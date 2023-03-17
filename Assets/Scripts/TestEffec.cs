@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Effects/Test1")]
+[CreateAssetMenu(menuName = "Cards/Test1")]
 public class TestEffec : Cards
 {
 

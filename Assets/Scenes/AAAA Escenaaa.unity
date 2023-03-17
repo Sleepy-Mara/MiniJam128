@@ -1435,7 +1435,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570003079}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1596,8 +1596,9 @@ GameObject:
   - component: {fileID: 1929406594}
   - component: {fileID: 1929406596}
   - component: {fileID: 1929406595}
+  - component: {fileID: 1929406597}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Battlemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1671,6 +1672,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929406593}
   m_CullTransparentMesh: 1
+--- !u!114 &1929406597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929406593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6880135fa7eab094087e76a1303dbfd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positions:
+  - card: {fileID: 0}
+    transform: {fileID: 3148479}
+    positionNum: 0
+  - card: {fileID: 0}
+    transform: {fileID: 165932190}
+    positionNum: 1
+  - card: {fileID: 0}
+    transform: {fileID: 1570003080}
+    positionNum: 2
+  - card: {fileID: 0}
+    transform: {fileID: 147808665}
+    positionNum: 3
+  - card: {fileID: 0}
+    transform: {fileID: 817315251}
+    positionNum: 4
+  - card: {fileID: 0}
+    transform: {fileID: 1094888485}
+    positionNum: 5
+  - card: {fileID: 0}
+    transform: {fileID: 742336033}
+    positionNum: 6
+  - card: {fileID: 0}
+    transform: {fileID: 362130087}
+    positionNum: 7
+  - card: {fileID: 0}
+    transform: {fileID: 967378340}
+    positionNum: 8
+  - card: {fileID: 0}
+    transform: {fileID: 250376077}
+    positionNum: 9
 --- !u!1 &1980867453
 GameObject:
   m_ObjectHideFlags: 0
