@@ -32,4 +32,9 @@ public class Card : MonoBehaviour
         _cardManager.HideCard(_showedCard);
         _showedCard = null;
     }
+
+    private void OnMouseDown()
+    {
+        _cardManager.PlaceCards(me);
+    }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     public Transform showCard;
+    private bool _placeCards;
+    private GameObject _cardToPlace;
     void Start()
     {
         
@@ -13,7 +15,14 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(_placeCards)
+        {
+            if(Input.GetMouseButtonDown(1))
+            {
+                _placeCards = false;
+                return;
+            }
+        }
     }
 
     public void ShowCard(GameObject card)
@@ -26,7 +35,12 @@ public class CardManager : MonoBehaviour
 
     public void HideCard(GameObject card)
     {
-        Debug.Log("aaaaa");
         Destroy(card);
+    }
+
+    public void PlaceCards(GameObject card)
+    {
+        _cardToPlace = card;
+        _placeCards = true;
     }
 }
