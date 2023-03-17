@@ -152,8 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33865f9ffd6d16845b2212c957aabdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cards: []
-  card: {fileID: 4281840592692090606, guid: 20aae91c8d8f74544ada38ffaeb519f4, type: 3}
+  deck: []
   handPos: {fileID: 17367328}
 --- !u!4 &17367328
 Transform:
@@ -479,8 +478,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33865f9ffd6d16845b2212c957aabdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cards: []
-  card: {fileID: 4281840592692090606, guid: 20aae91c8d8f74544ada38ffaeb519f4, type: 3}
+  deck:
+  - {fileID: 4281840592692090606, guid: 20aae91c8d8f74544ada38ffaeb519f4, type: 3}
+  - {fileID: 4281840592692090606, guid: 20aae91c8d8f74544ada38ffaeb519f4, type: 3}
+  - {fileID: 4281840592692090606, guid: 20aae91c8d8f74544ada38ffaeb519f4, type: 3}
+  - {fileID: 5239862092942517486, guid: 1e9b20eecdb672f478d18944fba928fb, type: 3}
+  - {fileID: 5239862092942517486, guid: 1e9b20eecdb672f478d18944fba928fb, type: 3}
+  - {fileID: 4451280304300092695, guid: 45eaacf76d235ad4290dfae41c327885, type: 3}
+  - {fileID: 4573829944010204728, guid: 50ddc42792d8d10418f45a8c54003d82, type: 3}
+  - {fileID: 4573829944010204728, guid: 50ddc42792d8d10418f45a8c54003d82, type: 3}
+  - {fileID: 4330095498280266172, guid: 2482fa17e244cd74f9f0e3fb2e280bd1, type: 3}
   handPos: {fileID: 1083484101}
 --- !u!4 &1083484101
 Transform:
