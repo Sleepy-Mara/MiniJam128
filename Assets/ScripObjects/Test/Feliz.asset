@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 4631b4ade2412cc4f9bdb0cbf6cc3932, type: 3}
   m_Name: Feliz
   m_EditorClassIdentifier: 
-  cardName: Felz
+  cardName: Feliz
   life: 5
-  attack: 0
+  attack: 1
   manaCost: 3
-  healthCost: 1
-  effects: []
+  healthCost: 0
   sprite: {fileID: 21300000, guid: 53371d6581772524dafeff35cc82730e, type: 3}
+  hasEffect: 1
+  effectDesc: te cura :)
+  effectSprite: {fileID: 21300000, guid: 1baf0f14a5b33ee40b4e71b1ef7f4275, type: 3}

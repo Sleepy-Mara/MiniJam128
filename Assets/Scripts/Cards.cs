@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Sprites;
 
-[CreateAssetMenu(menuName = "Objects/Card")]
+[CreateAssetMenu(menuName = "Cards/Normal")]
 public class Cards : ScriptableObject
 {
     public string cardName;
@@ -11,6 +10,13 @@ public class Cards : ScriptableObject
     public int attack;
     public int manaCost;
     public int healthCost;
-    public CardEffect[] effects;
     public Sprite sprite;
+    public bool hasEffect;
+    public string effectDesc;
+    public Sprite effectSprite;
+    public virtual void PlayEffect()
+    {
+        Debug.Log("la carta " + cardName + " no tiene efecto");
+    }
+
 }

@@ -13,6 +13,7 @@ public class ThisCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI manaCostText;
     [SerializeField] private TextMeshProUGUI healthCostText;
     [SerializeField] private Image image;
+    [SerializeField] private Image effectImage;
     private void Awake()
     {
         nameText.text = card.name;
@@ -21,5 +22,12 @@ public class ThisCard : MonoBehaviour
         lifeText.text = card.life.ToString();
         manaCostText.text = card.manaCost.ToString();
         healthCostText.text = card.healthCost.ToString();
+        if (card.hasEffect)
+        {
+            effectImage.sprite = card.effectSprite;
+        }
+        else 
+            effectImage.enabled = false;
+        card.PlayEffect();
     }
 }

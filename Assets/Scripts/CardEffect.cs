@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class CardEffect : MonoBehaviour
+public class CardEffect : ScriptableObject
 {
-    public string a;
+    public string effect;
+    public Sprite sprite;
+
+    public void PlayEffect()
+    {
+        Debug.Log("se jugo " + effect);
+    }
 }
