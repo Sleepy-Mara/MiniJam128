@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class ThisCard : MonoBehaviour
 {
     public Cards card;
+    [HideInInspector] public MapPosition actualPosition;
+    private int actualLife;
+    private int actualAttack;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI attackText;
     [SerializeField] private TextMeshProUGUI lifeText;
@@ -16,10 +19,12 @@ public class ThisCard : MonoBehaviour
     [SerializeField] private Image effectImage;
     private void Awake()
     {
+        actualLife = card.life;
+        actualAttack = card.attack;
         nameText.text = card.name;
         image.sprite = card.sprite;
         attackText.text = card.attack.ToString();
-        lifeText.text = card.life.ToString();
+        lifeText.text = actualLife.ToString();
         manaCostText.text = card.manaCost.ToString();
         healthCostText.text = card.healthCost.ToString();
         if (card.hasEffect)
@@ -29,5 +34,29 @@ public class ThisCard : MonoBehaviour
         else 
             effectImage.enabled = false;
         card.PlayEffect();
+    }
+
+    public void Attack()
+    {
+        //buscar al wachin que este al frente y hacerlo poronga
+        actualPosition.positionFacing.card.ReceiveDamage(actualAttack);
+        //ejecutar audio y/o animacion
+    }
+    public void ReceiveDamage(int damage)
+    {
+        actualLife -= damage;
+        lifeText.text = actualLife.ToString();
+        if (actualLife <= 0)
+        {
+            Death();
+        }
+        //ejecutar audio y/o animacion
+    }
+    public void Death()
+    {
+        //animacion / audio
+        Debug.Log("La carta " + card.cardName + " se murio :c");
+        actualPosition.card = null;
+        GameObject.Destroy(this);
     }
 }
