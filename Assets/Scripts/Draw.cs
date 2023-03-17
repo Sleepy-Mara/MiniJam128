@@ -4,25 +4,38 @@ using UnityEngine;
 
 public class Draw : MonoBehaviour
 {
-    public List<GameObject> _cards = new List<GameObject>();
-    public GameObject card;
+    private List<GameObject> _cardsInHand = new List<GameObject>();
+    public List<GameObject> deck;
+    private List<GameObject> _actualDeck = new List<GameObject>();
     public Transform handPos;
     void Start()
     {
-        
+        for (int i = 0; i < deck.Count; i++)
+            _actualDeck.Add(deck[i]);
+    }
+
+    public void AddACard(GameObject card)
+    {
+        deck.Add(card);
+        _actualDeck.Add(card);
     }
 
     public void DrawACard()
     {
-        var newCard = Instantiate(card, handPos);
-        _cards.Add(newCard);
-        for(int i = 0; i < _cards.Count; i++)
+        if (_actualDeck.Count <= 0)
         {
-            Debug.Log(_cards.Count);
-            //Debug.Log(90 / (_cards.Count + 1) * (i + 1));
-            _cards[_cards.Count - i - 1].transform.rotation = handPos.rotation;
-            _cards[_cards.Count - i - 1].transform.position += new Vector3(0, 0, 0 - 0.001f * i);
-            _cards[_cards.Count - i - 1].transform.Rotate(0, 0, 90 / (_cards.Count + 1) * (i + 1));
+            Debug.Log("perdiste gay");
+            return;
+        }
+        var drawedCard = Random.Range(0, _actualDeck.Count);
+        var newCard = Instantiate(_actualDeck[drawedCard], handPos);
+        _cardsInHand.Add(newCard);
+        _actualDeck.Remove(_actualDeck[drawedCard]);
+        for (int i = 0; i < _cardsInHand.Count; i++)
+        {
+            _cardsInHand[_cardsInHand.Count - i - 1].transform.rotation = handPos.rotation;
+            _cardsInHand[_cardsInHand.Count - i - 1].transform.position += new Vector3(0, 0, 0 - 0.001f * i);
+            _cardsInHand[_cardsInHand.Count - i - 1].transform.Rotate(0, 0, 90 / (_cardsInHand.Count + 1) * (i + 1));
         }
     }
 }

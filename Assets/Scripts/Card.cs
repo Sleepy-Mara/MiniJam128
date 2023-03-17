@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    public CardManager _cardManager;
+    private CardManager _cardManager;
     public GameObject me;
-    public GameObject showedCard;
+    private GameObject _showedCard;
     void Start()
     {
         _cardManager = FindObjectOfType<CardManager>();
@@ -20,16 +20,16 @@ public class Card : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (showedCard == null)
+        if (_showedCard == null)
         {
-            showedCard = Instantiate(me, new Vector3(10000, 10000, 10000), transform.rotation);
-            _cardManager.ShowCard(showedCard);
+            _showedCard = Instantiate(me, new Vector3(10000, 10000, 10000), transform.rotation);
+            _cardManager.ShowCard(_showedCard);
         }
     }
 
     private void OnMouseExit()
     {
-        _cardManager.HideCard(showedCard);
-        showedCard = null;
+        _cardManager.HideCard(_showedCard);
+        _showedCard = null;
     }
 }
