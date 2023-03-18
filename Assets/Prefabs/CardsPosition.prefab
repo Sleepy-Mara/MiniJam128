@@ -248,7 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6880135fa7eab094087e76a1303dbfd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions: []
+  playerPositions: []
+  enemyPositions: []
   cameras:
   - {fileID: 0}
   - {fileID: 0}
