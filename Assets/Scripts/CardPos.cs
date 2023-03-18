@@ -5,27 +5,41 @@ using UnityEngine;
 public class CardPos : MonoBehaviour
 {
     private CardManager _cardManager;
-    private BattleMap _battleMap;
-    public int position;
+    private Table _table;
+    public GameObject enemy;
 
     private void Start()
     {
         _cardManager = FindObjectOfType<CardManager>();
-        _battleMap = FindObjectOfType<BattleMap>();
+        _table = FindObjectOfType<Table>();
     }
     public void SelectThisPosition()
     {
-        Debug.Log("aaa");
         if(_cardManager.placeCards == true)
         {
+            Debug.Log("aaa");
+            List<GameObject> newCardsInHand = new List<GameObject>();
+            foreach(GameObject card in _cardManager.draw._cardsInHand)
+            {
+                if (card != _cardManager.cardToPlace)
+                {
+                    newCardsInHand.Add(card);
+                    Debug.Log("Added" + card.name);
+                }else Debug.Log("Ignored" + card.name);
+            }
+            _cardManager.draw._cardsInHand.Clear();
+            _cardManager.draw._cardsInHand = newCardsInHand;
             _cardManager.cardToPlace.GetComponent<Card>().enabled = false;
-            _battleMap.SetCard(_cardManager.cardToPlace, position);
+            _table.SetCard(_cardManager.cardToPlace, transform);
+            _cardManager.placeCards = false;
+            _cardManager.cardToPlace = null;
         }
 
     }
 
     private void OnMouseDown()
     {
-        SelectThisPosition();
+        if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
+            SelectThisPosition();
     }
 }

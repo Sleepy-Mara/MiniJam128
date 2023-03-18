@@ -7,25 +7,18 @@ public class CardManager : MonoBehaviour
     public Transform showCard;
     [HideInInspector] public bool placeCards;
     [HideInInspector] public GameObject cardToPlace;
-    private Draw draw;
-    private BattleMap battleMap;
+    [HideInInspector] public Draw draw;
+    private Table _table;
     void Start()
     {
         draw = FindObjectOfType<Draw>();
-        battleMap = FindObjectOfType<BattleMap>();
+        _table = FindObjectOfType<Table>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(placeCards)
-        {
-            if(Input.GetMouseButtonDown(1))
-            {
-                placeCards = false;
-                return;
-            }
-        }
+
     }
 
     public void ShowCard(GameObject card)
@@ -45,7 +38,7 @@ public class CardManager : MonoBehaviour
     {
         foreach (GameObject things in draw.drawThings)
             things.SetActive(false);
-        battleMap.ChangeCamera();
+        _table.ChangeCamera();
         cardToPlace = card;
         placeCards = true;
     }
