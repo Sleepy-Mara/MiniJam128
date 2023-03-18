@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public int maxHealth;
-    private int actualHealth;
+    public int actualHealth;
     public int manaLimit;
-    private int maxMana;
-    private int actualMana;
+    public int maxMana;
+    public int actualMana;
+    [SerializeField] private Image manaFill;
+    [SerializeField] private Image healthFill;
 
     private void Awake()
     {
         actualHealth = maxHealth;
+        RefreshMana();
+        RefreshHealth();
+    }
+    public void RestoreHealth(int heal)
+    {
+        actualHealth = Mathf.Clamp(actualHealth + heal, 0, maxHealth);
+        RefreshHealth();
+        //audio / algo
     }
     public void ReceiveDamage(int damage)
     {
@@ -20,9 +31,11 @@ public class Player : MonoBehaviour
         if((actualHealth - damage) <= 0)
         {
             actualHealth = 0;
+            RefreshHealth();
             Defeat();
         } else
             actualHealth -= damage;
+        RefreshHealth();
     }
     public bool EnoughMana(int cost)
     {
@@ -31,6 +44,7 @@ public class Player : MonoBehaviour
     public void SpendMana(int cost)
     {
         actualMana -= cost;
+        RefreshMana();
         //sonido / animacion
     }
     public void RestoreMana()
@@ -38,6 +52,7 @@ public class Player : MonoBehaviour
         if (maxMana != manaLimit)
             maxMana++;
         actualMana = maxMana;
+        RefreshMana();
         //sonido / animacion
     }
     public void Defeat()
@@ -45,5 +60,12 @@ public class Player : MonoBehaviour
         //lo que sea que pase cuando perdes
         Debug.Log("Te derrotaron wey");
     }
-
+    private void RefreshHealth()
+    {
+        healthFill.fillAmount = (float)actualHealth / (float)maxHealth;
+    }
+    private void RefreshMana()
+    {
+        manaFill.fillAmount = (float)actualMana / (float)manaLimit;
+    }
 }

@@ -22,8 +22,10 @@ public class TurnManager : MonoBehaviour
     {
         foreach (MapPosition position in battleMap.playerPositions)
         {
-            position.card.Attack();
+            if(position.card != null)
+                position.card.Attack();
         }
         //algun efecto de fin de turno quizas
+        //que actue el oponente
     }
 }
