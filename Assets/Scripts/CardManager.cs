@@ -12,6 +12,7 @@ public class CardManager : MonoBehaviour
     void Start()
     {
         draw = FindObjectOfType<Draw>();
+        Debug.Log(draw.gameObject.name);
         _table = FindObjectOfType<Table>();
     }
 

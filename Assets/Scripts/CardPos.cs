@@ -29,7 +29,8 @@ public class CardPos : MonoBehaviour
             }
             _cardManager.draw._cardsInHand.Clear();
             _cardManager.draw._cardsInHand = newCardsInHand;
-            _cardManager.cardToPlace.GetComponent<Card>().enabled = false;
+            _cardManager.draw.AdjustHand();
+            _cardManager.cardToPlace.GetComponentInChildren<Card>().inTable = true;
             _table.SetCard(_cardManager.cardToPlace, transform);
             _cardManager.placeCards = false;
             _cardManager.cardToPlace = null;

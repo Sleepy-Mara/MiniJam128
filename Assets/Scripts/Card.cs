@@ -7,6 +7,7 @@ public class Card : MonoBehaviour
     private CardManager _cardManager;
     public GameObject me;
     private GameObject _showedCard;
+    [HideInInspector] public bool inTable;
     void Start()
     {
         _cardManager = FindObjectOfType<CardManager>();
@@ -20,7 +21,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (_showedCard == null)
+        if (_showedCard == null && !inTable)
         {
             _showedCard = Instantiate(me, new Vector3(10000, 10000, 10000), transform.rotation);
             _cardManager.ShowCard(_showedCard);
@@ -35,8 +36,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _cardManager.PlaceCards(gameObject);
-        _cardManager.draw._cardsInHand.Remove(gameObject);
-        GetComponent<Card>().enabled = false;
+        if (!inTable)
+            _cardManager.PlaceCards(gameObject.transform.parent.gameObject);
     }
 }

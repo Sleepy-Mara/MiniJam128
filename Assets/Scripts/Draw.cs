@@ -32,6 +32,11 @@ public class Draw : MonoBehaviour
         var newCard = Instantiate(_actualDeck[drawedCard], handPos);
         _cardsInHand.Add(newCard);
         _actualDeck.Remove(_actualDeck[drawedCard]);
+        AdjustHand();
+    }
+
+    public void AdjustHand()
+    {
         for (int i = 0; i < _cardsInHand.Count; i++)
         {
             _cardsInHand[_cardsInHand.Count - i - 1].transform.rotation = handPos.rotation;

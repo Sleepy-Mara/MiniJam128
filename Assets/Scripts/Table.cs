@@ -23,7 +23,7 @@ public class Table : MonoBehaviour
     public void SetCard(GameObject card, Transform position)
     {
         card.transform.position = position.position + new Vector3(0, 0.01f, 0);
-        card.transform.rotation = position.rotation;
+        card.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
     public void ChangeCamera()

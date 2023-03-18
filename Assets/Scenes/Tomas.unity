@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 17367328}
-  - component: {fileID: 17367327}
   m_Layer: 0
   m_Name: Show
   m_TagString: Untagged
@@ -140,22 +139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &17367327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17367326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33865f9ffd6d16845b2212c957aabdef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawThings: []
-  _cardsInHand: []
-  deck: []
-  handPos: {fileID: 17367328}
 --- !u!4 &17367328
 Transform:
   m_ObjectHideFlags: 0
