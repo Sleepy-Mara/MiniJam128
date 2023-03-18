@@ -35,6 +35,6 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _cardManager.PlaceCards(me);
+        _cardManager.PlaceCards(gameObject);
     }
 }

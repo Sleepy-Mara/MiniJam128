@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MapPosition 
 {
     public ThisCard card;
-    public RectTransform transform;
+    public Transform transform;
     public int positionNum;
     public MapPosition positionFacing;
 }

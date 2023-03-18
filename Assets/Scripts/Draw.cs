@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Draw : MonoBehaviour
 {
+    public List<GameObject> drawThings;
     private List<GameObject> _cardsInHand = new List<GameObject>();
     public List<GameObject> deck;
     private List<GameObject> _actualDeck = new List<GameObject>();

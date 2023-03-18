@@ -5,21 +5,24 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     public Transform showCard;
-    private bool _placeCards;
-    private GameObject _cardToPlace;
+    [HideInInspector] public bool placeCards;
+    [HideInInspector] public GameObject cardToPlace;
+    private Draw draw;
+    private BattleMap battleMap;
     void Start()
     {
-        
+        draw = FindObjectOfType<Draw>();
+        battleMap = FindObjectOfType<BattleMap>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_placeCards)
+        if(placeCards)
         {
             if(Input.GetMouseButtonDown(1))
             {
-                _placeCards = false;
+                placeCards = false;
                 return;
             }
         }
@@ -40,7 +43,10 @@ public class CardManager : MonoBehaviour
 
     public void PlaceCards(GameObject card)
     {
-        _cardToPlace = card;
-        _placeCards = true;
+        foreach (GameObject things in draw.drawThings)
+            things.SetActive(false);
+        battleMap.ChangeCamera();
+        cardToPlace = card;
+        placeCards = true;
     }
 }
