@@ -173,8 +173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.328, y: 122.659}
-  m_SizeDelta: {x: 109.324, y: 31.883}
+  m_AnchoredPosition: {x: 0.0000029206, y: 126.98}
+  m_SizeDelta: {x: 131.4215, y: 21.3604}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &614555325605406327
 CanvasRenderer:
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614555325605406282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.35
+  m_fontSize: 19.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 614555326414849396}
   - component: {fileID: 614555326414849397}
   - component: {fileID: 614555326414849398}
+  - component: {fileID: 6613538543448993391}
   m_Layer: 5
   m_Name: CardTest
   m_TagString: Untagged
@@ -767,14 +768,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f93d63cb2a34c034f8417528392eb4f5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -797,6 +798,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: cb38db9a4c0417a468bafa6a51d5d528, type: 2}
+  actualPosition:
+    card: {fileID: 0}
+    transform: {fileID: 0}
+    positionNum: 0
   nameText: {fileID: 614555325657197718}
   attackText: {fileID: 614555327610193491}
   lifeText: {fileID: 614555325935901141}
@@ -804,6 +809,26 @@ MonoBehaviour:
   healthCostText: {fileID: 614555325550190241}
   image: {fileID: 614555327050818401}
   effectImage: {fileID: 4715075480355474519}
+--- !u!95 &6613538543448993391
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614555326414849352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1a0c5e1e1c762a747ba1c4d710ceb09e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &614555326593523937
 GameObject:
   m_ObjectHideFlags: 0

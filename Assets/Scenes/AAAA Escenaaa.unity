@@ -1684,37 +1684,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6880135fa7eab094087e76a1303dbfd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
+  playerPositions:
   - card: {fileID: 0}
     transform: {fileID: 3148479}
     positionNum: 0
   - card: {fileID: 0}
     transform: {fileID: 165932190}
-    positionNum: 1
+    positionNum: 0
   - card: {fileID: 0}
     transform: {fileID: 1570003080}
-    positionNum: 2
+    positionNum: 0
   - card: {fileID: 0}
     transform: {fileID: 147808665}
-    positionNum: 3
+    positionNum: 0
   - card: {fileID: 0}
     transform: {fileID: 817315251}
-    positionNum: 4
+    positionNum: 0
+  enemyPositions:
   - card: {fileID: 0}
     transform: {fileID: 1094888485}
-    positionNum: 5
+    positionNum: 0
   - card: {fileID: 0}
     transform: {fileID: 742336033}
-    positionNum: 6
+    positionNum: 0
   - card: {fileID: 0}
     transform: {fileID: 362130087}
-    positionNum: 7
+    positionNum: 0
   - card: {fileID: 0}
     transform: {fileID: 967378340}
-    positionNum: 8
+    positionNum: 0
   - card: {fileID: 0}
     transform: {fileID: 250376077}
-    positionNum: 9
+    positionNum: 0
+  cameras: []
 --- !u!1 &1980867453
 GameObject:
   m_ObjectHideFlags: 0

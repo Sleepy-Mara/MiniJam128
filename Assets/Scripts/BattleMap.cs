@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class BattleMap : MonoBehaviour
 {
-    public MapPosition[] positions;
+    public MapPosition[] playerPositions;
+    public MapPosition[] enemyPositions;
     public List<GameObject> cameras;
 
     private void Awake()
     {
-        for (int i = 0; i < positions.Length / 2; i++)
+        for (int i = 0; i < playerPositions.Length; i++)
         {
-            positions[i].positionFacing = positions[i + (positions.Length / 2)];
+            playerPositions[i].positionFacing = enemyPositions[i];
+            playerPositions[i].positionNum = i;
+            enemyPositions[i].positionFacing = playerPositions[i];
+            enemyPositions[i].positionNum = i;
         }
     }
     public void SetCard(GameObject card, int pos)
     {
-        card.transform.position = positions[pos].transform.position;
-        card.transform.rotation = positions[pos].transform.rotation;
-        positions[pos].card = card.GetComponent<ThisCard>();
-        positions[pos].card.actualPosition = positions[pos];
+        card.transform.SetPositionAndRotation(playerPositions[pos].transform.position, playerPositions[pos].transform.rotation);
+        playerPositions[pos].card = card.GetComponent<ThisCard>();
+        playerPositions[pos].card.actualPosition = playerPositions[pos];
     }
 
     public void ChangeCamera()

@@ -20,7 +20,7 @@ public class TurnManager : MonoBehaviour
     }
     public void EndTurn()
     {
-        foreach (MapPosition position in battleMap.positions)
+        foreach (MapPosition position in battleMap.playerPositions)
         {
             position.card.Attack();
         }
