@@ -18,6 +18,7 @@ public class CardPos : MonoBehaviour
         Debug.Log("aaa");
         if(_cardManager.placeCards == true)
         {
+            _cardManager.cardToPlace.GetComponent<Card>().enabled = false;
             _battleMap.SetCard(_cardManager.cardToPlace, position);
         }
 
