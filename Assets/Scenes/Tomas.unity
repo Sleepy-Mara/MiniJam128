@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f0cef22ec2f3e4e9f8c7caee9a833b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: 2
+  enemy: {fileID: 0}
 --- !u!64 &794231704
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f0cef22ec2f3e4e9f8c7caee9a833b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: 0
+  enemy: {fileID: 0}
 --- !u!1 &956935841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f0cef22ec2f3e4e9f8c7caee9a833b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: 1
+  enemy: {fileID: 0}
 --- !u!64 &1487931848
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1498,19 +1498,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2073858130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6880135fa7eab094087e76a1303dbfd0, type: 3}
+  m_Script: {fileID: 11500000, guid: a141b697c77475241b71b80dafecf14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
-  - card: {fileID: 0}
-    transform: {fileID: 890950067}
-    positionNum: 0
-  - card: {fileID: 0}
-    transform: {fileID: 1487931851}
-    positionNum: 1
-  - card: {fileID: 0}
-    transform: {fileID: 794231707}
-    positionNum: 2
   cameras:
-  - {fileID: 1174815223}
   - {fileID: 1359778003}
+  - {fileID: 1174815223}

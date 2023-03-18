@@ -36,5 +36,7 @@ public class Card : MonoBehaviour
     private void OnMouseDown()
     {
         _cardManager.PlaceCards(gameObject);
+        _cardManager.draw._cardsInHand.Remove(gameObject);
+        GetComponent<Card>().enabled = false;
     }
 }
