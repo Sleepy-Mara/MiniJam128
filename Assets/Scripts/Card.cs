@@ -8,6 +8,7 @@ public class Card : MonoBehaviour
     public GameObject me;
     private GameObject _showedCard;
     [HideInInspector] public bool inTable;
+    [HideInInspector] public bool canPlay;
     void Start()
     {
         _cardManager = FindObjectOfType<CardManager>();
@@ -36,7 +37,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!inTable)
+        if (!inTable && canPlay)
             _cardManager.PlaceCards(gameObject.transform.parent.gameObject);
     }
 }

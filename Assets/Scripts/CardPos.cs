@@ -7,6 +7,7 @@ public class CardPos : MonoBehaviour
     private CardManager _cardManager;
     private Table _table;
     public GameObject enemy;
+    public Transform positionFacing;
 
     private void Start()
     {

@@ -5,12 +5,15 @@ using UnityEngine;
 public class Draw : MonoBehaviour
 {
     public List<GameObject> drawThings;
-     public List<GameObject> _cardsInHand = new List<GameObject>();
+    [HideInInspector] public List<GameObject> _cardsInHand = new List<GameObject>();
     public List<GameObject> deck;
     private List<GameObject> _actualDeck = new List<GameObject>();
     public Transform handPos;
+    [HideInInspector] public bool canDraw;
+    private TurnManager turnManager;
     void Start()
     {
+        turnManager = FindObjectOfType<TurnManager>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
     }
@@ -19,6 +22,16 @@ public class Draw : MonoBehaviour
     {
         deck.Add(card);
         _actualDeck.Add(card);
+    }
+
+    public void PlayerDraw()
+    {
+        if (canDraw)
+        {
+            canDraw = false;
+            DrawACard();
+            turnManager.PlayableTurn();
+        }
     }
 
     public void DrawACard()
