@@ -18,6 +18,8 @@ public class Table : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             ChangeCamera();
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            ChangeCamera();
     }
 
     public void SetCard(GameObject card, Transform position)

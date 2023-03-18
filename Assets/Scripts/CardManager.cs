@@ -19,7 +19,12 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (placeCards && Input.GetButtonDown("Fire2"))
+        {
+            placeCards = false;
+            cardToPlace = null;
+            _table.ChangeCamera();
+        }
     }
 
     public void ShowCard(GameObject card)
