@@ -5,13 +5,25 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     private int turn;
+    [SerializeField] private BattleMap battleMap;
+    [SerializeField] private Player player;
+    public void StartBattle()
+    {
+        //hacer cosas como agarrar cartas iniciales, setear enemigo? y eso
+        StartTurn();
+    }
     public void StartTurn()
     {
         turn++;
-        //recuperar mana
+        player.RestoreMana();
+        //algun efecto de comienzo de turno
     }
     public void EndTurn()
     {
-        //ataque
+        foreach (MapPosition position in battleMap.positions)
+        {
+            position.card.Attack();
+        }
+        //algun efecto de fin de turno quizas
     }
 }
