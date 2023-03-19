@@ -158,7 +158,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private void DealDamgeEffect(GameObject target)
     {
         if (target.GetComponent<ThisCard>())
-            target.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this);
+            target.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this, false);
         if (target.GetComponent<Health>())
             target.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
     }
