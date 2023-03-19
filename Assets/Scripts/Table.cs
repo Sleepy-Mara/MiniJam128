@@ -9,7 +9,7 @@ public class Table : MonoBehaviour
     public MapPosition[] playerPositions;
     public MapPosition[] enemyFront;
     public MapPosition[] enemyBack;
-    private Player player;
+    [HideInInspector] public Player player;
     private Enemy enemy;
     public GameObject cardPrefab;
 

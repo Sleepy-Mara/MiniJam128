@@ -26,6 +26,16 @@ public class Player : Health
         RefreshMana();
         //sonido / animacion
     }
+    public bool EnoughHealth(int cost)
+    {
+        return actualHealth > cost;
+    }
+    public void SpendHealth(int cost)
+    {
+        actualHealth -= cost;
+        RefreshHealth();
+        //algun sonido animacion especial
+    }
     public void RestoreMana()
     {
         if (maxMana != manaLimit)

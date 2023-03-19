@@ -26,7 +26,6 @@ public class TurnManager : MonoBehaviour
         for (int i = 0; i < cardsInHandStart; i++)
             draw.DrawACard();
         //hacer cosas como agarrar cartas iniciales, setear enemigo? y eso
-        StartTurn();
     }
     public void StartTurn()
     {
@@ -47,8 +46,9 @@ public class TurnManager : MonoBehaviour
     public void EndTurn()
     {
         var cards = FindObjectsOfType<Card>();
-        foreach (Card card in cards)
-            card.canPlay = false;
+        canPlayCards = false;
+        //foreach (Card card in cards)
+        //    card.canPlay = false;
         foreach (ThisCard thisCard in table.myCards)
             thisCard.Attack();
         //foreach (MapPosition position in battleMap.playerPositions)

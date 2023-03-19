@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
             actualHealth -= damage;
         RefreshHealth();
     }
-    private void RefreshHealth()
+    protected void RefreshHealth()
     {
         healthFill.fillAmount = (float)actualHealth / (float)maxHealth;
     }

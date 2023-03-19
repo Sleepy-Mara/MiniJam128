@@ -96,8 +96,18 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (actualPosition.cardPos == null && _turnManager.canPlayCards)
-            _cardManager.PlaceCards(gameObject);
+        if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
+        {
+            if (actualPosition.cardPos == null && _turnManager.canPlayCards)
+            {
+                _cardManager.PlaceCards(gameObject);
+                _table.player.SpendMana(card.manaCost);
+            }
+        }
+        else
+        {
+            Debug.Log("no tenes mana");
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

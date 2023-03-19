@@ -7,10 +7,12 @@ public class Enemy : Health
     public Strategy strategy;
     private Table table;
     public GameObject card;
+    private TurnManager _turnManager;
 
     private void Start()
     {
         table = FindObjectOfType<Table>();
+        _turnManager = FindObjectOfType<TurnManager>();
     }
     public void MoveBackCards(int turn)
     {
@@ -19,27 +21,30 @@ public class Enemy : Health
     }
     public void PlaceBackCards(int turn)
     {
-        Debug.Log("el enemigo pone cartas, turno " + turn);
-        if (strategy.turns[turn].cardPlacement0 != null)
+        if (turn < strategy.turns.Length)
         {
-            //var newCard = Instantiate(card).GetComponent<ThisCard>();
-            //newCard.card = strategy.turns[turn].cardPlacement0;
-            //newCard.SetData();
-            table.EnemySetCard(0, strategy.turns[turn].cardPlacement0);
-        }
-        if (strategy.turns[turn].cardPlacement1 != null)
-        {
-            //var newCard = Instantiate(card).GetComponent<ThisCard>();
-            //newCard.card = strategy.turns[turn].cardPlacement1;
-            //newCard.SetData();
-            table.EnemySetCard(1, strategy.turns[turn].cardPlacement1);
-        }
-        if (strategy.turns[turn].cardPlacement2 != null)
-        {
-            //var newCard = Instantiate(card).GetComponent<ThisCard>();
-            //newCard.card = strategy.turns[turn].cardPlacement2;
-            //newCard.SetData();
-            table.EnemySetCard(2, strategy.turns[turn].cardPlacement2);
+                Debug.Log("el enemigo pone cartas, turno " + turn);
+            if (strategy.turns[turn].cardPlacement0 != null)
+            {
+                //var newCard = Instantiate(card).GetComponent<ThisCard>();
+                //newCard.card = strategy.turns[turn].cardPlacement0;
+                //newCard.SetData();
+                table.EnemySetCard(0, strategy.turns[turn].cardPlacement0);
+            }
+            if (strategy.turns[turn].cardPlacement1 != null)
+            {
+                //var newCard = Instantiate(card).GetComponent<ThisCard>();
+                //newCard.card = strategy.turns[turn].cardPlacement1;
+                //newCard.SetData();
+                table.EnemySetCard(1, strategy.turns[turn].cardPlacement1);
+            }
+            if (strategy.turns[turn].cardPlacement2 != null)
+            {
+                //var newCard = Instantiate(card).GetComponent<ThisCard>();
+                //newCard.card = strategy.turns[turn].cardPlacement2;
+                //newCard.SetData();
+                table.EnemySetCard(2, strategy.turns[turn].cardPlacement2);
+            }
         }
         AttackFrontCards();
     }
@@ -48,6 +53,7 @@ public class Enemy : Health
         foreach(MapPosition card in table.enemyFront)
             if (card.card != null)
                 card.card.Attack();
+        _turnManager.StartTurn();
     }
     public override void Defeat()
     {
