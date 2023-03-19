@@ -53,8 +53,22 @@ public class Table : MonoBehaviour
     }
     public void EnemySetCard(ThisCard card, int place)
     {
-        card.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position + new Vector3(0, 0.01f, 0), enemyBack[place].cardPos.transform.rotation);
-        enemyBack[place].card = card;
+        if (enemyFront[place] == null)
+        {
+            card.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position + new Vector3(0, 0.01f, 0), enemyBack[place].cardPos.transform.rotation);
+            enemyBack[place].card = card;
+        }
+    }
+    public void MoveEnemyCard()
+    {
+        for (int i = 0; i < enemyBack.Length; i++)
+            if(enemyBack[i].card != null && enemyFront[i].card == null)
+            {
+                var card = enemyBack[i].card;
+                enemyBack[i] = null;
+                card.transform.SetPositionAndRotation(enemyFront[i].cardPos.transform.position + new Vector3(0, 0.01f, 0), enemyFront[i].cardPos.transform.rotation);
+                enemyFront[i].card = card;
+            }
     }
 
     public void ChangeCamera()

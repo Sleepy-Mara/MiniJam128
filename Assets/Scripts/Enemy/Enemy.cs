@@ -8,8 +8,13 @@ public class Enemy : Health
     private Table table;
     public ThisCard card;
 
+    private void Start()
+    {
+        table = FindObjectOfType<Table>();
+    }
     public void MoveBackCards(int turn)
     {
+        table.MoveEnemyCard();
         PlaceBackCards(turn);
     }
     public void PlaceBackCards(int turn)
@@ -19,24 +24,21 @@ public class Enemy : Health
             var newCard = Instantiate(card);
             newCard.card = strategy.turns[turn].cardPlacement0;
             newCard.SetData();
-            //place holder:
-            table.SetCard(newCard.gameObject, transform);
+            table.EnemySetCard(newCard, 0);
         }
         if (strategy.turns[turn].cardPlacement1 != null)
         {
             var newCard = Instantiate(card);
             newCard.card = strategy.turns[turn].cardPlacement1;
             newCard.SetData();
-            //place holder:
-            table.SetCard(newCard.gameObject, transform);
+            table.EnemySetCard(newCard, 1);
         }
-        if (strategy.turns[turn].cardPlacement1 != null)
+        if (strategy.turns[turn].cardPlacement2 != null)
         {
             var newCard = Instantiate(card);
-            newCard.card = strategy.turns[turn].cardPlacement1;
+            newCard.card = strategy.turns[turn].cardPlacement2;
             newCard.SetData();
-            //place holder:
-            table.SetCard(newCard.gameObject, transform);
+            table.EnemySetCard(newCard, 2);
         }
     }
     public void AttackFrontCards()
