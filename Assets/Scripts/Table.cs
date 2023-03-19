@@ -16,7 +16,7 @@ public class Table : MonoBehaviour
         _draw = FindObjectOfType<Draw>();
         foreach (MapPosition position in mapPositions)
             foreach (MapPosition mapPosition in mapPositions)
-                if (position.transform == mapPosition.transform)
+                if (position.transform.gameObject.GetComponent<CardPos>().positionFacing == mapPosition.transform)
                     position.positionFacing = mapPosition;
     }
 
