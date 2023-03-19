@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     public Cards card;
-    [HideInInspector] public MapPosition actualPosition;
+    public MapPosition actualPosition;
     private int actualLife;
     private int actualAttack;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -89,7 +89,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //animacion / audio
         Debug.Log("La carta " + card.cardName + " se murio :c");
         actualPosition.card = null;
-        GameObject.Destroy(this);
+        Destroy(gameObject);
     }
     public void OnPointerDown(PointerEventData eventData)
     {

@@ -18,6 +18,8 @@ public class Table : MonoBehaviour
     void Start()
     {
         _draw = FindObjectOfType<Draw>();
+        player = FindObjectOfType<Player>();
+        enemy = FindObjectOfType<Enemy>();
         StartSet();
         //foreach (MapPosition position in mapPositions)
         //    foreach (MapPosition mapPosition in mapPositions)
@@ -41,6 +43,7 @@ public class Table : MonoBehaviour
         card.transform.SetParent(playerPositions[place].cardPos.transform);
         card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
         playerPositions[place].card = card.GetComponent<ThisCard>();
+        card.GetComponent<ThisCard>().actualPosition = playerPositions[place];
         //foreach (MapPosition positions in mapPositions)
         //    if (positions.cardPos == pos)
         //        positions.card = card.GetComponent<ThisCard>();
@@ -54,6 +57,7 @@ public class Table : MonoBehaviour
             newCard.GetComponent<Animator>().enabled = false;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
+            newCard.actualPosition = enemyBack[place];
             newCard.SetData();
             newCard.GetComponent<RectTransform>().SetPositionAndRotation(enemyBack[place].cardPos.GetComponent<RectTransform>().position, enemyBack[place].cardPos.transform.rotation);
             enemyBack[place].card = newCard;
@@ -65,10 +69,11 @@ public class Table : MonoBehaviour
         for (int i = 0; i < enemyBack.Length; i++)
             if(enemyBack[i].card != null && enemyFront[i].card == null)
             {
-                var card = enemyBack[i].card;
-                enemyBack[i] = null;
-                card.transform.SetParent(enemyFront[i].card.transform);
-                card.transform.SetPositionAndRotation(enemyFront[i].cardPos.transform.position + new Vector3(0, 0.01f, 0), enemyFront[i].cardPos.transform.rotation);
+                ThisCard card = enemyBack[i].card;
+                enemyBack[i].card = null;
+                card.transform.SetParent(enemyFront[i].cardPos.transform);
+                card.transform.SetPositionAndRotation(enemyFront[i].cardPos.transform.position, enemyFront[i].cardPos.transform.rotation);
+                card.actualPosition = enemyFront[i];
                 enemyFront[i].card = card;
             }
     }
