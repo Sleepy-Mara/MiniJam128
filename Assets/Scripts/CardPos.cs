@@ -44,4 +44,9 @@ public class CardPos : MonoBehaviour
         if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
             SelectThisPosition();
     }
+    public void SelectPosition()
+    {
+        if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
+            SelectThisPosition();
+    }
 }
