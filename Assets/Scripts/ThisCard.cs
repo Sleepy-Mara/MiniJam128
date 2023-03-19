@@ -22,6 +22,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [HideInInspector] public bool canPlay;
     private CardManager _cardManager;
     private TurnManager _turnManager;
+    private Draw _draw;
     private void Awake()
     {
         if (card != null)
@@ -31,6 +32,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         _cardManager = FindObjectOfType<CardManager>();
         _turnManager = FindObjectOfType<TurnManager>();
+        _draw = FindObjectOfType<Draw>();
     }
     public void SetData()
     {
@@ -126,9 +128,28 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                         doEffect = true;
                     if (card.keywords.IndexOf(effect) > 4)
                         effectToDo = effect;
+                    if (doEffect && effectToDo != null)
+                    {
+                        Effect(effectToDo);
+                        effectToDo = null;
+                    }
                 }
-            if (doEffect && effectToDo != null)
-                card.Effect(effectToDo);
         }
+    }
+    private void Effect(string effect)
+    {
+        var eventNumber = card.keywords.IndexOf(effect) - 4;
+        if (eventNumber == 0)
+            DrawEffect();
+        if (eventNumber == 1)
+            DealDamgeEffect();
+    }
+    private void DrawEffect()
+    {
+        _draw.DrawACard();
+    }
+    private void DealDamgeEffect()
+    {
+
     }
 }
