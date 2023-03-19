@@ -6,11 +6,12 @@ public class Draw : MonoBehaviour
 {
     public List<GameObject> drawThings;
     [HideInInspector] public List<GameObject> _cardsInHand = new List<GameObject>();
-    public List<GameObject> deck;
-    private List<GameObject> _actualDeck = new List<GameObject>();
+    public List<Cards> deck;
+    private List<Cards> _actualDeck = new List<Cards>();
     public Transform handPos;
-     public bool canDraw;
+    public bool canDraw;
     private TurnManager turnManager;
+    public GameObject cardPrefab;
     void Start()
     {
         turnManager = FindObjectOfType<TurnManager>();
@@ -18,7 +19,7 @@ public class Draw : MonoBehaviour
             _actualDeck.Add(deck[i]);
     }
 
-    public void AddACard(GameObject card)
+    public void AddACard(Cards card)
     {
         deck.Add(card);
         _actualDeck.Add(card);
@@ -42,7 +43,9 @@ public class Draw : MonoBehaviour
             return;
         }
         var drawedCard = Random.Range(0, _actualDeck.Count);
-        var newCard = Instantiate(_actualDeck[drawedCard], handPos);
+        //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
+        var newCard = Instantiate(cardPrefab, handPos);
+        newCard.GetComponent<ThisCard>().card = _actualDeck[drawedCard];
         _cardsInHand.Add(newCard);
         _actualDeck.Remove(_actualDeck[drawedCard]);
         AdjustHand();
@@ -60,7 +63,7 @@ public class Draw : MonoBehaviour
 
     public void ResetDeckAndHand()
     {
-        _actualDeck = new List<GameObject>();
+        _actualDeck = new List<Cards>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
         foreach (var card in _cardsInHand)
