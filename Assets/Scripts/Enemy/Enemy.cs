@@ -57,6 +57,7 @@ public class Enemy : Health
     }
     public override void Defeat()
     {
+        FindObjectOfType<NextCombat>().ToNextCombat();
         Debug.Log("Derrotaste al oponente, estas feliz?");
     }
 }
