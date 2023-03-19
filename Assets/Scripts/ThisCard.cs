@@ -23,6 +23,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private CardManager _cardManager;
     private TurnManager _turnManager;
     private Draw _draw;
+    private Table _table;
     private bool _inmune;
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _cardManager = FindObjectOfType<CardManager>();
         _turnManager = FindObjectOfType<TurnManager>();
         _draw = FindObjectOfType<Draw>();
+        _table = FindObjectOfType<Table>();
     }
     public void SetData()
     {
@@ -150,6 +152,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             DrawEffect();
         if (eventNumber == 1)
             DealDamgeEffect(target);
+        if (eventNumber == 2)
+            BuffAlly();
     }
     private void DrawEffect()
     {
@@ -161,5 +165,22 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             target.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this, false);
         if (target.GetComponent<Health>())
             target.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
+    }
+    private void BuffAlly()
+    {
+        //if(card.effectDesc.Contains("select"))
+        //    target = 
+        if (card.effectDesc.Contains("random"))
+            Buff(_table.myCards[Random.Range(0, _table.myCards.Count)].gameObject);
+    }
+    private void Buff(GameObject target)
+    {
+        for (int i = 0; i > 50; i++)
+            for (int j = 0; j < 50; j++)
+                if (card.effectDesc.Contains(j.ToString() + "/" + i.ToString()))
+                {
+                    target.GetComponent<ThisCard>().actualAttack = j;
+                    target.GetComponent<ThisCard>().actualLife = i;
+                }
     }
 }

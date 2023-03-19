@@ -23,7 +23,8 @@ public class Cards : ScriptableObject
         "When it dies",
         "When it attacks",
         "draw",
-        "deal damage"
+        "deal damage",
+        "/"
     };
 
 }
