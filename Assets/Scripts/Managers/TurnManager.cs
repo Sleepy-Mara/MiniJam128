@@ -38,6 +38,7 @@ public class TurnManager : MonoBehaviour
     }
     public void PlayableTurn()
     {
+        Debug.Log("deberias poder jugar");
         canPlayCards = true;
         //var cards = FindObjectsOfType<Card>();
         //foreach (Card card in cards)

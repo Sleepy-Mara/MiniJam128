@@ -9,6 +9,7 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
     private Table _table;
     public GameObject enemy;
     public Transform positionFacing;
+    public int positionNum;
 
     private void Start()
     {
@@ -32,8 +33,8 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
             _cardManager.draw._cardsInHand.Clear();
             _cardManager.draw._cardsInHand = newCardsInHand;
             _cardManager.draw.AdjustHand();
-            _cardManager.cardToPlace.GetComponentInChildren<Card>().inTable = true;
-            _table.SetCard(_cardManager.cardToPlace, transform);
+            //_cardManager.cardToPlace.GetComponentInChildren<ThisCard>().inTable = true;
+            _table.SetCard(_cardManager.cardToPlace, positionNum);
             _cardManager.placeCards = false;
             _cardManager.cardToPlace = null;
         }
@@ -44,14 +45,14 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
         if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
             SelectThisPosition();
     }
-    private void OnMouseDown()
-    {
-        if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
-            SelectThisPosition();
-    }
-    public void SelectPosition()
-    {
-        if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
-            SelectThisPosition();
-    }
+    //private void OnMouseDown()
+    //{
+    //    if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
+    //        SelectThisPosition();
+    //}
+    //public void SelectPosition()
+    //{
+    //    if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
+    //        SelectThisPosition();
+    //}
 }

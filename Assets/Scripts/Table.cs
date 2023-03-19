@@ -6,7 +6,6 @@ public class Table : MonoBehaviour
 {
     private bool _inTable;
     private Draw _draw;
-    public List<MapPosition> mapPositions;
     public MapPosition[] playerPositions;
     public MapPosition[] enemyFront;
     public MapPosition[] enemyBack;
@@ -36,20 +35,23 @@ public class Table : MonoBehaviour
             enemyBack[i].nextPosition = enemyFront[i];
         }
     }
-    public void SetCard(GameObject card, Transform position)
+    public void SetCard(GameObject card, int place)
     {
-        card.transform.position = position.position + new Vector3(0, 0.01f, 0);
-        card.transform.rotation = Quaternion.Euler(90, 0, 0);
-        foreach (MapPosition positions in mapPositions)
-            if (positions.cardPos == position)
-                positions.card = card.GetComponent<ThisCard>();
+        card.GetComponent<Animator>().enabled = false;
+        card.transform.SetParent(playerPositions[place].cardPos.transform);
+        card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
+        playerPositions[place].card = card.GetComponent<ThisCard>();
+        //foreach (MapPosition positions in mapPositions)
+        //    if (positions.cardPos == pos)
+        //        positions.card = card.GetComponent<ThisCard>();
         myCards.Add(card.GetComponent<ThisCard>());
     }
     public void EnemySetCard(int place, Cards cardType)
     {
         if (enemyBack[place].card == null)
         {
-            var newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<ThisCard>();
+            ThisCard newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<ThisCard>();
+            newCard.GetComponent<Animator>().enabled = false;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
             newCard.SetData();
