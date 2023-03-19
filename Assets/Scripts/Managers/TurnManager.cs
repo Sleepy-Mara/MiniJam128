@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    private int turn;
+    [HideInInspector] public int turn;
     [SerializeField] private Player player;
+    [HideInInspector] public Enemy enemy;
     private Draw draw;
     private Table table;
     [SerializeField] private int cardsInHandStart;
@@ -19,6 +20,7 @@ public class TurnManager : MonoBehaviour
 
     public void StartBattle()
     {
+        enemy.MoveBackCards(turn);
         for (int i = 0; i < cardsInHandStart; i++)
             draw.DrawACard();
         //hacer cosas como agarrar cartas iniciales, setear enemigo? y eso
@@ -51,5 +53,6 @@ public class TurnManager : MonoBehaviour
         //}
         //algun efecto de fin de turno quizas
         //que actue el oponente
+        enemy.MoveBackCards(turn);
     }
 }

@@ -40,10 +40,13 @@ public class Enemy : Health
             newCard.SetData();
             table.EnemySetCard(newCard, 2);
         }
+        AttackFrontCards();
     }
     public void AttackFrontCards()
     {
-
+        foreach(MapPosition card in table.enemyFront)
+            if (card.card != null)
+                card.card.Attack();
     }
     public override void Defeat()
     {

@@ -57,4 +57,16 @@ public class Draw : MonoBehaviour
             _cardsInHand[_cardsInHand.Count - i - 1].transform.Rotate(0, 0, 90 / (_cardsInHand.Count + 1) * (i + 1));
         }
     }
+
+    public void ResetDeckAndHand()
+    {
+        _actualDeck = new List<GameObject>();
+        for (int i = 0; i < deck.Count; i++)
+            _actualDeck.Add(deck[i]);
+        foreach (var card in _cardsInHand)
+        {
+            _cardsInHand.Remove(card);
+            Destroy(card);
+        }
+    }
 }

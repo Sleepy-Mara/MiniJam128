@@ -18,6 +18,14 @@ public class Table : MonoBehaviour
     void Start()
     {
         _draw = FindObjectOfType<Draw>();
+        StartSet();
+        //foreach (MapPosition position in mapPositions)
+        //    foreach (MapPosition mapPosition in mapPositions)
+        //        if (position.cardPos.gameObject.GetComponent<CardPos>().positionFacing == mapPosition.cardPos)
+        //            position.positionFacing = mapPosition;
+    }
+    void StartSet()
+    {
         for (int i = 0; i < playerPositions.Length; i++)
         {
             playerPositions[i].positionFacing = enemyFront[i];
@@ -26,10 +34,6 @@ public class Table : MonoBehaviour
             enemyFront[i].oponent = player;
             enemyBack[i].nextPosition = enemyFront[i];
         }
-        //foreach (MapPosition position in mapPositions)
-        //    foreach (MapPosition mapPosition in mapPositions)
-        //        if (position.cardPos.gameObject.GetComponent<CardPos>().positionFacing == mapPosition.cardPos)
-        //            position.positionFacing = mapPosition;
     }
     public void SetCard(GameObject card, Transform position)
     {
@@ -58,5 +62,19 @@ public class Table : MonoBehaviour
                 card.transform.SetPositionAndRotation(enemyFront[i].cardPos.transform.position + new Vector3(0, 0.01f, 0), enemyFront[i].cardPos.transform.rotation);
                 enemyFront[i].card = card;
             }
+    }
+    public void ResetTable(Enemy newEnemy)
+    {
+        enemy = newEnemy;
+        foreach (var card in enemyBack)
+            if (card.card != null)
+                Destroy(card.card);
+        foreach (var card in enemyFront)
+            if (card.card != null)
+                Destroy(card.card);
+        foreach (var card in playerPositions)
+            if (card.card != null)
+                Destroy(card.card);
+        StartSet();
     }
 }
