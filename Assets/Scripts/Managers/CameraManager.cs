@@ -30,8 +30,8 @@ public class CameraManager : MonoBehaviour
         _actualPosition += x;
         if (_actualPosition < 0)
             _actualPosition = 0;
-        if (_actualPosition > cameraPositions.Length)
-            _actualPosition = cameraPositions.Length;
+        if (_actualPosition >= cameraPositions.Length)
+            _actualPosition = cameraPositions.Length - 1;
         _camera.transform.position = cameraPositions[_actualPosition].position;
         _camera.transform.rotation = cameraPositions[_actualPosition].rotation;
     }
