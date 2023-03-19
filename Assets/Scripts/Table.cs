@@ -77,9 +77,8 @@ public class Table : MonoBehaviour
                 enemyFront[i].card = card;
             }
     }
-    public void ResetTable(Enemy newEnemy)
+    public void ResetTable()
     {
-        enemy = newEnemy;
         foreach (var card in enemyBack)
             if (card.card != null)
                 Destroy(card.card);

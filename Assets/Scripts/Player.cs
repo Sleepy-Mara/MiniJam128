@@ -44,6 +44,14 @@ public class Player : Health
         RefreshMana();
         //sonido / animacion
     }
+    public void RestartPlayer()
+    {
+        actualMana = 0;
+        maxMana = 0;
+        actualHealth = maxHealth;
+        RefreshHealth();
+        RefreshMana();
+    }
     public override void Defeat()
     {
         //lo que sea que pase cuando perdes

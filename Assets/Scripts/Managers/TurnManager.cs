@@ -45,8 +45,8 @@ public class TurnManager : MonoBehaviour
     }
     public void EndTurn()
     {
-        var cards = FindObjectsOfType<Card>();
         canPlayCards = false;
+        //var cards = FindObjectsOfType<Card>();
         //foreach (Card card in cards)
         //    card.canPlay = false;
         foreach (ThisCard thisCard in table.myCards)
