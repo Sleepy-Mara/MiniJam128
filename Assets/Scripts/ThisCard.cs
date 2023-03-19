@@ -52,6 +52,7 @@ public class ThisCard : MonoBehaviour
         {
             actualPosition.oponent.ReceiveDamage(card.attackToPlayer);
         }
+        CheckEffect(4);
     }
     public void ReceiveDamage(int damage)
     {
@@ -65,6 +66,7 @@ public class ThisCard : MonoBehaviour
     }
     public void Death()
     {
+        CheckEffect(3);
         //animacion / audio
         Debug.Log("La carta " + card.cardName + " se murio :c");
         actualPosition.card = null;
@@ -72,14 +74,32 @@ public class ThisCard : MonoBehaviour
     }
     public void OnPlayEffect()
     {
-        card.PlayEffect();
+        CheckEffect(1);
     }
     public void OnTurnStart()
     {
-        card.TurnStart();
+        CheckEffect(0);
     }
     public void OnTurnEnd()
     {
-        card.TurnEnd();
+        CheckEffect(2);
+    }
+    private void CheckEffect(int x)
+    {
+        if (card.hasEffect)
+        {
+            bool doEffect = false;
+            string effectToDo = null;
+            foreach (string effect in card.keywords)
+                if (card.effectDesc.Contains(effect))
+                {
+                    if (effect == card.keywords[x])
+                        doEffect = true;
+                    if (card.keywords.IndexOf(effect) > 4)
+                        effectToDo = effect;
+                }
+            if (doEffect && effectToDo != null)
+                card.Effect(effectToDo);
+        }
     }
 }

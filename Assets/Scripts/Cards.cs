@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cards/Normal")]
 public class Cards : ScriptableObject
 {
+    public delegate void EffectsDelegate();
     public string cardName;
     public int life;
     public int attack;
@@ -15,17 +16,20 @@ public class Cards : ScriptableObject
     public bool hasEffect;
     public string effectDesc;
     public Sprite effectSprite;
-    public virtual void PlayEffect()
+    public List<string> keywords = new List<string>()
+    {
+        "At the start of the turn",
+        "When it's played",
+        "At the end of the turn",
+        "When it dies",
+        "When it attacks",
+        "draw",
+        "deal damage"
+    };
+    public List<EffectsDelegate> effects;
+    public virtual void Effect(string effect)
     {
         Debug.Log("la carta " + cardName + " no tiene efecto");
-    }
-    public virtual void TurnStart()
-    {
-
-    }
-    public virtual void TurnEnd()
-    {
-
     }
 
 }
