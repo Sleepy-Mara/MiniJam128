@@ -20,7 +20,8 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-
+            musicVolume = 1;
+            sfxVolume = 1;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);

@@ -62,7 +62,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             actualPosition.positionFacing.card.ReceiveDamage(actualAttack, this, true);
             //ejecutar audio y/o animacion
-            CheckEffect(4, actualPosition.positionFacing.card.gameObject);
+            if(actualPosition.positionFacing.card != null)
+                CheckEffect(4, actualPosition.positionFacing.card.gameObject);
         }
         else
         {
@@ -72,7 +73,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void ReceiveDamage(int damage, ThisCard enemy, bool vengance)
     {
-        CheckEffect(4, enemy.gameObject);
+        if (enemy != null)
+            CheckEffect(4, enemy.gameObject);
         actualLife -= damage;
         lifeText.text = actualLife.ToString();
         if (!_inmune && enemy != null && vengance == true)
@@ -85,7 +87,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void Death(ThisCard enemy)
     {
-        CheckEffect(3, enemy.gameObject);
+        if (enemy != null)
+            CheckEffect(3, enemy.gameObject);
         //animacion / audio
         Debug.Log("La carta " + card.cardName + " se murio :c");
         actualPosition.card = null;
