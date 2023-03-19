@@ -32,7 +32,7 @@ public class CardManager : MonoBehaviour
         card.GetComponentInChildren<Card>().enabled = false;
         card.transform.position = showCard.position;
         card.transform.rotation = showCard.rotation;
-        card.transform.localScale = card.transform.localScale * 2;
+        card.transform.localScale = card.transform.localScale * 1.5f;
     }
 
     public void HideCard(GameObject card)

@@ -9,7 +9,7 @@ public class Draw : MonoBehaviour
     public List<GameObject> deck;
     private List<GameObject> _actualDeck = new List<GameObject>();
     public Transform handPos;
-    [HideInInspector] public bool canDraw;
+     public bool canDraw;
     private TurnManager turnManager;
     void Start()
     {
