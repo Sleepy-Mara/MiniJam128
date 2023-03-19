@@ -21,6 +21,11 @@ public class ThisCard : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<Player>();
+        if (card != null)
+            SetData();
+    }
+    public void SetData()
+    {
         actualLife = card.life;
         actualAttack = card.attack;
         nameText.text = card.name;
