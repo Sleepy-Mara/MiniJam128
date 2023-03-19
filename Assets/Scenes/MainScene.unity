@@ -6933,6 +6933,7 @@ MonoBehaviour:
     cardPos: {fileID: 186557578}
     positionNum: 2
     oponent: {fileID: 0}
+  player: {fileID: 0}
   cardPrefab: {fileID: 8954024018774041426, guid: 918ce3453ac3589469482dbb7da7ac37, type: 3}
   myCards: []
 --- !u!1001 &277075473
@@ -16819,7 +16820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &727877550
 RectTransform:
   m_ObjectHideFlags: 0
