@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: Crowin
+  m_Name: Forg
   m_EditorClassIdentifier: 
-  cardName: Crowin
-  life: 2
-  attack: 1
-  attackToPlayer: 1
+  cardName: Forg
+  life: 0
+  attack: 0
+  attackToPlayer: 0
   manaCost: 1
   healthCost: 0
-  sprite: {fileID: 21300000, guid: eb71ef060c97ea745bc6b5d8043659d0, type: 3}
-  hasEffect: 0
-  effectDesc: 
+  sprite: {fileID: 21300000, guid: f496ce796863d8a41b631efc991a4921, type: 3}
+  hasEffect: 1
+  effectDesc: When it dies, draw 1 card
   effectSprite: {fileID: 0}
