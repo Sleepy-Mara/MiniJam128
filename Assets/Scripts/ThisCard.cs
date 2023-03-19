@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEditor;
+using UnityEditor.Animations;
 
 public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
@@ -24,7 +26,14 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private TurnManager _turnManager;
     private Draw _draw;
     private Table _table;
-    private bool _inmune;
+    private bool _inmune = false;
+    public AnimatorController handAnimator;
+    public AnimatorController tableAnimator;
+    public bool attack;
+    public bool getAttacked;
+    private int lastDamage;
+    private ThisCard lastEnemy;
+    private GameObject lastTarget;
     private void Awake()
     {
         if (card != null)
@@ -36,6 +45,37 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _turnManager = FindObjectOfType<TurnManager>();
         _draw = FindObjectOfType<Draw>();
         _table = FindObjectOfType<Table>();
+    }
+    private void FixedUpdate()
+    {
+        if(attack)
+        {
+            if (lastTarget.GetComponent<ThisCard>())
+            {
+                lastTarget.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this, true);
+                //ejecutar audio y/o animacion
+                if (actualPosition.positionFacing.card != null)
+                    CheckEffect(4, actualPosition.positionFacing.card.gameObject);
+            }
+            if(lastTarget.GetComponent<Health>())
+            {
+                lastTarget.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
+                CheckEffect(4, actualPosition.oponent.gameObject);
+            }
+            attack = false;
+            lastTarget = null;
+        }
+        if (getAttacked)
+        {
+            lastEnemy.ReceiveDamage(lastDamage, this, false);
+            lastDamage = 0;
+            lastEnemy = null;
+            getAttacked = false;
+        }
+        if (actualLife <= 0)
+        {
+            Death(lastEnemy);
+        }
     }
     public void SetData()
     {
@@ -57,19 +97,17 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void Attack()
     {
-        //buscar al wachin que este al frente y hacerlo poronga
         if (actualPosition.positionFacing.card != null)
         {
-            actualPosition.positionFacing.card.ReceiveDamage(actualAttack, this, true);
+            lastTarget = actualPosition.positionFacing.card.gameObject;
             //ejecutar audio y/o animacion
-            if(actualPosition.positionFacing.card != null)
-                CheckEffect(4, actualPosition.positionFacing.card.gameObject);
         }
         else
         {
-            actualPosition.oponent.ReceiveDamage(card.attackToPlayer);
-            CheckEffect(4, actualPosition.oponent.gameObject);
+            lastTarget = actualPosition.oponent.gameObject;
         }
+        //buscar al wachin que este al frente y hacerlo poronga
+        GetComponent<Animator>().SetTrigger("Attack");
     }
     public void ReceiveDamage(int damage, ThisCard enemy, bool vengance)
     {
@@ -78,10 +116,10 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         actualLife -= damage;
         lifeText.text = actualLife.ToString();
         if (!_inmune && enemy != null && vengance == true)
-            enemy.ReceiveDamage(damage, this, false);
-        if (actualLife <= 0)
         {
-            Death(enemy);
+            lastDamage = damage;
+            lastEnemy = enemy;
+            GetComponent<Animator>().SetTrigger("GetDamage");
         }
         //ejecutar audio y/o animacion
     }
@@ -92,6 +130,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //animacion / audio
         Debug.Log("La carta " + card.cardName + " se murio :c");
         actualPosition.card = null;
+        _table.myCards.Remove(this);
         Destroy(gameObject);
     }
     public void OnPointerDown(PointerEventData eventData)

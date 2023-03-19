@@ -39,7 +39,7 @@ public class Table : MonoBehaviour
     }
     public void SetCard(GameObject card, int place)
     {
-        card.GetComponent<Animator>().enabled = false;
+        card.GetComponent<Animator>().runtimeAnimatorController = card.GetComponent<ThisCard>().tableAnimator;
         card.transform.SetParent(playerPositions[place].cardPos.transform);
         card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
         playerPositions[place].card = card.GetComponent<ThisCard>();
@@ -54,7 +54,7 @@ public class Table : MonoBehaviour
         if (enemyBack[place].card == null)
         {
             ThisCard newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<ThisCard>();
-            newCard.GetComponent<Animator>().enabled = false;
+            newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.GetComponent<ThisCard>().tableAnimator;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
             newCard.actualPosition = enemyBack[place];
