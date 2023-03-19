@@ -775,7 +775,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f93d63cb2a34c034f8417528392eb4f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c8f0622533b646742b32d8538e5aac94, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -800,8 +800,9 @@ MonoBehaviour:
   card: {fileID: 11400000, guid: cb38db9a4c0417a468bafa6a51d5d528, type: 2}
   actualPosition:
     card: {fileID: 0}
-    transform: {fileID: 0}
+    cardPos: {fileID: 0}
     positionNum: 0
+    oponent: {fileID: 0}
   nameText: {fileID: 614555325657197718}
   attackText: {fileID: 614555327610193491}
   lifeText: {fileID: 614555325935901141}
