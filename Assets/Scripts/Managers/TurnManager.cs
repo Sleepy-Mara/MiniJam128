@@ -6,7 +6,7 @@ public class TurnManager : MonoBehaviour
 {
     [HideInInspector] public int turn;
     [SerializeField] private Player player;
-    [HideInInspector] public Enemy enemy;
+    public Enemy enemy;
     private Draw draw;
     private Table table;
     public bool canPlayCards;
@@ -21,6 +21,7 @@ public class TurnManager : MonoBehaviour
 
     public void StartBattle()
     {
+        Debug.Log("Empieza el combate");
         enemy.MoveBackCards(turn);
         for (int i = 0; i < cardsInHandStart; i++)
             draw.DrawACard();
@@ -30,6 +31,7 @@ public class TurnManager : MonoBehaviour
     public void StartTurn()
     {
         turn++;
+        Debug.Log("Empieza el turno " + turn);
         player.RestoreMana();
         draw.canDraw = true;
         //algun efecto de comienzo de turno

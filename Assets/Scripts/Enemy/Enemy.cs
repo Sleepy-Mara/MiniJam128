@@ -6,7 +6,7 @@ public class Enemy : Health
 {
     public Strategy strategy;
     private Table table;
-    public ThisCard card;
+    public GameObject card;
 
     private void Start()
     {
@@ -19,26 +19,27 @@ public class Enemy : Health
     }
     public void PlaceBackCards(int turn)
     {
+        Debug.Log("el enemigo pone cartas, turno " + turn);
         if (strategy.turns[turn].cardPlacement0 != null)
         {
-            var newCard = Instantiate(card);
-            newCard.card = strategy.turns[turn].cardPlacement0;
-            newCard.SetData();
-            table.EnemySetCard(newCard, 0);
+            //var newCard = Instantiate(card).GetComponent<ThisCard>();
+            //newCard.card = strategy.turns[turn].cardPlacement0;
+            //newCard.SetData();
+            table.EnemySetCard(0, strategy.turns[turn].cardPlacement0);
         }
         if (strategy.turns[turn].cardPlacement1 != null)
         {
-            var newCard = Instantiate(card);
-            newCard.card = strategy.turns[turn].cardPlacement1;
-            newCard.SetData();
-            table.EnemySetCard(newCard, 1);
+            //var newCard = Instantiate(card).GetComponent<ThisCard>();
+            //newCard.card = strategy.turns[turn].cardPlacement1;
+            //newCard.SetData();
+            table.EnemySetCard(1, strategy.turns[turn].cardPlacement1);
         }
         if (strategy.turns[turn].cardPlacement2 != null)
         {
-            var newCard = Instantiate(card);
-            newCard.card = strategy.turns[turn].cardPlacement2;
-            newCard.SetData();
-            table.EnemySetCard(newCard, 2);
+            //var newCard = Instantiate(card).GetComponent<ThisCard>();
+            //newCard.card = strategy.turns[turn].cardPlacement2;
+            //newCard.SetData();
+            table.EnemySetCard(2, strategy.turns[turn].cardPlacement2);
         }
         AttackFrontCards();
     }

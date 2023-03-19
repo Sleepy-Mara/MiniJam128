@@ -55,9 +55,7 @@ public class Draw : MonoBehaviour
     public void AdjustHand()
     {
         float distance = Mathf.Abs(handRange[0].position.x) + Mathf.Abs(handRange[1].position.x);
-        Debug.Log(handRange[0].position.x);
         distance /= (_cardsInHand.Count + 1);
-        Debug.Log(distance);
         for (int i = 0; i < _cardsInHand.Count; i++)
         {
             _cardsInHand[i].transform.SetPositionAndRotation(new Vector3(handRange[1].position.x + distance * (1 +i), handRange[0].position.y, handRange[0].position.z), handRange[0].rotation);

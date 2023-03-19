@@ -12,6 +12,7 @@ public class Table : MonoBehaviour
     public MapPosition[] enemyBack;
     private Player player;
     private Enemy enemy;
+    public GameObject cardPrefab;
 
     [HideInInspector] public List<ThisCard> myCards = new List<ThisCard>();
 
@@ -44,21 +45,27 @@ public class Table : MonoBehaviour
                 positions.card = card.GetComponent<ThisCard>();
         myCards.Add(card.GetComponent<ThisCard>());
     }
-    public void EnemySetCard(ThisCard card, int place)
+    public void EnemySetCard(int place, Cards cardType)
     {
-        if (enemyFront[place] == null)
+        if (enemyBack[place].card == null)
         {
-            card.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position + new Vector3(0, 0.01f, 0), enemyBack[place].cardPos.transform.rotation);
-            enemyBack[place].card = card;
+            var newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<ThisCard>();
+            Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
+            newCard.card = cardType;
+            newCard.SetData();
+            newCard.GetComponent<RectTransform>().SetPositionAndRotation(enemyBack[place].cardPos.GetComponent<RectTransform>().position, enemyBack[place].cardPos.transform.rotation);
+            enemyBack[place].card = newCard;
         }
     }
     public void MoveEnemyCard()
     {
+        Debug.Log("MoveEnemyCard");
         for (int i = 0; i < enemyBack.Length; i++)
             if(enemyBack[i].card != null && enemyFront[i].card == null)
             {
                 var card = enemyBack[i].card;
                 enemyBack[i] = null;
+                card.transform.SetParent(enemyFront[i].card.transform);
                 card.transform.SetPositionAndRotation(enemyFront[i].cardPos.transform.position + new Vector3(0, 0.01f, 0), enemyFront[i].cardPos.transform.rotation);
                 enemyFront[i].card = card;
             }

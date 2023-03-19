@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CardPos : MonoBehaviour
+public class CardPos : MonoBehaviour, IPointerDownHandler
 {
     private CardManager _cardManager;
     private Table _table;
@@ -38,7 +39,11 @@ public class CardPos : MonoBehaviour
         }
 
     }
-
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
+            SelectThisPosition();
+    }
     private void OnMouseDown()
     {
         if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
