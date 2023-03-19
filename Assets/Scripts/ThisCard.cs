@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ThisCard : MonoBehaviour
+public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     public Cards card;
     [HideInInspector] public MapPosition actualPosition;
@@ -17,10 +18,19 @@ public class ThisCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthCostText;
     [SerializeField] private Image image;
     [SerializeField] private Image effectImage;
+    [SerializeField] private Canvas canvas;
+    [HideInInspector] public bool canPlay;
+    private CardManager _cardManager;
+    private TurnManager _turnManager;
     private void Awake()
     {
         if (card != null)
             SetData();
+    }
+    private void Start()
+    {
+        _cardManager = FindObjectOfType<CardManager>();
+        _turnManager = FindObjectOfType<TurnManager>();
     }
     public void SetData()
     {
@@ -71,6 +81,25 @@ public class ThisCard : MonoBehaviour
         Debug.Log("La carta " + card.cardName + " se murio :c");
         actualPosition.card = null;
         GameObject.Destroy(this);
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (actualPosition == null && _turnManager.canPlayCards)
+            _cardManager.PlaceCards(gameObject.transform.parent.gameObject);
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //animacion
+        GetComponent<Animator>().SetBool("Zoomed", true);
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = 1;
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //animacion
+        GetComponent<Animator>().SetBool("Zoomed", false);
+        canvas.sortingOrder = 0;
+        canvas.overrideSorting = false;
     }
     public void OnPlayEffect()
     {

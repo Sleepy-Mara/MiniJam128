@@ -9,6 +9,7 @@ public class TurnManager : MonoBehaviour
     [HideInInspector] public Enemy enemy;
     private Draw draw;
     private Table table;
+    public bool canPlayCards;
     [SerializeField] private int cardsInHandStart;
 
     private void Start()
@@ -35,9 +36,10 @@ public class TurnManager : MonoBehaviour
     }
     public void PlayableTurn()
     {
-        var cards = FindObjectsOfType<Card>();
-        foreach (Card card in cards)
-            card.canPlay = true;
+        canPlayCards = true;
+        //var cards = FindObjectsOfType<Card>();
+        //foreach (Card card in cards)
+        //    card.canPlay = true;
     }
     public void EndTurn()
     {
