@@ -23,6 +23,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private CardManager _cardManager;
     private TurnManager _turnManager;
     private Draw _draw;
+    private bool _inmune;
     private void Awake()
     {
         if (card != null)
@@ -57,28 +58,32 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //buscar al wachin que este al frente y hacerlo poronga
         if (actualPosition.positionFacing.card != null)
         {
-            actualPosition.positionFacing.card.ReceiveDamage(actualAttack);
+            actualPosition.positionFacing.card.ReceiveDamage(actualAttack, this, true);
             //ejecutar audio y/o animacion
+            CheckEffect(4, actualPosition.positionFacing.card.gameObject);
         }
         else
         {
             actualPosition.oponent.ReceiveDamage(card.attackToPlayer);
+            CheckEffect(4, actualPosition.oponent.gameObject);
         }
-        CheckEffect(4);
     }
-    public void ReceiveDamage(int damage)
+    public void ReceiveDamage(int damage, ThisCard enemy, bool vengance)
     {
+        CheckEffect(4, enemy.gameObject);
         actualLife -= damage;
         lifeText.text = actualLife.ToString();
+        if (!_inmune && enemy != null && vengance == true)
+            enemy.ReceiveDamage(damage, this, false);
         if (actualLife <= 0)
         {
-            Death();
+            Death(enemy);
         }
         //ejecutar audio y/o animacion
     }
-    public void Death()
+    public void Death(ThisCard enemy)
     {
-        CheckEffect(3);
+        CheckEffect(3, enemy.gameObject);
         //animacion / audio
         Debug.Log("La carta " + card.cardName + " se murio :c");
         actualPosition.card = null;
@@ -86,8 +91,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (actualPosition == null && _turnManager.canPlayCards)
-            _cardManager.PlaceCards(gameObject.transform.parent.gameObject);
+        if (actualPosition.cardPos == null && _turnManager.canPlayCards)
+            _cardManager.PlaceCards(gameObject);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -105,51 +110,56 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPlayEffect()
     {
-        CheckEffect(1);
+        CheckEffect(1, null);
     }
     public void OnTurnStart()
     {
-        CheckEffect(0);
+        CheckEffect(0, null);
     }
     public void OnTurnEnd()
     {
-        CheckEffect(2);
+        CheckEffect(2, null);
     }
-    private void CheckEffect(int x)
+    private void CheckEffect(int x, GameObject target)
     {
         if (card.hasEffect)
         {
             bool doEffect = false;
-            string effectToDo = null;
+            List<string> effectToDo = null;
             foreach (string effect in card.keywords)
                 if (card.effectDesc.Contains(effect))
                 {
                     if (effect == card.keywords[x])
                         doEffect = true;
                     if (card.keywords.IndexOf(effect) > 4)
-                        effectToDo = effect;
-                    if (doEffect && effectToDo != null)
                     {
-                        Effect(effectToDo);
-                        effectToDo = null;
+                        if (effectToDo == null)
+                            effectToDo = new List<string>();
+                        effectToDo.Add(effect);
                     }
                 }
+            if (doEffect && effectToDo != null)
+                foreach (string effect in effectToDo)
+                    Effect(effect, target);
         }
     }
-    private void Effect(string effect)
+    private void Effect(string effect, GameObject target)
     {
         var eventNumber = card.keywords.IndexOf(effect) - 4;
         if (eventNumber == 0)
             DrawEffect();
         if (eventNumber == 1)
-            DealDamgeEffect();
+            DealDamgeEffect(target);
     }
     private void DrawEffect()
     {
         _draw.DrawACard();
     }
-    private void DealDamgeEffect()
+    private void DealDamgeEffect(GameObject target)
     {
-
+        if (target.GetComponent<ThisCard>())
+            target.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this);
+        if (target.GetComponent<Health>())
+            target.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
     }
 }
