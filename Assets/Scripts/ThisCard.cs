@@ -19,7 +19,6 @@ public class ThisCard : MonoBehaviour
     [SerializeField] private Image effectImage;
     private void Awake()
     {
-        oponent = FindObjectOfType<Player>();
         if (card != null)
             SetData();
     }
