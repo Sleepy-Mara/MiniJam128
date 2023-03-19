@@ -20,7 +20,7 @@ public class BattleMap : MonoBehaviour
     }
     public void SetCard(GameObject card, int pos)
     {
-        card.transform.SetPositionAndRotation(playerPositions[pos].transform.position, playerPositions[pos].transform.rotation);
+        card.transform.SetPositionAndRotation(playerPositions[pos].cardPos.transform.position, playerPositions[pos].cardPos.transform.rotation);
         playerPositions[pos].card = card.GetComponent<ThisCard>();
         playerPositions[pos].card.actualPosition = playerPositions[pos];
     }

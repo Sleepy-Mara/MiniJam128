@@ -16,7 +16,7 @@ public class Table : MonoBehaviour
         _draw = FindObjectOfType<Draw>();
         foreach (MapPosition position in mapPositions)
             foreach (MapPosition mapPosition in mapPositions)
-                if (position.transform.gameObject.GetComponent<CardPos>().positionFacing == mapPosition.transform)
+                if (position.cardPos.gameObject.GetComponent<CardPos>().positionFacing == mapPosition.cardPos)
                     position.positionFacing = mapPosition;
     }
 
@@ -34,7 +34,7 @@ public class Table : MonoBehaviour
         card.transform.position = position.position + new Vector3(0, 0.01f, 0);
         card.transform.rotation = Quaternion.Euler(90, 0, 0);
         foreach (MapPosition positions in mapPositions)
-            if (positions.transform == position)
+            if (positions.cardPos == position)
                 positions.card = card.GetComponent<ThisCard>();
         myCards.Add(card.GetComponent<ThisCard>());
     }
