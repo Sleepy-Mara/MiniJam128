@@ -2842,6 +2842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 0
 --- !u!114 &104467955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4482,6 +4483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 0
 --- !u!114 &186557579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6623,7 +6625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a141b697c77475241b71b80dafecf14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPositions: []
   playerPositions:
   - card: {fileID: 0}
     cardPos: {fileID: 1768773269}
@@ -8942,7 +8943,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &389840674
 RectTransform:
@@ -12775,6 +12776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 2
 --- !u!114 &582032080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14728,6 +14730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 1
 --- !u!1 &661992215
 GameObject:
   m_ObjectHideFlags: 0
@@ -22038,6 +22041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 0
 --- !u!114 &1001518020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22925,6 +22929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 0
 --- !u!114 &1055771067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23854,6 +23859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 0
 --- !u!114 &1084821516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38622,6 +38628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 0
 --- !u!1 &1770544836
 GameObject:
   m_ObjectHideFlags: 0
@@ -43324,6 +43331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   positionFacing: {fileID: 0}
+  positionNum: 0
 --- !u!114 &1957874729
 MonoBehaviour:
   m_ObjectHideFlags: 0
