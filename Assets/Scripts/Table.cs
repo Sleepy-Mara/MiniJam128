@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    public List<GameObject> cameras;
     private bool _inTable;
     private Draw _draw;
     public List<MapPosition> mapPositions;
@@ -32,16 +31,6 @@ public class Table : MonoBehaviour
         //        if (position.cardPos.gameObject.GetComponent<CardPos>().positionFacing == mapPosition.cardPos)
         //            position.positionFacing = mapPosition;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
-            ChangeCamera();
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-            ChangeCamera();
-    }
-
     public void SetCard(GameObject card, Transform position)
     {
         card.transform.position = position.position + new Vector3(0, 0.01f, 0);
@@ -69,19 +58,5 @@ public class Table : MonoBehaviour
                 card.transform.SetPositionAndRotation(enemyFront[i].cardPos.transform.position + new Vector3(0, 0.01f, 0), enemyFront[i].cardPos.transform.rotation);
                 enemyFront[i].card = card;
             }
-    }
-
-    public void ChangeCamera()
-    {
-        if (cameras[0].activeSelf)
-        {
-            cameras[1].SetActive(true);
-            cameras[0].SetActive(false);
-        }
-        else
-        {
-            cameras[0].SetActive(true);
-            cameras[1].SetActive(false);
-        }
     }
 }

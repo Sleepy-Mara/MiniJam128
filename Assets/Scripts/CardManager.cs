@@ -8,12 +8,12 @@ public class CardManager : MonoBehaviour
     [HideInInspector] public bool placeCards;
     [HideInInspector] public GameObject cardToPlace;
     [HideInInspector] public Draw draw;
-    private Table _table;
+    private CameraManager _camera;
     void Start()
     {
         draw = FindObjectOfType<Draw>();
         Debug.Log(draw.gameObject.name);
-        _table = FindObjectOfType<Table>();
+        _camera = FindObjectOfType<CameraManager>();
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class CardManager : MonoBehaviour
         {
             placeCards = false;
             cardToPlace = null;
-            _table.ChangeCamera();
+            _camera.HandCamera();
         }
     }
 
@@ -42,9 +42,10 @@ public class CardManager : MonoBehaviour
 
     public void PlaceCards(GameObject card)
     {
+        cardToPlace = null;
         foreach (GameObject things in draw.drawThings)
             things.SetActive(false);
-        _table.ChangeCamera();
+        _camera.PlaceCardCamera();
         cardToPlace = card;
         placeCards = true;
     }
