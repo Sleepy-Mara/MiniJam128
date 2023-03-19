@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class ThisCard : MonoBehaviour
 {
     public Cards card;
-    private Player player;
     [HideInInspector] public MapPosition actualPosition;
     private int actualLife;
     private int actualAttack;
@@ -20,7 +19,7 @@ public class ThisCard : MonoBehaviour
     [SerializeField] private Image effectImage;
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
+        oponent = FindObjectOfType<Player>();
         if (card != null)
             SetData();
     }
@@ -52,7 +51,7 @@ public class ThisCard : MonoBehaviour
         }
         else
         {
-            player.ReceiveDamage(card.attackToPlayer);
+            actualPosition.oponent.ReceiveDamage(card.attackToPlayer);
         }
     }
     public void ReceiveDamage(int damage)

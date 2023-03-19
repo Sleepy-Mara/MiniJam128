@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Health
 {
     public Strategy strategy;
-    public BattleMap battleMap;
     private Table table;
     public ThisCard card;
 
@@ -15,26 +14,26 @@ public class Enemy : MonoBehaviour
     }
     public void PlaceBackCards(int turn)
     {
-        if (strategy.turns[turn].cardpPlacement0 != null)
+        if (strategy.turns[turn].cardPlacement0 != null)
         {
             var newCard = Instantiate(card);
-            newCard.card = strategy.turns[turn].cardpPlacement0;
+            newCard.card = strategy.turns[turn].cardPlacement0;
             newCard.SetData();
             //place holder:
             table.SetCard(newCard.gameObject, transform);
         }
-        if (strategy.turns[turn].cardpPlacement1 != null)
+        if (strategy.turns[turn].cardPlacement1 != null)
         {
             var newCard = Instantiate(card);
-            newCard.card = strategy.turns[turn].cardpPlacement1;
+            newCard.card = strategy.turns[turn].cardPlacement1;
             newCard.SetData();
             //place holder:
             table.SetCard(newCard.gameObject, transform);
         }
-        if (strategy.turns[turn].cardpPlacement1 != null)
+        if (strategy.turns[turn].cardPlacement1 != null)
         {
             var newCard = Instantiate(card);
-            newCard.card = strategy.turns[turn].cardpPlacement1;
+            newCard.card = strategy.turns[turn].cardPlacement1;
             newCard.SetData();
             //place holder:
             table.SetCard(newCard.gameObject, transform);
@@ -43,5 +42,9 @@ public class Enemy : MonoBehaviour
     public void AttackFrontCards()
     {
 
+    }
+    public override void Defeat()
+    {
+        Debug.Log("Derrotaste al oponente, estas feliz?");
     }
 }

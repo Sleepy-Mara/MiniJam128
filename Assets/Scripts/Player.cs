@@ -3,40 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : Health
 {
-    public int maxHealth;
-    public int actualHealth;
     public int manaLimit;
     public int maxMana;
     public int actualMana;
     [SerializeField] private Image manaFill;
-    [SerializeField] private Image healthFill;
 
-    private void Awake()
+    private new void Awake()
     {
-        actualHealth = maxHealth;
+        base.Awake();
         RefreshMana();
-        RefreshHealth();
     }
-    public void RestoreHealth(int heal)
-    {
-        actualHealth = Mathf.Clamp(actualHealth + heal, 0, maxHealth);
-        RefreshHealth();
-        //audio / algo
-    }
-    public void ReceiveDamage(int damage)
-    {
-        //sonido / animacion
-        if((actualHealth - damage) <= 0)
-        {
-            actualHealth = 0;
-            RefreshHealth();
-            Defeat();
-        } else
-            actualHealth -= damage;
-        RefreshHealth();
-    }
+    
     public bool EnoughMana(int cost)
     {
         return actualMana >= cost;
@@ -55,14 +34,10 @@ public class Player : MonoBehaviour
         RefreshMana();
         //sonido / animacion
     }
-    public void Defeat()
+    public override void Defeat()
     {
         //lo que sea que pase cuando perdes
         Debug.Log("Te derrotaron wey");
-    }
-    private void RefreshHealth()
-    {
-        healthFill.fillAmount = (float)actualHealth / (float)maxHealth;
     }
     private void RefreshMana()
     {

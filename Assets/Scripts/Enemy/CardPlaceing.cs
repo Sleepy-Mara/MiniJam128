@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class CardPlaceing
 {
-    public Cards cardpPlacement0;
-    public Cards cardpPlacement1;
-    public Cards cardpPlacement2;
+    public Cards cardPlacement0;
+    public Cards cardPlacement1;
+    public Cards cardPlacement2;
 }

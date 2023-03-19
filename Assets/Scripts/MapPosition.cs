@@ -10,4 +10,6 @@ public class MapPosition
     public CardPos cardPos;
     public int positionNum;
     public MapPosition positionFacing;
+    public MapPosition nextPosition;
+    public Health oponent;
 }

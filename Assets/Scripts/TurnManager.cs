@@ -5,7 +5,6 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     private int turn;
-    [SerializeField] private BattleMap battleMap;
     [SerializeField] private Player player;
     private Draw draw;
     private Table table;
