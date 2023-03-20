@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Ssssasha
   m_EditorClassIdentifier: 
-  cardName: Ssssasha
-  life: 1
-  attack: 4
-  attackToPlayer: 1
+  cardName: 
+  life: 0
+  attack: 0
+  attackToPlayer: 0
   manaCost: 0
-  healthCost: 1
-  sprite: {fileID: 21300000, guid: ad27c07008492f94d98d8d3a4f275346, type: 3}
-  hasEffect: 1
-  effectDesc: When it get attacked, deal 1 damage to the enemy player
+  healthCost: 0
+  sprite: {fileID: 0}
+  hasEffect: 0
+  effectDesc: 
   effectSprite: {fileID: 0}
   keywords:
   - At the start of the turn
@@ -31,3 +31,10 @@ MonoBehaviour:
   - draw
   - deal damage
   - /
+  - add
+  - deck
+  - hand
+  - Colonel toad
+  - Forg2
+  - Roger
+  - Rat

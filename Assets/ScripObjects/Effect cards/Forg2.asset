@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Forg2
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
+  cardName: Forg2
+  life: 1
   attack: 0
   attackToPlayer: 0
-  manaCost: 0
+  manaCost: 1
   healthCost: 0
-  sprite: {fileID: 0}
-  hasEffect: 0
-  effectDesc: 
+  sprite: {fileID: 21300000, guid: 607a451805d31c047b11d7ebde924148, type: 3}
+  hasEffect: 1
+  effectDesc: When it dies, draw 1 card and add Colonel toad to the deck
   effectSprite: {fileID: 0}
   keywords:
   - At the start of the turn
