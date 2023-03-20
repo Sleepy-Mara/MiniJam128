@@ -48,9 +48,14 @@ public class Draw : MonoBehaviour
         //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
         var newCard = Instantiate(cardPrefab, transform).GetComponent<ThisCard>();
         newCard.card = _actualDeck[drawedCard];
+        _actualDeck.Remove(_actualDeck[drawedCard]);
+        AddCardToHand(newCard);
+    }
+
+    public void AddCardToHand(ThisCard newCard)
+    {
         newCard.SetData();
         _cardsInHand.Add(newCard.gameObject);
-        _actualDeck.Remove(_actualDeck[drawedCard]);
         AdjustHand();
     }
 

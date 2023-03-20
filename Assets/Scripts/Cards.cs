@@ -24,7 +24,14 @@ public class Cards : ScriptableObject
         "When it attacks",
         "draw",
         "deal damage",
-        "/"
+        "/",
+        "add",
+        "deck",
+        "hand",
+        "Colonel toad",
+        "Forg2",
+        "Roger",
+        "Rat"
     };
 
 }
