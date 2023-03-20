@@ -30,6 +30,7 @@ public class TurnManager : MonoBehaviour
     }
     public void StartTurn()
     {
+        FindObjectOfType<CameraManager>().HandCamera();
         canEndTurn = false;
         turn++;
         Debug.Log("Empieza el turno " + turn);
