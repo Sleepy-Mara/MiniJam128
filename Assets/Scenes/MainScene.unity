@@ -10811,6 +10811,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 59235f970e15df94ca086378af299c64, type: 3}
   audio: {fileID: 6284032983735818647, guid: baffcd9591a9af84aa82bf4d89ea5ea4, type: 3}
   noCardsWindow: {fileID: 1747001688}
+  deckObject: {fileID: 1603253543}
 --- !u!1001 &391653325
 PrefabInstance:
   m_ObjectHideFlags: 0
