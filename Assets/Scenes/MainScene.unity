@@ -7552,6 +7552,12 @@ MonoBehaviour:
     oponent: {fileID: 0}
   player: {fileID: 0}
   cardPrefab: {fileID: 8954024018774041426, guid: 918ce3453ac3589469482dbb7da7ac37, type: 3}
+  clips:
+  - {fileID: 8300000, guid: 5b21ab2c629b7a54492c4dd7f61e7263, type: 3}
+  - {fileID: 8300000, guid: 5c530e1bb694727469656a0ca66bdbd7, type: 3}
+  - {fileID: 8300000, guid: 6a02c1edad8c2d94cb7b289409a3e9d6, type: 3}
+  - {fileID: 8300000, guid: e2de5fd73269d5647a20af949572c2d6, type: 3}
+  audio: {fileID: 6284032983735818647, guid: baffcd9591a9af84aa82bf4d89ea5ea4, type: 3}
   myCards: []
 --- !u!1001 &277075473
 PrefabInstance:
@@ -10017,6 +10023,10 @@ MonoBehaviour:
   handRange:
   - {fileID: 614555326149312881}
   - {fileID: 1540846191}
+  clips:
+  - {fileID: 8300000, guid: 15d265fe8eb693441af01da5a9185da7, type: 3}
+  - {fileID: 8300000, guid: 59235f970e15df94ca086378af299c64, type: 3}
+  audio: {fileID: 6284032983735818647, guid: baffcd9591a9af84aa82bf4d89ea5ea4, type: 3}
 --- !u!1001 &391653325
 PrefabInstance:
   m_ObjectHideFlags: 0

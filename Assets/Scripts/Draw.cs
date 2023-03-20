@@ -13,6 +13,8 @@ public class Draw : MonoBehaviour
     private TurnManager turnManager;
     public GameObject cardPrefab;
     public RectTransform[] handRange;
+    public List<AudioClip> clips;
+    public GameObject audio;
     void Start()
     {
         turnManager = FindObjectOfType<TurnManager>();
@@ -63,6 +65,9 @@ public class Draw : MonoBehaviour
 
     public void AdjustHand()
     {
+        var newAudio = Instantiate(audio).GetComponent<AudioSource>();
+        newAudio.clip = clips[Random.Range(0, clips.Count)];
+        newAudio.Play();
         float distance = Mathf.Abs(handRange[0].position.x) + Mathf.Abs(handRange[1].position.x);
         distance /= (_cardsInHand.Count + 1);
         for (int i = 0; i < _cardsInHand.Count; i++)

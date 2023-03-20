@@ -12,6 +12,8 @@ public class Table : MonoBehaviour
     [HideInInspector] public Player player;
     private Enemy enemy;
     public GameObject cardPrefab;
+    public List<AudioClip> clips;
+    public GameObject audio;
 
     [HideInInspector] public List<ThisCard> myCards = new List<ThisCard>();
 
@@ -39,6 +41,9 @@ public class Table : MonoBehaviour
     }
     public void SetCard(GameObject card, int place)
     {
+        var newAudio = Instantiate(audio).GetComponent<AudioSource>();
+        newAudio.clip = clips[Random.Range(0, clips.Count)];
+        newAudio.Play();
         card.GetComponent<Animator>().runtimeAnimatorController = card.GetComponent<ThisCard>().tableAnimator;
         card.transform.SetParent(playerPositions[place].cardPos.transform);
         card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
@@ -53,6 +58,9 @@ public class Table : MonoBehaviour
     {
         if (enemyBack[place].card == null)
         {
+            var newAudio = Instantiate(audio).GetComponent<AudioSource>();
+            newAudio.clip = clips[Random.Range(0, clips.Count)];
+            newAudio.Play();
             ThisCard newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<ThisCard>();
             newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.GetComponent<ThisCard>().tableAnimator;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
@@ -69,6 +77,9 @@ public class Table : MonoBehaviour
         for (int i = 0; i < enemyBack.Length; i++)
             if(enemyBack[i].card != null && enemyFront[i].card == null)
             {
+                var newAudio = Instantiate(audio).GetComponent<AudioSource>();
+                newAudio.clip = clips[Random.Range(0, clips.Count)];
+                newAudio.Play();
                 ThisCard card = enemyBack[i].card;
                 enemyBack[i].card = null;
                 card.transform.SetParent(enemyFront[i].cardPos.transform);
