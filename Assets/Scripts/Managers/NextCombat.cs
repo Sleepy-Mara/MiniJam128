@@ -37,7 +37,6 @@ public class NextCombat : MonoBehaviour
     }
     public void ToNextCombat()
     {
-        draw.AddACard(enemyRewards[enemyNum]);
         enemyCharacters[enemyNum].SetActive(false);
         enemyNum++;
         if (enemyNum == enemies.Length)
@@ -47,18 +46,19 @@ public class NextCombat : MonoBehaviour
             //agregar victoria de verdad xD
             return;
         }
+        draw.AddACard(enemyRewards[enemyNum]);
         enemyCharacters[enemyNum].SetActive(true);
         wonCombatText.text = wonCombatDescription[enemyNum - 1];
         draw.ResetDeckAndHand();
         _enemy.strategy = enemies[enemyNum];
         _enemy.RestoreHealth(10);
+        table.ResetTable();
         wonCombat.SetActive(true);
     }
     public void SendNext()
     {
         table.player.RestartPlayer();
         wonCombat.SetActive(false);
-        table.ResetTable();
         turnManager.turn = 0;
         turnManager.StartBattle();
     }

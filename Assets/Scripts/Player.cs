@@ -11,15 +11,20 @@ public class Player : Health
     public int actualMana;
     [SerializeField] private Image manaFill;
     [SerializeField] private TextMeshProUGUI manaText;
+    public Animator notEnoughManaWindow;
 
     private new void Awake()
     {
         base.Awake();
         RefreshMana();
     }
-    
+
     public bool EnoughMana(int cost)
     {
+        if (actualMana < cost)
+        {
+            notEnoughManaWindow.SetTrigger("Activate");
+        }
         return actualMana >= cost;
     }
     public void SpendMana(int cost)
