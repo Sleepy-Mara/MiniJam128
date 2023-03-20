@@ -6,6 +6,7 @@ using TMPro;
 public class NextCombat : MonoBehaviour
 {
     [SerializeField] private Strategy[] enemies;
+    public GameObject[] enemyCharacters;
     [TextArea(1, 4)]
     public string[] wonCombatDescription;
     public TextMeshProUGUI wonCombatText;
@@ -24,9 +25,11 @@ public class NextCombat : MonoBehaviour
         draw = FindObjectOfType<Draw>();
         table = FindObjectOfType<Table>();
         _enemy.strategy = enemies[enemyNum];
+        enemyCharacters[enemyNum].SetActive(true);
     }
     public void ToNextCombat()
     {
+        enemyCharacters[enemyNum].SetActive(false);
         enemyNum++;
         if (enemyNum == enemies.Length)
         {
@@ -35,6 +38,7 @@ public class NextCombat : MonoBehaviour
             //agregar victoria de verdad xD
             return;
         }
+        enemyCharacters[enemyNum].SetActive(true);
         wonCombatText.text = wonCombatDescription[enemyNum - 1];
         draw.ResetDeckAndHand();
         _enemy.strategy = enemies[enemyNum];
