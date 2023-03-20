@@ -16,6 +16,7 @@ public class Draw : MonoBehaviour
     public List<AudioClip> clips;
     public GameObject audio;
     public Animator noCardsWindow;
+    public GameObject deckObject;
     void Start()
     {
         turnManager = FindObjectOfType<TurnManager>();
@@ -63,6 +64,8 @@ public class Draw : MonoBehaviour
         newCard.SetData();
         _cardsInHand.Add(newCard.gameObject);
         _actualDeck.Remove(_actualDeck[drawedCard]);
+        if (_actualDeck.Count == 0)
+            deckObject.SetActive(false);
         AdjustHand();
     }
 
@@ -92,6 +95,7 @@ public class Draw : MonoBehaviour
 
     public void ResetDeckAndHand()
     {
+        deckObject.SetActive(true);
         _actualDeck = new List<Cards>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
