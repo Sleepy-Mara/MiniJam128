@@ -143,11 +143,12 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             {
                 _cardManager.PlaceCards(gameObject);
                 _table.player.SpendMana(card.manaCost);
+                _table.player.SpendHealth(card.healthCost);
             }
         }
         else
         {
-            Debug.Log("no tenes mana");
+            Debug.Log("no tenes mana o vida");
         }
     }
     public void OnPointerEnter(PointerEventData eventData)

@@ -31,6 +31,7 @@ public class Draw : MonoBehaviour
         if (canDraw)
         {
             canDraw = false;
+            turnManager.canEndTurn = true;
             DrawACard();
             turnManager.PlayableTurn();
         }
