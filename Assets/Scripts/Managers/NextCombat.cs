@@ -7,6 +7,7 @@ public class NextCombat : MonoBehaviour
 {
     [SerializeField] private Strategy[] enemies;
     public GameObject[] enemyCharacters;
+    public Cards[] enemyRewards;
     [TextArea(1, 4)]
     public string[] wonCombatDescription;
     public TextMeshProUGUI wonCombatText;
@@ -29,6 +30,7 @@ public class NextCombat : MonoBehaviour
     }
     public void ToNextCombat()
     {
+        draw.AddACard(enemyRewards[enemyNum]);
         enemyCharacters[enemyNum].SetActive(false);
         enemyNum++;
         if (enemyNum == enemies.Length)

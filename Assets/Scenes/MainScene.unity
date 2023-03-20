@@ -33558,6 +33558,12 @@ MonoBehaviour:
   - {fileID: 919132147568148162}
   - {fileID: 913971052}
   - {fileID: 7011682296625153121}
+  enemyRewards:
+  - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
+  - {fileID: 11400000, guid: 8b398a09d29ff544b842f24464179585, type: 2}
+  - {fileID: 11400000, guid: 6be924d44b649bc4aaec0796345fdc38, type: 2}
+  - {fileID: 11400000, guid: a22f44025117625489d931cedbff3bdc, type: 2}
+  - {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
   wonCombatDescription:
   - ganaste el primer combate
   - segundo
