@@ -34531,11 +34531,11 @@ MonoBehaviour:
   - {fileID: 913971052}
   - {fileID: 7011682296625153121}
   enemyRewards:
-  - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
   - {fileID: 11400000, guid: 8b398a09d29ff544b842f24464179585, type: 2}
-  - {fileID: 11400000, guid: 6be924d44b649bc4aaec0796345fdc38, type: 2}
-  - {fileID: 11400000, guid: a22f44025117625489d931cedbff3bdc, type: 2}
   - {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
+  - {fileID: 11400000, guid: a22f44025117625489d931cedbff3bdc, type: 2}
+  - {fileID: 11400000, guid: 6be924d44b649bc4aaec0796345fdc38, type: 2}
+  - {fileID: 11400000, guid: b5a2c4cc536e51745b542ccc885995e7, type: 2}
   wonCombatDescription:
   - "The butterfly falls behind the table, when you get closer, you see a card on
     the ground, you decide to add it to your deck.\r\nWhen you end doing this, another
