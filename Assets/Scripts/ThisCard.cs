@@ -136,16 +136,19 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
+        if(eventData.button == PointerEventData.InputButton.Left)
         {
-            if (actualPosition.cardPos == null && _turnManager.canPlayCards)
+            if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
             {
-                _cardManager.PlaceCards(gameObject);
+                if (actualPosition.cardPos == null && _turnManager.canPlayCards)
+                {
+                    _cardManager.PlaceCards(gameObject);
+                }
             }
-        }
-        else
-        {
-            Debug.Log("no tenes mana o vida");
+            else
+            {
+                Debug.Log("no tenes mana o vida");
+            }
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
