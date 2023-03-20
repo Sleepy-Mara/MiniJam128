@@ -17,7 +17,7 @@ public class TurnManager : MonoBehaviour
     {
         draw = FindObjectOfType<Draw>();
         table = FindObjectOfType<Table>();
-        StartBattle();
+        //StartBattle();
     }
 
     public void StartBattle()
@@ -35,16 +35,12 @@ public class TurnManager : MonoBehaviour
         Debug.Log("Empieza el turno " + turn);
         player.RestoreMana();
         draw.canDraw = true;
-        foreach (ThisCard thisCard in table.myCards)
-            thisCard.OnTurnStart();
         //algun efecto de comienzo de turno
     }
     public void PlayableTurn()
     {
         Debug.Log("deberias poder jugar");
         canPlayCards = true;
-        foreach (ThisCard thisCard in table.myCards)
-            thisCard.OnPlayEffect();
         //var cards = FindObjectsOfType<Card>();
         //foreach (Card card in cards)
         //    card.canPlay = true;
@@ -56,8 +52,6 @@ public class TurnManager : MonoBehaviour
             canPlayCards = false;
             foreach (ThisCard thisCard in table.myCards)
                 thisCard.Attack();
-            foreach (ThisCard thisCard in table.myCards)
-                thisCard.OnTurnEnd();
             enemy.MoveBackCards(turn);
         }
         //var cards = FindObjectsOfType<Card>();

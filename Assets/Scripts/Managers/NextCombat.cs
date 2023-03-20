@@ -18,6 +18,7 @@ public class NextCombat : MonoBehaviour
     private TurnManager turnManager;
     private Draw draw;
     private Table table;
+    public GameObject initialMenu;
 
     private void Start()
     {
@@ -26,7 +27,13 @@ public class NextCombat : MonoBehaviour
         draw = FindObjectOfType<Draw>();
         table = FindObjectOfType<Table>();
         _enemy.strategy = enemies[enemyNum];
+        initialMenu.SetActive(true);
+    }
+    public void StartGame()
+    {
         enemyCharacters[enemyNum].SetActive(true);
+        initialMenu.SetActive(false);
+        turnManager.StartBattle();
     }
     public void ToNextCombat()
     {
