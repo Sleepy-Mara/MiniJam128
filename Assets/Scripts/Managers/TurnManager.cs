@@ -35,7 +35,7 @@ public class TurnManager : MonoBehaviour
         turn++;
         Debug.Log("Empieza el turno " + turn);
         player.RestoreMana();
-        draw.canDraw = true;
+        draw.CanDraw();
         //algun efecto de comienzo de turno
     }
     public void PlayableTurn()
@@ -55,6 +55,10 @@ public class TurnManager : MonoBehaviour
             foreach (ThisCard thisCard in table.myCards)
                 thisCard.Attack();
             enemy.MoveBackCards(turn);
+        }
+        else
+        {
+            //abrir ventanita que diga que tenes que robar antes de terminar
         }
         //var cards = FindObjectsOfType<Card>();
         //foreach (Card card in cards)

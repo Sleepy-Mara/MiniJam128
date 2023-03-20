@@ -28,6 +28,14 @@ public class Draw : MonoBehaviour
         _actualDeck.Add(card);
     }
 
+    public void CanDraw()
+    {
+        if(_actualDeck.Count <= 0)
+        {
+            turnManager.canEndTurn = true;
+        }
+        canDraw = true;
+    }
     public void PlayerDraw()
     {
         if (canDraw)
@@ -44,6 +52,7 @@ public class Draw : MonoBehaviour
         if (_actualDeck.Count <= 0)
         {
             Debug.Log("perdiste gay");
+            //abrir ventanita que diga que te quedaste sin cartas
             return;
         }
         var drawedCard = Random.Range(0, _actualDeck.Count);
