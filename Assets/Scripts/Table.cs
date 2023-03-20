@@ -51,6 +51,7 @@ public class Table : MonoBehaviour
         card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
         playerPositions[place].card = card.GetComponent<ThisCard>();
         card.GetComponent<ThisCard>().actualPosition = playerPositions[place];
+        card.GetComponent<ThisCard>().playerCard = true;
         //foreach (MapPosition positions in mapPositions)
         //    if (positions.cardPos == pos)
         //        positions.card = card.GetComponent<ThisCard>();
@@ -70,6 +71,7 @@ public class Table : MonoBehaviour
             newCard.actualPosition = enemyBack[place];
             newCard.SetData();
             newCard.GetComponent<RectTransform>().SetPositionAndRotation(enemyBack[place].cardPos.GetComponent<RectTransform>().position, enemyBack[place].cardPos.transform.rotation);
+            newCard.GetComponent<ThisCard>().playerCard = false;
             enemyBack[place].card = newCard;
         }
     }

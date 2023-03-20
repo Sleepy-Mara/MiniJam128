@@ -29,8 +29,9 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private bool _inmune = false;
     public RuntimeAnimatorController handAnimator;
     public RuntimeAnimatorController tableAnimator;
-    public bool attack;
+    [HideInInspector] public bool attack;
     private GameObject lastTarget;
+    [HideInInspector] public bool playerCard;
     private void Awake()
     {
         if (card != null)
@@ -95,8 +96,10 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             lastTarget = actualPosition.oponent.gameObject;
         }
-        if(this != null)
-            GetComponent<Animator>().SetTrigger("Attack");
+        if (this != null)
+            if (playerCard)
+                GetComponent<Animator>().SetTrigger("AttackPlayer");
+            else GetComponent<Animator>().SetTrigger("AttackEnemy");
     }
     public void ReceiveDamage(int damage, ThisCard enemy)
     {
