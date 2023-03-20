@@ -41,6 +41,7 @@ public class Table : MonoBehaviour
     }
     public void SetCard(GameObject card, int place)
     {
+        FindObjectOfType<CameraManager>().HandCamera();
         var newAudio = Instantiate(audio).GetComponent<AudioSource>();
         newAudio.clip = clips[Random.Range(0, clips.Count)];
         newAudio.Play();

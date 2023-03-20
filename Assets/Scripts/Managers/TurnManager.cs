@@ -49,6 +49,7 @@ public class TurnManager : MonoBehaviour
     {
         if (canEndTurn)
         {
+            FindObjectOfType<CameraManager>().PlaceCardCamera();
             canPlayCards = false;
             foreach (ThisCard thisCard in table.myCards)
                 thisCard.Attack();
