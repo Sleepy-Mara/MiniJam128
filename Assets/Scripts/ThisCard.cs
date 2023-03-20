@@ -167,15 +167,18 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPlayEffect()
     {
-        CheckEffect(1, null);
+        if (actualPosition.cardPos != null)
+            CheckEffect(1, null);
     }
     public void OnTurnStart()
     {
-        CheckEffect(0, null);
+        if (actualPosition.cardPos != null)
+            CheckEffect(0, null);
     }
     public void OnTurnEnd()
     {
-        CheckEffect(2, null);
+        if (actualPosition.cardPos != null)
+            CheckEffect(2, null);
     }
     private void CheckEffect(int x, GameObject target)
     {
@@ -195,6 +198,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                         effectToDo.Add(effect);
                     }
                 }
+            Debug.LogError(doEffect +"&"+ x + "&" + effectToDo);
             if (doEffect && effectToDo != null)
                 foreach (string effect in effectToDo)
                     Effect(effect, target);
@@ -202,18 +206,19 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     private void Effect(string effect, GameObject target)
     {
-        var eventNumber = card.keywords.IndexOf(effect) - 4;
-        if (eventNumber == 0)
+        var eventNumber = card.keywords.IndexOf(effect);
+        if (eventNumber == 5)
             DrawEffect();
-        if (eventNumber == 1)
+        if (eventNumber == 6)
             DealDamgeEffect(target);
-        if (eventNumber == 2)
+        if (eventNumber == 7)
             BuffAlly();
-        if (eventNumber == 3)
+        if (eventNumber == 8)
             GiveCard();
     }
     private void DrawEffect()
     {
+        Debug.LogError("Tengo efecto");
         _draw.DrawACard();
     }
     private void DealDamgeEffect(GameObject target)
