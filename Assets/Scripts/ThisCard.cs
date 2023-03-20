@@ -107,8 +107,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             lastTarget = actualPosition.oponent.gameObject;
         }
-        //buscar al wachin que este al frente y hacerlo poronga
-        GetComponent<Animator>().SetTrigger("Attack");
+        if(this != null)
+            GetComponent<Animator>().SetTrigger("Attack");
     }
     public void ReceiveDamage(int damage, ThisCard enemy, bool vengance)
     {
@@ -140,7 +140,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
             {
-                if (actualPosition.cardPos == null && _turnManager.canPlayCards)
+                if (actualPosition.cardPos == null && _turnManager.CanPlayCards())
                 {
                     _cardManager.PlaceCards(gameObject);
                 }

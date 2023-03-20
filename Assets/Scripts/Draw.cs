@@ -15,6 +15,7 @@ public class Draw : MonoBehaviour
     public RectTransform[] handRange;
     public List<AudioClip> clips;
     public GameObject audio;
+    public Animator noCardsWindow;
     void Start()
     {
         turnManager = FindObjectOfType<TurnManager>();
@@ -52,7 +53,7 @@ public class Draw : MonoBehaviour
         if (_actualDeck.Count <= 0)
         {
             Debug.Log("perdiste gay");
-            //abrir ventanita que diga que te quedaste sin cartas
+            noCardsWindow.SetTrigger("Activate");
             return;
         }
         var drawedCard = Random.Range(0, _actualDeck.Count);

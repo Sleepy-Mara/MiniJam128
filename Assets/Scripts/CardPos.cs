@@ -10,6 +10,7 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
     public GameObject enemy;
     public Transform positionFacing;
     public int positionNum;
+    public bool isPlayable;
 
     private void Start()
     {
@@ -44,7 +45,7 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
+        if (_cardManager.placeCards == true && _cardManager.cardToPlace != null && isPlayable)
             SelectThisPosition();
     }
     //private void OnMouseDown()

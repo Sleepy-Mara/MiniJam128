@@ -34,6 +34,7 @@ public class Table : MonoBehaviour
         {
             playerPositions[i].positionFacing = enemyFront[i];
             playerPositions[i].oponent = enemy;
+            playerPositions[i].cardPos.isPlayable = true;
             enemyFront[i].positionFacing = playerPositions[i];
             enemyFront[i].oponent = player;
             enemyBack[i].nextPosition = enemyFront[i];

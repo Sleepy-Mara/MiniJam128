@@ -12,6 +12,8 @@ public class TurnManager : MonoBehaviour
     public bool canPlayCards;
     public bool canEndTurn;
     [SerializeField] private int cardsInHandStart;
+    public Animator drawCardWindow;
+    public Animator drawBeforePlayWindow;
 
     private void Start()
     {
@@ -58,6 +60,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
+            drawCardWindow.SetTrigger("Activate");
             //abrir ventanita que diga que tenes que robar antes de terminar
         }
         //var cards = FindObjectsOfType<Card>();
@@ -70,5 +73,11 @@ public class TurnManager : MonoBehaviour
         //}
         //algun efecto de fin de turno quizas
         //que actue el oponente
+    }
+    public bool CanPlayCards()
+    {
+        if (!canPlayCards)
+            drawBeforePlayWindow.SetTrigger("Activate");
+        return canPlayCards;
     }
 }
