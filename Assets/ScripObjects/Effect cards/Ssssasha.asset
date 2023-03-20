@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Ssssasha
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
-  attack: 0
-  attackToPlayer: 0
+  cardName: Ssssasha
+  life: 4
+  attack: 1
+  attackToPlayer: 1
   manaCost: 0
-  healthCost: 0
+  healthCost: 1
   sprite: {fileID: 0}
-  hasEffect: 0
-  effectDesc: 
+  hasEffect: 1
+  effectDesc: When it get attacked, deal 1 damage to the enemy player
   effectSprite: {fileID: 0}
   keywords:
   - At the start of the turn
