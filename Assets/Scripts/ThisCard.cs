@@ -246,6 +246,26 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     private void GiveCard()
     {
-
+        if (card.effectDesc.Contains(card.keywords[9]))
+        {
+            Cards newCard = null;
+            if (card.effectDesc.Contains(card.keywords[11]))
+                newCard = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards/" + card.keywords[11], typeof(ScriptableObject));
+            if (card.effectDesc.Contains(card.keywords[12]))
+                newCard = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards/" + card.keywords[12], typeof(ScriptableObject));
+            _draw.AddACard(newCard);
+        }
+        if (card.effectDesc.Contains(card.keywords[10]))
+        {
+            GameObject newCard = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Card", typeof(GameObject));
+            if (card.effectDesc.Contains(card.keywords[13]))
+                newCard.GetComponent<ThisCard>().card = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards" + card.keywords[13],
+                    typeof(ScriptableObject));
+            if (card.effectDesc.Contains(card.keywords[14]))
+                newCard.GetComponent<ThisCard>().card = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards" + card.keywords[14],
+                    typeof(ScriptableObject));
+            Instantiate(newCard);
+            _draw.AddCardToHand(newCard.GetComponent<ThisCard>());
+        }
     }
 }

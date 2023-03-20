@@ -65,6 +65,7 @@ public class Draw : MonoBehaviour
 
     public void AdjustHand()
     {
+        FindObjectOfType<CameraManager>().HandCamera();
         var newAudio = Instantiate(audio).GetComponent<AudioSource>();
         newAudio.clip = clips[Random.Range(0, clips.Count)];
         newAudio.Play();
