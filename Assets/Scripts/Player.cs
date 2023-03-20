@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : Health
 {
@@ -9,6 +10,7 @@ public class Player : Health
     public int maxMana;
     public int actualMana;
     [SerializeField] private Image manaFill;
+    [SerializeField] private TextMeshProUGUI manaText;
 
     private new void Awake()
     {
@@ -61,5 +63,6 @@ public class Player : Health
     private void RefreshMana()
     {
         manaFill.fillAmount = (float)actualMana / (float)manaLimit;
+        manaText.text = actualMana.ToString();
     }
 }

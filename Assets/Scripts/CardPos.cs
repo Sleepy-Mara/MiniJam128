@@ -35,6 +35,8 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
             _cardManager.draw.AdjustHand();
             //_cardManager.cardToPlace.GetComponentInChildren<ThisCard>().inTable = true;
             _table.SetCard(_cardManager.cardToPlace, positionNum);
+            _table.player.SpendMana(_cardManager.cardToPlace.GetComponent<ThisCard>().card.manaCost);
+            _table.player.SpendHealth(_cardManager.cardToPlace.GetComponent<ThisCard>().card.healthCost);
             _cardManager.placeCards = false;
             _cardManager.cardToPlace = null;
         }

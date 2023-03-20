@@ -141,8 +141,6 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if (actualPosition.cardPos == null && _turnManager.canPlayCards)
             {
                 _cardManager.PlaceCards(gameObject);
-                _table.player.SpendMana(card.manaCost);
-                _table.player.SpendHealth(card.healthCost);
             }
         }
         else

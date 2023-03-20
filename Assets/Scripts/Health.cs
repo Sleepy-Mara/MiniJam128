@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Health : MonoBehaviour
 {
     public int maxHealth;
     public int actualHealth;
     [SerializeField] private Image healthFill;
+    [SerializeField] private TextMeshProUGUI healthText;
 
     protected virtual void Awake()
     {
@@ -36,6 +38,7 @@ public class Health : MonoBehaviour
     protected void RefreshHealth()
     {
         healthFill.fillAmount = (float)actualHealth / (float)maxHealth;
+        healthText.text = actualHealth.ToString();
     }
     public virtual void Defeat()
     {

@@ -18,13 +18,13 @@ MonoBehaviour:
     cardPlacement2: {fileID: 0}
   - cardPlacement0: {fileID: 0}
     cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
+  - cardPlacement0: {fileID: 11400000, guid: 21d1a8a8e3400cd4095b1ac6af3226f3, type: 2}
+    cardPlacement1: {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
     cardPlacement2: {fileID: 0}
-  - cardPlacement0: {fileID: 0}
+  - cardPlacement0: {fileID: 11400000, guid: c65aebf507439b040a868efb09167974, type: 2}
     cardPlacement1: {fileID: 0}
     cardPlacement2: {fileID: 0}
   - cardPlacement0: {fileID: 0}
     cardPlacement1: {fileID: 0}
-    cardPlacement2: {fileID: 0}
-  - cardPlacement0: {fileID: 0}
-    cardPlacement1: {fileID: 0}
-    cardPlacement2: {fileID: 0}
+    cardPlacement2: {fileID: 11400000, guid: c65aebf507439b040a868efb09167974, type: 2}

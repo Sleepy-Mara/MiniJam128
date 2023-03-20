@@ -12,4 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4810cb8625a00e1449d408ed7c0e4a04, type: 3}
   m_Name: Canguro
   m_EditorClassIdentifier: 
-  turns: []
+  turns:
+  - cardPlacement0: {fileID: 11400000, guid: 26d16ce04e87aa947a969aefb11c5c8a, type: 2}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 11400000, guid: 46fd1b5ec94b2ae42b8caad074ae7c6e, type: 2}
+  - cardPlacement0: {fileID: 11400000, guid: 19d6b98e55bac86459f0cf3bba17f6b7, type: 2}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 11400000, guid: 6be924d44b649bc4aaec0796345fdc38, type: 2}
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 11400000, guid: c9a8bb9b421d4c74dadda7540e8a0bcc, type: 2}
+    cardPlacement1: {fileID: 11400000, guid: b5a2c4cc536e51745b542ccc885995e7, type: 2}
+    cardPlacement2: {fileID: 11400000, guid: 8b398a09d29ff544b842f24464179585, type: 2}
