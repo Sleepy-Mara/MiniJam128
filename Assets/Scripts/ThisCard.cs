@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEditor;
-using UnityEditor.Animations;
 
 public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
@@ -28,8 +27,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Draw _draw;
     private Table _table;
     private bool _inmune = false;
-    public AnimatorController handAnimator;
-    public AnimatorController tableAnimator;
+    public RuntimeAnimatorController handAnimator;
+    public RuntimeAnimatorController tableAnimator;
     public bool attack;
     public bool getAttacked;
     private int lastDamage;
@@ -247,26 +246,6 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     private void GiveCard()
     {
-        if (card.effectDesc.Contains(card.keywords[9]))
-        {
-            Cards newCard = null;
-            if (card.effectDesc.Contains(card.keywords[11]))
-                newCard = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards/" + card.keywords[11], typeof(ScriptableObject));
-            if (card.effectDesc.Contains(card.keywords[12]))
-                newCard = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards/" + card.keywords[12], typeof(ScriptableObject));
-            _draw.AddACard(newCard);
-        }
-        if (card.effectDesc.Contains(card.keywords[10]))
-        {
-            GameObject newCard = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Card", typeof(GameObject));
-            if (card.effectDesc.Contains(card.keywords[13]))
-                newCard.GetComponent<ThisCard>().card = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards" + card.keywords[13], 
-                    typeof(ScriptableObject));
-            if (card.effectDesc.Contains(card.keywords[14]))
-                newCard.GetComponent<ThisCard>().card = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards" + card.keywords[14],
-                    typeof(ScriptableObject));
-            Instantiate(newCard);
-            _draw.AddCardToHand(newCard.GetComponent<ThisCard>());
-        }
+
     }
 }
