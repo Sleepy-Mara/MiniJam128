@@ -54,9 +54,7 @@ public class TurnManager : MonoBehaviour
         {
             FindObjectOfType<CameraManager>().PlaceCardCamera();
             canPlayCards = false;
-            foreach (ThisCard thisCard in table.myCards)
-                thisCard.Attack();
-            enemy.MoveBackCards(turn);
+            StartCoroutine(AttackPhase());
         }
         else
         {
@@ -79,5 +77,14 @@ public class TurnManager : MonoBehaviour
         if (!canPlayCards)
             drawBeforePlayWindow.SetTrigger("Activate");
         return canPlayCards;
+    }
+
+    IEnumerator AttackPhase()
+    {
+
+        foreach (ThisCard thisCard in table.myCards)
+            thisCard.Attack();
+        yield return new WaitForSeconds(1.5f);
+        enemy.MoveBackCards(turn);
     }
 }

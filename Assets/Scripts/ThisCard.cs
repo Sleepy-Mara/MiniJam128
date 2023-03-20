@@ -30,9 +30,6 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public RuntimeAnimatorController handAnimator;
     public RuntimeAnimatorController tableAnimator;
     public bool attack;
-    public bool getAttacked;
-    private int lastDamage;
-    private ThisCard lastEnemy;
     private GameObject lastTarget;
     private void Awake()
     {
@@ -52,10 +49,12 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             if (lastTarget.GetComponent<ThisCard>())
             {
-                lastTarget.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this, true);
+                Debug.Log("Yo " + card.name + " ataque a " + lastTarget.GetComponent<ThisCard>().card.name);
+                lastTarget.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this);
                 //ejecutar audio y/o animacion
                 if (actualPosition.positionFacing.card != null)
                     CheckEffect(4, actualPosition.positionFacing.card.gameObject);
+                ReceiveDamage(lastTarget.GetComponent<ThisCard>().actualAttack, null);
             }
             if(lastTarget.GetComponent<Health>())
             {
@@ -64,17 +63,6 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             attack = false;
             lastTarget = null;
-        }
-        if (getAttacked)
-        {
-            lastEnemy.ReceiveDamage(lastDamage, this, false);
-            lastDamage = 0;
-            lastEnemy = null;
-            getAttacked = false;
-        }
-        if (actualLife <= 0)
-        {
-            Death(lastEnemy);
         }
     }
     public void SetData()
@@ -110,17 +98,19 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(this != null)
             GetComponent<Animator>().SetTrigger("Attack");
     }
-    public void ReceiveDamage(int damage, ThisCard enemy, bool vengance)
+    public void ReceiveDamage(int damage, ThisCard enemy)
     {
         if (enemy != null)
             CheckEffect(4, enemy.gameObject);
-        actualLife -= damage;
-        lifeText.text = actualLife.ToString();
-        if (!_inmune && enemy != null && vengance == true)
+        if (!_inmune)
         {
-            lastDamage = damage;
-            lastEnemy = enemy;
             GetComponent<Animator>().SetTrigger("GetDamage");
+            actualLife -= damage;
+            lifeText.text = actualLife.ToString();
+        }
+        if (actualLife <= 0)
+        {
+            Death(enemy);
         }
         //ejecutar audio y/o animacion
     }
@@ -198,7 +188,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                         effectToDo.Add(effect);
                     }
                 }
-            Debug.LogError(doEffect +"&"+ x + "&" + effectToDo);
+            Debug.LogError(doEffect +"&"+ x + "&" + effectToDo + card.name);
             if (doEffect && effectToDo != null)
                 foreach (string effect in effectToDo)
                     Effect(effect, target);
@@ -224,7 +214,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private void DealDamgeEffect(GameObject target)
     {
         if (target.GetComponent<ThisCard>())
-            target.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this, false);
+            target.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this);
         if (target.GetComponent<Health>())
             target.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
     }
