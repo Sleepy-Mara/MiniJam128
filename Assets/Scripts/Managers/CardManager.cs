@@ -12,7 +12,7 @@ public class CardManager : MonoBehaviour
     void Start()
     {
         draw = FindObjectOfType<Draw>();
-        Debug.Log(draw.gameObject.name);
+        //Debug.Log(draw.gameObject.name);
         _camera = FindObjectOfType<CameraManager>();
     }
 

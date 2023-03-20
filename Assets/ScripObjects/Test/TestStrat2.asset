@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4810cb8625a00e1449d408ed7c0e4a04, type: 3}
   m_Name: TestStrat2
   m_EditorClassIdentifier: 
-  turns: []
+  turns:
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 11400000, guid: a22f44025117625489d931cedbff3bdc, type: 2}
+    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 11400000, guid: a22f44025117625489d931cedbff3bdc, type: 2}
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
+    cardPlacement2: {fileID: 0}

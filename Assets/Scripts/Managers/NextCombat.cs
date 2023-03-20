@@ -7,10 +7,11 @@ public class NextCombat : MonoBehaviour
 {
     [SerializeField] private Strategy[] enemies;
     [TextArea(1, 4)]
-    public string[] wonCombatText;
-    public TextMeshProUGUI wonText;
+    public string[] wonCombatDescription;
+    public TextMeshProUGUI wonCombatText;
     [SerializeField] private Enemy _enemy;
     public GameObject wonCombat;
+    public GameObject gameVictory;
     private int enemyNum;
     private TurnManager turnManager;
     private Draw draw;
@@ -27,16 +28,17 @@ public class NextCombat : MonoBehaviour
     public void ToNextCombat()
     {
         enemyNum++;
-        if (enemyNum > enemies.Length)
+        if (enemyNum == enemies.Length)
         {
             Debug.Log("Ganaste");
+            gameVictory.SetActive(true);
             //agregar victoria de verdad xD
             return;
         }
+        wonCombatText.text = wonCombatDescription[enemyNum - 1];
         draw.ResetDeckAndHand();
         _enemy.strategy = enemies[enemyNum];
         _enemy.RestoreHealth(10);
-        wonText.text = wonCombatText[enemyNum];
         wonCombat.SetActive(true);
     }
     public void SendNext()

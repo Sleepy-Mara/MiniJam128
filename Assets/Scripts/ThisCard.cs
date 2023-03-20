@@ -84,6 +84,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         actualAttack = card.attack;
         nameText.text = card.name;
         image.sprite = card.sprite;
+        //image.SetNativeSize();
         attackText.text = card.attack.ToString();
         lifeText.text = actualLife.ToString();
         manaCostText.text = card.manaCost.ToString();

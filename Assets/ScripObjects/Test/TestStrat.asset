@@ -15,10 +15,10 @@ MonoBehaviour:
   turns:
   - cardPlacement0: {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
     cardPlacement1: {fileID: 0}
-    cardPlacement2: {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
+    cardPlacement2: {fileID: 0}
   - cardPlacement0: {fileID: 11400000, guid: 46fd1b5ec94b2ae42b8caad074ae7c6e, type: 2}
-    cardPlacement1: {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
+    cardPlacement1: {fileID: 0}
     cardPlacement2: {fileID: 0}
   - cardPlacement0: {fileID: 0}
-    cardPlacement1: {fileID: 11400000, guid: c9a8bb9b421d4c74dadda7540e8a0bcc, type: 2}
-    cardPlacement2: {fileID: 11400000, guid: 9e379370f11931344a8d3403664482ef, type: 2}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
