@@ -71,6 +71,11 @@ public class Draw : MonoBehaviour
         _actualDeck = new List<Cards>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
+        for (int j = 0; j < _cardsInHand.Count; j++)
+        {
+            Destroy(_cardsInHand[j].gameObject);
+            _cardsInHand.RemoveAt(j);
+        }
         foreach (var card in _cardsInHand)
         {
             _cardsInHand.Remove(card);

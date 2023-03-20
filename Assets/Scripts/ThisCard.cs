@@ -18,8 +18,9 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private TextMeshProUGUI lifeText;
     [SerializeField] private TextMeshProUGUI manaCostText;
     [SerializeField] private TextMeshProUGUI healthCostText;
+    [SerializeField] private TextMeshProUGUI effectText;
     [SerializeField] private Image image;
-    [SerializeField] private Image effectImage;
+    //[SerializeField] private Image effectImage;
     [SerializeField] private Canvas canvas;
     [HideInInspector] public bool canPlay;
     private CardManager _cardManager;
@@ -89,10 +90,10 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         healthCostText.text = card.healthCost.ToString();
         if (card.hasEffect)
         {
-            effectImage.sprite = card.effectSprite;
+            effectText.text = card.effectDesc;
         }
         else
-            effectImage.enabled = false;
+            effectText.enabled = false;
     }
 
     public void Attack()

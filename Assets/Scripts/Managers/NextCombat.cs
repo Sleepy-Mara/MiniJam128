@@ -33,16 +33,18 @@ public class NextCombat : MonoBehaviour
             //agregar victoria de verdad xD
             return;
         }
-        turnManager.turn = 0;
         draw.ResetDeckAndHand();
         _enemy.strategy = enemies[enemyNum];
         _enemy.RestoreHealth(10);
-        table.player.RestartPlayer();
+        wonText.text = wonCombatText[enemyNum];
         wonCombat.SetActive(true);
     }
     public void SendNext()
     {
+        table.player.RestartPlayer();
         wonCombat.SetActive(false);
         table.ResetTable();
+        turnManager.turn = 0;
+        turnManager.StartBattle();
     }
 }

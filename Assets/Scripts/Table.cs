@@ -79,15 +79,39 @@ public class Table : MonoBehaviour
     }
     public void ResetTable()
     {
-        foreach (var card in enemyBack)
-            if (card.card != null)
-                Destroy(card.card);
-        foreach (var card in enemyFront)
-            if (card.card != null)
-                Destroy(card.card);
-        foreach (var card in playerPositions)
-            if (card.card != null)
-                Destroy(card.card);
-        StartSet();
+        for (int i = 0; i < enemyBack.Length; i++)
+        {
+            if (enemyBack[i].card != null)
+            {
+                Destroy(enemyBack[i].card.gameObject);
+                enemyBack[i].card = null;
+            }
+        }
+        for (int j = 0; j < enemyFront.Length; j++)
+        {
+            if (enemyFront[j].card != null)
+            {
+                Destroy(enemyFront[j].card.gameObject);
+                enemyFront[j].card = null;
+            }
+        }
+        for (int k = 0; k < playerPositions.Length; k++)
+        {
+            if (playerPositions[k].card != null)
+            {
+                Destroy(playerPositions[k].card.gameObject);
+                playerPositions[k].card = null;
+            }
+        }
+        //foreach (var card in enemyBack)
+        //    if (card.card != null)
+        //        Destroy(card.card);
+        //foreach (var card in enemyFront)
+        //    if (card.card != null)
+        //        Destroy(card.card);
+        //foreach (var card in playerPositions)
+        //    if (card.card != null)
+        //        Destroy(card.card);
+        //StartSet();
     }
 }
