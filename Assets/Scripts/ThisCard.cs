@@ -109,6 +109,9 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             GetComponent<Animator>().SetTrigger("GetDamage");
             actualLife -= damage;
+            if (actualLife < card.life)
+                lifeText.color = Color.red;
+            else lifeText.color = Color.black;
             lifeText.text = actualLife.ToString();
         }
         if (actualLife <= 0)
