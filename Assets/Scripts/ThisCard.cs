@@ -72,7 +72,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         actualAttack = card.attack;
         nameText.text = card.name;
         image.sprite = card.sprite;
-        //image.SetNativeSize();
+        float aspectRatio = card.sprite.rect.width / card.sprite.rect.height;
+        image.GetComponent<AspectRatioFitter>().aspectRatio = aspectRatio;
         attackText.text = card.attack.ToString();
         lifeText.text = actualLife.ToString();
         manaCostText.text = card.manaCost.ToString();
@@ -132,18 +133,14 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Left)
+        if(eventData.button == PointerEventData.InputButton.Left && actualPosition.cardPos == null)
         {
-            if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
+            if (_turnManager.CanPlayCards())
             {
-                if (actualPosition.cardPos == null && _turnManager.CanPlayCards())
+                if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
                 {
                     _cardManager.PlaceCards(gameObject);
                 }
-            }
-            else
-            {
-                Debug.Log("no tenes mana o vida");
             }
         }
     }
@@ -153,7 +150,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             GetComponent<Animator>().SetBool("Zoomed", true);
             canvas.overrideSorting = true;
-            canvas.sortingOrder = 1;
+            canvas.sortingOrder = 5;
             _draw.zoomingCard = true;
         }
     }

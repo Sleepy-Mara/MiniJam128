@@ -808,7 +808,6 @@ MonoBehaviour:
   tableAnimator: {fileID: 9100000, guid: 54c394e32556e0f4a87c40c8b7495c8d, type: 2}
   attack: 0
   playerCard: 0
-  zoomCooldown: 0.25
 --- !u!95 &8954024018774041424
 Animator:
   serializedVersion: 4
@@ -1334,6 +1333,7 @@ GameObject:
   - component: {fileID: 8954024019986997755}
   - component: {fileID: 8954024019986997753}
   - component: {fileID: 8954024019986997752}
+  - component: {fileID: 5084250577631524744}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1356,10 +1356,10 @@ RectTransform:
   m_Father: {fileID: 8954024019286018030}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.14, y: 0.35}
-  m_AnchorMax: {x: 0.86, y: 0.85}
-  m_AnchoredPosition: {x: 0.000030517578, y: -0.40000153}
-  m_SizeDelta: {x: 6, y: 0}
+  m_AnchorMin: {x: 0.16000001, y: 0.34}
+  m_AnchorMax: {x: 0.86, y: 0.8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8954024019986997753
 CanvasRenderer:
@@ -1399,6 +1399,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5084250577631524744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954024019986997754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 1
+  m_AspectRatio: 1
 --- !u!1 &8954024020480902348
 GameObject:
   m_ObjectHideFlags: 0
