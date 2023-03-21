@@ -54,7 +54,6 @@ public class Draw : MonoBehaviour
     {
         if (_actualDeck.Count <= 0)
         {
-            Debug.Log("perdiste gay");
             noCardsWindow.SetTrigger("Activate");
             return;
         }
@@ -88,9 +87,6 @@ public class Draw : MonoBehaviour
         for (int i = 0; i < _cardsInHand.Count; i++)
         {
             _cardsInHand[_cardsInHand.Count - i - 1].transform.SetPositionAndRotation(new Vector3(handRange[1].position.x + distance * (1 +i), handRange[0].position.y, handRange[0].position.z), handRange[0].rotation);
-            //_cardsInHand[_cardsInHand.Count - i - 1].transform.rotation = handPos.rotation;
-            //_cardsInHand[_cardsInHand.Count - i - 1].transform.position += new Vector3(0, 0, 0 - 0.001f * i);
-            //_cardsInHand[_cardsInHand.Count - i - 1].transform.Rotate(0, 0, 90 / (_cardsInHand.Count + 1) * (i + 1));
         }
     }
 
@@ -105,15 +101,5 @@ public class Draw : MonoBehaviour
             Destroy(_cardsInHand[0].gameObject);
             _cardsInHand.RemoveAt(0);
         }
-        //for (int j = 0; j < _cardsInHand.Count; j++)
-        //{
-        //    Destroy(_cardsInHand[j].gameObject);
-        //    _cardsInHand.RemoveAt(j);
-        //}
-        //foreach (var card in _cardsInHand)
-        //{
-        //    _cardsInHand.Remove(card);
-        //    Destroy(card);
-        //}
     }
 }

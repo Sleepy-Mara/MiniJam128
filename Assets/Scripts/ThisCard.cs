@@ -72,8 +72,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         actualAttack = card.attack;
         nameText.text = card.name;
         image.sprite = card.sprite;
-        float aspectRatio = card.sprite.rect.width / card.sprite.rect.height;
-        image.GetComponent<AspectRatioFitter>().aspectRatio = aspectRatio;
+        //float aspectRatio = card.sprite.rect.width / card.sprite.rect.height;
+        //image.GetComponent<AspectRatioFitter>().aspectRatio = aspectRatio;
         attackText.text = card.attack.ToString();
         lifeText.text = actualLife.ToString();
         manaCostText.text = card.manaCost.ToString();
@@ -146,7 +146,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!_draw.zoomingCard && actualPosition != null)
+        if (!_draw.zoomingCard)
         {
             GetComponent<Animator>().SetBool("Zoomed", true);
             canvas.overrideSorting = true;
