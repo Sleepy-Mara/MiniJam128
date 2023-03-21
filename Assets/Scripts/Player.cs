@@ -9,8 +9,6 @@ public class Player : Health
     public int manaLimit;
     public int maxMana;
     public int actualMana;
-    [SerializeField] private Image manaFill;
-    [SerializeField] private TextMeshProUGUI manaText;
     [SerializeField] private ManaFiller manaFiller;
     public Animator notEnoughManaWindow;
 
@@ -64,7 +62,5 @@ public class Player : Health
     private void RefreshMana()
     {
         manaFiller.RefreshManas(actualMana, manaLimit);
-        manaFill.fillAmount = (float)actualMana / (float)manaLimit;
-        manaText.text = actualMana.ToString();
     }
 }
