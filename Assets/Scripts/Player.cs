@@ -11,13 +11,9 @@ public class Player : Health
     public int actualMana;
     [SerializeField] private Image manaFill;
     [SerializeField] private TextMeshProUGUI manaText;
+    [SerializeField] private ManaFiller manaFiller;
     public Animator notEnoughManaWindow;
 
-    private new void Awake()
-    {
-        base.Awake();
-        RefreshMana();
-    }
 
     public bool EnoughMana(int cost)
     {
@@ -67,6 +63,7 @@ public class Player : Health
     }
     private void RefreshMana()
     {
+        manaFiller.RefreshManas(actualMana, manaLimit);
         manaFill.fillAmount = (float)actualMana / (float)manaLimit;
         manaText.text = actualMana.ToString();
     }
