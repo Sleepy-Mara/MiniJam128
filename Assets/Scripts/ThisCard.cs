@@ -146,7 +146,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!_draw.zoomingCard)
+        if (!_draw.zoomingCard && actualPosition != null)
         {
             GetComponent<Animator>().SetBool("Zoomed", true);
             canvas.overrideSorting = true;
