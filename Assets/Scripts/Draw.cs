@@ -10,6 +10,7 @@ public class Draw : MonoBehaviour
     private List<Cards> _actualDeck = new List<Cards>();
     public Transform handPos;
     public bool canDraw;
+    public bool zoomingCard;
     private TurnManager turnManager;
     public GameObject cardPrefab;
     public RectTransform[] handRange;

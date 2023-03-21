@@ -146,17 +146,23 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //animacion
-        GetComponent<Animator>().SetBool("Zoomed", true);
-        canvas.overrideSorting = true;
-        canvas.sortingOrder = 1;
+        if (!_draw.zoomingCard)
+        {
+            GetComponent<Animator>().SetBool("Zoomed", true);
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = 1;
+            _draw.zoomingCard = true;
+        }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        //animacion
-        GetComponent<Animator>().SetBool("Zoomed", false);
-        canvas.sortingOrder = 0;
-        canvas.overrideSorting = false;
+        if (eventData.fullyExited)
+        {
+            GetComponent<Animator>().SetBool("Zoomed", false);
+            _draw.zoomingCard = false;
+            canvas.sortingOrder = 0;
+            canvas.overrideSorting = false;
+        }
     }
     public void OnPlayEffect()
     {
