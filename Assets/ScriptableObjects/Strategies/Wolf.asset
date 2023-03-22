@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4810cb8625a00e1449d408ed7c0e4a04, type: 3}
+  m_Name: Wolf
+  m_EditorClassIdentifier: 
+  turns:
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 11400000, guid: 9675af31f38a4df4892c4f4750409598, type: 2}
+    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
+  - cardPlacement0: {fileID: 11400000, guid: 21d1a8a8e3400cd4095b1ac6af3226f3, type: 2}
+    cardPlacement1: {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
+    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 11400000, guid: c65aebf507439b040a868efb09167974, type: 2}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 11400000, guid: c65aebf507439b040a868efb09167974, type: 2}
