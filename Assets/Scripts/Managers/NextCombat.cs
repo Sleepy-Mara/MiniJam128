@@ -38,6 +38,8 @@ public class NextCombat : MonoBehaviour
     public void ToNextCombat()
     {
         enemyCharacters[enemyNum].SetActive(false);
+        draw.AddACard(enemyRewards[enemyNum]);
+        wonCombatText.text = wonCombatDescription[enemyNum];
         enemyNum++;
         if (enemyNum == enemies.Length)
         {
@@ -46,9 +48,7 @@ public class NextCombat : MonoBehaviour
             //agregar victoria de verdad xD
             return;
         }
-        draw.AddACard(enemyRewards[enemyNum]);
         enemyCharacters[enemyNum].SetActive(true);
-        wonCombatText.text = wonCombatDescription[enemyNum - 1];
         draw.ResetDeckAndHand();
         _enemy.strategy = enemies[enemyNum];
         _enemy.RestoreHealth(10);

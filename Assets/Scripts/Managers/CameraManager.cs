@@ -45,4 +45,8 @@ public class CameraManager : MonoBehaviour
         _actualPosition = cameraHand;
         ChangeCamera(0);
     }
+    public int CameraPosition()
+    {
+        return _actualPosition;
+    }
 }
