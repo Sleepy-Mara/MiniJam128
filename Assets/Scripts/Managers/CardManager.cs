@@ -21,9 +21,7 @@ public class CardManager : MonoBehaviour
     {
         if (placeCards && Input.GetButtonDown("Fire2"))
         {
-            placeCards = false;
-            cardToPlace = null;
-            _camera.HandCamera();
+            CancelPlacing();
         }
     }
 
@@ -48,5 +46,11 @@ public class CardManager : MonoBehaviour
         _camera.PlaceCardCamera();
         cardToPlace = card;
         placeCards = true;
+    }
+    public void CancelPlacing()
+    {
+        placeCards = false;
+        cardToPlace = null;
+        _camera.HandCamera();
     }
 }

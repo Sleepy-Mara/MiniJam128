@@ -53,14 +53,14 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 Debug.Log("Yo " + card.name + " ataque a " + lastTarget.GetComponent<ThisCard>().card.name);
                 lastTarget.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this);
                 //ejecutar audio y/o animacion
-                if (actualPosition.positionFacing.card != null)
-                    CheckEffect(4, actualPosition.positionFacing.card.gameObject);
+                //if (actualPosition.positionFacing.card != null)
+                //    CheckEffect(4, actualPosition.positionFacing.card.gameObject);
                 ReceiveDamage(lastTarget.GetComponent<ThisCard>().actualAttack, null);
             }
             if(lastTarget.GetComponent<Health>())
             {
                 lastTarget.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
-                CheckEffect(4, actualPosition.oponent.gameObject);
+                //CheckEffect(4, actualPosition.oponent.gameObject);
             }
             attack = false;
             lastTarget = null;
@@ -104,8 +104,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void ReceiveDamage(int damage, ThisCard enemy)
     {
-        if (enemy != null)
-            CheckEffect(4, enemy.gameObject);
+        //if (enemy != null)
+        //    CheckEffect(4, enemy.gameObject);
         if (!_inmune)
         {
             GetComponent<Animator>().SetTrigger("GetDamage");
@@ -123,8 +123,8 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void Death(ThisCard enemy)
     {
-        if (enemy != null)
-            CheckEffect(3, enemy.gameObject);
+        //if (enemy != null)
+        //    CheckEffect(3, enemy.gameObject);
         //animacion / audio
         Debug.Log("La carta " + card.cardName + " se murio :c");
         actualPosition.card = null;
@@ -152,6 +152,7 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             canvas.overrideSorting = true;
             canvas.sortingOrder = 5;
             _draw.zoomingCard = true;
+            Debug.Log("se zoomea");
         }
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -159,113 +160,114 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (eventData.fullyExited)
         {
             GetComponent<Animator>().SetBool("Zoomed", false);
-            _draw.zoomingCard = false;
             canvas.sortingOrder = 0;
             canvas.overrideSorting = false;
+            _draw.zoomingCard = false;
+            Debug.Log("se dezoomea");
         }
     }
-    public void OnPlayEffect()
-    {
-        if (actualPosition.cardPos != null)
-            CheckEffect(1, null);
-    }
-    public void OnTurnStart()
-    {
-        if (actualPosition.cardPos != null)
-            CheckEffect(0, null);
-    }
-    public void OnTurnEnd()
-    {
-        if (actualPosition.cardPos != null)
-            CheckEffect(2, null);
-    }
-    private void CheckEffect(int x, GameObject target)
-    {
-        if (card.hasEffect)
-        {
-            bool doEffect = false;
-            List<string> effectToDo = null;
-            foreach (string effect in card.keywords)
-                if (card.effectDesc.Contains(effect))
-                {
-                    if (effect == card.keywords[x])
-                        doEffect = true;
-                    if (card.keywords.IndexOf(effect) > 4)
-                    {
-                        if (effectToDo == null)
-                            effectToDo = new List<string>();
-                        effectToDo.Add(effect);
-                    }
-                }
-            Debug.LogError(doEffect +"&"+ x + "&" + effectToDo + card.name);
-            if (doEffect && effectToDo != null)
-                foreach (string effect in effectToDo)
-                    Effect(effect, target);
-        }
-    }
-    private void Effect(string effect, GameObject target)
-    {
-        var eventNumber = card.keywords.IndexOf(effect);
-        if (eventNumber == 5)
-            DrawEffect();
-        if (eventNumber == 6)
-            DealDamgeEffect(target);
-        if (eventNumber == 7)
-            BuffAlly();
-        if (eventNumber == 8)
-            GiveCard();
-    }
-    private void DrawEffect()
-    {
-        Debug.LogError("Tengo efecto");
-        _draw.DrawACard();
-    }
-    private void DealDamgeEffect(GameObject target)
-    {
-        if (target.GetComponent<ThisCard>())
-            target.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this);
-        if (target.GetComponent<Health>())
-            target.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
-    }
-    private void BuffAlly()
-    {
-        //if(card.effectDesc.Contains("select"))
-        //    target = 
-        if (card.effectDesc.Contains("random"))
-            Buff(_table.myCards[Random.Range(0, _table.myCards.Count)].gameObject);
-    }
-    private void Buff(GameObject target)
-    {
-        for (int i = 0; i > 50; i++)
-            for (int j = 0; j < 50; j++)
-                if (card.effectDesc.Contains(j.ToString() + "/" + i.ToString()))
-                {
-                    target.GetComponent<ThisCard>().actualAttack = j;
-                    target.GetComponent<ThisCard>().actualLife = i;
-                }
-    }
-    private void GiveCard()
-    {
-        //if (card.effectDesc.Contains(card.keywords[9]))
-        //{
-        //    Cards newCard = null;
-        //    if (card.effectDesc.Contains(card.keywords[11]))
-        //        newCard = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards/" + card.keywords[11], typeof(ScriptableObject));
-        //    if (card.effectDesc.Contains(card.keywords[12]))
-        //        newCard = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards/" + card.keywords[12], typeof(ScriptableObject));
-        //    _draw.AddACard(newCard);
-        //}
-        //if (card.effectDesc.Contains(card.keywords[10]))
-        //{
-        //    GameObject newCard = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Card", typeof(GameObject));
-        //    if (card.effectDesc.Contains(card.keywords[13]))
-        //        newCard.GetComponent<ThisCard>().card = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards" + card.keywords[13],
-        //            typeof(ScriptableObject));
-        //    if (card.effectDesc.Contains(card.keywords[14]))
-        //        newCard.GetComponent<ThisCard>().card = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards" + card.keywords[14],
-        //            typeof(ScriptableObject));
-        //    Instantiate(newCard);
-        //    _draw.AddCardToHand(newCard.GetComponent<ThisCard>());
-        //}
-    }
+    //public void OnPlayEffect()
+    //{
+    //    if (actualPosition.cardPos != null)
+    //        CheckEffect(1, null);
+    //}
+    //public void OnTurnStart()
+    //{
+    //    if (actualPosition.cardPos != null)
+    //        CheckEffect(0, null);
+    //}
+    //public void OnTurnEnd()
+    //{
+    //    if (actualPosition.cardPos != null)
+    //        CheckEffect(2, null);
+    //}
+    //private void CheckEffect(int x, GameObject target)
+    //{
+    //    if (card.hasEffect)
+    //    {
+    //        bool doEffect = false;
+    //        List<string> effectToDo = null;
+    //        foreach (string effect in card.keywords)
+    //            if (card.effectDesc.Contains(effect))
+    //            {
+    //                if (effect == card.keywords[x])
+    //                    doEffect = true;
+    //                if (card.keywords.IndexOf(effect) > 4)
+    //                {
+    //                    if (effectToDo == null)
+    //                        effectToDo = new List<string>();
+    //                    effectToDo.Add(effect);
+    //                }
+    //            }
+    //        Debug.LogError(doEffect +"&"+ x + "&" + effectToDo + card.name);
+    //        if (doEffect && effectToDo != null)
+    //            foreach (string effect in effectToDo)
+    //                Effect(effect, target);
+    //    }
+    //}
+    //private void Effect(string effect, GameObject target)
+    //{
+    //    var eventNumber = card.keywords.IndexOf(effect);
+    //    if (eventNumber == 5)
+    //        DrawEffect();
+    //    if (eventNumber == 6)
+    //        DealDamgeEffect(target);
+    //    if (eventNumber == 7)
+    //        BuffAlly();
+    //    if (eventNumber == 8)
+    //        GiveCard();
+    //}
+    //private void DrawEffect()
+    //{
+    //    Debug.LogError("Tengo efecto");
+    //    _draw.DrawACard();
+    //}
+    //private void DealDamgeEffect(GameObject target)
+    //{
+    //    if (target.GetComponent<ThisCard>())
+    //        target.GetComponent<ThisCard>().ReceiveDamage(actualAttack, this);
+    //    if (target.GetComponent<Health>())
+    //        target.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
+    //}
+    //private void BuffAlly()
+    //{
+    //    //if(card.effectDesc.Contains("select"))
+    //    //    target = 
+    //    if (card.effectDesc.Contains("random"))
+    //        Buff(_table.myCards[Random.Range(0, _table.myCards.Count)].gameObject);
+    //}
+    //private void Buff(GameObject target)
+    //{
+    //    for (int i = 0; i > 50; i++)
+    //        for (int j = 0; j < 50; j++)
+    //            if (card.effectDesc.Contains(j.ToString() + "/" + i.ToString()))
+    //            {
+    //                target.GetComponent<ThisCard>().actualAttack = j;
+    //                target.GetComponent<ThisCard>().actualLife = i;
+    //            }
+    //}
+    //private void GiveCard()
+    //{
+    //    //if (card.effectDesc.Contains(card.keywords[9]))
+    //    //{
+    //    //    Cards newCard = null;
+    //    //    if (card.effectDesc.Contains(card.keywords[11]))
+    //    //        newCard = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards/" + card.keywords[11], typeof(ScriptableObject));
+    //    //    if (card.effectDesc.Contains(card.keywords[12]))
+    //    //        newCard = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards/" + card.keywords[12], typeof(ScriptableObject));
+    //    //    _draw.AddACard(newCard);
+    //    //}
+    //    //if (card.effectDesc.Contains(card.keywords[10]))
+    //    //{
+    //    //    GameObject newCard = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Card", typeof(GameObject));
+    //    //    if (card.effectDesc.Contains(card.keywords[13]))
+    //    //        newCard.GetComponent<ThisCard>().card = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards" + card.keywords[13],
+    //    //            typeof(ScriptableObject));
+    //    //    if (card.effectDesc.Contains(card.keywords[14]))
+    //    //        newCard.GetComponent<ThisCard>().card = (Cards)AssetDatabase.LoadAssetAtPath("Assets/ScripObjects/Normal cards" + card.keywords[14],
+    //    //            typeof(ScriptableObject));
+    //    //    Instantiate(newCard);
+    //    //    _draw.AddCardToHand(newCard.GetComponent<ThisCard>());
+    //    //}
+    //}
 }

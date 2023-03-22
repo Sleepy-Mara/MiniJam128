@@ -21,10 +21,10 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
     {
         if(_cardManager.placeCards == true)
         {
-            Debug.Log("aaa");
             List<GameObject> newCardsInHand = new List<GameObject>();
             foreach(GameObject card in _cardManager.draw._cardsInHand)
             {
+                // preguntar para que sirve este codigo
                 if (card != _cardManager.cardToPlace)
                 {
                     newCardsInHand.Add(card);
@@ -45,17 +45,12 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_cardManager.placeCards == true && _cardManager.cardToPlace != null && isPlayable)
-            SelectThisPosition();
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (_cardManager.placeCards == true && _cardManager.cardToPlace != null && isPlayable)
+                SelectThisPosition();
+        }
+        else
+            _cardManager.CancelPlacing();
     }
-    //private void OnMouseDown()
-    //{
-    //    if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
-    //        SelectThisPosition();
-    //}
-    //public void SelectPosition()
-    //{
-    //    if (_cardManager.placeCards == true && _cardManager.cardToPlace != null)
-    //        SelectThisPosition();
-    //}
 }

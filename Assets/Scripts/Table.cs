@@ -65,13 +65,13 @@ public class Table : MonoBehaviour
             newAudio.clip = clips[Random.Range(0, clips.Count)];
             newAudio.Play();
             ThisCard newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<ThisCard>();
-            newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.GetComponent<ThisCard>().tableAnimator;
+            newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
             newCard.actualPosition = enemyBack[place];
             newCard.SetData();
-            newCard.GetComponent<RectTransform>().SetPositionAndRotation(enemyBack[place].cardPos.GetComponent<RectTransform>().position, enemyBack[place].cardPos.transform.rotation);
-            newCard.GetComponent<ThisCard>().playerCard = false;
+            newCard.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation);
+            newCard.playerCard = false;
             enemyBack[place].card = newCard;
         }
     }
