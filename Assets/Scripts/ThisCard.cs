@@ -148,11 +148,14 @@ public class ThisCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (!_draw.zoomingCard)
         {
-            GetComponent<Animator>().SetBool("Zoomed", true);
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 5;
-            _draw.zoomingCard = true;
-            Debug.Log("se zoomea");
+            if (_cardManager._camera.CameraPosition() != 0 || actualPosition.cardPos == null)
+            {
+                GetComponent<Animator>().SetBool("Zoomed", true);
+                canvas.overrideSorting = true;
+                canvas.sortingOrder = 5;
+                _draw.zoomingCard = true;
+                Debug.Log("se zoomea");
+            }
         }
     }
     public void OnPointerExit(PointerEventData eventData)

@@ -8,7 +8,7 @@ public class CardManager : MonoBehaviour
     [HideInInspector] public bool placeCards;
     [HideInInspector] public GameObject cardToPlace;
     [HideInInspector] public Draw draw;
-    private CameraManager _camera;
+    public CameraManager _camera;
     void Start()
     {
         draw = FindObjectOfType<Draw>();
