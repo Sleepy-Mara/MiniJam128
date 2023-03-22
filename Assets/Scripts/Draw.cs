@@ -45,12 +45,12 @@ public class Draw : MonoBehaviour
         {
             canDraw = false;
             turnManager.canEndTurn = true;
-            DrawACard();
+            DrawACard(1);
             turnManager.PlayableTurn();
         }
     }
 
-    public void DrawACard()
+    public void DrawACard(int cardsToDraw)
     {
         if (_actualDeck.Count <= 0)
         {
@@ -61,12 +61,11 @@ public class Draw : MonoBehaviour
         //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
         var newCard = Instantiate(cardPrefab, transform).GetComponent<ThisCard>();
         newCard.card = _actualDeck[drawedCard];
-        newCard.SetData();
-        _cardsInHand.Add(newCard.gameObject);
         _actualDeck.Remove(_actualDeck[drawedCard]);
         if (_actualDeck.Count == 0)
             deckObject.SetActive(false);
-        AdjustHand();
+        for (int i = 0; i < cardsToDraw; i++)
+            AddCardToHand(newCard);
     }
 
     public void AddCardToHand(ThisCard newCard)
