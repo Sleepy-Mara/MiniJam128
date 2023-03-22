@@ -98,7 +98,10 @@ public class EffectManager : MonoBehaviour
     }
     private void DrawEffect(Cards card)
     {
-
+        for (int i = 0; i < 50; i++)
+            if (card.effectDesc.Contains(effects[i]))
+                for (int j = 0; j < i; j++)
+                    FindObjectOfType<Draw>().DrawACard();
     }
     private void DealDamageEffect(Cards card)
     {
