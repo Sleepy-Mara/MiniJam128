@@ -5,14 +5,11 @@ using TMPro;
 
 public class NextCombat : MonoBehaviour
 {
-    [SerializeField] private Strategy[] enemies;
-    public GameObject[] enemyCharacters;
-    public Cards[] enemyRewards;
-    [TextArea(1, 4)]
-    public string[] wonCombatDescription;
+    public EnemyData[] enemies;
     public TextMeshProUGUI wonCombatText;
     [SerializeField] private Enemy _enemy;
     public GameObject wonCombat;
+    public GameObject endTurnButton;
     public GameObject gameVictory;
     private int enemyNum;
     private TurnManager turnManager;
@@ -20,6 +17,10 @@ public class NextCombat : MonoBehaviour
     private Table table;
     public GameObject initialMenu;
     private AudioPlayer audioPlayer;
+    public RectTransform[] rewardsRange;
+    public Transform cardsPlacing;
+    public GameObject cardPrefab;
+    private List<GameObject> cardsToDelete;
 
     private void Start()
     {
@@ -32,17 +33,29 @@ public class NextCombat : MonoBehaviour
     }
     public void StartGame()
     {
-        enemyCharacters[enemyNum].SetActive(true);
-        _enemy.strategy = enemies[enemyNum];
+        enemies[enemyNum].enemyCharacter.SetActive(true);
+        _enemy.strategy = enemies[enemyNum].strategy;
         audioPlayer.Play("Music" + enemyNum);
         initialMenu.SetActive(false);
         turnManager.StartBattle();
     }
     public void ToNextCombat()
     {
-        enemyCharacters[enemyNum].SetActive(false);
-        draw.AddACard(enemyRewards[enemyNum]);
-        wonCombatText.text = wonCombatDescription[enemyNum];
+        enemies[enemyNum].enemyCharacter.SetActive(false);
+        float distance = Mathf.Abs(rewardsRange[0].localPosition.x) + Mathf.Abs(rewardsRange[1].localPosition.x);
+        distance /= (enemies[enemyNum].rewards.Length + 1);
+        for (int i = 0; i < enemies[enemyNum].rewards.Length; i++)
+        {
+            draw.AddACard(enemies[enemyNum].rewards[i]);
+            Card card = Instantiate(cardPrefab, cardsPlacing).GetComponent<Card>();
+            cardsToDelete.Add(card.gameObject);
+            card.card = enemies[enemyNum].rewards[i];
+            card.SetData();
+            card.GetComponent<Animator>().runtimeAnimatorController = card.tableAnimator;
+            card.playerCard = false;
+            card.transform.localPosition = new Vector3(rewardsRange[0].localPosition.x + distance * (1 + i), rewardsRange[0].position.y);
+        }
+        wonCombatText.text = enemies[enemyNum].wonCombatDescription;
         audioPlayer.StopPlaying("Music" + enemyNum);
         enemyNum++;
         if (enemyNum == enemies.Length)
@@ -54,17 +67,23 @@ public class NextCombat : MonoBehaviour
             return;
         }
         audioPlayer.Play("Music" + enemyNum);
-        enemyCharacters[enemyNum].SetActive(true);
         draw.ResetDeckAndHand();
-        _enemy.strategy = enemies[enemyNum];
+        _enemy.strategy = enemies[enemyNum].strategy;
+        _enemy.RestoreHealth(10);
         table.ResetTable();
-        wonCombat.SetActive(true);
         table.player.RestartPlayer();
+        endTurnButton.SetActive(false);
+        wonCombat.SetActive(true);
     }
     public void SendNext()
     {
+        enemies[enemyNum].enemyCharacter.SetActive(true);
         wonCombat.SetActive(false);
         turnManager.turn = 0;
         turnManager.StartBattle();
+        endTurnButton.SetActive(true);
+        foreach (GameObject card in cardsToDelete)
+            Destroy(card);
+        cardsToDelete.Clear();
     }
 }

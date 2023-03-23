@@ -131,7 +131,7 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left && actualPosition.cardPos == null)
+        if (eventData.button == PointerEventData.InputButton.Left && (actualPosition.cardPos == null || playerCard))
         {
             if (_turnManager.CanPlayCards())
             {
