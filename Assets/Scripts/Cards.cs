@@ -15,23 +15,5 @@ public class Cards : ScriptableObject
     public bool hasEffect;
     public string effectDesc;
     public Sprite effectSprite;
-    public List<string> keywords = new List<string>()
-    {
-        "At the start of the turn",
-        "When it's played",
-        "At the end of the turn",
-        "When it dies",
-        "When it attacks",
-        "draw",
-        "deal damage",
-        "/",
-        "add",
-        "deck",
-        "hand",
-        "Colonel toad",
-        "Forg2",
-        "Roger",
-        "Rat"
-    };
 
 }

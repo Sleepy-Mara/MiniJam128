@@ -89,11 +89,15 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator AttackPhase()
     {
-
+        bool wait = false;
         foreach (MapPosition card in table.playerPositions)
             if (card.card != null)
                 card.card.Attack();
-        yield return new WaitForSeconds(1.5f);
+        for(int i = 0; i < table.playerPositions.Length; i++)
+            if (table.playerPositions[i].card != null)
+                wait = true;
+        if (wait)
+            yield return new WaitForSeconds(3);
         enemy.MoveBackCards(turn);
     }
 }

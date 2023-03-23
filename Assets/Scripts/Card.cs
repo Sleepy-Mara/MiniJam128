@@ -41,6 +41,7 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
     }
     public void Attack()
     {
+        Debug.LogError(card.cardName + " ataque");
         if (this != null)
             if (actualPosition.oponent.GetComponent<Enemy>())
                 GetComponent<Animator>().SetTrigger("AttackPlayer");
@@ -93,7 +94,18 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
             _effectManager.CheckConditionDefeated(this);
         //animacion / audio
         actualPosition.card = null;
-        _table.myCards.Remove(this);
+        if (actualPosition.oponent.GetComponent<Player>())
+        {
+            for (int j = 0; j < _table.enemyFront.Length; j++)
+                if (_table.enemyFront[j].card != null)
+                    if (_table.enemyFront[j].card == this)
+                        _table.enemyFront[j].card = null;
+        }
+        else
+            for (int j = 0; j < _table.playerPositions.Length; j++)
+                if (_table.playerPositions[j].card != null)
+                    if(_table.playerPositions[j].card == this)
+                        _table.playerPositions[j].card = null;
         Destroy(gameObject);
     }
     public void Heal(int heal)
