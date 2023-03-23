@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Colonel toad
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  cardName: Colonel toad
+  life: 6
+  attack: 6
+  attackToPlayer: 2
+  manaCost: 1
   healthCost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 26b98ac9b6d11ae4fa7a8e46d8f2c105, type: 3}
   hasEffect: 0
   effectDesc: 
   effectSprite: {fileID: 0}

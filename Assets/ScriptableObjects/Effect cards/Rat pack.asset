@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Rat pack
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
+  cardName: Rat pack
+  life: 4
   attack: 0
   attackToPlayer: 0
-  manaCost: 0
+  manaCost: 2
   healthCost: 0
-  sprite: {fileID: 0}
-  hasEffect: 0
-  effectDesc: 
+  sprite: {fileID: 21300000, guid: 2f79dc67610fc174aa782b139fd9acf7, type: 3}
+  hasEffect: 1
+  effectDesc: At the end of the turn, add a Rat to the hand
   effectSprite: {fileID: 0}

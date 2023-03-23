@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Butterfly
   m_EditorClassIdentifier: 
   turns:
-  - cardPlacement0: {fileID: 11400000, guid: 6edafacc9f62664479e49eeff7c5e51f, type: 2}
-    cardPlacement1: {fileID: 0}
-    cardPlacement2: {fileID: 0}
-  - cardPlacement0: {fileID: 0}
-    cardPlacement1: {fileID: 0}
-    cardPlacement2: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
+  - cardPlacement0: {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+    cardPlacement1: {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+    cardPlacement2: {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
   - cardPlacement0: {fileID: 0}
     cardPlacement1: {fileID: 0}
     cardPlacement2: {fileID: 0}
   - cardPlacement0: {fileID: 0}
-    cardPlacement1: {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
+    cardPlacement1: {fileID: 0}
+    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 0}
+    cardPlacement1: {fileID: 0}
     cardPlacement2: {fileID: 0}
