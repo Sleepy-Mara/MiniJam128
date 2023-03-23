@@ -16,7 +16,7 @@ public class Table : MonoBehaviour
     //public GameObject audio;
     private AudioSource audioSource;
 
-    [HideInInspector] public List<ThisCard> myCards = new List<ThisCard>();
+    [HideInInspector] public List<Card> myCards = new List<Card>();
 
     void Start()
     {
@@ -48,16 +48,16 @@ public class Table : MonoBehaviour
         //var newAudio = Instantiate(audio).GetComponent<AudioSource>();
         audioSource.clip = clips[Random.Range(0, clips.Count)];
         audioSource.Play();
-        card.GetComponent<Animator>().runtimeAnimatorController = card.GetComponent<ThisCard>().tableAnimator;
+        card.GetComponent<Animator>().runtimeAnimatorController = card.GetComponent<Card>().tableAnimator;
         card.transform.SetParent(playerPositions[place].cardPos.transform);
         card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
-        playerPositions[place].card = card.GetComponent<ThisCard>();
-        card.GetComponent<ThisCard>().actualPosition = playerPositions[place];
-        card.GetComponent<ThisCard>().playerCard = true;
+        playerPositions[place].card = card.GetComponent<Card>();
+        card.GetComponent<Card>().actualPosition = playerPositions[place];
+        card.GetComponent<Card>().playerCard = true;
         //foreach (MapPosition positions in mapPositions)
         //    if (positions.cardPos == pos)
         //        positions.card = card.GetComponent<ThisCard>();
-        myCards.Add(card.GetComponent<ThisCard>());
+        myCards.Add(card.GetComponent<Card>());
     }
     public void EnemySetCard(int place, Cards cardType)
     {
@@ -66,7 +66,7 @@ public class Table : MonoBehaviour
             //var newAudio = Instantiate(audio).GetComponent<AudioSource>();
             audioSource.clip = clips[Random.Range(0, clips.Count)];
             audioSource.Play();
-            ThisCard newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<ThisCard>();
+            Card newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<Card>();
             newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
@@ -83,7 +83,7 @@ public class Table : MonoBehaviour
         {
             audioSource.clip = clips[Random.Range(0, clips.Count)];
             audioSource.Play();
-            ThisCard newCard = card.GetComponent<ThisCard>();
+            Card newCard = card.GetComponent<Card>();
             newCard.playerCard = false;
             card.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
             card.transform.SetParent(enemyFront[place].cardPos.transform);
@@ -103,7 +103,7 @@ public class Table : MonoBehaviour
                 //var newAudio = Instantiate(audio).GetComponent<AudioSource>();
                 audioSource.clip = clips[Random.Range(0, clips.Count)];
                 audioSource.Play();
-                ThisCard card = enemyBack[i].card;
+                Card card = enemyBack[i].card;
                 enemyBack[i].card = null;
                 card.transform.SetParent(enemyFront[i].cardPos.transform);
                 card.transform.SetPositionAndRotation(enemyFront[i].cardPos.transform.position, enemyFront[i].cardPos.transform.rotation);

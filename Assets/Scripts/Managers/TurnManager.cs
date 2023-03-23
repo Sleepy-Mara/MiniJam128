@@ -9,6 +9,7 @@ public class TurnManager : MonoBehaviour
     public Enemy enemy;
     private Draw draw;
     private Table table;
+    private EffectManager effectManager;
     public bool canPlayCards;
     public bool canEndTurn;
     [SerializeField] private int cardsInHandStart;
@@ -19,6 +20,7 @@ public class TurnManager : MonoBehaviour
     {
         draw = FindObjectOfType<Draw>();
         table = FindObjectOfType<Table>();
+        effectManager = FindObjectOfType<EffectManager>();
         //StartBattle();
     }
 
@@ -32,6 +34,9 @@ public class TurnManager : MonoBehaviour
     }
     public void StartTurn()
     {
+        foreach (MapPosition card in table.playerPositions)
+            if (card.card != null)
+                effectManager.CheckConditionStartOfTurn(card.card);
         FindObjectOfType<CameraManager>().HandCamera();
         canEndTurn = false;
         turn++;
@@ -52,6 +57,9 @@ public class TurnManager : MonoBehaviour
     {
         if (canEndTurn)
         {
+            foreach (MapPosition card in table.playerPositions)
+                if (card.card != null)
+                    effectManager.CheckConditionEndOfTurn(card.card);
             FindObjectOfType<CameraManager>().PlaceCardCamera();
             canPlayCards = false;
             StartCoroutine(AttackPhase());
@@ -82,7 +90,7 @@ public class TurnManager : MonoBehaviour
     IEnumerator AttackPhase()
     {
 
-        foreach (ThisCard thisCard in table.myCards)
+        foreach (Card thisCard in table.myCards)
             thisCard.Attack();
         yield return new WaitForSeconds(1.5f);
         enemy.MoveBackCards(turn);

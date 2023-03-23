@@ -13,7 +13,8 @@ public class EffectManager : MonoBehaviour
         "When it get damaged",
         "When it's defeated",
         "At the end of the turn",
-        "For this turn"
+        "until your next turn",
+        "until the end of the turn"
     };
     [SerializeField]
     private List<string> effects = new List<string>()
@@ -22,6 +23,7 @@ public class EffectManager : MonoBehaviour
         "deal damage",
         "heal",
         "add",
+        "give",
         "immune",
         "summon"
     };
@@ -38,49 +40,67 @@ public class EffectManager : MonoBehaviour
         "random ally creatures",
         "all enemy creatures",
         "all ally creatures",
-        "itself"
+        "itself",
+        "hand",
+        "deck",
+        "life deck"
     };
     [SerializeField]
     private List<Cards> cards;
-    public void CheckConditionStartOfTurn(Cards card)
+    [SerializeField]
+    private Card newCard;
+    private Table _table;
+    private Draw _draw;
+
+    private void Awake()
     {
-        if (card.effectDesc.Contains(conditions[0]))
+        _table = FindObjectOfType<Table>();
+        _draw = FindObjectOfType<Draw>();
+    }
+    public void CheckConditionStartOfTurn(Card card)
+    {
+        if (card.card.effectDesc.Contains(conditions[0]))
             CheckEffect(card);
     }
-    public void CheckConditionIsPlayed(Cards card)
+    public void CheckConditionIsPlayed(Card card)
     {
-        if (card.effectDesc.Contains(conditions[1]))
+        if (card.card.effectDesc.Contains(conditions[1]))
             CheckEffect(card);
     }
-    public void CheckConditionAttack(Cards card)
+    public void CheckConditionAttack(Card card)
     {
-        if (card.effectDesc.Contains(conditions[2]))
+        if (card.card.effectDesc.Contains(conditions[2]))
             CheckEffect(card);
     }
-    public void CheckConditionGetDamaged(Cards card)
+    public void CheckConditionGetDamaged(Card card)
     {
-        if (card.effectDesc.Contains(conditions[3]))
+        if (card.card.effectDesc.Contains(conditions[3]))
             CheckEffect(card);
     }
-    public void CheckConditionDefeated(Cards card)
+    public void CheckConditionDefeated(Card card)
     {
-        if (card.effectDesc.Contains(conditions[4]))
+        if (card.card.effectDesc.Contains(conditions[4]))
             CheckEffect(card);
     }
-    public void CheckConditionEndOfTurn(Cards card)
+    public void CheckConditionEndOfTurn(Card card)
     {
-        if (card.effectDesc.Contains(conditions[5]))
+        if (card.card.effectDesc.Contains(conditions[5]))
             CheckEffect(card);
     }
-    public void CheckConditionForThisTurn(Cards card)
+    public void CheckConditionUntilYourNextTurn(Card card)
     {
-        if (card.effectDesc.Contains(conditions[6]))
+        if (card.card.effectDesc.Contains(conditions[6]))
             CheckEffect(card);
     }
-    private void CheckEffect(Cards card)
+    public void CheckConditionUntilTheEndOfTheTurn(Card card)
+    {
+        if (card.card.effectDesc.Contains(conditions[7]))
+            CheckEffect(card);
+    }
+    private void CheckEffect(Card card)
     {
         foreach(string effect in effects)
-            if (card.effectDesc.Contains(effect))
+            if (card.card.effectDesc.Contains(effect))
             {
                 if (effect == effects[0])
                     DrawEffect(card);
@@ -91,36 +111,447 @@ public class EffectManager : MonoBehaviour
                 if (effect == effects[3])
                     AddEffect(card);
                 if (effect == effects[4])
-                    InmuneEffect(card);
+                    GiveEffect(card);
                 if (effect == effects[5])
+                    InmuneEffect(card);
+                if (effect == effects[6])
                     SumonEffect(card);
             }
     }
-    private void DrawEffect(Cards card)
+    private void DrawEffect(Card card)
     {
-        for (int i = 0; i < 50; i++)
-            if (card.effectDesc.Contains(effects[i]))
-                for (int j = 0; j < i; j++)
-                    FindObjectOfType<Draw>().DrawACard();
+        #region Draw
+        foreach (string target in targets)
+            if (card.card.effectDesc.Contains(target))
+                for (int i = 0; i < 50; i++)
+                    if (card.card.effectDesc.Contains(i.ToString()))
+                        for (int j = 0; j < i; j++)
+                        {
+                            if (target == targets[12])
+                                _draw.DrawACard();
+                            else if (target == targets[12])
+                                Debug.Log("Draw from life deck");
+                        }
+        #endregion
     }
-    private void DealDamageEffect(Cards card)
+    private void DealDamageEffect(Card card)
     {
-
+        #region DealDamage
+        foreach (string target in targets)
+            if (card.card.effectDesc.Contains(target))
+                for (int i = 0; i < 50; i++)
+                    if (card.card.effectDesc.Contains(i.ToString() + " damage"))
+                    {
+                        if (target == targets[0])
+                        {
+                            Debug.Log("Elige Enemigo");
+                        }
+                        else if (target == targets[1])
+                        {
+                            Debug.Log("Elige Aliado");
+                        }
+                        else if (target == targets[2])
+                        {
+                            var selected = Random.Range(0, _table.enemyFront.Length);
+                            if (selected == _table.enemyFront.Length)
+                                FindObjectOfType<Enemy>().ReceiveDamage(i);
+                            else if (_table.enemyFront[selected].card != null)
+                                _table.enemyFront[selected].card.ReceiveDamagePublic(i, null);
+                        }
+                        else if (target == targets[3])
+                        {
+                            var selected = Random.Range(0, _table.playerPositions.Length);
+                            if (selected == _table.playerPositions.Length)
+                                FindObjectOfType<Player>().ReceiveDamage(i);
+                            else if (_table.playerPositions[selected].card != null)
+                                _table.playerPositions[selected].card.ReceiveDamagePublic(i, null);
+                        }
+                        else if (target == targets[4])
+                        {
+                            var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                            if (_table.enemyFront[selected].card != null)
+                                _table.enemyFront[selected].card.ReceiveDamagePublic(i, null);
+                        }
+                        else if (target == targets[5])
+                        {
+                            var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                            if (_table.playerPositions[selected].card != null)
+                                _table.playerPositions[selected].card.ReceiveDamagePublic(i, null);
+                        }
+                        else if (target == targets[6])
+                        {
+                            for (int j = 0; j < 3; j++)
+                                if (card.card.effectDesc.Contains(j.ToString()))
+                                    for (int k = 0; k < j; k++)
+                                    {
+                                        var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                                        if (_table.enemyFront[selected].card != null)
+                                            _table.enemyFront[selected].card.ReceiveDamagePublic(i, null);
+                                    }
+                        }
+                        else if (target == targets[7])
+                        {
+                            for (int j = 0; j < 3; j++)
+                                if (card.card.effectDesc.Contains(j.ToString()))
+                                    for (int k = 0; k < j; k++)
+                                    {
+                                        var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                                        if (_table.playerPositions[selected].card != null)
+                                            _table.playerPositions[selected].card.ReceiveDamagePublic(i, null);
+                                    }
+                        }
+                        else if (target == targets[8])
+                        {
+                            foreach (MapPosition selected in _table.enemyFront)
+                                if (selected.card)
+                                    selected.card.ReceiveDamagePublic(i, null);
+                        }
+                        else if (target == targets[9])
+                        {
+                            foreach (MapPosition selected in _table.playerPositions)
+                                if (selected.card != null)
+                                    selected.card.ReceiveDamagePublic(i, null);
+                        }
+                        else if (target == targets[10])
+                            card.ReceiveDamagePublic(i, null);
+                    }
+        #endregion
     }
-    private void HealEffect(Cards card)
+    private void HealEffect(Card card)
     {
-
+        #region Heal
+        foreach (string target in targets)
+            if (card.card.effectDesc.Contains(target))
+                for (int i = 0; i < 50; i++)
+                    if (card.card.effectDesc.Contains("heal " + i.ToString()))
+                    {
+                        if (target == targets[0])
+                        {
+                            Debug.Log("Elige Enemigo");
+                        }
+                        else if (target == targets[1])
+                        {
+                            Debug.Log("Elige Aliado");
+                        }
+                        else if (target == targets[2])
+                        {
+                            var selected = Random.Range(0, _table.enemyFront.Length);
+                            if (selected == _table.enemyFront.Length)
+                                FindObjectOfType<Enemy>().RestoreHealth(i);
+                            else if (_table.enemyFront[selected].card != null)
+                                _table.enemyFront[selected].card.Heal(i);
+                        }
+                        else if (target == targets[3])
+                        {
+                            var selected = Random.Range(0, _table.playerPositions.Length);
+                            if (selected == _table.playerPositions.Length)
+                                FindObjectOfType<Player>().RestoreHealth(i);
+                            else if (_table.playerPositions[selected].card != null)
+                                _table.playerPositions[selected].card.Heal(i);
+                        }
+                        else if (target == targets[4])
+                        {
+                            var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                            if (_table.enemyFront[selected].card != null)
+                                _table.enemyFront[selected].card.Heal(i);
+                        }
+                        else if (target == targets[5])
+                        {
+                            var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                            if (_table.playerPositions[selected].card != null)
+                                _table.playerPositions[selected].card.Heal(i);
+                        }
+                        else if (target == targets[6])
+                        {
+                            for (int j = 0; j < 3; j++)
+                                if (card.card.effectDesc.Contains(j.ToString()))
+                                    for (int k = 0; k < j; k++)
+                                    {
+                                        var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                                        if (_table.enemyFront[selected].card != null)
+                                            _table.enemyFront[selected].card.Heal(i);
+                                    }
+                        }
+                        else if (target == targets[7])
+                        {
+                            for (int j = 0; j < 3; j++)
+                                if (card.card.effectDesc.Contains(j.ToString()))
+                                    for (int k = 0; k < j; k++)
+                                    {
+                                        var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                                        if (_table.playerPositions[selected].card != null)
+                                            _table.playerPositions[selected].card.Heal(i);
+                                    }
+                        }
+                        else if (target == targets[8])
+                        {
+                            foreach (MapPosition selected in _table.enemyFront)
+                                if (selected.card)
+                                    selected.card.Heal(i);
+                        }
+                        else if (target == targets[9])
+                        {
+                            foreach (MapPosition selected in _table.playerPositions)
+                                if (selected.card != null)
+                                    selected.card.Heal(i);
+                        }
+                        else if (target == targets[10])
+                            card.Heal(i);
+                    }
+        #endregion
     }
-    private void AddEffect(Cards card)
+    private void AddEffect(Card card)
     {
-
+        #region Add
+        bool added = false;
+        if (card.card.effectDesc.Contains(targets[11]))
+            foreach (Cards cards in cards)
+                if (card.card.effectDesc.Contains(cards.name))
+                {
+                    for (int i = 0; i < 50; i++)
+                        if (card.card.effectDesc.Contains(i.ToString()))
+                        {
+                            for (int j = 0; j < i; j++)
+                            {
+                                var addCard = Instantiate(newCard);
+                                addCard.card = cards;
+                                addCard.GetComponent<Card>().SetData();
+                                _draw.AddCardToHand(addCard);
+                            }
+                            added = true;
+                        }
+                    if (!added)
+                    {
+                        var addCard = Instantiate(newCard);
+                        addCard.card = cards;
+                        addCard.GetComponent<Card>().SetData();
+                        _draw.AddCardToHand(addCard);
+                    }
+                }
+        if (card.card.effectDesc.Contains(targets[12]))
+            foreach (Cards cards in cards)
+                if (card.card.effectDesc.Contains(cards.name))
+                {
+                    for (int i = 0; i < 50; i++)
+                        if (card.card.effectDesc.Contains(i.ToString()))
+                        {
+                            for (int j = 0; j < i; j++)
+                                _draw.AddATempCard(cards);
+                            added = true;
+                        }
+                    if (!added)
+                        _draw.AddATempCard(cards);
+                }
+        if (card.card.effectDesc.Contains(targets[12]))
+            foreach (Cards cards in cards)
+                if (card.card.effectDesc.Contains(cards.name))
+                {
+                    for (int i = 0; i < 50; i++)
+                        if (card.card.effectDesc.Contains(i.ToString()))
+                        {
+                            for (int j = 0; j < i; j++)
+                                Debug.Log("Add to life deck");
+                            added = true;
+                        }
+                    if (!added)
+                        Debug.Log("Add to life deck");
+                }
+        #endregion
     }
-    private void InmuneEffect(Cards card)
+    private void GiveEffect(Card card)
     {
-
+        #region Give
+        foreach (string target in targets)
+            if (card.card.effectDesc.Contains(target))
+                for (int i = 0; i < 50; i++)
+                    for(int j = 0; j < 50; j++)
+                    {
+                        if (card.card.effectDesc.Contains("+" + i.ToString() + "/+" + j.ToString()))
+                        {
+                            i *= 1;
+                            j *= 1;
+                        }
+                        else if (card.card.effectDesc.Contains("-" + i.ToString() + "/-" + j.ToString()))
+                        {
+                            i *= -1;
+                            j *= -1;
+                        }
+                        else if (card.card.effectDesc.Contains("+" + i.ToString() + "/-" + j.ToString()))
+                        {
+                            i *= 1;
+                            j *= -1;
+                        }
+                        else if (card.card.effectDesc.Contains("-" + i.ToString() + "/+" + j.ToString()))
+                        {
+                            i *= -1;
+                            j *= 1;
+                        }
+                        else return;
+                        if (target == targets[0])
+                        {
+                            Debug.Log("Elige Enemigo");
+                        }
+                        else if (target == targets[1])
+                        {
+                            Debug.Log("Elige Aliado");
+                        }
+                        else if (target == targets[4])
+                        {
+                            var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                            if (_table.enemyFront[selected].card != null)
+                                _table.enemyFront[selected].card.Buff(i, j);
+                        }
+                        else if (target == targets[5])
+                        {
+                            var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                            if (_table.playerPositions[selected].card != null)
+                                _table.playerPositions[selected].card.Buff(i, j);
+                        }
+                        else if (target == targets[6])
+                        {
+                            for (int l = 0; l < 3; l++)
+                                if (card.card.effectDesc.Contains(j.ToString()))
+                                    for (int k = 0; k < l; k++)
+                                    {
+                                        var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                                        if (_table.enemyFront[selected].card != null)
+                                            _table.enemyFront[selected].card.Buff(i, j);
+                                    }
+                        }
+                        else if (target == targets[7])
+                        {
+                            for (int l = 0; l < 3; l++)
+                                if (card.card.effectDesc.Contains(j.ToString()))
+                                    for (int k = 0; k < l; k++)
+                                    {
+                                        var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                                        if (_table.playerPositions[selected].card != null)
+                                            _table.playerPositions[selected].card.Buff(i, j);
+                                    }
+                        }
+                        else if (target == targets[8])
+                        {
+                            foreach (MapPosition selected in _table.enemyFront)
+                                if (selected.card != null)
+                                    selected.card.Buff(i, j);
+                        }
+                        else if (target == targets[9])
+                        {
+                            foreach (MapPosition selected in _table.playerPositions)
+                                if (selected.card != null)
+                                    selected.card.Buff(i, j);
+                        }
+                        else if (target == targets[10])
+                            card.Buff(i, j);
+                    }
+        #endregion
     }
-    private void SumonEffect(Cards card)
+    private void InmuneEffect(Card card)
     {
-
+        #region Inmune
+        foreach (string target in targets)
+            if (card.card.effectDesc.Contains(target))
+            {
+                if (target == targets[0])
+                {
+                    Debug.Log("Elige Enemigo");
+                }
+                else if (target == targets[1])
+                {
+                    Debug.Log("Elige Aliado");
+                }
+                else if (target == targets[4])
+                {
+                    var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                    if (_table.enemyFront[selected].card != null)
+                        _table.enemyFront[selected].card.inmune = true;
+                }
+                else if (target == targets[5])
+                {
+                    var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                    if (_table.playerPositions[selected].card != null)
+                        _table.playerPositions[selected].card.inmune = true;
+                }
+                else if (target == targets[6])
+                {
+                    for (int j = 0; j < 3; j++)
+                        if (card.card.effectDesc.Contains(j.ToString()))
+                            for (int k = 0; k < j; k++)
+                            {
+                                var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                                if (_table.enemyFront[selected].card != null)
+                                    _table.enemyFront[selected].card.inmune = true;
+                            }
+                }
+                else if (target == targets[7])
+                {
+                    for (int j = 0; j < 3; j++)
+                        if (card.card.effectDesc.Contains(j.ToString()))
+                            for (int k = 0; k < j; k++)
+                            {
+                                var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                                if (_table.playerPositions[selected].card != null)
+                                    _table.playerPositions[selected].card.inmune = true;
+                            }
+                }
+                else if (target == targets[8])
+                {
+                    foreach (MapPosition selected in _table.enemyFront)
+                        if (selected.card != null)
+                            selected.card.inmune = true;
+                }
+                else if (target == targets[9])
+                {
+                    foreach (MapPosition selected in _table.playerPositions)
+                        if (selected.card != null)
+                            selected.card.inmune = true;
+                }
+                else if (target == targets[10])
+                    card.inmune = true;
+            }
+        #endregion
+    }
+    private void SumonEffect(Card card)
+    {
+        #region Sumon
+        bool sumoned = false;
+        Cards selectedCard = null;
+        foreach (Cards cards in cards)
+            if (card.card.effectDesc.Contains(cards.name))
+                selectedCard = cards;
+        if (selectedCard != null)
+        {
+            if (card.actualPosition.oponent.GetComponent<Enemy>())
+            {
+                for (int i = 0; i < _table.enemyFront.Length; i++)
+                    if (card.card.effectDesc.Contains(i.ToString()))
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            var pos = Random.Range(0, _table.playerPositions.Length - 1);
+                            GameObject sumonCard = Instantiate(newCard).gameObject;
+                            sumonCard.GetComponent<Card>().card = selectedCard;
+                            _table.SetCard(sumonCard, pos);
+                            sumoned = true;
+                        }
+                    }
+            }
+            else if (card.actualPosition.oponent.GetComponent<Player>())
+            {
+                for (int i = 0; i < _table.enemyFront.Length; i++)
+                    if (card.card.effectDesc.Contains(i.ToString()))
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            var pos = Random.Range(0, _table.enemyFront.Length - 1);
+                            GameObject sumonCard = Instantiate(newCard).gameObject;
+                            sumonCard.GetComponent<Card>().card = selectedCard;
+                            _table.EnemySpawnCard(pos , sumonCard);
+                            sumoned = true;
+                        }
+                    }
+            }
+        }
+        #endregion
     }
 }

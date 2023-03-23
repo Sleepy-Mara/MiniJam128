@@ -30,6 +30,10 @@ public class Draw : MonoBehaviour
         deck.Add(card);
         _actualDeck.Add(card);
     }
+    public void AddATempCard(Cards card)
+    {
+        _actualDeck.Add(card);
+    }
 
     public void CanDraw()
     {
@@ -59,7 +63,7 @@ public class Draw : MonoBehaviour
         }
         var drawedCard = Random.Range(0, _actualDeck.Count);
         //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
-        var newCard = Instantiate(cardPrefab, transform).GetComponent<ThisCard>();
+        var newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
         newCard.card = _actualDeck[drawedCard];
         _actualDeck.Remove(_actualDeck[drawedCard]);
         if (_actualDeck.Count == 0)
@@ -67,7 +71,7 @@ public class Draw : MonoBehaviour
         AddCardToHand(newCard);
     }
 
-    public void AddCardToHand(ThisCard newCard)
+    public void AddCardToHand(Card newCard)
     {
         newCard.SetData();
         _cardsInHand.Add(newCard.gameObject);

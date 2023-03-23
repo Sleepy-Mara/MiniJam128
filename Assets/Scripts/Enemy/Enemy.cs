@@ -8,15 +8,23 @@ public class Enemy : Health
     private Table table;
     public GameObject card;
     private TurnManager _turnManager;
+    private EffectManager _effectManager;
 
     private void Start()
     {
         table = FindObjectOfType<Table>();
         _turnManager = FindObjectOfType<TurnManager>();
+        _effectManager = FindObjectOfType<EffectManager>();
     }
     public void MoveBackCards(int turn)
     {
+        foreach (MapPosition card in table.enemyFront)
+            if (card.card != null)
+                _effectManager.CheckConditionStartOfTurn(card.card);
         table.MoveEnemyCard();
+        foreach (MapPosition card in table.enemyFront)
+            if (card.card != null)
+                _effectManager.CheckConditionIsPlayed(card.card);
         PlaceBackCards(turn);
     }
     public void PlaceBackCards(int turn)
@@ -53,6 +61,9 @@ public class Enemy : Health
         foreach(MapPosition card in table.enemyFront)
             if (card.card != null)
                 card.card.Attack();
+        foreach (MapPosition card in table.enemyFront)
+            if (card.card != null)
+                _effectManager.CheckConditionEndOfTurn(card.card);
         _turnManager.StartTurn();
     }
     public override void Defeat()

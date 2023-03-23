@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class MapPosition 
 {
-    public ThisCard card;
+    public Card card;
     public CardPos cardPos;
     public int positionNum;
     public MapPosition positionFacing;
