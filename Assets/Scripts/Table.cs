@@ -75,6 +75,10 @@ public class Table : MonoBehaviour
             enemyBack[place].card = newCard;
         }
     }
+    public void EnemySpawnCard(int place, GameObject card)
+    {
+        //que spawnee las cartas en la fila de en frente
+    }
     public void MoveEnemyCard()
     {
         Debug.Log("MoveEnemyCard");
