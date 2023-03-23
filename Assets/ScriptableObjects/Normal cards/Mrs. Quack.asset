@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Mrs. Quack
   m_EditorClassIdentifier: 
-  cardName: Mrs. Quack
-  life: 1
-  attack: 1
-  attackToPlayer: 1
-  manaCost: 1
+  cardName: 
+  life: 0
+  attack: 0
+  attackToPlayer: 0
+  manaCost: 0
   healthCost: 0
-  sprite: {fileID: 21300000, guid: 88934eab46f052642a3f94221fefc515, type: 3}
+  sprite: {fileID: 0}
   hasEffect: 0
   effectDesc: 
   effectSprite: {fileID: 0}

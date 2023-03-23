@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Restable guy
   m_EditorClassIdentifier: 
-  cardName: Restable guy
-  life: 4
-  attack: 1
-  attackToPlayer: 1
-  manaCost: 3
+  cardName: 
+  life: 0
+  attack: 0
+  attackToPlayer: 0
+  manaCost: 0
   healthCost: 0
-  sprite: {fileID: 21300000, guid: 7a4519a04f5d42248b792dc736301a18, type: 3}
-  hasEffect: 1
-  effectDesc: At the end of the turn, heals 1 hp to a random ally creature
+  sprite: {fileID: 0}
+  hasEffect: 0
+  effectDesc: 
   effectSprite: {fileID: 0}

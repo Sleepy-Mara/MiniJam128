@@ -12,22 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Angry as fuk
   m_EditorClassIdentifier: 
-  cardName: Angry as fuk
-  life: 2
-  attack: 1
-  attackToPlayer: 2
-  manaCost: 2
+  cardName: 
+  life: 0
+  attack: 0
+  attackToPlayer: 0
+  manaCost: 0
   healthCost: 0
-  sprite: {fileID: 21300000, guid: 4476804f6d71c0b428d17e9114b50b84, type: 3}
+  sprite: {fileID: 0}
   hasEffect: 0
-  effectDesc: Deals 2 damage when attacking directly
+  effectDesc: 
   effectSprite: {fileID: 0}
-  keywords:
-  - At the start of the turn
-  - When it's played
-  - At the end of the turn
-  - When it dies
-  - When it attacks
-  - draw
-  - deal damage
-  - /
