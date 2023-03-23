@@ -57,7 +57,6 @@ public class NextCombat : MonoBehaviour
         enemyCharacters[enemyNum].SetActive(true);
         draw.ResetDeckAndHand();
         _enemy.strategy = enemies[enemyNum];
-        _enemy.RestoreHealth(10);
         table.ResetTable();
         wonCombat.SetActive(true);
         table.player.RestartPlayer();

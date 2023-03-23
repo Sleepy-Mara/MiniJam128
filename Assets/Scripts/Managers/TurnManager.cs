@@ -26,6 +26,7 @@ public class TurnManager : MonoBehaviour
 
     public void StartBattle()
     {
+        enemy.RestoreHealth(10);
         Debug.Log("Empieza el combate");
         enemy.MoveBackCards(turn);
         for (int i = 0; i < cardsInHandStart; i++)
@@ -98,6 +99,7 @@ public class TurnManager : MonoBehaviour
                 wait = true;
         if (wait)
             yield return new WaitForSeconds(3);
-        enemy.MoveBackCards(turn);
+        if (enemy.actualHealth > 0)
+            enemy.MoveBackCards(turn);
     }
 }
