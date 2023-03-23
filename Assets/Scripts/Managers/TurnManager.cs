@@ -90,8 +90,9 @@ public class TurnManager : MonoBehaviour
     IEnumerator AttackPhase()
     {
 
-        foreach (Card thisCard in table.myCards)
-            thisCard.Attack();
+        foreach (MapPosition card in table.playerPositions)
+            if (card.card != null)
+                card.card.Attack();
         yield return new WaitForSeconds(1.5f);
         enemy.MoveBackCards(turn);
     }
