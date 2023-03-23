@@ -19,6 +19,7 @@ public class NextCombat : MonoBehaviour
     private Draw draw;
     private Table table;
     public GameObject initialMenu;
+    private AudioPlayer audioPlayer;
 
     private void Start()
     {
@@ -26,12 +27,14 @@ public class NextCombat : MonoBehaviour
         turnManager.enemy = _enemy;
         draw = FindObjectOfType<Draw>();
         table = FindObjectOfType<Table>();
-        _enemy.strategy = enemies[enemyNum];
+        audioPlayer = GetComponent<AudioPlayer>();
         initialMenu.SetActive(true);
     }
     public void StartGame()
     {
         enemyCharacters[enemyNum].SetActive(true);
+        _enemy.strategy = enemies[enemyNum];
+        audioPlayer.Play("Music" + enemyNum);
         initialMenu.SetActive(false);
         turnManager.StartBattle();
     }
@@ -40,24 +43,27 @@ public class NextCombat : MonoBehaviour
         enemyCharacters[enemyNum].SetActive(false);
         draw.AddACard(enemyRewards[enemyNum]);
         wonCombatText.text = wonCombatDescription[enemyNum];
+        audioPlayer.StopPlaying("Music" + enemyNum);
         enemyNum++;
         if (enemyNum == enemies.Length)
         {
             Debug.Log("Ganaste");
+            audioPlayer.Play("Credits");
             gameVictory.SetActive(true);
             //agregar victoria de verdad xD
             return;
         }
+        audioPlayer.Play("Music" + enemyNum);
         enemyCharacters[enemyNum].SetActive(true);
         draw.ResetDeckAndHand();
         _enemy.strategy = enemies[enemyNum];
         _enemy.RestoreHealth(10);
         table.ResetTable();
         wonCombat.SetActive(true);
+        table.player.RestartPlayer();
     }
     public void SendNext()
     {
-        table.player.RestartPlayer();
         wonCombat.SetActive(false);
         turnManager.turn = 0;
         turnManager.StartBattle();

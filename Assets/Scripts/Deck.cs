@@ -14,7 +14,10 @@ public class Deck : MonoBehaviour
     private void OnMouseDown()
     {
         if (draw.canDraw)
+        {
             animator.SetTrigger("Activate");
+            GetComponent<AudioSource>().Play();
+        }
     }
     public void DrawedCard()
     {
