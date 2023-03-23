@@ -100,9 +100,9 @@ public class Table : MonoBehaviour
         for (int i = 0; i < enemyBack.Length; i++)
             if(enemyBack[i].card != null && enemyFront[i].card == null)
             {
-                var newAudio = Instantiate(audio).GetComponent<AudioSource>();
-                newAudio.clip = clips[Random.Range(0, clips.Count)];
-                newAudio.Play();
+                //var newAudio = Instantiate(audio).GetComponent<AudioSource>();
+                audioSource.clip = clips[Random.Range(0, clips.Count)];
+                audioSource.Play();
                 ThisCard card = enemyBack[i].card;
                 enemyBack[i].card = null;
                 card.transform.SetParent(enemyFront[i].cardPos.transform);
