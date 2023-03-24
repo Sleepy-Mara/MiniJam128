@@ -18,7 +18,7 @@ MonoBehaviour:
   attackToPlayer: 1
   manaCost: 2
   healthCost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 41a3d76fa212061429d0dc3afcdaf0d1, type: 3}
   hasEffect: 1
-  effectDesc: When it attacks, it's immune
+  effectDesc: When it attacks, makes itself immune
   effectSprite: {fileID: 0}
