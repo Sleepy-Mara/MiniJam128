@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -35514,7 +35514,7 @@ MonoBehaviour:
   - strategy: {fileID: 11400000, guid: 33c7cc9fd0b485b479df7cf372b0cf68, type: 2}
     enemyCharacter: {fileID: 919132147568148162}
     rewards:
-    - {fileID: 11400000, guid: a22f44025117625489d931cedbff3bdc, type: 2}
+    - {fileID: 11400000, guid: b732fe27de5b4564e923f10b5db800a4, type: 2}
     - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
     - {fileID: 11400000, guid: 21d1a8a8e3400cd4095b1ac6af3226f3, type: 2}
     wonCombatDescription: perro
@@ -35532,7 +35532,7 @@ MonoBehaviour:
   wonCombatText: {fileID: 2120831673}
   _enemy: {fileID: 18335427}
   wonCombat: {fileID: 911816279}
-  endTurnButton: {fileID: 0}
+  endTurnButton: {fileID: 2143375515}
   gameVictory: {fileID: 114791959}
   initialMenu: {fileID: 1583593137}
   rewardsRange:
@@ -55729,7 +55729,7 @@ GameObject:
   - component: {fileID: 2143375521}
   - component: {fileID: 2143375520}
   m_Layer: 5
-  m_Name: Button
+  m_Name: NextTurn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

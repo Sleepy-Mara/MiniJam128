@@ -20,7 +20,7 @@ public class NextCombat : MonoBehaviour
     public RectTransform[] rewardsRange;
     public Transform cardsPlacing;
     public GameObject cardPrefab;
-    private List<GameObject> cardsToDelete;
+    private List<GameObject> cardsToDelete = new();
 
     private void Start()
     {
@@ -41,23 +41,25 @@ public class NextCombat : MonoBehaviour
     }
     public void ToNextCombat()
     {
-        enemies[enemyNum].enemyCharacter.SetActive(false);
         float distance = Mathf.Abs(rewardsRange[0].localPosition.x) + Mathf.Abs(rewardsRange[1].localPosition.x);
         distance /= (enemies[enemyNum].rewards.Length + 1);
         for (int i = 0; i < enemies[enemyNum].rewards.Length; i++)
         {
             draw.AddACard(enemies[enemyNum].rewards[i]);
             Card card = Instantiate(cardPrefab, cardsPlacing).GetComponent<Card>();
-            cardsToDelete.Add(card.gameObject);
             card.card = enemies[enemyNum].rewards[i];
             card.SetData();
             card.GetComponent<Animator>().runtimeAnimatorController = card.tableAnimator;
             card.playerCard = false;
             card.transform.localPosition = new Vector3(rewardsRange[0].localPosition.x + distance * (1 + i), rewardsRange[0].position.y);
+            cardsToDelete.Add(card.gameObject);
         }
         wonCombatText.text = enemies[enemyNum].wonCombatDescription;
         audioPlayer.StopPlaying("Music" + enemyNum);
         enemyNum++;
+        table.ResetTable();
+        table.player.RestartPlayer();
+        draw.ResetDeckAndHand();
         if (enemyNum == enemies.Length)
         {
             Debug.Log("Ganaste");
@@ -67,16 +69,14 @@ public class NextCombat : MonoBehaviour
             return;
         }
         audioPlayer.Play("Music" + enemyNum);
-        draw.ResetDeckAndHand();
         _enemy.strategy = enemies[enemyNum].strategy;
         _enemy.RestoreHealth(10);
-        table.ResetTable();
-        table.player.RestartPlayer();
         endTurnButton.SetActive(false);
         wonCombat.SetActive(true);
     }
     public void SendNext()
     {
+        enemies[enemyNum - 1].enemyCharacter.SetActive(false);
         enemies[enemyNum].enemyCharacter.SetActive(true);
         wonCombat.SetActive(false);
         turnManager.turn = 0;
