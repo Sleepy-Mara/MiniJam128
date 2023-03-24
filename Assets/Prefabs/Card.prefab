@@ -771,10 +771,10 @@ MonoBehaviour:
   healthCostText: {fileID: 8954024018486074424}
   effectText: {fileID: 784638889057809569}
   image: {fileID: 8954024019986997752}
+  canvas: {fileID: 7246755023112462814}
   inAttackAnim: 0
   inDamageAnim: 0
-  canvas: {fileID: 7246755023112462814}
-  inmune: 0
+  immune: 0
   handAnimator: {fileID: 9100000, guid: a6e780c53ff91e14caa89ae61ced91b5, type: 2}
   tableAnimator: {fileID: 9100000, guid: 54c394e32556e0f4a87c40c8b7495c8d, type: 2}
   playerCard: 0
