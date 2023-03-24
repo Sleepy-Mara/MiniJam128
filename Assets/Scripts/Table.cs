@@ -6,6 +6,7 @@ public class Table : MonoBehaviour
 {
     private bool _inTable;
     private Draw _draw;
+    private EffectManager _effectManager;
     public MapPosition[] playerPositions;
     public MapPosition[] enemyFront;
     public MapPosition[] enemyBack;
@@ -21,6 +22,7 @@ public class Table : MonoBehaviour
     void Start()
     {
         _draw = FindObjectOfType<Draw>();
+        _effectManager = FindObjectOfType<EffectManager>();
         player = FindObjectOfType<Player>();
         enemy = FindObjectOfType<Enemy>();
         audioSource = GetComponent<AudioSource>();
@@ -58,6 +60,7 @@ public class Table : MonoBehaviour
         //    if (positions.cardPos == pos)
         //        positions.card = card.GetComponent<ThisCard>();
         myCards.Add(card.GetComponent<Card>());
+        _effectManager.CheckConditionIsPlayed(card.GetComponent<Card>());
     }
     public void EnemySetCard(int place, Cards cardType)
     {

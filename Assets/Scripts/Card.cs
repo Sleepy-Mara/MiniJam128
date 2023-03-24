@@ -41,7 +41,8 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
     }
     public void Attack()
     {
-        Debug.LogError(card.cardName + " ataque");
+        if (ActualAttack <= 0)
+            return;
         if (this != null)
             if (actualPosition.oponent.GetComponent<Enemy>())
                 GetComponent<Animator>().SetTrigger("AttackPlayer");
@@ -90,8 +91,7 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
     {
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => inDamageAnim == false);
-        if (attacker != null)
-            _effectManager.CheckConditionDefeated(this);
+        _effectManager.CheckConditionDefeated(this);
         //animacion / audio
         actualPosition.card = null;
         if (actualPosition.oponent.GetComponent<Player>())
