@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class Card : CardCore, IPointerDownHandler
 {
     public bool inAttackAnim;
     public bool inDamageAnim;
-    [SerializeField] 
-    private Canvas canvas;
     private EffectManager _effectManager;
     private CardManager _cardManager;
     private TurnManager _turnManager;
-    private Table _table;
-    private Draw _draw;
     [HideInInspector]
     public bool immune;
     public RuntimeAnimatorController handAnimator;
@@ -25,8 +21,6 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
         _effectManager = FindObjectOfType<EffectManager>();
         _cardManager = FindObjectOfType<CardManager>();
         _turnManager = FindObjectOfType<TurnManager>();
-        _table = FindObjectOfType<Table>();
-        _draw = FindObjectOfType<Draw>();
         immune = false;
     }
     public int ActualLife
@@ -155,7 +149,7 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
             }
         }
     }
-    public void OnPointerEnter(PointerEventData eventData)
+    public override void OnPointerEnter(PointerEventData eventData)
     {
         if (!_draw.zoomingCard)
         {
@@ -165,7 +159,7 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
             _draw.zoomingCard = true;
         }
     }
-    public void OnPointerExit(PointerEventData eventData)
+    public override void OnPointerExit(PointerEventData eventData)
     {
         if (eventData.fullyExited)
         {

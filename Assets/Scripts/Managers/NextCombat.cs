@@ -46,12 +46,12 @@ public class NextCombat : MonoBehaviour
         for (int i = 0; i < enemies[enemyNum].rewards.Length; i++)
         {
             draw.AddACard(enemies[enemyNum].rewards[i]);
-            Card card = Instantiate(cardPrefab, cardsPlacing).GetComponent<Card>();
+            CardCore card = Instantiate(cardPrefab, cardsPlacing).GetComponent<CardCore>();
             card.card = enemies[enemyNum].rewards[i];
             card.SetData();
-            card.GetComponent<Animator>().runtimeAnimatorController = card.tableAnimator;
-            card.playerCard = false;
-            card.transform.localPosition = new Vector3(rewardsRange[0].localPosition.x + distance * (1 + i), rewardsRange[0].position.y);
+            //card.GetComponent<Animator>().runtimeAnimatorController = card.tableAnimator;
+            //card.playerCard = false;
+            card.transform.localPosition = new Vector3(rewardsRange[0].localPosition.x + distance * (1 + i), rewardsRange[0].localPosition.y);
             cardsToDelete.Add(card.gameObject);
         }
         wonCombatText.text = enemies[enemyNum].wonCombatDescription;

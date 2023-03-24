@@ -35637,7 +35637,7 @@ MonoBehaviour:
   - {fileID: 474627177}
   - {fileID: 509975083}
   cardsPlacing: {fileID: 542873424}
-  cardPrefab: {fileID: 8954024018774041426, guid: 918ce3453ac3589469482dbb7da7ac37, type: 3}
+  cardPrefab: {fileID: 8954024018774041426, guid: c7fd93e506b3b634d98e9832de111438, type: 3}
 --- !u!114 &1366086831
 MonoBehaviour:
   m_ObjectHideFlags: 0
