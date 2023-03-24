@@ -68,7 +68,6 @@ public class NextCombat : MonoBehaviour
             //agregar victoria de verdad xD
             return;
         }
-        audioPlayer.Play("Music" + enemyNum);
         _enemy.strategy = enemies[enemyNum].strategy;
         _enemy.RestoreHealth(10);
         endTurnButton.SetActive(false);
@@ -76,6 +75,7 @@ public class NextCombat : MonoBehaviour
     }
     public void SendNext()
     {
+        audioPlayer.Play("Music" + enemyNum);
         enemies[enemyNum - 1].enemyCharacter.SetActive(false);
         enemies[enemyNum].enemyCharacter.SetActive(true);
         wonCombat.SetActive(false);
