@@ -60,6 +60,14 @@ public class NextCombat : MonoBehaviour
         table.ResetTable();
         table.player.RestartPlayer();
         draw.ResetDeckAndHand();
+        _enemy.RestoreHealth(10);
+        endTurnButton.SetActive(false);
+        wonCombat.SetActive(true);
+    }
+    public void SendNext()
+    {
+        enemies[enemyNum - 1].enemyCharacter.SetActive(false);
+        wonCombat.SetActive(false);
         if (enemyNum == enemies.Length)
         {
             Debug.Log("Ganaste");
@@ -68,20 +76,12 @@ public class NextCombat : MonoBehaviour
             //agregar victoria de verdad xD
             return;
         }
-        _enemy.strategy = enemies[enemyNum].strategy;
-        _enemy.RestoreHealth(10);
-        endTurnButton.SetActive(false);
-        wonCombat.SetActive(true);
-    }
-    public void SendNext()
-    {
-        audioPlayer.Play("Music" + enemyNum);
-        enemies[enemyNum - 1].enemyCharacter.SetActive(false);
         enemies[enemyNum].enemyCharacter.SetActive(true);
-        wonCombat.SetActive(false);
+        audioPlayer.Play("Music" + enemyNum);
         turnManager.turn = 0;
         turnManager.StartBattle();
         endTurnButton.SetActive(true);
+        _enemy.strategy = enemies[enemyNum].strategy;
         foreach (GameObject card in cardsToDelete)
             Destroy(card);
         cardsToDelete.Clear();
