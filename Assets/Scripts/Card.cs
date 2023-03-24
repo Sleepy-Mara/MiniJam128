@@ -91,6 +91,8 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
                 GetComponent<Animator>().SetTrigger("GetDamage");
             ActualLife = -damage;
         }
+        else
+            immune = false;
         if (ActualLife <= 0)
         {
             StartCoroutine(Defeated(attacker));
