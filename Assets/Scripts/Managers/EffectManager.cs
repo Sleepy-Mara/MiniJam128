@@ -178,7 +178,7 @@ public class EffectManager : MonoBehaviour
                                 if (enemy.card != null)
                                     if (enemy.card.ActualLife > 0)
                                         enemysAlive.Add(enemy);
-                            var selected = Random.Range(0, enemysAlive.Count);
+                            var selected = Random.Range(0, enemysAlive.Count + 1);
                             if (selected == _table.enemyFront.Length)
                                 FindObjectOfType<Enemy>().ReceiveDamage(i);
                             else if (_table.enemyFront[selected].card != null)
@@ -191,7 +191,7 @@ public class EffectManager : MonoBehaviour
                                 if (enemy.card != null)
                                     if (enemy.card.ActualLife > 0)
                                         enemysAlive.Add(enemy);
-                            var selected = Random.Range(0, enemysAlive.Count);
+                            var selected = Random.Range(0, enemysAlive.Count + 1);
                             if (selected == _table.playerPositions.Length)
                                 FindObjectOfType<Player>().ReceiveDamage(i);
                             else if (_table.playerPositions[selected].card != null)
@@ -280,6 +280,7 @@ public class EffectManager : MonoBehaviour
                 for (int i = 0; i < 50; i++)
                     if (card.card.effectDesc.Contains("heal " + i.ToString()))
                     {
+                        Debug.Log("Im going to heal");
                         if (target == targets[0])
                         {
                             Debug.Log("Elige Enemigo");
@@ -290,7 +291,12 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[2])
                         {
-                            var selected = Random.Range(0, _table.enemyFront.Length);
+                            var allysToHeal = new List<MapPosition>();
+                            foreach (MapPosition ally in _table.enemyFront)
+                                if (ally.card != null)
+                                    if (ally.card.ActualLife > 0)
+                                        allysToHeal.Add(ally);
+                            var selected = Random.Range(0, allysToHeal.Count + 1);
                             if (selected == _table.enemyFront.Length)
                                 FindObjectOfType<Enemy>().RestoreHealth(i);
                             else if (_table.enemyFront[selected].card != null)
@@ -298,7 +304,12 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[3])
                         {
-                            var selected = Random.Range(0, _table.playerPositions.Length);
+                            var allysToHeal = new List<MapPosition>();
+                            foreach (MapPosition ally in _table.playerPositions)
+                                if (ally.card != null)
+                                    if (ally.card.ActualLife > 0)
+                                        allysToHeal.Add(ally);
+                            var selected = Random.Range(0, allysToHeal.Count + 1);
                             if (selected == _table.playerPositions.Length)
                                 FindObjectOfType<Player>().RestoreHealth(i);
                             else if (_table.playerPositions[selected].card != null)
@@ -306,15 +317,27 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[4])
                         {
-                            var selected = Random.Range(0, _table.enemyFront.Length - 1);
-                            if (_table.enemyFront[selected].card != null)
-                                _table.enemyFront[selected].card.Heal(i);
+                            var allysToHeal = new List<MapPosition>();
+                            foreach (MapPosition ally in _table.enemyFront)
+                                if (ally.card != null)
+                                    if (ally.card.ActualLife > 0)
+                                        allysToHeal.Add(ally);
+                            var selected = Random.Range(0, allysToHeal.Count);
+                            Debug.Log("Im going to heal you " + allysToHeal[selected].card.card.name);
+                            if (allysToHeal[selected].card != null)
+                                allysToHeal[selected].card.Heal(i);
                         }
                         else if (target == targets[5])
                         {
-                            var selected = Random.Range(0, _table.playerPositions.Length - 1);
-                            if (_table.playerPositions[selected].card != null)
-                                _table.playerPositions[selected].card.Heal(i);
+                            var allysToHeal = new List<MapPosition>();
+                            foreach (MapPosition ally in _table.playerPositions)
+                                if (ally.card != null)
+                                    if (ally.card.ActualLife > 0)
+                                        allysToHeal.Add(ally);
+                            var selected = Random.Range(0, allysToHeal.Count);
+                            Debug.Log("Im going to heal you " + allysToHeal[selected].card.card.name);
+                            if (allysToHeal[selected].card != null)
+                                allysToHeal[selected].card.Heal(i);
                         }
                         else if (target == targets[6])
                         {
@@ -322,7 +345,12 @@ public class EffectManager : MonoBehaviour
                                 if (card.card.effectDesc.Contains(j.ToString()))
                                     for (int k = 0; k < j; k++)
                                     {
-                                        var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                                        var allysToHeal = new List<MapPosition>();
+                                        foreach (MapPosition ally in _table.enemyFront)
+                                            if (ally.card != null)
+                                                if (ally.card.ActualLife > 0)
+                                                    allysToHeal.Add(ally);
+                                        var selected = Random.Range(0, allysToHeal.Count);
                                         if (_table.enemyFront[selected].card != null)
                                             _table.enemyFront[selected].card.Heal(i);
                                     }
@@ -333,7 +361,12 @@ public class EffectManager : MonoBehaviour
                                 if (card.card.effectDesc.Contains(j.ToString()))
                                     for (int k = 0; k < j; k++)
                                     {
-                                        var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                                        var allysToHeal = new List<MapPosition>();
+                                        foreach (MapPosition ally in _table.playerPositions)
+                                            if (ally.card != null)
+                                                if (ally.card.ActualLife > 0)
+                                                    allysToHeal.Add(ally);
+                                        var selected = Random.Range(0, allysToHeal.Count);
                                         if (_table.playerPositions[selected].card != null)
                                             _table.playerPositions[selected].card.Heal(i);
                                     }

@@ -58,9 +58,6 @@ public class TurnManager : MonoBehaviour
     {
         if (canEndTurn)
         {
-            foreach (MapPosition card in table.playerPositions)
-                if (card.card != null)
-                    effectManager.CheckConditionEndOfTurn(card.card);
             FindObjectOfType<CameraManager>().PlaceCardCamera();
             canPlayCards = false;
             StartCoroutine(AttackPhase());
@@ -99,6 +96,9 @@ public class TurnManager : MonoBehaviour
                 wait = true;
         if (wait)
             yield return new WaitForSeconds(3);
+        foreach (MapPosition card in table.playerPositions)
+            if (card.card != null)
+                effectManager.CheckConditionEndOfTurn(card.card);
         if (enemy.actualHealth > 0)
             enemy.MoveBackCards(turn);
     }

@@ -32,7 +32,12 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
     public int ActualLife
     {
         get { return actualLife; }
-        set { actualLife += value; }
+        set { actualLife += value;
+            if (actualLife < card.life)
+                lifeText.color = Color.red;
+            else lifeText.color = Color.black;
+            lifeText.text = actualLife.ToString();
+        }
     }
     public int ActualAttack
     {
@@ -76,10 +81,6 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
             if (damage > 0)
                 GetComponent<Animator>().SetTrigger("GetDamage");
             ActualLife = -damage;
-            if (ActualLife < card.life)
-                lifeText.color = Color.red;
-            else lifeText.color = Color.black;
-            lifeText.text = ActualLife.ToString();
         }
         if (ActualLife <= 0)
         {
@@ -114,6 +115,7 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
         for (int i = 0; i < heal; i++)
             if (ActualLife < card.life)
                 ActualLife = 1;
+        Debug.Log("Heal me " + heal);
     }
     public void Buff(int attack, int life)
     {
