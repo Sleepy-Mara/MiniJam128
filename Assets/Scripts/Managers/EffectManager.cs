@@ -51,6 +51,7 @@ public class EffectManager : MonoBehaviour
     private Card newCard;
     private Table _table;
     private Draw _draw;
+    public bool checking;
 
     private void Awake()
     {
@@ -89,6 +90,7 @@ public class EffectManager : MonoBehaviour
             CheckEffect(card);
             Debug.Log("DefeatedCheckTrue");
         }
+        else checking = false;
     }
     public void CheckConditionEndOfTurn(Card card)
     {
@@ -109,31 +111,32 @@ public class EffectManager : MonoBehaviour
         if (card.card.effectDesc.Contains(conditions[7]))
             CheckEffect(card);
     }
-    private bool CheckEffect(Card card)
+    private void CheckEffect(Card card)
     {
-        foreach(string effect in effects)
+        foreach (string effect in effects)
             if (card.card.effectDesc.Contains(effect))
             {
                 if (effect == effects[0])
-                    return DrawEffect(card);
+                    DrawEffect(card);
                 if (effect == effects[1])
-                    return DealDamageEffect(card);
+                    DealDamageEffect(card);
                 if (effect == effects[2])
-                    return HealEffect(card);
+                    HealEffect(card);
                 if (effect == effects[3])
-                    return AddEffect(card);
+                    AddEffect(card);
                 if (effect == effects[4])
-                    return GiveEffect(card);
+                    GiveEffect(card);
                 if (effect == effects[5])
-                    return InmuneEffect(card);
+                    ImmuneEffect(card);
                 if (effect == effects[6])
-                    return SumonEffect(card);
+                    SumonEffect(card);
+                return;
             }
-            else
-                return true;
+        checking = false;
     }
-    private bool DrawEffect(Card card)
+    private void DrawEffect(Card card)
     {
+        Debug.Log("Im going to draw maybe");
         #region Draw
         foreach (string target in targets)
             if (card.card.effectDesc.Contains(target))
@@ -146,10 +149,10 @@ public class EffectManager : MonoBehaviour
                             else if (target == targets[12])
                                 Debug.Log("Draw from life deck");
                         }
-        return true;
+        checking = false;
         #endregion
     }
-    private bool DealDamageEffect(Card card)
+    private void DealDamageEffect(Card card)
     {
         Debug.Log("Im going to do damage maybe");
         #region DealDamage
@@ -170,7 +173,12 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[2])
                         {
-                            var selected = Random.Range(0, _table.enemyFront.Length);
+                            var enemysAlive = new List<MapPosition>();
+                            foreach (MapPosition enemy in _table.enemyFront)
+                                if (enemy.card != null)
+                                    if (enemy.card.ActualLife > 0)
+                                        enemysAlive.Add(enemy);
+                            var selected = Random.Range(0, enemysAlive.Count);
                             if (selected == _table.enemyFront.Length)
                                 FindObjectOfType<Enemy>().ReceiveDamage(i);
                             else if (_table.enemyFront[selected].card != null)
@@ -178,7 +186,12 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[3])
                         {
-                            var selected = Random.Range(0, _table.playerPositions.Length);
+                            var enemysAlive = new List<MapPosition>();
+                            foreach (MapPosition enemy in _table.playerPositions)
+                                if (enemy.card != null)
+                                    if (enemy.card.ActualLife > 0)
+                                        enemysAlive.Add(enemy);
+                            var selected = Random.Range(0, enemysAlive.Count);
                             if (selected == _table.playerPositions.Length)
                                 FindObjectOfType<Player>().ReceiveDamage(i);
                             else if (_table.playerPositions[selected].card != null)
@@ -186,13 +199,23 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[4])
                         {
-                            var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                            var enemysAlive = new List<MapPosition>();
+                            foreach (MapPosition enemy in _table.enemyFront)
+                                if (enemy.card != null)
+                                    if (enemy.card.ActualLife > 0)
+                                        enemysAlive.Add(enemy);
+                            var selected = Random.Range(0, enemysAlive.Count);
                             if (_table.enemyFront[selected].card != null)
                                 _table.enemyFront[selected].card.ReceiveDamagePublic(i, null);
                         }
                         else if (target == targets[5])
                         {
-                            var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                            var enemysAlive = new List<MapPosition>();
+                            foreach (MapPosition enemy in _table.playerPositions)
+                                if (enemy.card != null)
+                                    if (enemy.card.ActualLife > 0)
+                                        enemysAlive.Add(enemy);
+                            var selected = Random.Range(0, enemysAlive.Count);
                             if (_table.playerPositions[selected].card != null)
                                 _table.playerPositions[selected].card.ReceiveDamagePublic(i, null);
                         }
@@ -202,7 +225,12 @@ public class EffectManager : MonoBehaviour
                                 if (card.card.effectDesc.Contains(j.ToString()))
                                     for (int k = 0; k < j; k++)
                                     {
-                                        var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                                        var enemysAlive = new List<MapPosition>();
+                                        foreach (MapPosition enemy in _table.enemyFront)
+                                            if (enemy.card != null)
+                                                if (enemy.card.ActualLife > 0)
+                                                    enemysAlive.Add(enemy);
+                                        var selected = Random.Range(0, enemysAlive.Count);
                                         if (_table.enemyFront[selected].card != null)
                                             _table.enemyFront[selected].card.ReceiveDamagePublic(i, null);
                                     }
@@ -213,7 +241,12 @@ public class EffectManager : MonoBehaviour
                                 if (card.card.effectDesc.Contains(j.ToString()))
                                     for (int k = 0; k < j; k++)
                                     {
-                                        var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                                        var enemysAlive = new List<MapPosition>();
+                                        foreach (MapPosition enemy in _table.playerPositions)
+                                            if (enemy.card != null)
+                                                if (enemy.card.ActualLife > 0)
+                                                    enemysAlive.Add(enemy);
+                                        var selected = Random.Range(0, enemysAlive.Count);
                                         if (_table.playerPositions[selected].card != null)
                                             _table.playerPositions[selected].card.ReceiveDamagePublic(i, null);
                                     }
@@ -234,11 +267,13 @@ public class EffectManager : MonoBehaviour
                             card.ReceiveDamagePublic(i, null);
                     }
             }
-        return true;
+        Debug.Log("I did damage");
+        checking = false;
         #endregion
     }
-    private bool HealEffect(Card card)
+    private void HealEffect(Card card)
     {
+        Debug.Log("Im going to heal maybe");
         #region Heal
         foreach (string target in targets)
             if (card.card.effectDesc.Contains(target))
@@ -318,11 +353,12 @@ public class EffectManager : MonoBehaviour
                         else if (target == targets[10])
                             card.Heal(i);
                     }
-        return true;
+        checking = false;
         #endregion
     }
-    private bool AddEffect(Card card)
+    private void AddEffect(Card card)
     {
+        Debug.Log("Im going to add a card maybe");
         #region Add
         bool added = false;
         if (card.card.effectDesc.Contains(targets[11]))
@@ -377,11 +413,12 @@ public class EffectManager : MonoBehaviour
                     if (!added)
                         Debug.Log("Add to life deck");
                 }
-        return true;
+        checking = false;
         #endregion
     }
-    private bool GiveEffect(Card card)
+    private void GiveEffect(Card card)
     {
+        Debug.Log("Im going to buff maybe");
         #region Give
         foreach (string target in targets)
             if (card.card.effectDesc.Contains(target))
@@ -408,7 +445,7 @@ public class EffectManager : MonoBehaviour
                             i *= -1;
                             j *= 1;
                         }
-                        else return true;
+                        else return;
                         if (target == targets[0])
                         {
                             Debug.Log("Elige Enemigo");
@@ -466,11 +503,12 @@ public class EffectManager : MonoBehaviour
                         else if (target == targets[10])
                             card.Buff(i, j);
                     }
-        return true;
+        checking = false;
         #endregion
     }
-    private bool InmuneEffect(Card card)
+    private void ImmuneEffect(Card card)
     {
+        Debug.Log("Im immune maybe");
         #region Inmune
         foreach (string target in targets)
             if (card.card.effectDesc.Contains(target))
@@ -487,13 +525,13 @@ public class EffectManager : MonoBehaviour
                 {
                     var selected = Random.Range(0, _table.enemyFront.Length - 1);
                     if (_table.enemyFront[selected].card != null)
-                        _table.enemyFront[selected].card.inmune = true;
+                        _table.enemyFront[selected].card.immune = true;
                 }
                 else if (target == targets[5])
                 {
                     var selected = Random.Range(0, _table.playerPositions.Length - 1);
                     if (_table.playerPositions[selected].card != null)
-                        _table.playerPositions[selected].card.inmune = true;
+                        _table.playerPositions[selected].card.immune = true;
                 }
                 else if (target == targets[6])
                 {
@@ -503,7 +541,7 @@ public class EffectManager : MonoBehaviour
                             {
                                 var selected = Random.Range(0, _table.enemyFront.Length - 1);
                                 if (_table.enemyFront[selected].card != null)
-                                    _table.enemyFront[selected].card.inmune = true;
+                                    _table.enemyFront[selected].card.immune = true;
                             }
                 }
                 else if (target == targets[7])
@@ -514,29 +552,30 @@ public class EffectManager : MonoBehaviour
                             {
                                 var selected = Random.Range(0, _table.playerPositions.Length - 1);
                                 if (_table.playerPositions[selected].card != null)
-                                    _table.playerPositions[selected].card.inmune = true;
+                                    _table.playerPositions[selected].card.immune = true;
                             }
                 }
                 else if (target == targets[8])
                 {
                     foreach (MapPosition selected in _table.enemyFront)
                         if (selected.card != null)
-                            selected.card.inmune = true;
+                            selected.card.immune = true;
                 }
                 else if (target == targets[9])
                 {
                     foreach (MapPosition selected in _table.playerPositions)
                         if (selected.card != null)
-                            selected.card.inmune = true;
+                            selected.card.immune = true;
                 }
                 else if (target == targets[10])
-                    card.inmune = true;
+                    card.immune = true;
             }
-        return true;
+        checking = false;
         #endregion
     }
-    private bool SumonEffect(Card card)
+    private void SumonEffect(Card card)
     {
+        Debug.Log("Im going to sumon maybe");
         #region Sumon
         bool sumoned = false;
         Cards selectedCard = null;
@@ -576,7 +615,7 @@ public class EffectManager : MonoBehaviour
                     }
             }
         }
-        return true;
+        checking = false;
         #endregion
     }
 }

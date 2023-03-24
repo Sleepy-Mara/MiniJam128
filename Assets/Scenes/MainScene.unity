@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10757,16 +10757,35 @@ MonoBehaviour:
   _cardsInHand: []
   deck:
   - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
-  - {fileID: 11400000, guid: bb69fe447d248bb42b0e0650830199e8, type: 2}
-  - {fileID: 11400000, guid: 6edafacc9f62664479e49eeff7c5e51f, type: 2}
-  - {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
-  - {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
-  - {fileID: 11400000, guid: 42344a2ae4643d846bab0813380a6ec6, type: 2}
-  - {fileID: 11400000, guid: c9a8bb9b421d4c74dadda7540e8a0bcc, type: 2}
-  - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
-  - {fileID: 11400000, guid: 26d16ce04e87aa947a969aefb11c5c8a, type: 2}
-  - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
-  - {fileID: 11400000, guid: 46a3f64fb186f4a4a8d1ea7d6badce78, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
   handPos: {fileID: 0}
   canDraw: 0
   zoomingCard: 0
@@ -44468,6 +44487,7 @@ Transform:
   - {fileID: 966880309}
   - {fileID: 529511131}
   - {fileID: 1703289127}
+  - {fileID: 1718453386}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44533,6 +44553,117 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 423216759134236767, guid: c01f4b2f436cffe4a85d372c03aec181, type: 3}
   m_PrefabInstance: {fileID: 1712154345}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1718453385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1718453386}
+  - component: {fileID: 1718453387}
+  m_Layer: 0
+  m_Name: EffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1718453386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718453385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1711294742}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718453387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718453385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e76bbdabddf28e4fb37b6a0506077d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions:
+  - At the start of the turn
+  - When it's played
+  - When it attacks
+  - When it get damaged
+  - When it's defeated
+  - At the end of the turn
+  - until your next turn
+  - until the end of the turn
+  effects:
+  - draw
+  - deal
+  - heal
+  - add
+  - give
+  - immune
+  - summon
+  targets:
+  - enemy creature
+  - ally creature
+  - random enemy
+  - random ally
+  - random enemy creature
+  - random ally creature
+  - random enemy creatures
+  - random ally creatures
+  - all enemy creatures
+  - all ally creatures
+  - itself
+  - hand
+  - deck
+  - life deck
+  cards:
+  - {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
+  - {fileID: 11400000, guid: 9675af31f38a4df4892c4f4750409598, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: b732fe27de5b4564e923f10b5db800a4, type: 2}
+  - {fileID: 11400000, guid: bb69fe447d248bb42b0e0650830199e8, type: 2}
+  - {fileID: 11400000, guid: b04b925a8acd9d441af4044d1917bcb7, type: 2}
+  - {fileID: 11400000, guid: 26d16ce04e87aa947a969aefb11c5c8a, type: 2}
+  - {fileID: 11400000, guid: 1002cbd4826fe1f438b96f6738ef713a, type: 2}
+  - {fileID: 11400000, guid: 9f3a7fdb11fb9274288b0a089dc4d640, type: 2}
+  - {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
+  - {fileID: 11400000, guid: 6be924d44b649bc4aaec0796345fdc38, type: 2}
+  - {fileID: 11400000, guid: c65aebf507439b040a868efb09167974, type: 2}
+  - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
+  - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
+  - {fileID: 11400000, guid: 46fd1b5ec94b2ae42b8caad074ae7c6e, type: 2}
+  - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+  - {fileID: 11400000, guid: 42344a2ae4643d846bab0813380a6ec6, type: 2}
+  - {fileID: 11400000, guid: 6edafacc9f62664479e49eeff7c5e51f, type: 2}
+  - {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
+  - {fileID: 11400000, guid: 21d1a8a8e3400cd4095b1ac6af3226f3, type: 2}
+  - {fileID: 11400000, guid: 46a3f64fb186f4a4a8d1ea7d6badce78, type: 2}
+  - {fileID: 11400000, guid: 19d6b98e55bac86459f0cf3bba17f6b7, type: 2}
+  - {fileID: 11400000, guid: c9a8bb9b421d4c74dadda7540e8a0bcc, type: 2}
+  - {fileID: 11400000, guid: b5a2c4cc536e51745b542ccc885995e7, type: 2}
+  - {fileID: 11400000, guid: 90132ced47930e740a196d34dc1b52a3, type: 2}
+  - {fileID: 11400000, guid: 4032ea2835bbecc41b790112d31464db, type: 2}
+  - {fileID: 11400000, guid: 01deb2331f3c17d4b9757b9d64831ceb, type: 2}
+  - {fileID: 11400000, guid: 7d051a7f0cca2844dbef5c8896f64ded, type: 2}
+  - {fileID: 11400000, guid: 2bde0e37b5506b24a96933e537866a46, type: 2}
+  - {fileID: 11400000, guid: e7c1a7e9d7b81cc4393e00e0314470c8, type: 2}
+  - {fileID: 11400000, guid: 091d7ca638832e74e860d63cf5a25204, type: 2}
+  - {fileID: 11400000, guid: 8b398a09d29ff544b842f24464179585, type: 2}
+  newCard: {fileID: 8954024018774041425, guid: 918ce3453ac3589469482dbb7da7ac37, type: 3}
+  checking: 0
 --- !u!1 &1725489127
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,5 +20,5 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 0aae5b7fff26c5e4bbbd7e1dad092654, type: 3}
   hasEffect: 1
-  effectDesc: At the end of the turn, draw 1 card
+  effectDesc: At the end of the turn, draw 1 card from the deck
   effectSprite: {fileID: 0}

@@ -15,7 +15,7 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
     private Table _table;
     private Draw _draw;
     [HideInInspector]
-    public bool inmune;
+    public bool immune;
     public RuntimeAnimatorController handAnimator;
     public RuntimeAnimatorController tableAnimator;
     [HideInInspector]
@@ -27,7 +27,7 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
         _turnManager = FindObjectOfType<TurnManager>();
         _table = FindObjectOfType<Table>();
         _draw = FindObjectOfType<Draw>();
-        inmune = false;
+        immune = false;
     }
     public int ActualLife
     {
@@ -70,9 +70,8 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
         if (attacker != null)
             yield return new WaitUntil(() => inAttackAnim == false && attacker.inAttackAnim == false);
         else yield return new WaitUntil(() => inAttackAnim == false);
-        if (attacker != null)
-            _effectManager.CheckConditionGetDamaged(this);
-        if (!inmune)
+        _effectManager.CheckConditionGetDamaged(this);
+        if (!immune)
         {
             if (damage > 0)
                 GetComponent<Animator>().SetTrigger("GetDamage");
@@ -91,7 +90,9 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
     {
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => inDamageAnim == false);
+        _effectManager.checking = true;
         _effectManager.CheckConditionDefeated(this);
+        yield return new WaitUntil(() => _effectManager.checking == false);
         //animacion / audio
         actualPosition.card = null;
         if (actualPosition.oponent.GetComponent<Player>())
