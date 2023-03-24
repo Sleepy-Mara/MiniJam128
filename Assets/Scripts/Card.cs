@@ -35,6 +35,8 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
         set { actualLife += value;
             if (actualLife < card.life)
                 lifeText.color = Color.red;
+            else if (actualLife > card.life)
+                lifeText.color = Color.green;
             else lifeText.color = Color.black;
             lifeText.text = actualLife.ToString();
         }
@@ -42,7 +44,14 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
     public int ActualAttack
     {
         get { return actualAttack; }
-        set { actualAttack += value; }
+        set { actualAttack += value;
+            if (actualAttack < card.attack)
+                attackText.color = Color.red;
+            else if (actualAttack > card.attack)
+                attackText.color = Color.green;
+            else attackText.color = Color.black;
+            attackText.text = actualAttack.ToString();
+        }
     }
     public void Attack()
     {
@@ -125,12 +134,11 @@ public class Card : CardCore, IPointerEnterHandler, IPointerExitHandler, IPointe
             posOrNegLife = -1;
         if (attack < 0)
             posOrNegAttack = -1;
+        Debug.LogError(card.cardName + " get buffed by " + attack * posOrNegAttack + "/" + life * posOrNegLife);
         for (int i = 0; i < life; i++)
-            if (ActualLife < card.life)
-                ActualLife = posOrNegLife;
+            ActualLife = posOrNegLife;
         for (int i = 0; i < attack; i++)
-            if (ActualAttack < card.attack)
-                ActualAttack = posOrNegAttack;
+            ActualAttack = posOrNegAttack;
     }
     public void OnPointerDown(PointerEventData eventData)
     {

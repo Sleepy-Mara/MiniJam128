@@ -478,7 +478,8 @@ public class EffectManager : MonoBehaviour
                             i *= -1;
                             j *= 1;
                         }
-                        else return;
+                        else continue;
+                        Debug.LogError("Im going to buff");
                         if (target == targets[0])
                         {
                             Debug.Log("Elige Enemigo");
@@ -489,15 +490,26 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[4])
                         {
-                            var selected = Random.Range(0, _table.enemyFront.Length - 1);
-                            if (_table.enemyFront[selected].card != null)
-                                _table.enemyFront[selected].card.Buff(i, j);
+                            var creatureToBuff = new List<MapPosition>();
+                            foreach (MapPosition creature in _table.enemyFront)
+                                if (creature.card != null)
+                                    if (creature.card.ActualLife > 0)
+                                        creatureToBuff.Add(creature);
+                            var selected = Random.Range(0, creatureToBuff.Count);
+                            if (creatureToBuff[selected].card != null)
+                                creatureToBuff[selected].card.Buff(i, j);
                         }
                         else if (target == targets[5])
                         {
-                            var selected = Random.Range(0, _table.playerPositions.Length - 1);
-                            if (_table.playerPositions[selected].card != null)
-                                _table.playerPositions[selected].card.Buff(i, j);
+                            Debug.LogError("Im going to buff");
+                            var creatureToBuff = new List<MapPosition>();
+                            foreach (MapPosition creature in _table.playerPositions)
+                                if (creature.card != null)
+                                    if (creature.card.ActualLife > 0)
+                                        creatureToBuff.Add(creature);
+                            var selected = Random.Range(0, creatureToBuff.Count);
+                            if (creatureToBuff[selected].card != null)
+                                creatureToBuff[selected].card.Buff(i, j);
                         }
                         else if (target == targets[6])
                         {
@@ -505,9 +517,14 @@ public class EffectManager : MonoBehaviour
                                 if (card.card.effectDesc.Contains(j.ToString()))
                                     for (int k = 0; k < l; k++)
                                     {
-                                        var selected = Random.Range(0, _table.enemyFront.Length - 1);
-                                        if (_table.enemyFront[selected].card != null)
-                                            _table.enemyFront[selected].card.Buff(i, j);
+                                        var creatureToBuff = new List<MapPosition>();
+                                        foreach (MapPosition creature in _table.enemyFront)
+                                            if (creature.card != null)
+                                                if (creature.card.ActualLife > 0)
+                                                    creatureToBuff.Add(creature);
+                                        var selected = Random.Range(0, creatureToBuff.Count);
+                                        if (creatureToBuff[selected].card != null)
+                                            creatureToBuff[selected].card.Buff(i, j);
                                     }
                         }
                         else if (target == targets[7])
@@ -516,9 +533,14 @@ public class EffectManager : MonoBehaviour
                                 if (card.card.effectDesc.Contains(j.ToString()))
                                     for (int k = 0; k < l; k++)
                                     {
-                                        var selected = Random.Range(0, _table.playerPositions.Length - 1);
-                                        if (_table.playerPositions[selected].card != null)
-                                            _table.playerPositions[selected].card.Buff(i, j);
+                                        var creatureToBuff = new List<MapPosition>();
+                                        foreach (MapPosition creature in _table.playerPositions)
+                                            if (creature.card != null)
+                                                if (creature.card.ActualLife > 0)
+                                                    creatureToBuff.Add(creature);
+                                        var selected = Random.Range(0, creatureToBuff.Count);
+                                        if (creatureToBuff[selected].card != null)
+                                            creatureToBuff[selected].card.Buff(i, j);
                                     }
                         }
                         else if (target == targets[8])

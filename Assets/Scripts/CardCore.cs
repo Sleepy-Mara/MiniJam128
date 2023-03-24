@@ -11,7 +11,7 @@ public class CardCore : MonoBehaviour
     protected int actualLife;
     protected int actualAttack;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI attackText;
+    [SerializeField] protected TextMeshProUGUI attackText;
     [SerializeField] protected TextMeshProUGUI lifeText;
     [SerializeField] private TextMeshProUGUI manaCostText;
     [SerializeField] private TextMeshProUGUI healthCostText;
