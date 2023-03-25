@@ -6,7 +6,8 @@ public class Draw : MonoBehaviour
 {
     public List<GameObject> drawThings;
     [HideInInspector] public List<GameObject> _cardsInHand = new List<GameObject>();
-    public List<Cards> deck;
+    public static List<Cards> deck;
+    private static Draw instance;
     private List<Cards> _actualDeck = new List<Cards>();
     public Transform handPos;
     public bool canDraw;
@@ -18,6 +19,16 @@ public class Draw : MonoBehaviour
     public GameObject audio;
     public Animator noCardsWindow;
     public GameObject deckObject;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            deck = new List<Cards>();
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+    }
     void Start()
     {
         _turnManager = FindObjectOfType<TurnManager>();

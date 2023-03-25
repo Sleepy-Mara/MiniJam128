@@ -262,6 +262,8 @@ public class EffectManager : MonoBehaviour
     {
         Debug.Log("Im going to draw maybe");
         #region Draw
+        if (card.actualPosition.oponent == FindObjectOfType<Player>())
+            return;
         foreach (string target in targets)
             if (card.card.effectDesc.Contains(target))
                 for (int i = 0; i < 50; i++)
@@ -561,6 +563,8 @@ public class EffectManager : MonoBehaviour
     {
         Debug.Log("Im going to add a card maybe");
         #region Add
+        if (card.actualPosition.oponent == FindObjectOfType<Player>())
+            return;
         bool added = false;
         if (card.card.effectDesc.Contains(targets[13]))
             foreach (Cards cards in cards)
