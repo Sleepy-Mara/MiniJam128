@@ -12,7 +12,6 @@ public class Draw : MonoBehaviour
     public bool canDraw;
     public bool zoomingCard;
     private TurnManager _turnManager;
-    private CardManager _cardManager;
     public GameObject cardPrefab;
     public RectTransform[] handRange;
     public List<AudioClip> clips;
