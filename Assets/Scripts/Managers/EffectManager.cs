@@ -41,6 +41,8 @@ public class EffectManager : MonoBehaviour
         "all enemy creatures",
         "all ally creatures",
         "itself",
+        "to the enemy player",
+        "to the player",
         "hand",
         "deck",
         "life deck"
@@ -62,25 +64,7 @@ public class EffectManager : MonoBehaviour
     {
         if (card.card.effectDesc.Contains(". "))
         {
-            List<string> effectDescriptions = new List<string>();
-            int lastCharacter = 0;
-            for (int i = 0; i < card.card.effectDesc.Length; i++)
-            {
-                if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        string newEffect = card.card.effectDesc[j].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                    for (int k = i; k < card.card.effectDesc.Length; k++)
-                    {
-                        string newEffect = card.card.effectDesc[k].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                }
-                lastCharacter = card.card.effectDesc[i];
-            }
+            List<string> effectDescriptions = CheckSecondEffect(card);
             foreach (string effectDescription in effectDescriptions)
                 if (effectDescription.Contains(conditions[0]))
                     CheckEffect(card);
@@ -92,25 +76,7 @@ public class EffectManager : MonoBehaviour
     {
         if (card.card.effectDesc.Contains(". "))
         {
-            List<string> effectDescriptions = new List<string>();
-            int lastCharacter = 0;
-            for (int i = 0; i < card.card.effectDesc.Length; i++)
-            {
-                if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        string newEffect = card.card.effectDesc[j].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                    for (int k = i; k < card.card.effectDesc.Length; k++)
-                    {
-                        string newEffect = card.card.effectDesc[k].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                }
-                lastCharacter = card.card.effectDesc[i];
-            }
+            List<string> effectDescriptions = CheckSecondEffect(card);
             foreach (string effectDescription in effectDescriptions)
                 if (effectDescription.Contains(conditions[1]))
                     CheckEffect(card);
@@ -122,25 +88,7 @@ public class EffectManager : MonoBehaviour
     {
         if (card.card.effectDesc.Contains(". "))
         {
-            List<string> effectDescriptions = new List<string>();
-            int lastCharacter = 0;
-            for (int i = 0; i < card.card.effectDesc.Length; i++)
-            {
-                if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        string newEffect = card.card.effectDesc[j].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                    for (int k = i; k < card.card.effectDesc.Length; k++)
-                    {
-                        string newEffect = card.card.effectDesc[k].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                }
-                lastCharacter = card.card.effectDesc[i];
-            }
+            List<string> effectDescriptions = CheckSecondEffect(card);
             foreach (string effectDescription in effectDescriptions)
                 if (effectDescription.Contains(conditions[2]))
                     CheckEffect(card);
@@ -152,25 +100,7 @@ public class EffectManager : MonoBehaviour
     {
         if (card.card.effectDesc.Contains(". "))
         {
-            List<string> effectDescriptions = new List<string>();
-            int lastCharacter = 0;
-            for (int i = 0; i < card.card.effectDesc.Length; i++)
-            {
-                if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        string newEffect = card.card.effectDesc[j].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                    for (int k = i; k < card.card.effectDesc.Length; k++)
-                    {
-                        string newEffect = card.card.effectDesc[k].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                }
-                lastCharacter = card.card.effectDesc[i];
-            }
+            List<string> effectDescriptions = CheckSecondEffect(card);
             foreach (string effectDescription in effectDescriptions)
                 if (effectDescription.Contains(conditions[3]))
                     CheckEffect(card);
@@ -182,25 +112,7 @@ public class EffectManager : MonoBehaviour
     {
         if (card.card.effectDesc.Contains(". "))
         {
-            List<string> effectDescriptions = new List<string>();
-            int lastCharacter = 0;
-            for (int i = 0; i < card.card.effectDesc.Length; i++)
-            {
-                if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        string newEffect = card.card.effectDesc[j].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                    for (int k = i; k < card.card.effectDesc.Length; k++)
-                    {
-                        string newEffect = card.card.effectDesc[k].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                }
-                lastCharacter = card.card.effectDesc[i];
-            }
+            List<string> effectDescriptions = CheckSecondEffect(card);
             foreach (string effectDescription in effectDescriptions)
                 if (effectDescription.Contains(conditions[4]))
                     CheckEffect(card);
@@ -216,25 +128,7 @@ public class EffectManager : MonoBehaviour
     {
         if (card.card.effectDesc.Contains(". "))
         {
-            List<string> effectDescriptions = new List<string>();
-            int lastCharacter = 0;
-            for (int i = 0; i < card.card.effectDesc.Length; i++)
-            {
-                if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        string newEffect = card.card.effectDesc[j].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                    for (int k = i; k < card.card.effectDesc.Length; k++)
-                    {
-                        string newEffect = card.card.effectDesc[k].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                }
-                lastCharacter = card.card.effectDesc[i];
-            }
+            List<string> effectDescriptions = CheckSecondEffect(card);
             foreach (string effectDescription in effectDescriptions)
                 if (effectDescription.Contains(conditions[5]))
                     CheckEffect(card);
@@ -249,25 +143,7 @@ public class EffectManager : MonoBehaviour
     {
         if (card.card.effectDesc.Contains(". "))
         {
-            List<string> effectDescriptions = new List<string>();
-            int lastCharacter = 0;
-            for (int i = 0; i < card.card.effectDesc.Length; i++)
-            {
-                if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        string newEffect = card.card.effectDesc[j].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                    for (int k = i; k < card.card.effectDesc.Length; k++)
-                    {
-                        string newEffect = card.card.effectDesc[k].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                }
-                lastCharacter = card.card.effectDesc[i];
-            }
+            List<string> effectDescriptions = CheckSecondEffect(card);
             foreach (string effectDescription in effectDescriptions)
                 if (effectDescription.Contains(conditions[6]))
                     CheckEffect(card);
@@ -279,31 +155,36 @@ public class EffectManager : MonoBehaviour
     {
         if (card.card.effectDesc.Contains(". "))
         {
-            List<string> effectDescriptions = new List<string>();
-            int lastCharacter = 0;
-            for (int i = 0; i < card.card.effectDesc.Length; i++)
-            {
-                if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        string newEffect = card.card.effectDesc[j].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                    for (int k = i; k < card.card.effectDesc.Length; k++)
-                    {
-                        string newEffect = card.card.effectDesc[k].ToString();
-                        effectDescriptions.Add(newEffect);
-                    }
-                }
-                lastCharacter = card.card.effectDesc[i];
-            }
+            List<string> effectDescriptions = CheckSecondEffect(card);
             foreach (string effectDescription in effectDescriptions)
                 if (effectDescription.Contains(conditions[7]))
                     CheckEffect(card);
         }
         else if (card.card.effectDesc.Contains(conditions[7]))
             CheckEffect(card);
+    }
+    List<string> CheckSecondEffect(Card card)
+    {
+        List<string> effectDescriptions = new List<string>();
+        int lastCharacter = 0;
+        for (int i = 0; i < card.card.effectDesc.Length; i++)
+        {
+            if (card.card.effectDesc[lastCharacter].ToString() + card.card.effectDesc[i].ToString() == ". ")
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    string newEffect = card.card.effectDesc[j].ToString();
+                    effectDescriptions.Add(newEffect);
+                }
+                for (int k = i; k < card.card.effectDesc.Length; k++)
+                {
+                    string newEffect = card.card.effectDesc[k].ToString();
+                    effectDescriptions.Add(newEffect);
+                }
+            }
+            lastCharacter = card.card.effectDesc[i];
+        }
+        return effectDescriptions;
     }
     private void CheckEffect(Card card)
     {
@@ -334,8 +215,6 @@ public class EffectManager : MonoBehaviour
                 lastFirstCharacter = i;
             }
             foreach (string effectDescription in effectDescriptions)
-            {
-                Debug.LogError(effectDescription);
                 foreach (string effect in effects)
                     if (effectDescription.Contains(effect))
                     {
@@ -355,7 +234,6 @@ public class EffectManager : MonoBehaviour
                             SumonEffect(card);
                         continue;
                     }
-            }
                 
         }
         else
@@ -390,9 +268,9 @@ public class EffectManager : MonoBehaviour
                     if (card.card.effectDesc.Contains(" " + i.ToString() + " "))
                         for (int j = 0; j < i; j++)
                         {
-                            if (target == targets[12])
+                            if (target == targets[14])
                                 _draw.DrawACard();
-                            else if (target == targets[12])
+                            else if (target == targets[15])
                                 Debug.Log("Draw from life deck");
                         }
         checking = false;
@@ -511,6 +389,10 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[10])
                             card.ReceiveDamagePublic(i, null);
+                        else if (target == targets[11])
+                            FindObjectOfType<Enemy>().ReceiveDamage(i);
+                        else if (target == targets[12])
+                            FindObjectOfType<Player>().ReceiveDamage(i);
                     }
             }
         Debug.Log("I did damage");
@@ -631,6 +513,10 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[10])
                             card.Heal(i);
+                        else if (target == targets[11])
+                            FindObjectOfType<Enemy>().RestoreHealth(i);
+                        else if (target == targets[12])
+                            FindObjectOfType<Player>().RestoreHealth(i);
                     }
         checking = false;
         #endregion
@@ -640,7 +526,7 @@ public class EffectManager : MonoBehaviour
         Debug.Log("Im going to add a card maybe");
         #region Add
         bool added = false;
-        if (card.card.effectDesc.Contains(targets[11]))
+        if (card.card.effectDesc.Contains(targets[13]))
             foreach (Cards cards in cards)
                 if (card.card.effectDesc.Contains(cards.name))
                 {
@@ -664,7 +550,7 @@ public class EffectManager : MonoBehaviour
                         _draw.AddCardToHand(addCard);
                     }
                 }
-        if (card.card.effectDesc.Contains(targets[12]))
+        if (card.card.effectDesc.Contains(targets[14]))
             foreach (Cards cards in cards)
                 if (card.card.effectDesc.Contains(cards.name))
                 {
@@ -678,7 +564,7 @@ public class EffectManager : MonoBehaviour
                     if (!added)
                         _draw.AddATempCard(cards);
                 }
-        if (card.card.effectDesc.Contains(targets[13]))
+        if (card.card.effectDesc.Contains(targets[15]))
             foreach (Cards cards in cards)
                 if (card.card.effectDesc.Contains(cards.name))
                 {
