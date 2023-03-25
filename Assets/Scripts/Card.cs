@@ -16,6 +16,8 @@ public class Card : CardCore, IPointerDownHandler
     public RuntimeAnimatorController tableAnimator;
     [HideInInspector]
     public bool playerCard;
+    [HideInInspector]
+    public bool played = false;
     private void Start()
     {
         _effectManager = FindObjectOfType<EffectManager>();

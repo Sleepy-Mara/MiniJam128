@@ -24,7 +24,11 @@ public class Enemy : Health
         table.MoveEnemyCard();
         foreach (MapPosition card in table.enemyFront)
             if (card.card != null)
-                _effectManager.CheckConditionIsPlayed(card.card);
+                if (!card.card.played)
+                {
+                    _effectManager.CheckConditionIsPlayed(card.card);
+                    card.card.played = true;
+                }
         PlaceBackCards(turn);
     }
     public void PlaceBackCards(int turn)
