@@ -11,7 +11,8 @@ public class Draw : MonoBehaviour
     public Transform handPos;
     public bool canDraw;
     public bool zoomingCard;
-    private TurnManager turnManager;
+    private TurnManager _turnManager;
+    private CardManager _cardManager;
     public GameObject cardPrefab;
     public RectTransform[] handRange;
     public List<AudioClip> clips;
@@ -20,7 +21,7 @@ public class Draw : MonoBehaviour
     public GameObject deckObject;
     void Start()
     {
-        turnManager = FindObjectOfType<TurnManager>();
+        _turnManager = FindObjectOfType<TurnManager>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
     }
@@ -39,7 +40,8 @@ public class Draw : MonoBehaviour
     {
         if(_actualDeck.Count <= 0)
         {
-            turnManager.canEndTurn = true;
+            _turnManager.canEndTurn = true;
+            _turnManager.PlayableTurn();
         }
         canDraw = true;
     }
@@ -48,9 +50,9 @@ public class Draw : MonoBehaviour
         if (canDraw)
         {
             canDraw = false;
-            turnManager.canEndTurn = true;
+            _turnManager.canEndTurn = true;
             DrawACard();
-            turnManager.PlayableTurn();
+            _turnManager.PlayableTurn();
         }
     }
 
