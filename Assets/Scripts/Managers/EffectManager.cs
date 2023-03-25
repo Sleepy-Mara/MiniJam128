@@ -283,6 +283,24 @@ public class EffectManager : MonoBehaviour
         foreach (string target in targets)
             if (card.card.effectDesc.Contains(target))
             {
+                MapPosition[] enemyPositions;
+                MapPosition[] allyPositions;
+                Health enemyHealth;
+                Health allyHealth;
+                if (card.actualPosition.oponent == FindObjectOfType<Player>())
+                {
+                    enemyPositions = _table.playerPositions;
+                    allyPositions = _table.enemyFront;
+                    enemyHealth = FindObjectOfType<Player>();
+                    allyHealth = FindObjectOfType<Enemy>();
+                }
+                else
+                {
+                    enemyPositions = _table.enemyFront;
+                    allyPositions = _table.playerPositions;
+                    enemyHealth = FindObjectOfType<Enemy>();
+                    allyHealth = FindObjectOfType<Player>();
+                }
                 Debug.Log("Im going to do damage");
                 for (int i = 0; i < 50; i++)
                     if (card.card.effectDesc.Contains(i.ToString() + " damage"))
@@ -298,50 +316,50 @@ public class EffectManager : MonoBehaviour
                         else if (target == targets[2])
                         {
                             var enemysAlive = new List<MapPosition>();
-                            foreach (MapPosition enemy in _table.enemyFront)
+                            foreach (MapPosition enemy in enemyPositions)
                                 if (enemy.card != null)
                                     if (enemy.card.ActualLife > 0)
                                         enemysAlive.Add(enemy);
                             var selected = Random.Range(0, enemysAlive.Count + 1);
-                            if (selected == _table.enemyFront.Length)
-                                FindObjectOfType<Enemy>().ReceiveDamage(i);
-                            else if (_table.enemyFront[selected].card != null)
-                                _table.enemyFront[selected].card.ReceiveDamagePublic(i, null);
+                            if (selected == enemyPositions.Length)
+                                enemyHealth.ReceiveDamage(i);
+                            else if (enemyPositions[selected].card != null)
+                                enemyPositions[selected].card.ReceiveDamagePublic(i, null);
                         }
                         else if (target == targets[3])
                         {
                             var enemysAlive = new List<MapPosition>();
-                            foreach (MapPosition enemy in _table.playerPositions)
+                            foreach (MapPosition enemy in allyPositions)
                                 if (enemy.card != null)
                                     if (enemy.card.ActualLife > 0)
                                         enemysAlive.Add(enemy);
                             var selected = Random.Range(0, enemysAlive.Count + 1);
-                            if (selected == _table.playerPositions.Length)
-                                FindObjectOfType<Player>().ReceiveDamage(i);
-                            else if (_table.playerPositions[selected].card != null)
-                                _table.playerPositions[selected].card.ReceiveDamagePublic(i, null);
+                            if (selected == allyPositions.Length)
+                                allyHealth.ReceiveDamage(i);
+                            else if (allyPositions[selected].card != null)
+                                allyPositions[selected].card.ReceiveDamagePublic(i, null);
                         }
                         else if (target == targets[4])
                         {
                             var enemysAlive = new List<MapPosition>();
-                            foreach (MapPosition enemy in _table.enemyFront)
+                            foreach (MapPosition enemy in enemyPositions)
                                 if (enemy.card != null)
                                     if (enemy.card.ActualLife > 0)
                                         enemysAlive.Add(enemy);
                             var selected = Random.Range(0, enemysAlive.Count);
-                            if (_table.enemyFront[selected].card != null)
-                                _table.enemyFront[selected].card.ReceiveDamagePublic(i, null);
+                            if (enemyPositions[selected].card != null)
+                                enemyPositions[selected].card.ReceiveDamagePublic(i, null);
                         }
                         else if (target == targets[5])
                         {
                             var enemysAlive = new List<MapPosition>();
-                            foreach (MapPosition enemy in _table.playerPositions)
+                            foreach (MapPosition enemy in allyPositions)
                                 if (enemy.card != null)
                                     if (enemy.card.ActualLife > 0)
                                         enemysAlive.Add(enemy);
                             var selected = Random.Range(0, enemysAlive.Count);
-                            if (_table.playerPositions[selected].card != null)
-                                _table.playerPositions[selected].card.ReceiveDamagePublic(i, null);
+                            if (allyPositions[selected].card != null)
+                                allyPositions[selected].card.ReceiveDamagePublic(i, null);
                         }
                         else if (target == targets[6])
                         {
@@ -350,13 +368,13 @@ public class EffectManager : MonoBehaviour
                                     for (int k = 0; k < j; k++)
                                     {
                                         var enemysAlive = new List<MapPosition>();
-                                        foreach (MapPosition enemy in _table.enemyFront)
+                                        foreach (MapPosition enemy in enemyPositions)
                                             if (enemy.card != null)
                                                 if (enemy.card.ActualLife > 0)
                                                     enemysAlive.Add(enemy);
                                         var selected = Random.Range(0, enemysAlive.Count);
-                                        if (_table.enemyFront[selected].card != null)
-                                            _table.enemyFront[selected].card.ReceiveDamagePublic(i, null);
+                                        if (enemyPositions[selected].card != null)
+                                            enemyPositions[selected].card.ReceiveDamagePublic(i, null);
                                     }
                         }
                         else if (target == targets[7])
@@ -366,33 +384,33 @@ public class EffectManager : MonoBehaviour
                                     for (int k = 0; k < j; k++)
                                     {
                                         var enemysAlive = new List<MapPosition>();
-                                        foreach (MapPosition enemy in _table.playerPositions)
+                                        foreach (MapPosition enemy in allyPositions)
                                             if (enemy.card != null)
                                                 if (enemy.card.ActualLife > 0)
                                                     enemysAlive.Add(enemy);
                                         var selected = Random.Range(0, enemysAlive.Count);
-                                        if (_table.playerPositions[selected].card != null)
-                                            _table.playerPositions[selected].card.ReceiveDamagePublic(i, null);
+                                        if (allyPositions[selected].card != null)
+                                            allyPositions[selected].card.ReceiveDamagePublic(i, null);
                                     }
                         }
                         else if (target == targets[8])
                         {
-                            foreach (MapPosition selected in _table.enemyFront)
+                            foreach (MapPosition selected in enemyPositions)
                                 if (selected.card)
                                     selected.card.ReceiveDamagePublic(i, null);
                         }
                         else if (target == targets[9])
                         {
-                            foreach (MapPosition selected in _table.playerPositions)
+                            foreach (MapPosition selected in allyPositions)
                                 if (selected.card != null)
                                     selected.card.ReceiveDamagePublic(i, null);
                         }
                         else if (target == targets[10])
                             card.ReceiveDamagePublic(i, null);
                         else if (target == targets[11])
-                            FindObjectOfType<Enemy>().ReceiveDamage(i);
+                            enemyHealth.ReceiveDamage(i);
                         else if (target == targets[12])
-                            FindObjectOfType<Player>().ReceiveDamage(i);
+                            allyHealth.ReceiveDamage(i);
                     }
             }
         Debug.Log("I did damage");
@@ -408,6 +426,24 @@ public class EffectManager : MonoBehaviour
                 for (int i = 0; i < 50; i++)
                     if (card.card.effectDesc.Contains("heal " + i.ToString()))
                     {
+                        MapPosition[] enemyPositions;
+                        MapPosition[] allyPositions;
+                        Health enemyHealth;
+                        Health allyHealth;
+                        if (card.actualPosition.oponent == FindObjectOfType<Player>())
+                        {
+                            enemyPositions = _table.playerPositions;
+                            allyPositions = _table.enemyFront;
+                            enemyHealth = FindObjectOfType<Player>();
+                            allyHealth = FindObjectOfType<Enemy>();
+                        }
+                        else
+                        {
+                            enemyPositions = _table.enemyFront;
+                            allyPositions = _table.playerPositions;
+                            enemyHealth = FindObjectOfType<Enemy>();
+                            allyHealth = FindObjectOfType<Player>();
+                        }
                         Debug.Log("Im going to heal");
                         if (target == targets[0])
                         {
@@ -420,33 +456,33 @@ public class EffectManager : MonoBehaviour
                         else if (target == targets[2])
                         {
                             var allysToHeal = new List<MapPosition>();
-                            foreach (MapPosition ally in _table.enemyFront)
+                            foreach (MapPosition ally in enemyPositions)
                                 if (ally.card != null)
                                     if (ally.card.ActualLife > 0)
                                         allysToHeal.Add(ally);
                             var selected = Random.Range(0, allysToHeal.Count + 1);
-                            if (selected == _table.enemyFront.Length)
-                                FindObjectOfType<Enemy>().RestoreHealth(i);
-                            else if (_table.enemyFront[selected].card != null)
-                                _table.enemyFront[selected].card.Heal(i);
+                            if (selected == enemyPositions.Length)
+                                enemyHealth.RestoreHealth(i);
+                            else if (allysToHeal[selected].card != null)
+                                allysToHeal[selected].card.Heal(i);
                         }
                         else if (target == targets[3])
                         {
                             var allysToHeal = new List<MapPosition>();
-                            foreach (MapPosition ally in _table.playerPositions)
+                            foreach (MapPosition ally in allyPositions)
                                 if (ally.card != null)
                                     if (ally.card.ActualLife > 0)
                                         allysToHeal.Add(ally);
                             var selected = Random.Range(0, allysToHeal.Count + 1);
-                            if (selected == _table.playerPositions.Length)
-                                FindObjectOfType<Player>().RestoreHealth(i);
-                            else if (_table.playerPositions[selected].card != null)
-                                _table.playerPositions[selected].card.Heal(i);
+                            if (selected == allyPositions.Length)
+                                allyHealth.RestoreHealth(i);
+                            else if (allysToHeal[selected].card != null)
+                                allysToHeal[selected].card.Heal(i);
                         }
                         else if (target == targets[4])
                         {
                             var allysToHeal = new List<MapPosition>();
-                            foreach (MapPosition ally in _table.enemyFront)
+                            foreach (MapPosition ally in enemyPositions)
                                 if (ally.card != null)
                                     if (ally.card.ActualLife > 0)
                                         allysToHeal.Add(ally);
@@ -458,7 +494,7 @@ public class EffectManager : MonoBehaviour
                         else if (target == targets[5])
                         {
                             var allysToHeal = new List<MapPosition>();
-                            foreach (MapPosition ally in _table.playerPositions)
+                            foreach (MapPosition ally in allyPositions)
                                 if (ally.card != null)
                                     if (ally.card.ActualLife > 0)
                                         allysToHeal.Add(ally);
@@ -474,13 +510,13 @@ public class EffectManager : MonoBehaviour
                                     for (int k = 0; k < j; k++)
                                     {
                                         var allysToHeal = new List<MapPosition>();
-                                        foreach (MapPosition ally in _table.enemyFront)
+                                        foreach (MapPosition ally in enemyPositions)
                                             if (ally.card != null)
                                                 if (ally.card.ActualLife > 0)
                                                     allysToHeal.Add(ally);
                                         var selected = Random.Range(0, allysToHeal.Count);
-                                        if (_table.enemyFront[selected].card != null)
-                                            _table.enemyFront[selected].card.Heal(i);
+                                        if (allysToHeal[selected].card != null)
+                                            allysToHeal[selected].card.Heal(i);
                                     }
                         }
                         else if (target == targets[7])
@@ -490,33 +526,33 @@ public class EffectManager : MonoBehaviour
                                     for (int k = 0; k < j; k++)
                                     {
                                         var allysToHeal = new List<MapPosition>();
-                                        foreach (MapPosition ally in _table.playerPositions)
+                                        foreach (MapPosition ally in allyPositions)
                                             if (ally.card != null)
                                                 if (ally.card.ActualLife > 0)
                                                     allysToHeal.Add(ally);
                                         var selected = Random.Range(0, allysToHeal.Count);
-                                        if (_table.playerPositions[selected].card != null)
-                                            _table.playerPositions[selected].card.Heal(i);
+                                        if (allysToHeal[selected].card != null)
+                                            allysToHeal[selected].card.Heal(i);
                                     }
                         }
                         else if (target == targets[8])
                         {
-                            foreach (MapPosition selected in _table.enemyFront)
+                            foreach (MapPosition selected in enemyPositions)
                                 if (selected.card)
                                     selected.card.Heal(i);
                         }
                         else if (target == targets[9])
                         {
-                            foreach (MapPosition selected in _table.playerPositions)
+                            foreach (MapPosition selected in allyPositions)
                                 if (selected.card != null)
                                     selected.card.Heal(i);
                         }
                         else if (target == targets[10])
                             card.Heal(i);
                         else if (target == targets[11])
-                            FindObjectOfType<Enemy>().RestoreHealth(i);
+                            enemyHealth.RestoreHealth(i);
                         else if (target == targets[12])
-                            FindObjectOfType<Player>().RestoreHealth(i);
+                            allyHealth.RestoreHealth(i);
                     }
         checking = false;
         #endregion
@@ -611,6 +647,18 @@ public class EffectManager : MonoBehaviour
                             j *= 1;
                         }
                         else continue;
+                        MapPosition[] enemyPositions;
+                        MapPosition[] allyPositions;
+                        if (card.actualPosition.oponent == FindObjectOfType<Player>())
+                        {
+                            enemyPositions = _table.playerPositions;
+                            allyPositions = _table.enemyFront;
+                        }
+                        else
+                        {
+                            enemyPositions = _table.enemyFront;
+                            allyPositions = _table.playerPositions;
+                        }
                         Debug.LogError("Im going to buff");
                         if (target == targets[0])
                         {
@@ -623,7 +671,7 @@ public class EffectManager : MonoBehaviour
                         else if (target == targets[4])
                         {
                             var creatureToBuff = new List<MapPosition>();
-                            foreach (MapPosition creature in _table.enemyFront)
+                            foreach (MapPosition creature in enemyPositions)
                                 if (creature.card != null)
                                     if (creature.card.ActualLife > 0)
                                         creatureToBuff.Add(creature);
@@ -635,7 +683,7 @@ public class EffectManager : MonoBehaviour
                         {
                             Debug.LogError("Im going to buff");
                             var creatureToBuff = new List<MapPosition>();
-                            foreach (MapPosition creature in _table.playerPositions)
+                            foreach (MapPosition creature in allyPositions)
                                 if (creature.card != null)
                                     if (creature.card.ActualLife > 0)
                                         creatureToBuff.Add(creature);
@@ -650,7 +698,7 @@ public class EffectManager : MonoBehaviour
                                     for (int k = 0; k < l; k++)
                                     {
                                         var creatureToBuff = new List<MapPosition>();
-                                        foreach (MapPosition creature in _table.enemyFront)
+                                        foreach (MapPosition creature in enemyPositions)
                                             if (creature.card != null)
                                                 if (creature.card.ActualLife > 0)
                                                     creatureToBuff.Add(creature);
@@ -666,7 +714,7 @@ public class EffectManager : MonoBehaviour
                                     for (int k = 0; k < l; k++)
                                     {
                                         var creatureToBuff = new List<MapPosition>();
-                                        foreach (MapPosition creature in _table.playerPositions)
+                                        foreach (MapPosition creature in allyPositions)
                                             if (creature.card != null)
                                                 if (creature.card.ActualLife > 0)
                                                     creatureToBuff.Add(creature);
@@ -677,13 +725,13 @@ public class EffectManager : MonoBehaviour
                         }
                         else if (target == targets[8])
                         {
-                            foreach (MapPosition selected in _table.enemyFront)
+                            foreach (MapPosition selected in enemyPositions)
                                 if (selected.card != null)
                                     selected.card.Buff(i, j);
                         }
                         else if (target == targets[9])
                         {
-                            foreach (MapPosition selected in _table.playerPositions)
+                            foreach (MapPosition selected in allyPositions)
                                 if (selected.card != null)
                                     selected.card.Buff(i, j);
                         }
@@ -700,6 +748,18 @@ public class EffectManager : MonoBehaviour
         foreach (string target in targets)
             if (card.card.effectDesc.Contains(target))
             {
+                MapPosition[] enemyPositions;
+                MapPosition[] allyPositions;
+                if (card.actualPosition.oponent == FindObjectOfType<Player>())
+                {
+                    enemyPositions = _table.playerPositions;
+                    allyPositions = _table.enemyFront;
+                }
+                else
+                {
+                    enemyPositions = _table.enemyFront;
+                    allyPositions = _table.playerPositions;
+                }
                 if (target == targets[0])
                 {
                     Debug.Log("Elige Enemigo");
@@ -710,13 +770,13 @@ public class EffectManager : MonoBehaviour
                 }
                 else if (target == targets[4])
                 {
-                    var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                    var selected = Random.Range(0, enemyPositions.Length - 1);
                     if (_table.enemyFront[selected].card != null)
                         _table.enemyFront[selected].card.immune = true;
                 }
                 else if (target == targets[5])
                 {
-                    var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                    var selected = Random.Range(0, allyPositions.Length - 1);
                     if (_table.playerPositions[selected].card != null)
                         _table.playerPositions[selected].card.immune = true;
                 }
@@ -726,7 +786,7 @@ public class EffectManager : MonoBehaviour
                         if (card.card.effectDesc.Contains(j.ToString()))
                             for (int k = 0; k < j; k++)
                             {
-                                var selected = Random.Range(0, _table.enemyFront.Length - 1);
+                                var selected = Random.Range(0, enemyPositions.Length - 1);
                                 if (_table.enemyFront[selected].card != null)
                                     _table.enemyFront[selected].card.immune = true;
                             }
@@ -737,20 +797,20 @@ public class EffectManager : MonoBehaviour
                         if (card.card.effectDesc.Contains(j.ToString()))
                             for (int k = 0; k < j; k++)
                             {
-                                var selected = Random.Range(0, _table.playerPositions.Length - 1);
+                                var selected = Random.Range(0, allyPositions.Length - 1);
                                 if (_table.playerPositions[selected].card != null)
                                     _table.playerPositions[selected].card.immune = true;
                             }
                 }
                 else if (target == targets[8])
                 {
-                    foreach (MapPosition selected in _table.enemyFront)
+                    foreach (MapPosition selected in enemyPositions)
                         if (selected.card != null)
                             selected.card.immune = true;
                 }
                 else if (target == targets[9])
                 {
-                    foreach (MapPosition selected in _table.playerPositions)
+                    foreach (MapPosition selected in allyPositions)
                         if (selected.card != null)
                             selected.card.immune = true;
                 }
