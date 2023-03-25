@@ -9,7 +9,7 @@ public class Enemy : Health
     public GameObject card;
     private TurnManager _turnManager;
     private EffectManager _effectManager;
-
+    
     private void Start()
     {
         table = FindObjectOfType<Table>();
@@ -18,13 +18,16 @@ public class Enemy : Health
     }
     public void MoveBackCards(int turn)
     {
+        var backCards = table.enemyBack;
         foreach (MapPosition card in table.enemyFront)
             if (card.card != null)
                 _effectManager.CheckConditionStartOfTurn(card.card);
         table.MoveEnemyCard();
         foreach (MapPosition card in table.enemyFront)
-            if (card.card != null)
-                _effectManager.CheckConditionIsPlayed(card.card);
+            foreach (MapPosition card2 in backCards)
+                if (card.card != null)
+                    if (card.card == card2.card)
+                        _effectManager.CheckConditionIsPlayed(card.card);
         PlaceBackCards(turn);
     }
     public void PlaceBackCards(int turn)
