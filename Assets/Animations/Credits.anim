@@ -650,6 +650,34 @@ AnimationClip:
     path: 
     classID: 114
     script: {fileID: 11500000, guid: e0fec87d1019d724ebc0d83d2b9365a8, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 75.23333
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: Win
+    path: ChangeScene
+    classID: 114
+    script: {fileID: 11500000, guid: c4023a52a963aec4b8c6d87838024708, type: 3}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -767,6 +795,13 @@ AnimationClip:
       path: 0
       attribute: 642447742
       script: {fileID: 11500000, guid: e0fec87d1019d724ebc0d83d2b9365a8, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2698409641
+      attribute: 2290580886
+      script: {fileID: 11500000, guid: c4023a52a963aec4b8c6d87838024708, type: 3}
       typeID: 114
       customType: 0
       isPPtrCurve: 0
@@ -1665,6 +1700,34 @@ AnimationClip:
     path: 
     classID: 114
     script: {fileID: 11500000, guid: e0fec87d1019d724ebc0d83d2b9365a8, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 75.23333
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: Win
+    path: ChangeScene
+    classID: 114
+    script: {fileID: 11500000, guid: c4023a52a963aec4b8c6d87838024708, type: 3}
   m_EulerEditorCurves:
   - curve:
       serializedVersion: 2
