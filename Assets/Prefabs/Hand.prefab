@@ -194,6 +194,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawThings: []
   _cardsInHand: []
+  deck:
+  - {fileID: 11400000, guid: 19d6b98e55bac86459f0cf3bba17f6b7, type: 2}
+  - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
+  - {fileID: 11400000, guid: 46fd1b5ec94b2ae42b8caad074ae7c6e, type: 2}
+  - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
+  - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+  - {fileID: 11400000, guid: bb69fe447d248bb42b0e0650830199e8, type: 2}
   handPos: {fileID: 0}
   canDraw: 0
   zoomingCard: 0

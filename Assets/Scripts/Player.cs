@@ -57,7 +57,7 @@ public class Player : Health
     {
         //lo que sea que pase cuando perdes
         Debug.Log("Te derrotaron wey");
-        FindObjectOfType<DefeatMenu>().Defeat();
+        FindObjectOfType<NextCombat>().Defeat();
     }
     private void RefreshMana()
     {

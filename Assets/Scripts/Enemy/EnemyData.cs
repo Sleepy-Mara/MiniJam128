@@ -9,5 +9,9 @@ public class EnemyData
     public GameObject enemyCharacter;
     public Cards[] rewards;
     [TextArea(1, 4)]
-    public string wonCombatDescription;
+    public string introCombatMessage;
+    [TextArea(1, 4)]
+    public string wonCombatMessage;
+    [TextArea(1, 4)]
+    public string lostCombatMessage;
 }
