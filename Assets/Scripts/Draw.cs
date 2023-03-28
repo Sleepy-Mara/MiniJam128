@@ -6,7 +6,8 @@ public class Draw : MonoBehaviour
 {
     public List<GameObject> drawThings;
     [HideInInspector] public List<GameObject> _cardsInHand = new List<GameObject>();
-    public static List<Cards> deck;
+    public static List<Cards> savedDeck;
+    public List<Cards> deck;
     private static Draw instance;
     private List<Cards> _actualDeck = new List<Cards>();
     public Transform handPos;
@@ -24,10 +25,11 @@ public class Draw : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            deck = new List<Cards>();
+            savedDeck = deck;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+        deck = savedDeck;
     }
     void Start()
     {
