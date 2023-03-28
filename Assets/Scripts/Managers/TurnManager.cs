@@ -30,7 +30,7 @@ public class TurnManager : MonoBehaviour
         Debug.Log("Empieza el combate");
         enemy.MoveBackCards(turn);
         for (int i = 0; i < cardsInHandStart; i++)
-            draw.DrawACard();
+            draw.DrawACard(Draw.DeckType.Mana);
         //hacer cosas como agarrar cartas iniciales, setear enemigo? y eso
     }
     public void StartTurn()

@@ -7,9 +7,12 @@ public class Draw : MonoBehaviour
     public List<GameObject> drawThings;
     [HideInInspector] public List<GameObject> _cardsInHand = new List<GameObject>();
     public static List<Cards> savedDeck;
+    public static List<Cards> savedBloodDeck;
     public List<Cards> deck;
+    public List<Cards> bloodDeck;
     private static Draw instance;
     private List<Cards> _actualDeck = new List<Cards>();
+    private List<Cards> _actualBloodDeck = new();
     public Transform handPos;
     public bool canDraw;
     public bool zoomingCard;
@@ -19,69 +22,97 @@ public class Draw : MonoBehaviour
     public List<AudioClip> clips;
     public GameObject audio;
     public Animator noCardsWindow;
-    public GameObject deckObject;
+    public GameObject manaDeckObject;
+    public GameObject bloodDeckObject;
+    public enum DeckType { Mana, Blood}
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             savedDeck = deck;
+            savedBloodDeck = bloodDeck;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
         deck = savedDeck;
+        bloodDeck = savedBloodDeck;
     }
     void Start()
     {
         _turnManager = FindObjectOfType<TurnManager>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
+        for (int j = 0; j < bloodDeck.Count; j++)
+        {
+            _actualBloodDeck.Add(bloodDeck[j]);
+        }
     }
 
     public void AddACard(Cards card)
     {
-        deck.Add(card);
-        _actualDeck.Add(card);
+        if(card.healthCost == 0)
+        {
+            deck.Add(card);
+            _actualDeck.Add(card);
+        }
+        else
+        {
+            bloodDeck.Add(card);
+            _actualBloodDeck.Add(card);
+        }
     }
     public void AddATempCard(Cards card)
     {
-        _actualDeck.Add(card);
+        if (card.healthCost == 0)
+            _actualDeck.Add(card);
+        else
+            _actualBloodDeck.Add(card);
     }
 
     public void CanDraw()
     {
-        if(_actualDeck.Count <= 0)
+        if(_actualDeck.Count <= 0 && _actualBloodDeck.Count <= 0)
         {
             _turnManager.canEndTurn = true;
             _turnManager.PlayableTurn();
         }
         canDraw = true;
     }
-    public void PlayerDraw()
+    public void PlayerDraw(DeckType type)
     {
-        if (canDraw)
-        {
-            canDraw = false;
-            _turnManager.canEndTurn = true;
-            DrawACard();
-            _turnManager.PlayableTurn();
-        }
+        canDraw = false;
+        _turnManager.canEndTurn = true;
+        DrawACard(type);
+        _turnManager.PlayableTurn();
     }
 
-    public void DrawACard()
+    public void DrawACard(DeckType type)
     {
-        if (_actualDeck.Count <= 0)
+        if (_actualDeck.Count <= 0 && _actualBloodDeck.Count <= 0)
         {
             noCardsWindow.SetTrigger("Activate");
             return;
         }
-        var drawedCard = Random.Range(0, _actualDeck.Count);
-        //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
         var newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
-        newCard.card = _actualDeck[drawedCard];
-        _actualDeck.Remove(_actualDeck[drawedCard]);
-        if (_actualDeck.Count == 0)
-            deckObject.SetActive(false);
+        int drawedCard;
+        if (type == DeckType.Mana)
+        {
+            drawedCard = Random.Range(0, _actualDeck.Count);
+            //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
+            newCard.card = _actualDeck[drawedCard];
+            _actualDeck.Remove(_actualDeck[drawedCard]);
+            if (_actualDeck.Count == 0)
+                manaDeckObject.SetActive(false);
+        }
+        else
+        {
+            drawedCard = Random.Range(0, _actualBloodDeck.Count);
+            newCard.card = _actualBloodDeck[drawedCard];
+            _actualBloodDeck.RemoveAt(drawedCard);
+            if (_actualBloodDeck.Count == 0)
+                bloodDeckObject.SetActive(false);
+        }
         AddCardToHand(newCard);
     }
 
@@ -108,10 +139,14 @@ public class Draw : MonoBehaviour
 
     public void ResetDeckAndHand()
     {
-        deckObject.SetActive(true);
+        manaDeckObject.SetActive(true);
+        bloodDeckObject.SetActive(true);
         _actualDeck = new List<Cards>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
+        _actualBloodDeck = new();
+        for (int j = 0; j < bloodDeck.Count; j++)
+            _actualBloodDeck.Add(bloodDeck[j]);
         while (_cardsInHand.Count > 0)
         {
             Destroy(_cardsInHand[0].gameObject);

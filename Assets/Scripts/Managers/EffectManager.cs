@@ -271,7 +271,7 @@ public class EffectManager : MonoBehaviour
                         for (int j = 0; j < i; j++)
                         {
                             if (target == targets[14])
-                                _draw.DrawACard();
+                                _draw.DrawACard(Draw.DeckType.Mana);
                             else if (target == targets[15])
                                 Debug.Log("Draw from life deck");
                         }

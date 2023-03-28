@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
+    public Draw.DeckType type;
     private Draw draw;
     private Animator animator;
     private void Start()
@@ -17,10 +18,11 @@ public class Deck : MonoBehaviour
         {
             animator.SetTrigger("Activate");
             GetComponent<AudioSource>().Play();
+            draw.canDraw = false;
         }
     }
     public void DrawedCard()
     {
-        draw.PlayerDraw();
+        draw.PlayerDraw(type);
     }
 }
