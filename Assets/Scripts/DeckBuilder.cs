@@ -7,15 +7,16 @@ public class DeckBuilder : MonoBehaviour
 {
     public List<CardsInDeckBuilder> cardsInDeckBuilder;
     public List<CardsInDeckBuilder> cardsInBloodDeckBuilder;
-    public List<Card> cardsInDeck;
-    static List<Card> savedCardsInDeck;
-    public List<Card> cardsInBloodDeck;
-    static List<Card> savedCardsInBloodDeck;
+    public List<Cards> cardsInDeck;
+    static List<Cards> savedCardsInDeck;
+    public List<Cards> cardsInBloodDeck;
+    static List<Cards> savedCardsInBloodDeck;
     private static DeckBuilder instance;
     [SerializeField] private int maxCardsInNormalDeck;
     [SerializeField] private int minCardsInNormalDeck;
     [SerializeField] private int maxCardsInBloodDeck;
     [SerializeField] private int minCardsInBloodDeck;
+    [SerializeField] private Draw deck;
     private void Awake()
     {
         if (instance == null)
@@ -28,6 +29,12 @@ public class DeckBuilder : MonoBehaviour
         else Destroy(gameObject);
         cardsInDeck = savedCardsInDeck;
         cardsInBloodDeck = savedCardsInBloodDeck;
+        if (deck != null)
+        {
+            deck.deck = cardsInDeck;
+            deck.bloodDeck = cardsInBloodDeck;
+        }
+
     }
     public void UnlockCard(Card newCard)
     {
@@ -51,14 +58,18 @@ public class DeckBuilder : MonoBehaviour
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
             if (card.card.card.name == newCard.card.name)
             {
-                cardsInDeck.Add(newCard);
-                savedCardsInDeck.Add(newCard);
+                cardsInDeck.Add(newCard.card);
+                savedCardsInDeck.Add(newCard.card);
+                if (deck != null)
+                    deck.deck.Add(newCard.card);
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
             if (card.card.card.name == newCard.card.name)
             {
-                cardsInBloodDeck.Add(newCard);
-                savedCardsInBloodDeck.Add(newCard);
+                cardsInBloodDeck.Add(newCard.card);
+                savedCardsInBloodDeck.Add(newCard.card);
+                if (deck != null)
+                    deck.bloodDeck.Add(newCard.card);
             }
     }
     public void UnselectedCard(Card newCard)
@@ -66,14 +77,18 @@ public class DeckBuilder : MonoBehaviour
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
             if (card.card.card.name == newCard.card.name)
             {
-                cardsInDeck.Remove(newCard);
-                savedCardsInDeck.Remove(newCard);
+                cardsInDeck.Remove(newCard.card);
+                savedCardsInDeck.Remove(newCard.card);
+                if (deck != null)
+                    deck.deck.Remove(newCard.card);
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
             if (card.card.card.name == newCard.card.name)
             {
-                cardsInBloodDeck.Remove(newCard);
-                savedCardsInBloodDeck.Remove(newCard);
+                cardsInBloodDeck.Remove(newCard.card);
+                savedCardsInBloodDeck.Remove(newCard.card);
+                if (deck != null)
+                    deck.bloodDeck.Remove(newCard.card);
             }
     }
 
