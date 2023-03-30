@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Butterfly
   m_EditorClassIdentifier: 
   turns:
-  - cardPlacement0: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
-    cardPlacement1: {fileID: 0}
-    cardPlacement2: {fileID: 0}
-  - cardPlacement0: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
-    cardPlacement1: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
-    cardPlacement2: {fileID: 0}
+  - cardPlacement0: {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
+    cardPlacement1: {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+    cardPlacement2: {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
+  - cardPlacement0: {fileID: 11400000, guid: b732fe27de5b4564e923f10b5db800a4, type: 2}
+    cardPlacement1: {fileID: 11400000, guid: 6be924d44b649bc4aaec0796345fdc38, type: 2}
+    cardPlacement2: {fileID: 11400000, guid: c65aebf507439b040a868efb09167974, type: 2}
   - cardPlacement0: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
     cardPlacement1: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
     cardPlacement2: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
