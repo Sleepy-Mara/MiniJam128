@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5219,7 +5219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &173842687
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36588,7 +36588,7 @@ MonoBehaviour:
     playOnAwake: 0
     source: {fileID: 0}
   - audioName: Music1
-    clip: {fileID: 8300000, guid: 50dba6fe1ce7a4445b26f8fd9a3428cd, type: 3}
+    clip: {fileID: 8300000, guid: 0faea1f56d2cc8144a61e2d3e83f23d2, type: 3}
     audioMixerGroup: {fileID: -5838666839490337696, guid: 4b2ecf21b1a208643972b85f94ba5541, type: 2}
     volume: 0.8
     pitch: 1
@@ -36597,7 +36597,7 @@ MonoBehaviour:
     playOnAwake: 0
     source: {fileID: 0}
   - audioName: Music2
-    clip: {fileID: 8300000, guid: 0faea1f56d2cc8144a61e2d3e83f23d2, type: 3}
+    clip: {fileID: 8300000, guid: 50dba6fe1ce7a4445b26f8fd9a3428cd, type: 3}
     audioMixerGroup: {fileID: -5838666839490337696, guid: 4b2ecf21b1a208643972b85f94ba5541, type: 2}
     volume: 0.8
     pitch: 1
@@ -36623,8 +36623,17 @@ MonoBehaviour:
     loop: 1
     playOnAwake: 0
     source: {fileID: 0}
-  - audioName: Credits
-    clip: {fileID: 8300000, guid: ba8209f2c5275874f8561d9be5d78be8, type: 3}
+  - audioName: Music5
+    clip: {fileID: 8300000, guid: 32b462d6ebcb9064eaca19fc23eeaf77, type: 3}
+    audioMixerGroup: {fileID: -5838666839490337696, guid: 4b2ecf21b1a208643972b85f94ba5541, type: 2}
+    volume: 0.8
+    pitch: 1
+    spatialBlend: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - audioName: Music6
+    clip: {fileID: 8300000, guid: cf2649a02c8cf5f43ba2989ae8e25347, type: 3}
     audioMixerGroup: {fileID: -5838666839490337696, guid: 4b2ecf21b1a208643972b85f94ba5541, type: 2}
     volume: 0.8
     pitch: 1
