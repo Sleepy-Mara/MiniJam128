@@ -5,24 +5,28 @@ using UnityEngine;
 public class Enemy : Health
 {
     public Strategy strategy;
-    private Table table;
     public GameObject card;
+    private Table _table;
     private TurnManager _turnManager;
     private EffectManager _effectManager;
     
     private void Start()
     {
-        table = FindObjectOfType<Table>();
         _turnManager = FindObjectOfType<TurnManager>();
         _effectManager = FindObjectOfType<EffectManager>();
     }
+    private new void Awake()
+    {
+        base.Awake();
+        _table = FindObjectOfType<Table>();
+    }
     public void MoveBackCards(int turn)
     {
-        foreach (MapPosition card in table.enemyFront)
+        foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
                 _effectManager.CheckConditionStartOfTurn(card.card);
-        table.MoveEnemyCard();
-        foreach (MapPosition card in table.enemyFront)
+        _table.MoveEnemyCard();
+        foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
                 if (!card.card.played)
                 {
@@ -41,31 +45,31 @@ public class Enemy : Health
                 //var newCard = Instantiate(card).GetComponent<ThisCard>();
                 //newCard.card = strategy.turns[turn].cardPlacement0;
                 //newCard.SetData();
-                table.EnemySetCard(0, strategy.turns[turn].cardPlacement0);
+                _table.EnemySetCard(0, strategy.turns[turn].cardPlacement0);
             }
             if (strategy.turns[turn].cardPlacement1 != null)
             {
                 //var newCard = Instantiate(card).GetComponent<ThisCard>();
                 //newCard.card = strategy.turns[turn].cardPlacement1;
                 //newCard.SetData();
-                table.EnemySetCard(1, strategy.turns[turn].cardPlacement1);
+                _table.EnemySetCard(1, strategy.turns[turn].cardPlacement1);
             }
             if (strategy.turns[turn].cardPlacement2 != null)
             {
                 //var newCard = Instantiate(card).GetComponent<ThisCard>();
                 //newCard.card = strategy.turns[turn].cardPlacement2;
                 //newCard.SetData();
-                table.EnemySetCard(2, strategy.turns[turn].cardPlacement2);
+                _table.EnemySetCard(2, strategy.turns[turn].cardPlacement2);
             }
         }
         AttackFrontCards();
     }
     public void AttackFrontCards()
     {
-        foreach(MapPosition card in table.enemyFront)
+        foreach(MapPosition card in _table.enemyFront)
             if (card.card != null)
                 card.card.Attack();
-        foreach (MapPosition card in table.enemyFront)
+        foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
                 _effectManager.CheckConditionEndOfTurn(card.card);
         _turnManager.StartTurn();

@@ -38,8 +38,10 @@ public class Draw : MonoBehaviour
         deck = savedDeck;
         bloodDeck = savedBloodDeck;
     }
-    void Start()
+    public void Start()
     {
+        manaDeckObject = GameObject.Find("Deck");
+        bloodDeckObject = GameObject.Find("BloodDeck");
         _turnManager = FindObjectOfType<TurnManager>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);

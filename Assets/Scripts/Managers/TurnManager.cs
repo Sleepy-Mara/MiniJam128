@@ -8,7 +8,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private Player player;
     public Enemy enemy;
     private Draw draw;
-    private Table table;
+    public Table table;
     private EffectManager effectManager;
     public bool canPlayCards;
     public bool canEndTurn;

@@ -15,7 +15,7 @@ public class Table : MonoBehaviour
     public GameObject cardPrefab;
     public List<AudioClip> clips;
     //public GameObject audio;
-    private AudioSource audioSource;
+    [SerializeField]private AudioSource audioSource;
 
     [HideInInspector] public List<Card> myCards = new List<Card>();
 
@@ -25,12 +25,16 @@ public class Table : MonoBehaviour
         _effectManager = FindObjectOfType<EffectManager>();
         player = FindObjectOfType<Player>();
         enemy = FindObjectOfType<Enemy>();
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
         StartSet();
         //foreach (MapPosition position in mapPositions)
         //    foreach (MapPosition mapPosition in mapPositions)
         //        if (position.cardPos.gameObject.GetComponent<CardPos>().positionFacing == mapPosition.cardPos)
         //            position.positionFacing = mapPosition;
+    }
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
     void StartSet()
     {

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MonkeysScene.unity
     guid: d5d9677ebf4c6374694bb06f6e084316
+  - enabled: 1
+    path: Assets/Scenes/PruebaNoche.unity
+    guid: 1efff0797ae1afc4cb59bfcfb28ccc56
   m_configObjects: {}

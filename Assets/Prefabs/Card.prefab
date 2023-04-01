@@ -778,6 +778,7 @@ MonoBehaviour:
   handAnimator: {fileID: 9100000, guid: a6e780c53ff91e14caa89ae61ced91b5, type: 2}
   tableAnimator: {fileID: 9100000, guid: 54c394e32556e0f4a87c40c8b7495c8d, type: 2}
   playerCard: 0
+  played: 0
 --- !u!95 &8954024018774041424
 Animator:
   serializedVersion: 4

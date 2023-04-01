@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class NextCombat : MonoBehaviour
 {
@@ -26,6 +27,26 @@ public class NextCombat : MonoBehaviour
     private Table _table;
     private AudioPlayer _audioPlayer;
 
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _enemy = FindObjectOfType<Enemy>();
+        _turnManager = FindObjectOfType<TurnManager>();
+        Debug.Log("Se busco TurnManager, se encontro " + _turnManager.name);
+        _turnManager.enemy = _enemy;
+        _draw = FindObjectOfType<Draw>();
+        _draw.Start();
+        _table = FindObjectOfType<Table>();
+        _audioPlayer = GetComponent<AudioPlayer>();
+        if (enemyNum == enemies.Length - 1)
+        {
+            GameObject.Find("CapybaraBoy").SetActive(true);
+            StartGame();
+        }
+    }
     private void Start()
     {
         _enemy = FindObjectOfType<Enemy>();
@@ -34,14 +55,24 @@ public class NextCombat : MonoBehaviour
         _draw = FindObjectOfType<Draw>();
         _table = FindObjectOfType<Table>();
         _audioPlayer = GetComponent<AudioPlayer>();
+        if (enemyNum == enemies.Length - 1)
+        {
+            enemies[enemyNum].enemyCharacter = GameObject.Find("CapybaraBoy");
+            StartGame();
+            return;
+        }
         initialMenu.SetActive(true);
+        DontDestroyOnLoad(this);
     }
     public void StartGame()
     {
-        enemies[enemyNum].enemyCharacter.SetActive(true);
+        if(enemies[enemyNum].enemyCharacter != null)
+            enemies[enemyNum].enemyCharacter.SetActive(true);
         initialMenu.SetActive(false);
         introCombatText.text = enemies[enemyNum].introCombatMessage;
         introCombat.SetActive(true);
+        endTurnButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        endTurnButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(_turnManager.EndTurn);
     }
     public void ToNextCombat()
     {
@@ -75,22 +106,24 @@ public class NextCombat : MonoBehaviour
     // este es para el boton de victoria
     public void EndCombat()
     {
-        enemies[enemyNum - 1].enemyCharacter.SetActive(false);
         wonCombat.SetActive(false);
         if (enemyNum == enemies.Length)
         {
-            Debug.Log("Ganaste");
-            _audioPlayer.Play("Credits");
-            gameVictory.SetActive(true);
-            //agregar victoria de verdad xD
+            FindObjectOfType<ChangeSceneManager>().ChangeScene("Credits");
             return;
         }
-        enemies[enemyNum].enemyCharacter.SetActive(true);
-        introCombatText.text = enemies[enemyNum].introCombatMessage;
-        introCombat.SetActive(true);
+        enemies[enemyNum - 1].enemyCharacter.SetActive(false);
         foreach (GameObject card in cardsToDelete)
             Destroy(card);
         cardsToDelete.Clear();
+        if (enemyNum == enemies.Length - 1)
+        {
+            FindObjectOfType<ChangeSceneManager>().ChangeScene("PruebaNoche");
+            return;
+        }
+        enemies[enemyNum].enemyCharacter.SetActive(true);
+        introCombat.SetActive(true);
+        introCombatText.text = enemies[enemyNum].introCombatMessage;
     }
     // este es para el boton de derrota
     public void RestartCombat()
@@ -100,28 +133,6 @@ public class NextCombat : MonoBehaviour
         lostCombat.SetActive(false);
         endTurnButton.SetActive(true);
     }
-    //public void SendNext()
-    //{
-    //    enemies[enemyNum - 1].enemyCharacter.SetActive(false);
-    //    wonCombat.SetActive(false);
-    //    if (enemyNum == enemies.Length)
-    //    {
-    //        Debug.Log("Ganaste");
-    //        _audioPlayer.Play("Credits");
-    //        gameVictory.SetActive(true);
-    //        //agregar victoria de verdad xD
-    //        return;
-    //    }
-    //    enemies[enemyNum].enemyCharacter.SetActive(true);
-    //    _audioPlayer.Play("Music" + enemyNum);
-    //    _turnManager.turn = 0;
-    //    _turnManager.StartBattle();
-    //    endTurnButton.SetActive(true);
-    //    _enemy.strategy = enemies[enemyNum].strategy;
-    //    foreach (GameObject card in cardsToDelete)
-    //        Destroy(card);
-    //    cardsToDelete.Clear();
-    //}
     public void Defeat()
     {
         ResetCombat();
@@ -137,5 +148,9 @@ public class NextCombat : MonoBehaviour
         _enemy.RestoreHealth(10);
         _turnManager.turn = 0;
         endTurnButton.SetActive(false);
+    }
+    public void SetEnemyNum(int i)
+    {
+        enemyNum = i;
     }
 }
