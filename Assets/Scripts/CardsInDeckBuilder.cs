@@ -30,4 +30,8 @@ public class CardsInDeckBuilder : MonoBehaviour
     {
         
     }
+    public void SelectThis()
+    {
+        FindObjectOfType<DeckBuilder>().SelectCard(card);
+    }
 }

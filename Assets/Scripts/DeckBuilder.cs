@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class DeckBuilder : MonoBehaviour
@@ -17,6 +18,11 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private int maxCardsInBloodDeck;
     [SerializeField] private int minCardsInBloodDeck;
     [SerializeField] private Draw deck;
+    [SerializeField] private int originalCameraHeight;
+    [SerializeField] private int originalCameraWidth;
+    private int actualCameraHeight;
+    private int actualCameraWidth;
+    private Camera camera;
     private void Awake()
     {
         if (instance == null)
@@ -34,7 +40,15 @@ public class DeckBuilder : MonoBehaviour
             deck.deck = cardsInDeck;
             deck.bloodDeck = cardsInBloodDeck;
         }
-
+        camera = FindObjectOfType<Camera>();
+        Debug.Log(camera.pixelWidth);
+        Debug.Log(camera.pixelHeight);
+        GetComponentInChildren<GridLayoutGroup>().spacing = new Vector2(GetComponentInChildren<GridLayoutGroup>().spacing.x * ((float)camera.pixelWidth / (float)originalCameraWidth),
+            GetComponentInChildren<GridLayoutGroup>().spacing.y * ((float)camera.pixelHeight / (float)originalCameraHeight));
+        GetComponentInChildren<GridLayoutGroup>().cellSize = new Vector2(GetComponentInChildren<GridLayoutGroup>().cellSize.x * ((float)camera.pixelWidth / (float)originalCameraWidth),
+            GetComponentInChildren<GridLayoutGroup>().cellSize.y * ((float)camera.pixelHeight / (float)originalCameraHeight));
+        actualCameraHeight = camera.pixelHeight;
+        actualCameraWidth = camera.pixelWidth;
     }
     public void UnlockCard(Card newCard)
     {
@@ -51,7 +65,7 @@ public class DeckBuilder : MonoBehaviour
                 card.mysteryCard.SetActive(false);
             }
     }
-    public void SelectCard(Card newCard)
+    public void SelectCard(CardCore newCard)
     {
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
             if (card.card.card.name == newCard.card.name)
@@ -88,5 +102,17 @@ public class DeckBuilder : MonoBehaviour
                 if (deck != null)
                     deck.bloodDeck.Remove(newCard.card);
             }
+    }
+    private void Update()
+    {
+        if (actualCameraHeight != camera.pixelHeight || actualCameraWidth != camera.pixelWidth)
+        {
+            GetComponentInChildren<GridLayoutGroup>().spacing = new Vector2(GetComponentInChildren<GridLayoutGroup>().spacing.x * ((float)camera.pixelWidth / (float)actualCameraWidth),
+                GetComponentInChildren<GridLayoutGroup>().spacing.y * ((float)camera.pixelHeight / (float)actualCameraHeight));
+            GetComponentInChildren<GridLayoutGroup>().cellSize = new Vector2(GetComponentInChildren<GridLayoutGroup>().cellSize.x * ((float)camera.pixelWidth / (float)actualCameraWidth),
+                GetComponentInChildren<GridLayoutGroup>().cellSize.y * ((float)camera.pixelHeight / (float)actualCameraHeight));
+            actualCameraHeight = camera.pixelHeight;
+            actualCameraWidth = camera.pixelWidth;
+        }
     }
 }
