@@ -18,7 +18,7 @@ public class CardsInDeckBuilder : MonoBehaviour
     }
     public TextMeshProUGUI numberText;
     public GameObject mysteryCard;
-    public Card card;
+    public CardCore card;
     // Start is called before the first frame update
     void Start()
     {
