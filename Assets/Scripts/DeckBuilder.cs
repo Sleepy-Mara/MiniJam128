@@ -41,15 +41,13 @@ public class DeckBuilder : MonoBehaviour
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
             if (card.card.card.name == newCard.card.name)
             {
-                card.numberOfCards++;
-                card.numberText.text = card.numberOfCards.ToString();
+                card.NumberOfCards = 1;
                 card.mysteryCard.SetActive(false);
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
             if (card.card.card.name == newCard.card.name)
             {
-                card.numberOfCards++;
-                card.numberText.text = card.numberOfCards.ToString();
+                card.NumberOfCards = 1;
                 card.mysteryCard.SetActive(false);
             }
     }
@@ -91,24 +89,4 @@ public class DeckBuilder : MonoBehaviour
                     deck.bloodDeck.Remove(newCard.card);
             }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
-public class CardsInDeckBuilder : ScriptableObject
-{
-    [HideInInspector]
-    public int numberOfCards;
-    public TextMeshProUGUI numberText;
-    public GameObject mysteryCard;
-    public Card card;
 }
