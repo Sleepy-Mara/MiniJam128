@@ -5,7 +5,7 @@ using TMPro;
 
 public class CardsInDeckBuilder : MonoBehaviour
 {
-    private int numberOfCards;
+    [SerializeField] private int numberOfCards;
     [HideInInspector]
     public int NumberOfCards
     {
@@ -19,10 +19,15 @@ public class CardsInDeckBuilder : MonoBehaviour
     public TextMeshProUGUI numberText;
     public GameObject mysteryCard;
     public CardCore card;
+    [HideInInspector]
+    public bool inDeck;
+    public bool inDeckFromStart;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (inDeckFromStart)
+            FindObjectOfType<DeckBuilder>().SelectCard(this);
+        numberText.text = NumberOfCards.ToString();
     }
 
     // Update is called once per frame
@@ -32,6 +37,12 @@ public class CardsInDeckBuilder : MonoBehaviour
     }
     public void SelectThis()
     {
-        FindObjectOfType<DeckBuilder>().SelectCard(card);
+        if (NumberOfCards < 1)
+            return;
+        NumberOfCards = -1;
+        if (!inDeck)
+            FindObjectOfType<DeckBuilder>().SelectCard(this);
+        if (inDeck)
+            FindObjectOfType<DeckBuilder>().UnselectedCard(this);
     }
 }

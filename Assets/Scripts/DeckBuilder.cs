@@ -8,10 +8,10 @@ public class DeckBuilder : MonoBehaviour
 {
     public List<CardsInDeckBuilder> cardsInDeckBuilder;
     public List<CardsInDeckBuilder> cardsInBloodDeckBuilder;
-    public List<Cards> cardsInDeck;
-    static List<Cards> savedCardsInDeck;
-    public List<Cards> cardsInBloodDeck;
-    static List<Cards> savedCardsInBloodDeck;
+    public List<CardsInDeckBuilder> cardsInDeck;
+    static List<CardsInDeckBuilder> savedCardsInDeck;
+    public List<CardsInDeckBuilder> cardsInBloodDeck;
+    static List<CardsInDeckBuilder> savedCardsInBloodDeck;
     private static DeckBuilder instance;
     [SerializeField] private int maxCardsInNormalDeck;
     [SerializeField] private int minCardsInNormalDeck;
@@ -22,7 +22,10 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private int originalCameraWidth;
     private int actualCameraHeight;
     private int actualCameraWidth;
-    private Camera camera;
+    private Camera mainCamera;
+    [SerializeField] private GridLayoutGroup buildDeck;
+    [SerializeField] private GridLayoutGroup actualDeck;
+    [SerializeField] private GameObject cardInDeck;
     private void Awake()
     {
         if (instance == null)
@@ -35,84 +38,141 @@ public class DeckBuilder : MonoBehaviour
         else Destroy(gameObject);
         cardsInDeck = savedCardsInDeck;
         cardsInBloodDeck = savedCardsInBloodDeck;
+        List<Cards> cardsInDeckTemp = new List<Cards>();
+        List<Cards> cardsInBloodDeckTemp = new List<Cards>();
+        foreach (var card in cardsInDeck)
+            cardsInDeckTemp.Add(card.card.card);
+        foreach (var card in cardsInBloodDeck)
+            cardsInBloodDeckTemp.Add(card.card.card);
         if (deck != null)
         {
-            deck.deck = cardsInDeck;
-            deck.bloodDeck = cardsInBloodDeck;
+            deck.deck = cardsInDeckTemp;
+            deck.bloodDeck = cardsInBloodDeckTemp;
         }
-        camera = FindObjectOfType<Camera>();
-        Debug.Log(camera.pixelWidth);
-        Debug.Log(camera.pixelHeight);
-        GetComponentInChildren<GridLayoutGroup>().spacing = new Vector2(GetComponentInChildren<GridLayoutGroup>().spacing.x * ((float)camera.pixelWidth / (float)originalCameraWidth),
-            GetComponentInChildren<GridLayoutGroup>().spacing.y * ((float)camera.pixelHeight / (float)originalCameraHeight));
-        GetComponentInChildren<GridLayoutGroup>().cellSize = new Vector2(GetComponentInChildren<GridLayoutGroup>().cellSize.x * ((float)camera.pixelWidth / (float)originalCameraWidth),
-            GetComponentInChildren<GridLayoutGroup>().cellSize.y * ((float)camera.pixelHeight / (float)originalCameraHeight));
-        actualCameraHeight = camera.pixelHeight;
-        actualCameraWidth = camera.pixelWidth;
+        mainCamera = FindObjectOfType<Camera>();
+        Debug.Log(mainCamera.pixelWidth);
+        Debug.Log(mainCamera.pixelHeight);
+        buildDeck.spacing = new Vector2(buildDeck.spacing.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
+            buildDeck.spacing.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
+        buildDeck.cellSize = new Vector2(buildDeck.cellSize.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
+            buildDeck.cellSize.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
+        actualCameraHeight = mainCamera.pixelHeight;
+        actualCameraWidth = mainCamera.pixelWidth;
     }
     public void UnlockCard(Card newCard)
     {
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
-            if (card.card.card.name == newCard.card.name)
+            if (card.card.card.cardName == newCard.card.cardName)
             {
                 card.NumberOfCards = 1;
                 card.mysteryCard.SetActive(false);
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
-            if (card.card.card.name == newCard.card.name)
+            if (card.card.card.cardName == newCard.card.cardName)
             {
                 card.NumberOfCards = 1;
                 card.mysteryCard.SetActive(false);
             }
     }
-    public void SelectCard(CardCore newCard)
+    public void SelectCard(CardsInDeckBuilder selectedCard)
     {
+        Debug.Log("aaaa");
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
-            if (card.card.card.name == newCard.card.name)
+            if (card.card.card.cardName == selectedCard.card.card.cardName)
             {
-                cardsInDeck.Add(newCard.card);
-                savedCardsInDeck.Add(newCard.card);
+                bool inDeck = false;
+                CardsInDeckBuilder newCardInDeck = null;
+                if(cardsInDeck.Count > 0)
+                    foreach (CardsInDeckBuilder cards in cardsInDeck)
+                        if (cards.card.card.cardName == selectedCard.card.card.cardName)
+                        {
+                            inDeck = true;
+                            newCardInDeck = cards;
+                        }
+                if (!inDeck)
+                {
+                    CardsInDeckBuilder newCard = Instantiate(cardInDeck, actualDeck.transform).GetComponent<CardsInDeckBuilder>();
+                    newCard.card.card = selectedCard.card.card;
+                    newCard.card.SetData();
+                    newCard.inDeck = true;
+                    newCard.NumberOfCards = 1;
+                    newCardInDeck = newCard;
+                }
+                else
+                    newCardInDeck.NumberOfCards = 1;
+                cardsInDeck.Add(newCardInDeck);
+                savedCardsInDeck.Add(newCardInDeck);
                 if (deck != null)
-                    deck.deck.Add(newCard.card);
+                    deck.deck.Add(newCardInDeck.card.card);
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
-            if (card.card.card.name == newCard.card.name)
+            if (card.card.card.cardName == selectedCard.card.card.cardName)
             {
-                cardsInBloodDeck.Add(newCard.card);
-                savedCardsInBloodDeck.Add(newCard.card);
+                bool inDeck = false;
+                CardsInDeckBuilder newCardInDeck = null;
+                if (cardsInBloodDeck.Count > 0)
+                    foreach (CardsInDeckBuilder cards in cardsInBloodDeck)
+                        if (cards.card.card.cardName == selectedCard.card.card.cardName)
+                        {
+                            inDeck = true;
+                            cards.NumberOfCards = 1;
+                            newCardInDeck = cards;
+                        }
+                if (!inDeck)
+                {
+                    CardsInDeckBuilder newCard = Instantiate(cardInDeck, actualDeck.transform).GetComponent<CardsInDeckBuilder>();
+                    newCard.card.card = selectedCard.card.card;
+                    newCard.inDeck = true;
+                    newCard.NumberOfCards = 1;
+                    newCardInDeck = newCard;
+                }
+                cardsInDeck.Add(newCardInDeck);
+                savedCardsInDeck.Add(newCardInDeck);
                 if (deck != null)
-                    deck.bloodDeck.Add(newCard.card);
+                    deck.bloodDeck.Add(newCardInDeck.card.card);
             }
     }
-    public void UnselectedCard(Card newCard)
+    public void UnselectedCard(CardsInDeckBuilder selectedCard)
     {
-        foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
-            if (card.card.card.name == newCard.card.name)
+        foreach (CardsInDeckBuilder card in cardsInDeck)
+            if (card.card.card.cardName == selectedCard.card.card.cardName)
             {
-                cardsInDeck.Remove(newCard.card);
-                savedCardsInDeck.Remove(newCard.card);
+                foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
+                    if (cards.card.card.cardName == selectedCard.card.card.cardName)
+                        cards.NumberOfCards = 1;
+                cardsInDeck.Remove(selectedCard);
+                savedCardsInDeck.Remove(selectedCard);
                 if (deck != null)
-                    deck.deck.Remove(newCard.card);
+                    deck.deck.Remove(selectedCard.card.card);
+                if (selectedCard.NumberOfCards < 1)
+                    Destroy(selectedCard.gameObject);
+                return;
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
-            if (card.card.card.name == newCard.card.name)
+            if (card.card.card.cardName == selectedCard.card.card.cardName)
             {
-                cardsInBloodDeck.Remove(newCard.card);
-                savedCardsInBloodDeck.Remove(newCard.card);
+                foreach (CardsInDeckBuilder cards in cardsInDeckBuilder) 
+                    if (cards.card.card.cardName == selectedCard.card.card.cardName)
+                        cards.NumberOfCards = 1;
+                cardsInBloodDeck.Remove(selectedCard);
+                savedCardsInBloodDeck.Remove(selectedCard);
                 if (deck != null)
-                    deck.bloodDeck.Remove(newCard.card);
+                    deck.bloodDeck.Remove(selectedCard.card.card);
+                if (selectedCard.NumberOfCards < 1)
+                    Destroy(selectedCard.gameObject);
+                return;
             }
     }
     private void Update()
     {
-        if (actualCameraHeight != camera.pixelHeight || actualCameraWidth != camera.pixelWidth)
+        if (actualCameraHeight != mainCamera.pixelHeight || actualCameraWidth != mainCamera.pixelWidth)
         {
-            GetComponentInChildren<GridLayoutGroup>().spacing = new Vector2(GetComponentInChildren<GridLayoutGroup>().spacing.x * ((float)camera.pixelWidth / (float)actualCameraWidth),
-                GetComponentInChildren<GridLayoutGroup>().spacing.y * ((float)camera.pixelHeight / (float)actualCameraHeight));
-            GetComponentInChildren<GridLayoutGroup>().cellSize = new Vector2(GetComponentInChildren<GridLayoutGroup>().cellSize.x * ((float)camera.pixelWidth / (float)actualCameraWidth),
-                GetComponentInChildren<GridLayoutGroup>().cellSize.y * ((float)camera.pixelHeight / (float)actualCameraHeight));
-            actualCameraHeight = camera.pixelHeight;
-            actualCameraWidth = camera.pixelWidth;
+            buildDeck.spacing = new Vector2(buildDeck.spacing.x * ((float)mainCamera.pixelWidth / (float)actualCameraWidth),
+                buildDeck.spacing.y * ((float)mainCamera.pixelHeight / (float)actualCameraHeight));
+            buildDeck.cellSize = new Vector2(buildDeck.cellSize.x * ((float)mainCamera.pixelWidth / (float)actualCameraWidth),
+                buildDeck.cellSize.y * ((float)mainCamera.pixelHeight / (float)actualCameraHeight));
+            actualCameraHeight = mainCamera.pixelHeight;
+            actualCameraWidth = mainCamera.pixelWidth;
         }
     }
 }
