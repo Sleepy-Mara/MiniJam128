@@ -16,9 +16,9 @@ MonoBehaviour:
   life: 2
   attack: 1
   attackToPlayer: 1
-  manaCost: 1
+  manaCost: 3
   healthCost: 0
   sprite: {fileID: 21300000, guid: eb71ef060c97ea745bc6b5d8043659d0, type: 3}
-  hasEffect: 0
-  effectDesc: 
+  hasEffect: 1
+  effectDesc: When it gets damaged, draw 1 card from the deck
   effectSprite: {fileID: 0}
