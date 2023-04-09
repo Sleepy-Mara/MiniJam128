@@ -39,8 +39,8 @@ ModelImporter:
       name: Chimp_TempMotion
       takeName: Chimp_TempMotion
       internalID: 0
-      firstFrame: 0
-      lastFrame: 847
+      firstFrame: 356
+      lastFrame: 832
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
