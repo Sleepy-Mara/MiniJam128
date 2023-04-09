@@ -59,7 +59,7 @@ public class Card : CardCore, IPointerDownHandler
             else GetComponent<Animator>().SetTrigger("AttackEnemy");
         if (actualPosition.positionFacing.card != null)
         {
-            actualPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, actualPosition.positionFacing.card.GetComponent<Card>());
+            actualPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, this);
             //ejecutar audio y/o animacion
             _effectManager.CheckConditionAttack(this);
             ReceiveDamagePublic(actualPosition.positionFacing.card.GetComponent<Card>().ActualAttack, null);
@@ -98,6 +98,20 @@ public class Card : CardCore, IPointerDownHandler
     {
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => inDamageAnim == false);
+        _effectManager.checking = true;
+        if (attacker != null)
+            _effectManager.CheckConditionDefeatsAnEnemy(attacker);
+        _effectManager.checking = true;
+        if (actualPosition.oponent == FindObjectOfType<Enemy>())
+        {
+            foreach (MapPosition mapPosition in _table.playerPositions)
+                if (mapPosition.card != null)
+                    _effectManager.CheckConditionAllyIsDefeated(mapPosition.card);
+        }
+        else
+            foreach (MapPosition mapPosition in _table.enemyFront)
+                if (mapPosition.card != null)
+                    _effectManager.CheckConditionAllyIsDefeated(mapPosition.card);
         _effectManager.checking = true;
         _effectManager.CheckConditionDefeated(this);
         yield return new WaitUntil(() => _effectManager.checking == false);
