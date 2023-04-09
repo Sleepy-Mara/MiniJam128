@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: Bear of fear
+  m_Name: Eucalyptus Pete
   m_EditorClassIdentifier: 
-  cardName: Bear of fear
-  life: 5
-  attack: 4
+  cardName: Eucalyptus Pete
+  life: 2
+  attack: 1
   attackToPlayer: 1
-  manaCost: 4
+  manaCost: 3
   healthCost: 0
-  sprite: {fileID: 21300000, guid: 8f2b1716707904240b02ff013c0b14a7, type: 3}
-  hasEffect: 0
-  effectDesc: 
+  sprite: {fileID: 21300000, guid: b0fccb8388b0e1544bd8ee091441a084, type: 3}
+  hasEffect: 1
+  effectDesc: When it's played, gain immune until the end of the turn
   effectSprite: {fileID: 0}

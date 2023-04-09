@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: Rat
+  m_Name: Patches
   m_EditorClassIdentifier: 
-  cardName: Rat 1
+  cardName: Patches
   life: 1
-  attack: 1
-  attackToPlayer: 1
-  manaCost: 0
+  attack: 0
+  attackToPlayer: 0
+  manaCost: 1
   healthCost: 0
-  sprite: {fileID: 21300000, guid: c8ef9d2c0c197a7439317946f3d210d2, type: 3}
-  hasEffect: 0
-  effectDesc: 
+  sprite: {fileID: 21300000, guid: d42fbb11a03355749940edbcbd6e95d0, type: 3}
+  hasEffect: 1
+  effectDesc: When it's played, heal 1 HP to all ally creatures
   effectSprite: {fileID: 0}
