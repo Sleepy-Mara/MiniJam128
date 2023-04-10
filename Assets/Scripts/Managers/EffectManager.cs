@@ -65,7 +65,7 @@ public class EffectManager : MonoBehaviour
         _table = FindObjectOfType<Table>();
         _draw = FindObjectOfType<Draw>();
     }
-    #region checkings
+    #region CheckingsConditions
     public void CheckConditionStartOfTurn(Card card)
     {
         if (card.card.effectDesc.Contains(". "))
@@ -239,6 +239,7 @@ public class EffectManager : MonoBehaviour
     #endregion
     private void CheckEffect(Card card)
     {
+        #region Check
         if (card.card.effectDesc.Contains("and"))
         {
             List<string> effectDescriptions = new List<string>();
@@ -308,6 +309,7 @@ public class EffectManager : MonoBehaviour
                     return;
                 }
         checking = false;
+        #endregion
     }
     private void DrawEffect(Card card)
     {
