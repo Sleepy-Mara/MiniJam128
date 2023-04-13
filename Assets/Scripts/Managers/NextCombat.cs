@@ -66,8 +66,9 @@ public class NextCombat : MonoBehaviour
     }
     public void StartGame()
     {
-        if(enemies[enemyNum].enemyCharacter != null)
+        if (enemies[enemyNum].enemyCharacter != null)
             enemies[enemyNum].enemyCharacter.SetActive(true);
+        else Debug.Log("ESTAMOS EN LA B!!!!!");
         initialMenu.SetActive(false);
         introCombatText.text = enemies[enemyNum].introCombatMessage;
         introCombat.SetActive(true);

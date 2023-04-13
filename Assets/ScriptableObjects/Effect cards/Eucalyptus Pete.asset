@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: b0fccb8388b0e1544bd8ee091441a084, type: 3}
   hasEffect: 1
-  effectDesc: When it's played, gain immune until the end of the turn
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: abf50e6046897394ba27b066d63e5d37, type: 3}
   hasEffect: 1
-  effectDesc: When an ally creature is defeted, give a random enemy creature -1/-0
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

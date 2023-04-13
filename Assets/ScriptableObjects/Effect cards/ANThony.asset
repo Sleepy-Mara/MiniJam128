@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 1bc0d57836c37a249a24cfa2f42ad6da, type: 3}
   hasEffect: 1
-  effectDesc: When it's played, add 1 random spell from either deck
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

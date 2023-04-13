@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: df5f9f59b06d67f48ac1a24279d8956e, type: 3}
   hasEffect: 1
-  effectDesc: When it's defeated, add Roger to your hand
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 7a4519a04f5d42248b792dc736301a18, type: 3}
   hasEffect: 1
-  effectDesc: At the end of the turn, heal 1 HP to a random ally creature
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

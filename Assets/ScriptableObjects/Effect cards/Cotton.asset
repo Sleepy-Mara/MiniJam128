@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: d5c4e4d703b07d4478d79817a4e5813b, type: 3}
   hasEffect: 1
-  effectDesc: When it's defeated, deals 2 damage to a random enemy
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

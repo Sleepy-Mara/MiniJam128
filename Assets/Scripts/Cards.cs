@@ -13,7 +13,10 @@ public class Cards : ScriptableObject
     public int healthCost;
     public Sprite sprite;
     public bool hasEffect;
-    public string effectDesc;
+    [TextArea(1, 4)]
+    public string effect;
     public Sprite effectSprite;
+    [TextArea(1, 4)]
+    public List<string> effectDesc;
 
 }

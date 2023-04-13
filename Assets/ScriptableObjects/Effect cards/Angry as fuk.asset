@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 4476804f6d71c0b428d17e9114b50b84, type: 3}
   hasEffect: 1
-  effectDesc: Deals 2 damage when attacking directly
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

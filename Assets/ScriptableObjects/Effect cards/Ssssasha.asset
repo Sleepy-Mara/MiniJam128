@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 1
   sprite: {fileID: 21300000, guid: ad27c07008492f94d98d8d3a4f275346, type: 3}
   hasEffect: 1
-  effectDesc: When it get damaged, deal 1 damage to the enemy face
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

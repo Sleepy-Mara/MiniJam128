@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: be009c029f785e84cafee7a118d64c9a, type: 3}
   hasEffect: 1
-  effectDesc: At the end of the turn, give +0/+1 to a random ally creature
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

@@ -42,7 +42,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         healthCostText.text = card.healthCost.ToString();
         if (card.hasEffect)
         {
-            effectText.text = card.effectDesc;
+            UpdateLanguage(FindObjectOfType<LanguageManager>().languageNumber);
         }
         else
             effectText.enabled = false;
@@ -66,5 +66,10 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             canvas.sortingOrder = 0;
             canvas.overrideSorting = false;
         }
+    }
+    public void UpdateLanguage(int languageNumber)
+    {
+        if(card.hasEffect)
+            effectText.text = card.effectDesc[languageNumber];
     }
 }

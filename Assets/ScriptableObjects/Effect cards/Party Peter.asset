@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 0}
   hasEffect: 0
-  effectDesc: 
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

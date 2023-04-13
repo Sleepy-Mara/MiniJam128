@@ -18,6 +18,7 @@ public class Card : CardCore, IPointerDownHandler
     public bool playerCard;
     [HideInInspector]
     public bool played = false;
+    public bool checkingEffect;
     private void Start()
     {
         _effectManager = FindObjectOfType<EffectManager>();
@@ -61,12 +62,14 @@ public class Card : CardCore, IPointerDownHandler
         {
             actualPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, this);
             //ejecutar audio y/o animacion
+            checkingEffect = true;
             _effectManager.CheckConditionAttack(this);
             ReceiveDamagePublic(actualPosition.positionFacing.card.GetComponent<Card>().ActualAttack, null);
         }
         else
         {
             actualPosition.oponent.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
+            checkingEffect = true;
             _effectManager.CheckConditionAttack(this);
         }
     }
@@ -76,10 +79,12 @@ public class Card : CardCore, IPointerDownHandler
     }
     IEnumerator ReceiveDamage(int damage, Card attacker)
     {
+        yield return new WaitUntil(() => checkingEffect == false);
         yield return new WaitForSeconds(1);
         if (attacker != null)
             yield return new WaitUntil(() => inAttackAnim == false && attacker.inAttackAnim == false);
         else yield return new WaitUntil(() => inAttackAnim == false);
+        checkingEffect = true;
         _effectManager.CheckConditionGetDamaged(this);
         if (!immune)
         {
@@ -89,6 +94,7 @@ public class Card : CardCore, IPointerDownHandler
         }
         else
             immune = false;
+        yield return new WaitUntil(() => checkingEffect == false);
         if (ActualLife <= 0)
         {
             StartCoroutine(Defeated(attacker));
@@ -98,23 +104,30 @@ public class Card : CardCore, IPointerDownHandler
     {
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => inDamageAnim == false);
-        _effectManager.checking = true;
         if (attacker != null)
+        {
+            checkingEffect = true;
             _effectManager.CheckConditionDefeatsAnEnemy(attacker);
-        _effectManager.checking = true;
+        }
         if (actualPosition.oponent == FindObjectOfType<Enemy>())
         {
             foreach (MapPosition mapPosition in _table.playerPositions)
                 if (mapPosition.card != null)
+                {
+                    checkingEffect = true;
                     _effectManager.CheckConditionAllyIsDefeated(mapPosition.card);
+                }
         }
         else
             foreach (MapPosition mapPosition in _table.enemyFront)
                 if (mapPosition.card != null)
+                {
+                    checkingEffect = true;
                     _effectManager.CheckConditionAllyIsDefeated(mapPosition.card);
-        _effectManager.checking = true;
+                }
+        checkingEffect = true;
         _effectManager.CheckConditionDefeated(this);
-        yield return new WaitUntil(() => _effectManager.checking == false);
+        yield return new WaitUntil(() => checkingEffect == false);
         //animacion / audio
         actualPosition.card = null;
         if (actualPosition.oponent.GetComponent<Player>())
@@ -151,6 +164,8 @@ public class Card : CardCore, IPointerDownHandler
             ActualLife = posOrNegLife;
         for (int i = 0; i < attack; i++)
             ActualAttack = posOrNegAttack;
+        checkingEffect = true;
+        _effectManager.CheckConditionGetBuffed(this);
     }
     public void OnPointerDown(PointerEventData eventData)
     {

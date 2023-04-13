@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: f181212f00384ea488016ecd58b9d625, type: 3}
   hasEffect: 1
-  effectDesc: When it defeats an enemy, draw 1 card from the deck
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 

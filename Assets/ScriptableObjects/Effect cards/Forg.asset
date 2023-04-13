@@ -20,5 +20,8 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: f496ce796863d8a41b631efc991a4921, type: 3}
   hasEffect: 1
-  effectDesc: When it's defeated, draw 1 card and add Forg2 to the deck
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc:
+  - 
+  - 
