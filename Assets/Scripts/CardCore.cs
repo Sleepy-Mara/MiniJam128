@@ -11,14 +11,22 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public MapPosition actualPosition;
     protected int actualLife;
     protected int actualAttack;
-    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] protected TextMeshProUGUI nameText;
     [SerializeField] protected TextMeshProUGUI attackText;
     [SerializeField] protected TextMeshProUGUI lifeText;
-    [SerializeField] private TextMeshProUGUI manaCostText;
-    [SerializeField] private TextMeshProUGUI healthCostText;
-    [SerializeField] private TextMeshProUGUI effectText;
-    [SerializeField] private Image image;
+    [SerializeField] protected TextMeshProUGUI manaCostText;
+    [SerializeField] protected TextMeshProUGUI healthCostText;
+    [SerializeField] protected TextMeshProUGUI effectText;
+    [SerializeField] protected Image image;
     [SerializeField] protected Canvas canvas;
+
+    [HideInInspector]
+    public bool playerCard;
+    public bool checkingEffect;
+
+    protected EffectManager _effectManager;
+    protected CardManager _cardManager;
+    protected TurnManager _turnManager;
     protected Table _table;
     protected Draw _draw;
 
@@ -28,9 +36,12 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             SetData();
         _table = FindObjectOfType<Table>();
         _draw = FindObjectOfType<Draw>();
+        _effectManager = FindObjectOfType<EffectManager>();
+        _cardManager = FindObjectOfType<CardManager>();
+        _turnManager = FindObjectOfType<TurnManager>();
     }
 
-    public void SetData()
+    public virtual void SetData()
     {
         actualLife = card.life;
         actualAttack = card.attack;

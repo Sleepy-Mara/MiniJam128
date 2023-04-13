@@ -7,18 +7,12 @@ public class Card : CardCore, IPointerDownHandler
 {
     public bool inAttackAnim;
     public bool inDamageAnim;
-    private EffectManager _effectManager;
-    private CardManager _cardManager;
-    private TurnManager _turnManager;
     [HideInInspector]
     public bool immune;
     public RuntimeAnimatorController handAnimator;
     public RuntimeAnimatorController tableAnimator;
     [HideInInspector]
-    public bool playerCard;
-    [HideInInspector]
     public bool played = false;
-    public bool checkingEffect;
     private void Start()
     {
         _effectManager = FindObjectOfType<EffectManager>();

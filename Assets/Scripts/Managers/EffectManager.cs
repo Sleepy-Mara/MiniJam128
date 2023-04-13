@@ -316,11 +316,11 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void DrawEffect(Card card)
+    private void DrawEffect(CardCore card)
     {
         Debug.Log("Im going to draw maybe");
         #region Draw
-        if (card.actualPosition.oponent == FindObjectOfType<Player>())
+        if (card.GetType() == typeof(Card) && card.actualPosition.oponent == FindObjectOfType<Player>())
             return;
         foreach (string target in targets)
             if (card.card.effect.Contains(target))
@@ -336,7 +336,7 @@ public class EffectManager : MonoBehaviour
                                 Debug.Log("Draw from life deck");
                             }
                             else if (target == targets[15])
-                                _draw.DrawACard(Draw.DeckType.Mana);
+                                _draw.DrawACard(Draw.DeckType.Blood);
                         }
         card.checkingEffect = false;
         #endregion
