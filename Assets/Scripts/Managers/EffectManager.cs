@@ -51,7 +51,9 @@ public class EffectManager : MonoBehaviour
         "hand",
         "deck",
         "life deck",
-        "either deck"
+        "either deck",
+        "random creature",
+        "random spell"
     };
     [SerializeField]
     private List<Cards> cards;
@@ -342,14 +344,20 @@ public class EffectManager : MonoBehaviour
                     if (card.card.effect.Contains(" " + i.ToString() + " "))
                         for (int j = 0; j < i; j++)
                         {
+                            bool creature = true;
+                            bool spell = true;
+                            if (card.card.effect.Contains(targets[18]))
+                                spell = false;
+                            if (card.card.effect.Contains(targets[19]))
+                                creature = false;
                             if (target == targets[15])
-                                _draw.DrawACard(Draw.DeckType.Mana);
+                                _draw.DrawACard(Draw.DeckType.Mana, creature, spell);
                             else if (target == targets[16])
-                                _draw.DrawACard(Draw.DeckType.Blood);
+                                _draw.DrawACard(Draw.DeckType.Blood, creature, spell);
                             else if (target == targets[17])
                             {
-                                _draw.DrawACard(Draw.DeckType.Mana);
-                                _draw.DrawACard(Draw.DeckType.Blood);
+                                _draw.DrawACard(Draw.DeckType.Mana, creature, spell);
+                                _draw.DrawACard(Draw.DeckType.Blood, creature, spell);
                             }
                         }
         card.checkingEffect = false;
@@ -649,8 +657,22 @@ public class EffectManager : MonoBehaviour
         bool added = false;
         if (card.card.effect.Contains(targets[14]))
         {
+            List<Cards> listOfCards = new List<Cards>();
+            if (card.card.effect.Contains(targets[18]))
+            {
+                foreach (Cards cardToList in cards)
+                    if (!cardToList.spell)
+                        listOfCards.Add(cardToList);
+            }
+            else if (card.card.effect.Contains(targets[19]))
+            {
+                foreach (Cards cardToList in cards)
+                    if (cardToList.spell)
+                        listOfCards.Add(cardToList);
+            }
+            else listOfCards = cards;
             List<Cards> cardsToAdd = new List<Cards>();
-            foreach (Cards cards in cards)
+            foreach (Cards cards in listOfCards)
                 if (card.card.effect.Contains(cards.name))
                     cardsToAdd.Add(cards);
             if (cardsToAdd.Count > 0)
@@ -679,8 +701,22 @@ public class EffectManager : MonoBehaviour
         }
         else if (card.card.effect.Contains(targets[15]))
         {
+            List<Cards> listOfCards = new List<Cards>();
+            if (card.card.effect.Contains(targets[18]))
+            {
+                foreach (Cards cardToList in cards)
+                    if (!cardToList.spell)
+                        listOfCards.Add(cardToList);
+            }
+            else if (card.card.effect.Contains(targets[19]))
+            {
+                foreach (Cards cardToList in cards)
+                    if (cardToList.spell)
+                        listOfCards.Add(cardToList);
+            }
+            else listOfCards = cards;
             List<Cards> cardsToAdd = new List<Cards>();
-            foreach (Cards cards in cards)
+            foreach (Cards cards in listOfCards)
                 if (card.card.effect.Contains(cards.name))
                     cardsToAdd.Add(cards);
             if (cardsToAdd.Count > 0)
@@ -699,8 +735,22 @@ public class EffectManager : MonoBehaviour
         }
         else if (card.card.effect.Contains(targets[16]))
         {
+            List<Cards> listOfCards = new List<Cards>();
+            if (card.card.effect.Contains(targets[18]))
+            {
+                foreach (Cards cardToList in cards)
+                    if (!cardToList.spell)
+                        listOfCards.Add(cardToList);
+            }
+            else if (card.card.effect.Contains(targets[19]))
+            {
+                foreach (Cards cardToList in cards)
+                    if (cardToList.spell)
+                        listOfCards.Add(cardToList);
+            }
+            else listOfCards = cards;
             List<Cards> cardsToAdd = new List<Cards>();
-            foreach (Cards cards in cards)
+            foreach (Cards cards in listOfCards)
                 if (card.card.effect.Contains(cards.name))
                     cardsToAdd.Add(cards);
             if (cardsToAdd.Count > 0)

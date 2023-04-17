@@ -11,8 +11,8 @@ public class Draw : MonoBehaviour
     public List<Cards> deck;
     public List<Cards> bloodDeck;
     private static Draw instance;
-    private List<Cards> _actualDeck = new List<Cards>();
-    private List<Cards> _actualBloodDeck = new();
+    [SerializeField]private List<Cards> _actualDeck = new List<Cards>();
+    [SerializeField] private List<Cards> _actualBloodDeck = new();
     public Transform handPos;
     public bool canDraw;
     public bool zoomingCard;
@@ -38,18 +38,16 @@ public class Draw : MonoBehaviour
         else Destroy(gameObject);
         deck = savedDeck;
         bloodDeck = savedBloodDeck;
-    }
-    public void Start()
-    {
-        manaDeckObject = GameObject.Find("Deck");
-        bloodDeckObject = GameObject.Find("BloodDeck");
-        _turnManager = FindObjectOfType<TurnManager>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
         for (int j = 0; j < bloodDeck.Count; j++)
-        {
             _actualBloodDeck.Add(bloodDeck[j]);
-        }
+    }
+    public void Start()
+    {
+        manaDeckObject = GameObject.Find("ManaDeck");
+        bloodDeckObject = GameObject.Find("BloodDeck");
+        _turnManager = FindObjectOfType<TurnManager>();
     }
 
     public void AddACard(Cards card)
@@ -86,11 +84,11 @@ public class Draw : MonoBehaviour
     {
         canDraw = false;
         _turnManager.canEndTurn = true;
-        DrawACard(type);
+        DrawACard(type, true, true);
         _turnManager.PlayableTurn();
     }
 
-    public void DrawACard(DeckType type)
+    public void DrawACard(DeckType type, bool creature, bool spell)
     {
         if (_actualDeck.Count <= 0 && _actualBloodDeck.Count <= 0)
         {
@@ -101,27 +99,51 @@ public class Draw : MonoBehaviour
         CardCore newCard;
         if (type == DeckType.Mana)
         {
-            drawedCard = Random.Range(0, _actualDeck.Count);
+            if (_actualDeck.Count <= 0)
+                return;
+            List<Cards> cardsToDraw = new List<Cards>();
+            if (creature)
+                foreach (Cards card in _actualDeck)
+                    if (!card.spell)
+                        cardsToDraw.Add(card);
+            if (spell)
+                foreach (Cards card in _actualDeck)
+                    if (card.spell)
+                        cardsToDraw.Add(card);
+            drawedCard = Random.Range(0, cardsToDraw.Count);
             //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
-            if (_actualDeck[drawedCard].spell)
+            if (cardsToDraw[drawedCard].spell)
                 newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
             else
                 newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
-            newCard.card = _actualDeck[drawedCard];
-            _actualDeck.Remove(_actualDeck[drawedCard]);
-            if (_actualDeck.Count == 0)
+            newCard.card = cardsToDraw[drawedCard];
+            _actualDeck.Remove(cardsToDraw[drawedCard]);
+            Debug.Log(_actualDeck.Count);
+            if (_actualDeck.Count < 1)
                 manaDeckObject.SetActive(false);
         }
         else
         {
-            drawedCard = Random.Range(0, _actualBloodDeck.Count);
-            if (_actualDeck[drawedCard].spell)
+            if (_actualBloodDeck.Count <= 0)
+                return;
+            List<Cards> cardsToDraw = new List<Cards>();
+            if (creature)
+                foreach (Cards card in _actualBloodDeck)
+                    if (!card.spell)
+                        cardsToDraw.Add(card);
+            if (spell)
+                foreach (Cards card in _actualBloodDeck)
+                    if (card.spell)
+                        cardsToDraw.Add(card);
+            drawedCard = Random.Range(0, cardsToDraw.Count);
+            if (_actualBloodDeck[drawedCard].spell)
                 newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
             else
                 newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
-            newCard.card = _actualBloodDeck[drawedCard];
-            _actualBloodDeck.RemoveAt(drawedCard);
-            if (_actualBloodDeck.Count == 0)
+            newCard.card = cardsToDraw[drawedCard];
+            _actualBloodDeck.Remove(cardsToDraw[drawedCard]);
+            Debug.Log(_actualBloodDeck.Count);
+            if (_actualBloodDeck.Count < 1)
                 bloodDeckObject.SetActive(false);
         }
         AddCardToHand(newCard);
