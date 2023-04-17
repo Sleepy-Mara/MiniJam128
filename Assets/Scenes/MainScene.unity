@@ -42009,7 +42009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5696a3520f230c042b179b2d2863b7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!65 &1556953871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43931,7 +43931,7 @@ GameObject:
   - component: {fileID: 1603253546}
   - component: {fileID: 1603253548}
   m_Layer: 0
-  m_Name: Deck
+  m_Name: ManaDeck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58462,7 +58462,7 @@ PrefabInstance:
       objectReference: {fileID: 845860779}
     - target: {fileID: 984996553449241544, guid: 817b1c73404fb9c4ba1e6624774724f2, type: 3}
       propertyPath: deck.Array.size
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 984996553449241544, guid: 817b1c73404fb9c4ba1e6624774724f2, type: 3}
       propertyPath: deck.Array.data[0]
