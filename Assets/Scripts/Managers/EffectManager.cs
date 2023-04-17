@@ -61,7 +61,6 @@ public class EffectManager : MonoBehaviour
     private Card newCard;
     private Table _table;
     private Draw _draw;
-
     private void Awake()
     {
         _table = FindObjectOfType<Table>();

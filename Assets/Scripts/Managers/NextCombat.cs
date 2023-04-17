@@ -106,6 +106,7 @@ public class NextCombat : MonoBehaviour
     // este es para el boton de victoria
     public void EndCombat()
     {
+        ResetCombat();
         wonCombat.SetActive(false);
         if (enemyNum == enemies.Length)
         {
