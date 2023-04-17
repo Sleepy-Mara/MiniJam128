@@ -18,6 +18,7 @@ public class Draw : MonoBehaviour
     public bool zoomingCard;
     private TurnManager _turnManager;
     public GameObject cardPrefab;
+    public GameObject spellPrefab;
     public RectTransform[] handRange;
     public List<AudioClip> clips;
     public GameObject audio;
@@ -96,12 +97,16 @@ public class Draw : MonoBehaviour
             noCardsWindow.SetTrigger("Activate");
             return;
         }
-        var newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
         int drawedCard;
+        CardCore newCard;
         if (type == DeckType.Mana)
         {
             drawedCard = Random.Range(0, _actualDeck.Count);
             //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
+            if (_actualDeck[drawedCard].spell)
+                newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
+            else
+                newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
             newCard.card = _actualDeck[drawedCard];
             _actualDeck.Remove(_actualDeck[drawedCard]);
             if (_actualDeck.Count == 0)
@@ -110,6 +115,10 @@ public class Draw : MonoBehaviour
         else
         {
             drawedCard = Random.Range(0, _actualBloodDeck.Count);
+            if (_actualDeck[drawedCard].spell)
+                newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
+            else
+                newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
             newCard.card = _actualBloodDeck[drawedCard];
             _actualBloodDeck.RemoveAt(drawedCard);
             if (_actualBloodDeck.Count == 0)
@@ -118,7 +127,7 @@ public class Draw : MonoBehaviour
         AddCardToHand(newCard);
     }
 
-    public void AddCardToHand(Card newCard)
+    public void AddCardToHand(CardCore newCard)
     {
         newCard.SetData();
         _cardsInHand.Add(newCard.gameObject);

@@ -58,6 +58,7 @@ public class TurnManager : MonoBehaviour
     {
         if (canEndTurn)
         {
+            Debug.Log("puta");
             FindObjectOfType<CameraManager>().PlaceCardCamera();
             canPlayCards = false;
             StartCoroutine(AttackPhase());

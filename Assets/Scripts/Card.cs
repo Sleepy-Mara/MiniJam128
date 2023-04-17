@@ -54,6 +54,7 @@ public class Card : CardCore, IPointerDownHandler
             else GetComponent<Animator>().SetTrigger("AttackEnemy");
         if (actualPosition.positionFacing.card != null)
         {
+                Debug.Log(card.name + " ataco");
             actualPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, this);
             //ejecutar audio y/o animacion
             checkingEffect = true;

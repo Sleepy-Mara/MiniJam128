@@ -18,5 +18,5 @@ public class Cards : ScriptableObject
     public Sprite effectSprite;
     [TextArea(1, 4)]
     public List<string> effectDesc;
-
+    public bool spell;
 }

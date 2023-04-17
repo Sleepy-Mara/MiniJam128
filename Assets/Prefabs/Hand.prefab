@@ -201,10 +201,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
   - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
   - {fileID: 11400000, guid: bb69fe447d248bb42b0e0650830199e8, type: 2}
+  bloodDeck: []
   handPos: {fileID: 0}
   canDraw: 0
   zoomingCard: 0
   cardPrefab: {fileID: 8954024018774041426, guid: 918ce3453ac3589469482dbb7da7ac37, type: 3}
+  spellPrefab: {fileID: 2568296507009188237, guid: 3451e5447d38fb449afd7f5df4e12e16, type: 3}
   handRange:
   - {fileID: 372743193811961242}
   - {fileID: 984996554462492292}
@@ -213,7 +215,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 59235f970e15df94ca086378af299c64, type: 3}
   audio: {fileID: 6284032983735818647, guid: baffcd9591a9af84aa82bf4d89ea5ea4, type: 3}
   noCardsWindow: {fileID: 0}
-  deckObject: {fileID: 0}
+  manaDeckObject: {fileID: 0}
+  bloodDeckObject: {fileID: 0}
 --- !u!1 &984996554462492293
 GameObject:
   m_ObjectHideFlags: 0

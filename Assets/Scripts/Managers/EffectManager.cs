@@ -16,6 +16,7 @@ public class EffectManager : MonoBehaviour
         "When an ally creature is defeated",
         "At the end of the turn",
         "When it gets buffed",
+        "When a spell is played",
         "until your next turn",
         "until the end of the turn"
     };
@@ -65,7 +66,7 @@ public class EffectManager : MonoBehaviour
         _draw = FindObjectOfType<Draw>();
     }
     #region CheckingsConditions
-    public void CheckConditionStartOfTurn(Card card)
+    public void CheckConditionStartOfTurn(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -78,7 +79,7 @@ public class EffectManager : MonoBehaviour
             CheckEffect(card);
         else card.checkingEffect = false;
     }
-    public void CheckConditionIsPlayed(Card card)
+    public void CheckConditionIsPlayed(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -91,7 +92,7 @@ public class EffectManager : MonoBehaviour
             CheckEffect(card);
         else card.checkingEffect = false;
     }
-    public void CheckConditionAttack(Card card)
+    public void CheckConditionAttack(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -104,7 +105,7 @@ public class EffectManager : MonoBehaviour
             CheckEffect(card);
         else card.checkingEffect = false;
     }
-    public void CheckConditionGetDamaged(Card card)
+    public void CheckConditionGetDamaged(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -117,7 +118,7 @@ public class EffectManager : MonoBehaviour
             CheckEffect(card);
         else card.checkingEffect = false;
     }
-    public void CheckConditionDefeated(Card card)
+    public void CheckConditionDefeated(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -133,7 +134,7 @@ public class EffectManager : MonoBehaviour
         }
         else card.checkingEffect = false;
     }
-    public void CheckConditionDefeatsAnEnemy(Card card)
+    public void CheckConditionDefeatsAnEnemy(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -149,7 +150,7 @@ public class EffectManager : MonoBehaviour
         }
         else card.checkingEffect = false;
     }
-    public void CheckConditionAllyIsDefeated(Card card)
+    public void CheckConditionAllyIsDefeated(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -165,7 +166,7 @@ public class EffectManager : MonoBehaviour
         }
         else card.checkingEffect = false;
     }
-    public void CheckConditionEndOfTurn(Card card)
+    public void CheckConditionEndOfTurn(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -181,7 +182,7 @@ public class EffectManager : MonoBehaviour
         }
         else card.checkingEffect = false;
     }
-    public void CheckConditionGetBuffed(Card card)
+    public void CheckConditionSpellPlayed(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -194,7 +195,7 @@ public class EffectManager : MonoBehaviour
             CheckEffect(card);
         else card.checkingEffect = false;
     }
-    public void CheckConditionUntilYourNextTurn(Card card)
+    public void CheckConditionGetBuffed(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -205,8 +206,9 @@ public class EffectManager : MonoBehaviour
         }
         else if (card.card.effect.Contains(conditions[9]))
             CheckEffect(card);
+        else card.checkingEffect = false;
     }
-    public void CheckConditionUntilTheEndOfTheTurn(Card card)
+    public void CheckConditionUntilYourNextTurn(CardCore card)
     {
         if (card.card.effect.Contains(". "))
         {
@@ -218,7 +220,19 @@ public class EffectManager : MonoBehaviour
         else if (card.card.effect.Contains(conditions[10]))
             CheckEffect(card);
     }
-    List<string> CheckSecondEffect(Card card)
+    public void CheckConditionUntilTheEndOfTheTurn(CardCore card)
+    {
+        if (card.card.effect.Contains(". "))
+        {
+            List<string> effectDescriptions = CheckSecondEffect(card);
+            foreach (string effectDescription in effectDescriptions)
+                if (effectDescription.Contains(conditions[10]))
+                    CheckEffect(card);
+        }
+        else if (card.card.effect.Contains(conditions[10]))
+            CheckEffect(card);
+    }
+    List<string> CheckSecondEffect(CardCore card)
     {
         List<string> effectDescriptions = new List<string>();
         int lastCharacter = 0;
@@ -242,7 +256,7 @@ public class EffectManager : MonoBehaviour
         return effectDescriptions;
     }
     #endregion
-    private void CheckEffect(Card card)
+    private void CheckEffect(CardCore card)
     {
         #region Check
         if (card.card.effect.Contains("and"))
@@ -328,20 +342,20 @@ public class EffectManager : MonoBehaviour
                     if (card.card.effect.Contains(" " + i.ToString() + " "))
                         for (int j = 0; j < i; j++)
                         {
-                            if (target == targets[16])
-                                Debug.Log("Draw from life deck");
+                            if (target == targets[15])
+                                _draw.DrawACard(Draw.DeckType.Mana);
+                            else if (target == targets[16])
+                                _draw.DrawACard(Draw.DeckType.Blood);
                             else if (target == targets[17])
                             {
                                 _draw.DrawACard(Draw.DeckType.Mana);
-                                Debug.Log("Draw from life deck");
-                            }
-                            else if (target == targets[15])
                                 _draw.DrawACard(Draw.DeckType.Blood);
+                            }
                         }
         card.checkingEffect = false;
         #endregion
     }
-    private void DealDamageEffect(Card card)
+    private void DealDamageEffect(CardCore card)
     {
         Debug.Log("Im going to do damage maybe");
         #region DealDamage
@@ -376,8 +390,8 @@ public class EffectManager : MonoBehaviour
                             allyHealth.ReceiveDamage(i);
                         else if (target == targets[11])
                             enemyHealth.ReceiveDamage(i);
-                        else if (target == targets[10])
-                            card.ReceiveDamagePublic(i, null);
+                        else if (target == targets[10] || card.GetComponent<Card>())
+                            card.GetComponent<Card>().ReceiveDamagePublic(i, null);
                         else if (target == targets[7])
                         {
                             for (int j = 0; j < 3; j++)
@@ -484,7 +498,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void HealEffect(Card card)
+    private void HealEffect(CardCore card)
     {
         Debug.Log("Im going to heal maybe");
         #region Heal
@@ -518,8 +532,8 @@ public class EffectManager : MonoBehaviour
                             allyHealth.RestoreHealth(i);
                         else if (target == targets[11])
                             enemyHealth.RestoreHealth(i);
-                        else if (target == targets[10])
-                            card.Heal(i);
+                        else if (target == targets[10] || card.GetComponent<Card>())
+                            card.GetComponent<Card>().Heal(i);
                         else if (target == targets[7])
                         {
                             for (int j = 0; j < 3; j++)
@@ -626,7 +640,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void AddEffect(Card card)
+    private void AddEffect(CardCore card)
     {
         Debug.Log("Im going to add a card maybe");
         #region Add
@@ -635,95 +649,78 @@ public class EffectManager : MonoBehaviour
         bool added = false;
         if (card.card.effect.Contains(targets[14]))
         {
+            List<Cards> cardsToAdd = new List<Cards>();
             foreach (Cards cards in cards)
                 if (card.card.effect.Contains(cards.name))
-                {
-                    for (int i = 0; i < 50; i++)
-                        if (card.card.effect.Contains(" " + i.ToString() + " "))
-                        {
-                            for (int j = 0; j < i; j++)
-                            {
-                                var addCard = Instantiate(newCard, _draw.transform);
-                                addCard.card = cards;
-                                addCard.GetComponent<Card>().SetData();
-                                _draw.AddCardToHand(addCard);
-                            }
-                            added = true;
-                        }
-                    if (!added)
+                    cardsToAdd.Add(cards);
+            if (cardsToAdd.Count > 0)
+            {
+                var cards = cardsToAdd[Random.Range(0, cardsToAdd.Count)];
+                for (int i = 0; i < 50; i++)
+                    if (card.card.effect.Contains(" " + i.ToString() + " "))
                     {
-                        var addCard = Instantiate(newCard, _draw.transform);
-                        addCard.card = cards;
-                        addCard.GetComponent<Card>().SetData();
-                        _draw.AddCardToHand(addCard);
+                        for (int j = 0; j < i; j++)
+                        {
+                            var addCard = Instantiate(newCard, _draw.transform);
+                            addCard.card = cards;
+                            addCard.GetComponent<Card>().SetData();
+                            _draw.AddCardToHand(addCard);
+                        }
+                        added = true;
                     }
+                if (!added)
+                {
+                    var addCard = Instantiate(newCard, _draw.transform);
+                    addCard.card = cards;
+                    addCard.GetComponent<Card>().SetData();
+                    _draw.AddCardToHand(addCard);
                 }
+            }
         }
         else if (card.card.effect.Contains(targets[15]))
         {
+            List<Cards> cardsToAdd = new List<Cards>();
             foreach (Cards cards in cards)
                 if (card.card.effect.Contains(cards.name))
-                {
-                    for (int i = 0; i < 50; i++)
-                        if (card.card.effect.Contains(" " + i.ToString() + " "))
-                        {
-                            for (int j = 0; j < i; j++)
-                                _draw.AddATempCard(cards);
-                            added = true;
-                        }
-                    if (!added)
-                        _draw.AddATempCard(cards);
-                }
+                    cardsToAdd.Add(cards);
+            if (cardsToAdd.Count > 0)
+            {
+                var cards = cardsToAdd[Random.Range(0, cardsToAdd.Count)];
+                for (int i = 0; i < 50; i++)
+                    if (card.card.effect.Contains(" " + i.ToString() + " "))
+                    {
+                        for (int j = 0; j < i; j++)
+                            _draw.AddATempCard(cards);
+                        added = true;
+                    }
+                if (!added)
+                    _draw.AddATempCard(cards);
+            }
         }
         else if (card.card.effect.Contains(targets[16]))
         {
+            List<Cards> cardsToAdd = new List<Cards>();
             foreach (Cards cards in cards)
                 if (card.card.effect.Contains(cards.name))
-                {
-                    for (int i = 0; i < 50; i++)
-                        if (card.card.effect.Contains(" " + i.ToString() + " "))
-                        {
-                            for (int j = 0; j < i; j++)
-                                Debug.Log("Add to life deck");
-                            added = true;
-                        }
-                    if (!added)
-                        Debug.Log("Add to life deck");
-                }
-        }
-        else if (card.card.effect.Contains(targets[17]))
-        {
-            foreach (Cards cards in cards)
-                if (card.card.effect.Contains(cards.name))
-                {
-                    for (int i = 0; i < 50; i++)
-                        if (card.card.effect.Contains(" " + i.ToString() + " "))
-                        {
-                            for (int j = 0; j < i; j++)
-                                _draw.AddATempCard(cards);
-                            added = true;
-                        }
-                    if (!added)
-                        _draw.AddATempCard(cards);
-                }
-            foreach (Cards cards in cards)
-                if (card.card.effect.Contains(cards.name))
-                {
-                    for (int i = 0; i < 50; i++)
-                        if (card.card.effect.Contains(" " + i.ToString() + " "))
-                        {
-                            for (int j = 0; j < i; j++)
-                                Debug.Log("Add to life deck");
-                            added = true;
-                        }
-                    if (!added)
-                        Debug.Log("Add to life deck");
-                }
+                    cardsToAdd.Add(cards);
+            if (cardsToAdd.Count > 0)
+            {
+                var cards = cardsToAdd[Random.Range(0, cardsToAdd.Count)];
+                for (int i = 0; i < 50; i++)
+                    if (card.card.effect.Contains(" " + i.ToString() + " "))
+                    {
+                        for (int j = 0; j < i; j++)
+                            _draw.AddATempCard(cards);
+                        added = true;
+                    }
+                if (!added)
+                    _draw.AddATempCard(cards);
+            }
         }
         card.checkingEffect = false;
         #endregion
     }
-    private void GiveEffect(Card card)
+    private void GiveEffect(CardCore card)
     {
         Debug.Log("Im going to buff maybe");
         #region Give
@@ -768,8 +765,8 @@ public class EffectManager : MonoBehaviour
                         Debug.LogError("Im going to buff");
                         if (target == targets[13])
                             card.actualPosition.positionFacing.card.Buff(i, j);
-                        else if (target == targets[10])
-                            card.Buff(i, j);
+                        else if (target == targets[10] || card.GetComponent<Card>())
+                            card.GetComponent<Card>().Buff(i, j);
                         else if (target == targets[7])
                         {
                             for (int l = 0; l < 3; l++)
@@ -849,7 +846,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void ImmuneEffect(Card card)
+    private void ImmuneEffect(CardCore card)
     {
         Debug.Log("Im immune maybe");
         #region Inmune
@@ -870,8 +867,8 @@ public class EffectManager : MonoBehaviour
                 }
                 if (target == targets[13])
                     card.actualPosition.positionFacing.card.immune = true;
-                else if (target == targets[10])
-                    card.immune = true;
+                else if (target == targets[10] || card.GetComponent<Card>())
+                    card.GetComponent<Card>().immune = true;
                 else if (target == targets[7])
                 {
                     for (int j = 0; j < 3; j++)
@@ -930,7 +927,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void SumonEffect(Card card)
+    private void SumonEffect(CardCore card)
     {
         Debug.Log("Im going to sumon maybe");
         #region Sumon
