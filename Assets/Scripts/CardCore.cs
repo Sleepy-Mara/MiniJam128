@@ -45,18 +45,12 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         actualLife = card.life;
         actualAttack = card.attack;
-        nameText.text = card.name;
         image.sprite = card.sprite;
         attackText.text = card.attack.ToString();
         lifeText.text = actualLife.ToString();
         manaCostText.text = card.manaCost.ToString();
         healthCostText.text = card.healthCost.ToString();
-        if (card.hasEffect)
-        {
-            UpdateLanguage(FindObjectOfType<LanguageManager>().languageNumber);
-        }
-        else
-            effectText.enabled = false;
+        UpdateLanguage(FindObjectOfType<LanguageManager>().languageNumber);
     }
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
@@ -80,7 +74,10 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void UpdateLanguage(int languageNumber)
     {
-        if(card.hasEffect)
+        nameText.text = card.cardName[languageNumber];
+        if (card.hasEffect)
             effectText.text = card.effectDesc[languageNumber];
+        else
+            effectText.enabled = false;
     }
 }

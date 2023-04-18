@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cards/Normal")]
 public class Cards : ScriptableObject
 {
-    public string cardName;
+    public List<string> cardName;
     public int life;
     public int attack;
     public int attackToPlayer;
