@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: Party Peter
+  m_Name: Hearthfelt horror
   m_EditorClassIdentifier: 
   cardName: 
   life: 0
@@ -22,6 +22,5 @@ MonoBehaviour:
   hasEffect: 0
   effect: 
   effectSprite: {fileID: 0}
-  effectDesc:
-  - 
-  - 
+  effectDesc: []
+  spell: 0
