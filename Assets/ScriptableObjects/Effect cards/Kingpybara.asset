@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Kingpybara
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  cardName:
+  - Kingpybara
+  life: 1
+  attack: 1
+  attackToPlayer: 1
+  manaCost: 5
   healthCost: 0
   sprite: {fileID: 0}
-  hasEffect: 0
+  hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's played, summon 2 Guardpybara
+  - Cuando es jugado, invoca 2 Guardpybara
+  spell: 0

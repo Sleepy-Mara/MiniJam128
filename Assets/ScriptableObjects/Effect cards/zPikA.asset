@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: zPikA
   m_EditorClassIdentifier: 
   cardName:
-  - 
-  - 
-  - 
-  - 
-  - 
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  - zPikA
+  life: 2
+  attack: 2
+  attackToPlayer: 1
+  manaCost: 2
   healthCost: 0
   sprite: {fileID: 21300000, guid: 2df30320a84ae2c41aa5b8795c159987, type: 3}
-  hasEffect: 0
+  hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
-  effectDesc: []
+  effectDesc:
+  - When it's played, if you have the 2 other monkeys in the hand, summon them and
+    add 1 random spell with the effect of either "deal" or "heal" to the hand
+  - "Cuando es jugado, si tenes a los otros 2 monos en la mano, invocalos y a\xF1ade
+    1 hechizo al azar a la mano con el efecto de \"da\xF1ar\" o \"curar\""
   spell: 0

@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Rod
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  cardName:
+  - Rod
+  life: 1
+  attack: 1
+  attackToPlayer: 1
+  manaCost: 2
   healthCost: 0
   sprite: {fileID: 0}
   hasEffect: 0
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's played, give -1/-1 to the enemy creature in front
+  - Cuando es jugado, da -1/-1 a la criatura enemiga en frente
+  spell: 0

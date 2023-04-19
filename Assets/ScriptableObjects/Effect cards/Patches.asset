@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Patches
   m_EditorClassIdentifier: 
-  cardName: Patches
+  cardName:
+  - Patches
   life: 1
   attack: 0
   attackToPlayer: 0
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's played, heal 1 HP to all ally creatures
+  - Cuando es jugado, cura 1 PV a todas las criaturas aliadas
+  spell: 0

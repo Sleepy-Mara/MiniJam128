@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Eucalyptus Pete
   m_EditorClassIdentifier: 
-  cardName: Eucalyptus Pete
+  cardName:
+  - Eucalyptus Pete
   life: 2
   attack: 1
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's played, gain immune until the end of your turn
+  - Cuando es jugado, gana inmune hasta el final de tu turno
+  spell: 0

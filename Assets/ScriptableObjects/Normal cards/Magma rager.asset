@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Magma rager
   m_EditorClassIdentifier: 
-  cardName: Magma rager
+  cardName:
+  - Magma rager
   life: 1
   attack: 5
   attackToPlayer: 1
@@ -20,5 +21,7 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 72ecfb8ddbedcd84594b614706570c2a, type: 3}
   hasEffect: 0
-  effectDesc: 
+  effect: 
   effectSprite: {fileID: 0}
+  effectDesc: []
+  spell: 0

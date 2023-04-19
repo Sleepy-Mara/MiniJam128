@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Carlos
   m_EditorClassIdentifier: 
   cardName:
-  - Carlos
-  life: 0
-  attack: 0
-  attackToPlayer: 0
+  - Carlos the capybara
+  life: 1
+  attack: 1
+  attackToPlayer: 1
   manaCost: 0
   healthCost: 0
   sprite: {fileID: 0}

@@ -12,15 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Kete
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  cardName:
+  - Kete
+  life: 1
+  attack: 3
+  attackToPlayer: 1
+  manaCost: 2
   healthCost: 0
-  sprite: {fileID: 0}
-  hasEffect: 0
+  sprite: {fileID: 21300000, guid: 3da73740603cb79469ee0f28a508273c, type: 3}
+  hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
-  effectDesc: []
+  effectDesc:
+  - When it's played, if you have the 2 other monkeys in the hand, summon them and
+    add 1 random spell with the effect of either "immune" or "summon"
+  - "Cuando es jugado, si tenes a los otros 2 monos en la mano, invocalos y a\xF1ade
+    1 hechizo al azar a la mano con el efecto de \"inmune\" o \"invoca\""
   spell: 0

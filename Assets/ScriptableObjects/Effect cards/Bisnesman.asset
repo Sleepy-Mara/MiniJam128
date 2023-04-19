@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Bisnesman
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  cardName:
+  - Bisnesman
+  life: 1
+  attack: 2
+  attackToPlayer: 1
+  manaCost: 3
   healthCost: 0
   sprite: {fileID: 21300000, guid: c27819de83c16b54cb2da38ef1c56ad1, type: 3}
-  hasEffect: 0
+  hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's played, draw 1 card
+  - Cuando es jugado, roba 1 carta
   spell: 0

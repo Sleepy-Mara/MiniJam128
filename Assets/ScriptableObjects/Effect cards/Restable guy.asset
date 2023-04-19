@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Restable guy
   m_EditorClassIdentifier: 
-  cardName: Restable guy
+  cardName:
+  - Restable guy
   life: 4
   attack: 1
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - At the end of your turn, heal 1 HP to a random ally creature
+  - Al final de tu turno, cura 1 PV a una criatura aliada al azar
+  spell: 0

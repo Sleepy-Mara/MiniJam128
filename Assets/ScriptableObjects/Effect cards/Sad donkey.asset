@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Sad donkey
   m_EditorClassIdentifier: 
-  cardName: Sad donkey
+  cardName:
+  - Sad donkey
   life: 3
   attack: 1
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - At the end of your turn, heals itself 1 HP
+  - Al final de tu turno, se cura a si mismo 1 PV
+  spell: 0

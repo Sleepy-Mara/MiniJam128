@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Trashy
   m_EditorClassIdentifier: 
-  cardName: Trashy
+  cardName:
+  - Trashy
   life: 1
   attack: 2
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it defeats an enemy creature, draw 1 card
+  - Cuando derrota a una criatura enemiga, roba 1 carta
+  spell: 0

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Dog
   m_EditorClassIdentifier: 
-  cardName: Dog
+  cardName:
+  - Dog
   life: 1
   attack: 1
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's played, give +1/+1 to a random ally creature
+  - Cuando es jugado, da +1/+1 a una criatura aliada al azar
+  spell: 0

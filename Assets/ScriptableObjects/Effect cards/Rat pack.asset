@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Rat pack
   m_EditorClassIdentifier: 
-  cardName: Rat pack
+  cardName:
+  - Rat pack
   life: 4
   attack: 0
   attackToPlayer: 0
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - At the end of your turn, add 1 Rat to the hand
+  - "Al final de tu turno, a\xF1ade 1 Rata a la mano"
+  spell: 0

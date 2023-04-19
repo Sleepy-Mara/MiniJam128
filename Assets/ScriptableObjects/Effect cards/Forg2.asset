@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Forg2
   m_EditorClassIdentifier: 
-  cardName: Forg2
+  cardName:
+  - Forg2
   life: 1
   attack: 0
   attackToPlayer: 0
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's defeated, draw 1 card and add Colonel toad to the deck
+  - "Cuando es derrotado, roba 1 carta y a\xF1ade a Coronel sapo al mazo"
+  spell: 0

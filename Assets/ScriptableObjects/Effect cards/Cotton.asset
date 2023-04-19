@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Cotton
   m_EditorClassIdentifier: 
-  cardName: Cotton
+  cardName:
+  - Cotton
   life: 1
   attack: 1
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's defeated, deal 2 damage to the enemy in front
+  - "Cuando es derrotado, hace 2 de da\xF1o al enemigo de enfrente"
+  spell: 0

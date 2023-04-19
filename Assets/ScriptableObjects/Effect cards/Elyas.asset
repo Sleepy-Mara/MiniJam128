@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Elyas
   m_EditorClassIdentifier: 
-  cardName: Elyas
+  cardName:
+  - Elyas
   life: 1
   attack: 2
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - At the end of your turn, deal 1 damage to a random enemy creature
+  - "Al final de tu turno, hace 1 de da\xF1o a una criatura enemiga al azar"
+  spell: 0

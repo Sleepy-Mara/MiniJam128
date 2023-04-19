@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: ANThony
   m_EditorClassIdentifier: 
-  cardName: ANThony
+  cardName:
+  - ANThony
   life: 1
   attack: 0
   attackToPlayer: 0
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When it's played, add 1 random spell from your deck to the hand
+  - "Cuando es jugado, a\xF1ade un hechizo al azar de tu mazo a la mano"
+  spell: 0

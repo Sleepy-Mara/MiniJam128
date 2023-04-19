@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Hearthfelt horror
   m_EditorClassIdentifier: 
-  cardName: 
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  cardName:
+  - Hearthfelt horror
+  life: 1
+  attack: 1
+  attackToPlayer: 1
+  manaCost: 4
   healthCost: 0
-  sprite: {fileID: 0}
-  hasEffect: 0
+  sprite: {fileID: 21300000, guid: 45267dc04125952428e374c741eccc71, type: 3}
+  hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
-  effectDesc: []
+  effectDesc:
+  - When it's played, deal 1 damage to the enemy player
+  - "Cuando es jugado, hace 1 de da\xF1o al jugador enemigo"
   spell: 0

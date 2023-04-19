@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Terry
   m_EditorClassIdentifier: 
-  cardName: Terry
+  cardName:
+  - Terry
   life: 3
   attack: 1
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - When an ally creature is defeated, give -1/-0 to a random enemy creature
+  - Cuando una criatura aliada es derrotada, da -1/-0 a una criatura enemiga al azar
+  spell: 0

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Bday doggo
   m_EditorClassIdentifier: 
-  cardName: Bday doggo
+  cardName:
+  - Bday doggo
   life: 3
   attack: 2
   attackToPlayer: 1
@@ -23,3 +24,4 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc: []
+  spell: 0

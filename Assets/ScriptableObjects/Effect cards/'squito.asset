@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: '''squito'
   m_EditorClassIdentifier: 
-  cardName: '''squito'
+  cardName:
+  - '''squito'
   life: 1
   attack: 1
   attackToPlayer: 1
@@ -23,5 +24,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - 
-  - 
+  - Gain immune while attacking
+  - Gana inmune al atacar
+  spell: 0

@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: Peppa
   m_EditorClassIdentifier: 
-  cardName: []
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  cardName:
+  - Peppa
+  life: 4
+  attack: 2
+  attackToPlayer: 1
+  manaCost: 3
   healthCost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 9e0ec8b0f677c0c4783f24cd62342c91, type: 3}
   hasEffect: 0
   effect: 
   effectSprite: {fileID: 0}
