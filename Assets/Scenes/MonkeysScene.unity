@@ -7479,6 +7479,7 @@ MonoBehaviour:
   turn: 0
   player: {fileID: 1576629345}
   enemy: {fileID: 900393442}
+  table: {fileID: 0}
   canPlayCards: 0
   canEndTurn: 0
   cardsInHandStart: 3
@@ -9783,6 +9784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5696a3520f230c042b179b2d2863b7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
 --- !u!95 &294204357
 Animator:
   serializedVersion: 4
@@ -16392,7 +16394,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cf6ed0a8ba3c244ae7294d23c718eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defeatMenu: {fileID: 877066888}
 --- !u!1001 &587136000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20010,6 +20011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5696a3520f230c042b179b2d2863b7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
 --- !u!65 &716607398
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21386,6 +21388,134 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7148351599262447553, guid: c894f9bfd6221e04c98a2b39f1804fbf, type: 3}
   m_PrefabInstance: {fileID: 740060532}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &744140852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744140854}
+  - component: {fileID: 744140853}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &744140853
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744140852}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9b453ab1e1ae4204cb63cb3e4214e7f2, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &744140854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744140852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.018483, y: 3.9601035, z: -1.09336}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &747191810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23462,6 +23592,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5c530e1bb694727469656a0ca66bdbd7, type: 3}
   - {fileID: 8300000, guid: 6a02c1edad8c2d94cb7b289409a3e9d6, type: 3}
   - {fileID: 8300000, guid: e2de5fd73269d5647a20af949572c2d6, type: 3}
+  audioSource: {fileID: 0}
   myCards: []
 --- !u!114 &805867961
 MonoBehaviour:
@@ -38595,7 +38726,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 091d7ca638832e74e860d63cf5a25204, type: 2}
   - {fileID: 11400000, guid: 8b398a09d29ff544b842f24464179585, type: 2}
   newCard: {fileID: 8954024018774041425, guid: 918ce3453ac3589469482dbb7da7ac37, type: 3}
-  checking: 0
 --- !u!1001 &1385930384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42947,10 +43077,15 @@ MonoBehaviour:
   - strategy: {fileID: 11400000, guid: b5de511e6375b6542b21ccdb7240108f, type: 2}
     enemyCharacter: {fileID: 1686065596}
     rewards: []
-    wonCombatDescription: 
-  wonCombatText: {fileID: 1942253188}
-  _enemy: {fileID: 900393442}
+    introCombatMessage: 
+    wonCombatMessage: 
+    lostCombatMessage: 
+  introCombat: {fileID: 0}
+  introCombatText: {fileID: 0}
   wonCombat: {fileID: 1382407925}
+  wonCombatText: {fileID: 1942253188}
+  lostCombat: {fileID: 0}
+  lostCombatText: {fileID: 0}
   endTurnButton: {fileID: 0}
   gameVictory: {fileID: 1499277109}
   initialMenu: {fileID: 1695625937}
