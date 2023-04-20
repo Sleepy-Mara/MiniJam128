@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - oggod yadB
+  - "ore\xF1alpmc otirreP"
   life: 2
   attack: 3
   attackToPlayer: 1

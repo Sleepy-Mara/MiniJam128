@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Kabosu
+  - Kabosu
   life: 3
   attack: 1
   attackToPlayer: 1
@@ -21,7 +22,7 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 77737cc845fe05b4c90f8d9eafec635d, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <defeats_enemy><give><itself_+2/+0>
   effectSprite: {fileID: 0}
   effectDesc:
   - When it defeats an enemy, gain +2/+0

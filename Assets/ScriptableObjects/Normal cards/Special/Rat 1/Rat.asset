@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: Carlos
+  m_Name: Rat
   m_EditorClassIdentifier: 
   cardName:
-  - Carlos the capybara
+  - Rat 1
+  - Rata 1
   life: 1
   attack: 1
   attackToPlayer: 1
   manaCost: 0
   healthCost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: c8ef9d2c0c197a7439317946f3d210d2, type: 3}
   hasEffect: 0
   effect: 
   effectSprite: {fileID: 0}

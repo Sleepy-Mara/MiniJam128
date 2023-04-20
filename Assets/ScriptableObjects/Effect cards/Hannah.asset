@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Hannah
+  - Hannah
   life: 1
   attack: 1
   attackToPlayer: 1
@@ -21,7 +22,7 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: df5f9f59b06d67f48ac1a24279d8956e, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <defeated><add><deck_1><Roger>
   effectSprite: {fileID: 0}
   effectDesc:
   - When it's defeated, add Roger to the deck

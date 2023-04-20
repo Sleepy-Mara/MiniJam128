@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Forg2
+  - Rna2
   life: 1
   attack: 0
   attackToPlayer: 0
@@ -21,7 +22,7 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 607a451805d31c047b11d7ebde924148, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <defeated><draw><deck_1><&><add><deck_1><Colonel Toad>
   effectSprite: {fileID: 0}
   effectDesc:
   - When it's defeated, draw 1 card and add Colonel toad to the deck

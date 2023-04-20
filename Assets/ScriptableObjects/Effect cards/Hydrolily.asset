@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Hydrolily
+  - "H\xEDdrolily"
   life: 1
   attack: 1
   attackToPlayer: 1
   manaCost: 3
   healthCost: 0
   sprite: {fileID: 21300000, guid: d236036aa68c25e4b81065bfd2ed5b13, type: 3}
-  hasEffect: 0
-  effect: 
+  hasEffect: 1
+  effect: <spell_played><heal><random_ally_creature_1>
   effectSprite: {fileID: 0}
   effectDesc:
   - When a spell is played, heal 1 HP to a random ally creature

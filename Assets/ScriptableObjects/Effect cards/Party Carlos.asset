@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Party Carlos
+  - Cumple Carlos
   life: 1
   attack: 2
   attackToPlayer: 1
   manaCost: 3
   healthCost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: e807223c959c0dc41b17381c30f38c88, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <buffed><immune><itself>
   effectSprite: {fileID: 0}
   effectDesc:
   - When it's buffed, gain immune until your next turn

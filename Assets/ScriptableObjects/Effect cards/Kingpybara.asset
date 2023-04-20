@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Kingpybara
+  - Reypincho
   life: 1
   attack: 1
   attackToPlayer: 1
   manaCost: 5
   healthCost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: e53d2ae5e344b1045961da96672de4c7, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <played><summon><2><Guardpybara>
   effectSprite: {fileID: 0}
   effectDesc:
   - When it's played, summon 2 Guardpybara
-  - Cuando es jugado, invoca 2 Guardpybara
+  - Cuando es jugado, invoca 2 Guardiapincho
   spell: 0

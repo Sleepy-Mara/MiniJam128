@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Rod
+  - Rod
   life: 1
   attack: 1
   attackToPlayer: 1
   manaCost: 2
   healthCost: 0
-  sprite: {fileID: 0}
-  hasEffect: 0
-  effect: 
+  sprite: {fileID: 21300000, guid: 4a64bbd3164c87042aa7b139b6e766c3, type: 3}
+  hasEffect: 1
+  effect: <played><give><creature_front_-1/-1>
   effectSprite: {fileID: 0}
   effectDesc:
   - When it's played, give -1/-1 to the enemy creature in front

@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: Rat 6
+  m_Name: Lava rager
   m_EditorClassIdentifier: 
   cardName:
-  - Rat 6
+  - Lava rager
+  - Furibundo de lava
   life: 1
-  attack: 1
+  attack: 5
   attackToPlayer: 1
-  manaCost: 0
+  manaCost: 3
   healthCost: 0
-  sprite: {fileID: 21300000, guid: ca2f964b92f88af4d817f651f2d5e69f, type: 3}
+  sprite: {fileID: 21300000, guid: c91a73fad67e11b4d8e2ba57c3f28db7, type: 3}
   hasEffect: 0
   effect: 
   effectSprite: {fileID: 0}

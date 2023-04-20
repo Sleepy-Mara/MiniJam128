@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Bday doggo
+  - "Perrito cmpla\xF1ero"
   life: 3
   attack: 2
   attackToPlayer: 1

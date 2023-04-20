@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Pilgor
+  - Pilgor
   life: 3
   attack: 1
   attackToPlayer: 1

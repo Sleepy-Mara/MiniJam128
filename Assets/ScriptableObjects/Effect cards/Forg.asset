@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Forg
+  - Rna
   life: 1
   attack: 0
   attackToPlayer: 0
@@ -21,7 +22,7 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: f496ce796863d8a41b631efc991a4921, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <defeated><draw><deck_1><&><add><deck_1><Forg2>
   effectSprite: {fileID: 0}
   effectDesc:
   - When it's defeated, draw 1 card and add Forg2 to the deck

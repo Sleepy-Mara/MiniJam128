@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Plumsy
+  - Ciruelin
   life: 1
   attack: 2
   attackToPlayer: 1

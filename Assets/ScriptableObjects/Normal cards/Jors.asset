@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Jors
+  - Cabayo
   life: 2
   attack: 2
   attackToPlayer: 1

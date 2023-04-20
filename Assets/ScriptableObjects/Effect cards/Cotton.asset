@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Cotton
+  - Algodon
   life: 1
   attack: 1
   attackToPlayer: 1
@@ -21,7 +22,7 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: d5c4e4d703b07d4478d79817a4e5813b, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <defeated><deal><enemy_front_2>
   effectSprite: {fileID: 0}
   effectDesc:
   - When it's defeated, deal 2 damage to the enemy in front

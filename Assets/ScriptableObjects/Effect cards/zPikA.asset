@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - zPikA
+  - zPikA
   life: 2
   attack: 2
   attackToPlayer: 1

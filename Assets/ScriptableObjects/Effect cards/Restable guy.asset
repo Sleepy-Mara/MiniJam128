@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Restable guy
+  - El tipo de Restable
   life: 4
   attack: 1
   attackToPlayer: 1
@@ -21,7 +22,7 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 7a4519a04f5d42248b792dc736301a18, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <end_turn><heal><random_ally_creature_1>
   effectSprite: {fileID: 0}
   effectDesc:
   - At the end of your turn, heal 1 HP to a random ally creature

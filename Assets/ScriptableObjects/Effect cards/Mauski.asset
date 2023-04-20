@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Mauski
+  - Mauski
   life: 1
   attack: 1
   attackToPlayer: 1
@@ -21,7 +22,7 @@ MonoBehaviour:
   healthCost: 0
   sprite: {fileID: 21300000, guid: 0aae5b7fff26c5e4bbbd7e1dad092654, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <end_turn><draw><deck_1>
   effectSprite: {fileID: 0}
   effectDesc:
   - At the end of your turn, draw 1 card

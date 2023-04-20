@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Guardpybara
+  - Guardiapincho
   life: 0
   attack: 0
   attackToPlayer: 0
