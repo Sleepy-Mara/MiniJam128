@@ -133,7 +133,7 @@ public class EffectManager : MonoBehaviour
                         {
                             effectDescriptions.Remove(conditions);
                             CheckEffect(card, effectDescriptions);
-                            continue;
+                            break;
                         }
                     effectDescriptions.Clear();
                 }
@@ -148,7 +148,7 @@ public class EffectManager : MonoBehaviour
                             effectDescriptions.Remove(conditions);
                             CheckEffect(card, effectDescriptions);
                             checkCondition = true;
-                            continue;
+                            break;
                         }
                     effectDescriptions.Clear();
                     if (checkCondition)
@@ -728,16 +728,17 @@ public class EffectManager : MonoBehaviour
                                 enemyPositions = _table.enemyFront;
                                 allyPositions = _table.playerPositions;
                             }
-                            Debug.LogError("Im going to buff");
                             if (target == targets[13])
                             {
+                                Debug.LogError("Im going to buffgggg");
                                 if (card.actualPosition.positionFacing.card != null)
                                     card.actualPosition.positionFacing.card.Buff(i, j);
                             }
-                            else if (target == targets[10] || card.GetComponent<Card>())
+                            else if (target == targets[10] && card.GetComponent<Card>())
                                 card.GetComponent<Card>().Buff(i, j);
                             else if (target == targets[7])
                             {
+                                Debug.LogError("Im going to buffzzzz");
                                 for (int l = 0; l < 3; l++)
                                     foreach (string effect in newEffect)
                                         if (effect == target + "_" + l.ToString())
@@ -755,6 +756,7 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[6])
                             {
+                                Debug.LogError("Im going to buffxxxx");
                                 for (int l = 0; l < 3; l++)
                                     foreach (string effect in newEffect)
                                         if (effect == target + "_" + l.ToString())
@@ -772,19 +774,21 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[9])
                             {
+                                Debug.LogError("Im going to buffeeee");
                                 foreach (MapPosition selected in allyPositions)
                                     if (selected.card != null)
                                         selected.card.Buff(i, j);
                             }
                             else if (target == targets[8])
                             {
+                                Debug.LogError("Im going to buffiiii");
                                 foreach (MapPosition selected in enemyPositions)
                                     if (selected.card != null)
                                         selected.card.Buff(i, j);
                             }
                             else if (target == targets[5])
                             {
-                                Debug.LogError("Im going to buff");
+                                Debug.LogError("Im going to buffa");
                                 var creatureToBuff = new List<MapPosition>();
                                 foreach (MapPosition creature in allyPositions)
                                     if (creature.card != null)
@@ -796,6 +800,7 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[4])
                             {
+                                Debug.LogError("Im going to buff");
                                 var creatureToBuff = new List<MapPosition>();
                                 foreach (MapPosition creature in enemyPositions)
                                     if (creature.card != null)
