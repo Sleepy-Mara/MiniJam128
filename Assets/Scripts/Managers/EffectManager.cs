@@ -686,31 +686,33 @@ public class EffectManager : MonoBehaviour
                     for (int i = 0; i < 5; i++)
                         for (int j = 0; j < 5; j++)
                         {
+                            int attack = i;
+                            int life = j;
                             bool mustContinue = true;
                             foreach (string effect in newEffect)
                             {
                                 if (effect == target + "_+" + i.ToString() + "/+" + j.ToString())
                                 {
-                                    i *= 1;
-                                    j *= 1;
+                                    attack *= 1;
+                                    life *= 1;
                                     mustContinue = false;
                                 }
                                 else if (effect == target + "_-" + i.ToString() + "/-" + j.ToString())
                                 {
-                                    i *= -1;
-                                    j *= -1;
+                                    attack *= -1;
+                                    life *= -1;
                                     mustContinue = false;
                                 }
                                 else if (effect == target + "_+" + i.ToString() + "/-" + j.ToString())
                                 {
-                                    i *= 1;
-                                    j *= -1;
+                                    attack *= 1;
+                                    life *= -1;
                                     mustContinue = false;
                                 }
                                 else if (effect == target + "_-" + i.ToString() + "/+" + j.ToString())
                                 {
-                                    i *= -1;
-                                    j *= 1;
+                                    attack *= -1;
+                                    life *= 1;
                                     mustContinue = false;
                                 }
                             }
@@ -730,15 +732,13 @@ public class EffectManager : MonoBehaviour
                             }
                             if (target == targets[13])
                             {
-                                Debug.LogError("Im going to buffgggg");
                                 if (card.actualPosition.positionFacing.card != null)
-                                    card.actualPosition.positionFacing.card.Buff(i, j);
+                                    card.actualPosition.positionFacing.card.Buff(attack, life);
                             }
                             else if (target == targets[10] && card.GetComponent<Card>())
-                                card.GetComponent<Card>().Buff(i, j);
+                                card.GetComponent<Card>().Buff(attack, life);
                             else if (target == targets[7])
                             {
-                                Debug.LogError("Im going to buffzzzz");
                                 for (int l = 0; l < 3; l++)
                                     foreach (string effect in newEffect)
                                         if (effect == target + "_" + l.ToString())
@@ -751,12 +751,11 @@ public class EffectManager : MonoBehaviour
                                                             creatureToBuff.Add(creature);
                                                 var selected = Random.Range(0, creatureToBuff.Count);
                                                 if (creatureToBuff[selected].card != null)
-                                                    creatureToBuff[selected].card.Buff(i, j);
+                                                    creatureToBuff[selected].card.Buff(attack, life);
                                             }
                             }
                             else if (target == targets[6])
                             {
-                                Debug.LogError("Im going to buffxxxx");
                                 for (int l = 0; l < 3; l++)
                                     foreach (string effect in newEffect)
                                         if (effect == target + "_" + l.ToString())
@@ -769,26 +768,23 @@ public class EffectManager : MonoBehaviour
                                                             creatureToBuff.Add(creature);
                                                 var selected = Random.Range(0, creatureToBuff.Count);
                                                 if (creatureToBuff[selected].card != null)
-                                                    creatureToBuff[selected].card.Buff(i, j);
+                                                    creatureToBuff[selected].card.Buff(attack, life);
                                             }
                             }
                             else if (target == targets[9])
                             {
-                                Debug.LogError("Im going to buffeeee");
                                 foreach (MapPosition selected in allyPositions)
                                     if (selected.card != null)
-                                        selected.card.Buff(i, j);
+                                        selected.card.Buff(attack, life);
                             }
                             else if (target == targets[8])
                             {
-                                Debug.LogError("Im going to buffiiii");
                                 foreach (MapPosition selected in enemyPositions)
                                     if (selected.card != null)
-                                        selected.card.Buff(i, j);
+                                        selected.card.Buff(attack, life);
                             }
                             else if (target == targets[5])
                             {
-                                Debug.LogError("Im going to buffa");
                                 var creatureToBuff = new List<MapPosition>();
                                 foreach (MapPosition creature in allyPositions)
                                     if (creature.card != null)
@@ -796,11 +792,10 @@ public class EffectManager : MonoBehaviour
                                             creatureToBuff.Add(creature);
                                 var selected = Random.Range(0, creatureToBuff.Count);
                                 if (creatureToBuff[selected].card != null)
-                                    creatureToBuff[selected].card.Buff(i, j);
+                                    creatureToBuff[selected].card.Buff(attack, life);
                             }
                             else if (target == targets[4])
                             {
-                                Debug.LogError("Im going to buff");
                                 var creatureToBuff = new List<MapPosition>();
                                 foreach (MapPosition creature in enemyPositions)
                                     if (creature.card != null)
@@ -808,7 +803,7 @@ public class EffectManager : MonoBehaviour
                                             creatureToBuff.Add(creature);
                                 var selected = Random.Range(0, creatureToBuff.Count);
                                 if (creatureToBuff[selected].card != null)
-                                    creatureToBuff[selected].card.Buff(i, j);
+                                    creatureToBuff[selected].card.Buff(attack, life);
                             }
                             else if (target == targets[0])
                             {

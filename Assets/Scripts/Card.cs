@@ -155,27 +155,34 @@ public class Card : CardCore, IPointerDownHandler
     }
     public void Buff(int attack, int life)
     {
+        Debug.LogWarning(attack);
+        Debug.LogWarning(life);
         int posOrNegLife = 1;
         int posOrNegAttack = 1;
+        if (life > 0 || attack > 0)
+            _effectManager.CheckConditionGetBuffed(this);
         if (life < 0)
         {
             posOrNegLife = -1;
-            if (ActualLife <= 1)
-                life = 0;
+            life *= -1;
         }
         if (attack < 0)
         {
             posOrNegAttack = -1;
-            if (ActualAttack <= 0)
-                attack = 0;
+            attack *= -1;
         }
-        Debug.LogError(card.cardName + " get buffed by " + attack * posOrNegAttack + "/" + life * posOrNegLife);
         for (int i = 0; i < life; i++)
+        {
+            if (ActualLife <= 1)
+                break;
             ActualLife = posOrNegLife;
+        }
         for (int i = 0; i < attack; i++)
+        {
+            if (ActualAttack <= 0)
+                break;
             ActualAttack = posOrNegAttack;
-        checkingEffect = true;
-        _effectManager.CheckConditionGetBuffed(this);
+        }
     }
     public void OnPointerDown(PointerEventData eventData)
     {
