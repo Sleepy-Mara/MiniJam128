@@ -137,6 +137,13 @@ public class Card : CardCore, IPointerDownHandler
                 if (_table.playerPositions[j].card != null)
                     if(_table.playerPositions[j].card == this)
                         _table.playerPositions[j].card = null;
+        foreach (Cemetery cemetery in FindObjectsOfType<Cemetery>())
+        {
+            if (cemetery.player && actualPosition.oponent.GetComponent<Enemy>())
+                cemetery.AddCard(card);
+            if (!cemetery.player && actualPosition.oponent.GetComponent<Player>())
+                cemetery.AddCard(card);
+        }
         Destroy(gameObject);
     }
     public void Heal(int heal)
@@ -151,9 +158,17 @@ public class Card : CardCore, IPointerDownHandler
         int posOrNegLife = 1;
         int posOrNegAttack = 1;
         if (life < 0)
+        {
             posOrNegLife = -1;
+            if (ActualLife <= 1)
+                life = 0;
+        }
         if (attack < 0)
+        {
             posOrNegAttack = -1;
+            if (ActualAttack <= 0)
+                attack = 0;
+        }
         Debug.LogError(card.cardName + " get buffed by " + attack * posOrNegAttack + "/" + life * posOrNegLife);
         for (int i = 0; i < life; i++)
             ActualLife = posOrNegLife;

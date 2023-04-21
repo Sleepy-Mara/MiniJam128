@@ -45,6 +45,11 @@ public class CardMagic : CardCore, IPointerDownHandler
         checkingEffect = true;
         _effectManager.CheckConditionIsPlayed(this);
         yield return new WaitUntil(() => checkingEffect == false);
+        foreach (Cemetery cemetery in FindObjectsOfType<Cemetery>())
+        {
+            if (cemetery.player)
+                cemetery.AddCard(card);
+        }
         StopCoroutine(PlayEffect());
         Destroy(gameObject);
     }
