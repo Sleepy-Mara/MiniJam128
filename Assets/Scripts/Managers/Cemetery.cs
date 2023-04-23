@@ -49,4 +49,8 @@ public class Cemetery : MonoBehaviour, IPointerDownHandler
     {
         cemetery.GetComponent<Animator>().SetBool("Open", true);
     }
+    public void CloseMenu()
+    {
+        cemetery.GetComponent<Animator>().SetBool("Open", false);
+    }
 }
