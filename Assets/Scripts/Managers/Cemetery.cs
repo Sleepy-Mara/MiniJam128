@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Cemetery : MonoBehaviour, IPointerDownHandler
+public class Cemetery : MonoBehaviour
 {
     [SerializeField]
     private GameObject cardCore;
@@ -16,10 +16,14 @@ public class Cemetery : MonoBehaviour, IPointerDownHandler
     [SerializeField] private int originalCameraWidth;
     private int actualCameraHeight;
     private int actualCameraWidth;
+    [SerializeField]
+    private Transform playerCemetery;
+    [SerializeField]
+    private Transform enemyCemetery;
     private void Awake()
     {
         mainCamera = FindObjectOfType<Camera>();
-        var listCemetery = cemetery.GetComponent<GridLayoutGroup>();
+        var listCemetery = cemetery.GetComponentInChildren<GridLayoutGroup>();
         listCemetery.spacing = new Vector2(listCemetery.spacing.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
             listCemetery.spacing.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
         listCemetery.cellSize = new Vector2(listCemetery.cellSize.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
@@ -42,15 +46,23 @@ public class Cemetery : MonoBehaviour, IPointerDownHandler
     }
     public void AddCard(Cards cardToAdd)
     {
-        var newCard = Instantiate(cardCore, cemetery).GetComponent<CardCore>();
+        Transform newCemetery;
+        if (player)
+            newCemetery = playerCemetery;
+        else newCemetery = enemyCemetery;
+        var newCard = Instantiate(cardCore, newCemetery).GetComponent<CardCore>();
         newCard.card = cardToAdd;
     }
-    public void OnPointerDown(PointerEventData eventData)
+    private void OnMouseDown()
     {
-        cemetery.GetComponent<Animator>().SetBool("Open", true);
+        if (player)
+            cemetery.GetComponent<Animator>().SetBool("OpenPlayer", true);
+        if (!player)
+            cemetery.GetComponent<Animator>().SetBool("OpenEnemy", true);
     }
     public void CloseMenu()
     {
-        cemetery.GetComponent<Animator>().SetBool("Open", false);
+        cemetery.GetComponent<Animator>().SetBool("OpenPlayer", false);
+        cemetery.GetComponent<Animator>().SetBool("OpenEnemy", false);
     }
 }
