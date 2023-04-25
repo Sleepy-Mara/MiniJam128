@@ -7,9 +7,22 @@ public class LanguageManager : MonoBehaviour
 {
     private string language;
     public int languageNumber;
+    static int savedLanguageNumber;
+    static LanguageManager instance;
     [SerializeField]
     private List<TextLanguage> texts;
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            savedLanguageNumber = languageNumber;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+        languageNumber = savedLanguageNumber;
+        UpdateLanguage();
+    }
     public void ChangeLanguage(string selectedLanguage)
     {
         language = selectedLanguage;
