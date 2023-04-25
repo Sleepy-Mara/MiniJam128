@@ -772,12 +772,13 @@ MonoBehaviour:
   effectText: {fileID: 784638889057809569}
   image: {fileID: 8954024019986997752}
   canvas: {fileID: 7246755023112462814}
+  playerCard: 0
+  checkingEffect: 0
   inAttackAnim: 0
   inDamageAnim: 0
   immune: 0
   handAnimator: {fileID: 9100000, guid: a6e780c53ff91e14caa89ae61ced91b5, type: 2}
   tableAnimator: {fileID: 9100000, guid: 54c394e32556e0f4a87c40c8b7495c8d, type: 2}
-  playerCard: 0
   played: 0
 --- !u!95 &8954024018774041424
 Animator:
@@ -1283,7 +1284,7 @@ Animator:
   m_GameObject: {fileID: 8954024019598615160}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3e4435713f283874ea212417c743c142, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -137,13 +137,17 @@ public class Card : CardCore, IPointerDownHandler
                 if (_table.playerPositions[j].card != null)
                     if(_table.playerPositions[j].card == this)
                         _table.playerPositions[j].card = null;
-        foreach (Cemetery cemetery in FindObjectsOfType<Cemetery>())
-        {
-            if (cemetery.player && actualPosition.oponent.GetComponent<Enemy>())
-                cemetery.AddCard(card);
-            if (!cemetery.player && actualPosition.oponent.GetComponent<Player>())
-                cemetery.AddCard(card);
-        }
+        //foreach (Cemetery cemetery in FindObjectsOfType<Cemetery>())
+        //{
+        //    if (cemetery.player && actualPosition.oponent.GetComponent<Enemy>())
+        //        cemetery.AddCard(card);
+        //    if (!cemetery.player && actualPosition.oponent.GetComponent<Player>())
+        //        cemetery.AddCard(card);
+        //}
+        if (actualPosition.oponent.GetComponent<Enemy>())
+            FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, actualPosition, true);
+        if (actualPosition.oponent.GetComponent<Player>())
+            FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, actualPosition, false);
         Destroy(gameObject);
     }
     public void Heal(int heal)

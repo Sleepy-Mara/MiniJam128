@@ -50,7 +50,7 @@ public class CardMagic : CardCore, IPointerDownHandler
             if (cemetery.player)
                 cemetery.AddCard(card);
         }
-        StopCoroutine(PlayEffect());
+        FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, null, true);
         Destroy(gameObject);
     }
 }
