@@ -20,6 +20,11 @@ public class EffectManager : MonoBehaviour
         "until_next_turn", //10
         "until_end_turn" //11
     };
+    [HideInInspector]
+    public List<string> Conditions
+    {
+        get { return conditions; }
+    }
     [SerializeField]
     private List<string> effects = new List<string>()
     {
@@ -31,6 +36,11 @@ public class EffectManager : MonoBehaviour
         "immune", //5
         "summon" //6
     };
+    [HideInInspector]
+    public List<string> Effects
+    {
+        get { return effects; }
+    }
     [SerializeField]
     private List<string> targets = new List<string>()
     {
@@ -55,6 +65,11 @@ public class EffectManager : MonoBehaviour
         "random_creature", //18
         "random_spell" //19
     };
+    [HideInInspector]
+    public List<string> Target
+    {
+        get { return targets; }
+    }
     [SerializeField]
     private List<Cards> cards;
     [SerializeField]
@@ -526,7 +541,10 @@ public class EffectManager : MonoBehaviour
         Debug.LogError("Im going to add a card maybe");
         #region Add
         if (card.actualPosition.oponent == FindObjectOfType<Player>())
+        {
+            card.checkingEffect = false;
             return;
+        }
         bool added = false;
         foreach (string effectNew in newEffect)
         {

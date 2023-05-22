@@ -6,9 +6,9 @@ public class Enemy : Health
 {
     public Strategy strategy;
     public GameObject card;
-    private Table _table;
+    protected Table _table;
     private TurnManager _turnManager;
-    private EffectManager _effectManager;
+    protected EffectManager _effectManager;
     
     private void Start()
     {
@@ -20,7 +20,7 @@ public class Enemy : Health
         base.Awake();
         _table = FindObjectOfType<Table>();
     }
-    public void MoveBackCards(int turn)
+    virtual public void MoveBackCards(int turn)
     {
         foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
@@ -35,7 +35,7 @@ public class Enemy : Health
                 }
         PlaceBackCards(turn);
     }
-    public void PlaceBackCards(int turn)
+    virtual public void PlaceBackCards(int turn)
     {
         if (turn < strategy.turns.Length)
         {
@@ -66,12 +66,29 @@ public class Enemy : Health
     }
     public void AttackFrontCards()
     {
-        foreach(MapPosition card in _table.enemyFront)
-            if (card.card != null)
-                card.card.Attack();
+        StartCoroutine(AttackPhase());
+    }
+    IEnumerator AttackPhase()
+    {
+
         foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
+            {
+                card.card.attacking = true;
+                card.card.Attack();
+                if (card.card.ActualAttack > 0)
+                {
+                    yield return new WaitUntil(() => card.card.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
+                    yield return new WaitUntil(() => !card.card.attacking);
+                }
+            }
+        foreach (MapPosition card in _table.enemyFront)
+            if (card.card != null)
+            {
+                card.card.checkingEffect = true;
                 _effectManager.CheckConditionEndOfTurn(card.card);
+                yield return new WaitUntil(() => !card.card.checkingEffect);
+            }
         _turnManager.StartTurn();
     }
     public override void Defeat()

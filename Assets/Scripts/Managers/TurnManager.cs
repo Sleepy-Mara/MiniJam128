@@ -88,18 +88,26 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator AttackPhase()
     {
+        canEndTurn = false;
         bool wait = false;
         foreach (MapPosition card in table.playerPositions)
             if (card.card != null)
+            {
+                card.card.attacking = true;
                 card.card.Attack();
-        for(int i = 0; i < table.playerPositions.Length; i++)
-            if (table.playerPositions[i].card != null)
-                wait = true;
-        if (wait)
-            yield return new WaitForSeconds(3);
+                if (card.card.ActualAttack > 0)
+                {
+                    yield return new WaitUntil(() => card.card.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackPlayer"));
+                    yield return new WaitUntil(() => !card.card.attacking);
+                }
+            }
         foreach (MapPosition card in table.playerPositions)
             if (card.card != null)
+            {
+                card.card.checkingEffect = true;
                 effectManager.CheckConditionEndOfTurn(card.card);
+                yield return new WaitUntil(() => !card.card.checkingEffect);
+            }
         if (enemy.actualHealth > 0)
             enemy.MoveBackCards(turn);
     }

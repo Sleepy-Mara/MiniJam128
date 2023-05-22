@@ -13,6 +13,7 @@ public class Card : CardCore, IPointerDownHandler
     public RuntimeAnimatorController tableAnimator;
     [HideInInspector]
     public bool played = false;
+    public bool attacking;
     private void Start()
     {
         _effectManager = FindObjectOfType<EffectManager>();
@@ -47,25 +48,27 @@ public class Card : CardCore, IPointerDownHandler
     public void Attack()
     {
         if (ActualAttack <= 0)
+        {
+            attacking = false;
             return;
-        if (this != null)
-            if (actualPosition.oponent.GetComponent<Enemy>())
-                GetComponent<Animator>().SetTrigger("AttackPlayer");
-            else GetComponent<Animator>().SetTrigger("AttackEnemy");
+        }
+        if (actualPosition.oponent.GetComponent<Enemy>())
+            GetComponent<Animator>().SetTrigger("AttackPlayer");
+        else GetComponent<Animator>().SetTrigger("AttackEnemy");
         if (actualPosition.positionFacing.card != null)
         {
-                Debug.Log(card.name + " ataco");
             actualPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, this);
             //ejecutar audio y/o animacion
             checkingEffect = true;
             _effectManager.CheckConditionAttack(this);
-            ReceiveDamagePublic(actualPosition.positionFacing.card.GetComponent<Card>().ActualAttack, null);
+            //ReceiveDamagePublic(actualPosition.positionFacing.card.GetComponent<Card>().ActualAttack, null);
         }
         else
         {
             actualPosition.oponent.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
             checkingEffect = true;
             _effectManager.CheckConditionAttack(this);
+            attacking = false;
         }
     }
     public void ReceiveDamagePublic(int damage, Card attacker)
@@ -75,21 +78,39 @@ public class Card : CardCore, IPointerDownHandler
     IEnumerator ReceiveDamage(int damage, Card attacker)
     {
         yield return new WaitUntil(() => checkingEffect == false);
-        yield return new WaitForSeconds(1);
+        string myAttackAnim = "";
+        string attackerAttackAnim = "";
+        if (actualPosition.oponent.GetComponent<Enemy>())
+        {
+            attackerAttackAnim = "AttackEnemy";
+            myAttackAnim = "AttackPlayer";
+        }
+        else
+        {
+            attackerAttackAnim = "AttackPlayer";
+            myAttackAnim = "AttackEnemy";
+        }
+        //if (attacker != null)
+        //    yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(myAttackAnim) && attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
+        //else yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
         if (attacker != null)
-            yield return new WaitUntil(() => inAttackAnim == false && attacker.inAttackAnim == false);
-        else yield return new WaitUntil(() => inAttackAnim == false);
+            yield return new WaitUntil(() => attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(attackerAttackAnim));
         checkingEffect = true;
         _effectManager.CheckConditionGetDamaged(this);
+        bool damaged = false;
         if (!immune)
         {
             if (damage > 0)
                 GetComponent<Animator>().SetTrigger("GetDamage");
             ActualLife = -damage;
+            damaged = true;
         }
         else
             immune = false;
         yield return new WaitUntil(() => checkingEffect == false);
+        if (damaged)
+            yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("GetDamage"));
+        attacker.attacking = false;
         if (ActualLife <= 0)
         {
             StartCoroutine(Defeated(attacker));
@@ -97,8 +118,6 @@ public class Card : CardCore, IPointerDownHandler
     }
     IEnumerator Defeated(Card attacker)
     {
-        yield return new WaitForSeconds(0.5f);
-        yield return new WaitUntil(() => inDamageAnim == false);
         if (attacker != null)
         {
             checkingEffect = true;
