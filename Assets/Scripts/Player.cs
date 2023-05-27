@@ -11,6 +11,8 @@ public class Player : Health
     public int actualMana;
     [SerializeField] private ManaFiller manaFiller;
     public Animator notEnoughManaWindow;
+    [SerializeField] private float shakeDuration;
+    [SerializeField] private float shakeMagnitude;
 
 
     public bool EnoughMana(int cost)
@@ -62,5 +64,25 @@ public class Player : Health
     private void RefreshMana()
     {
         manaFiller.RefreshManas(actualMana, manaLimit);
+    }
+    public override void ReceiveDamage(int damage)
+    {
+        //StartCoroutine(Shake());
+        base.ReceiveDamage(damage);
+    }
+    IEnumerator Shake()
+    {
+        Camera cam = FindObjectOfType<Camera>();
+        Vector3 originalPos = cam.transform.localPosition;
+        float elapsed = 0.0f;
+        while (elapsed < shakeDuration)
+        {
+            float x = Random.Range(-1f, +1f) * shakeMagnitude;
+            float y = Random.Range(-1f, +1f) * shakeMagnitude;
+            cam.transform.localPosition = new Vector3(x, y, originalPos.z);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        cam.transform.localPosition = originalPos;
     }
 }

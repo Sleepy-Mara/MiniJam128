@@ -14,6 +14,8 @@ public class Card : CardCore, IPointerDownHandler
     [HideInInspector]
     public bool played = false;
     public bool attacking;
+    private List<CardTempEffect> cardTempEffects = new List<CardTempEffect>();
+    private int attackToPlayer;
     private void Start()
     {
         _effectManager = FindObjectOfType<EffectManager>();
@@ -65,7 +67,12 @@ public class Card : CardCore, IPointerDownHandler
         }
         else
         {
-            actualPosition.oponent.GetComponent<Health>().ReceiveDamage(card.attackToPlayer);
+            if (ActualAttack >= 10)
+                attackToPlayer = 3;
+            else if (ActualAttack >= 5)
+                attackToPlayer = 2;
+            else attackToPlayer = 1;
+            actualPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
             checkingEffect = true;
             _effectManager.CheckConditionAttack(this);
             attacking = false;
@@ -105,8 +112,6 @@ public class Card : CardCore, IPointerDownHandler
             ActualLife = -damage;
             damaged = true;
         }
-        else
-            immune = false;
         yield return new WaitUntil(() => checkingEffect == false);
         if (damaged)
             yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("GetDamage"));
@@ -169,17 +174,38 @@ public class Card : CardCore, IPointerDownHandler
             FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, actualPosition, false);
         Destroy(gameObject);
     }
+    public void ReceiveDamageEffect(int damage, Card attacker, bool startTurn, bool endTurn)
+    {
+        if (startTurn)
+            cardTempEffects.Add(new CardTempEffect { startTurn = true, endTurn = false, damage = damage });
+        if (endTurn)
+            cardTempEffects.Add(new CardTempEffect { startTurn = false, endTurn = true, damage = damage });
+        StartCoroutine(ReceiveDamage(damage, attacker));
+    }
+    public void HealEffect(int heal, bool startTurn, bool endTurn)
+    {
+        if (startTurn)
+            cardTempEffects.Add(new CardTempEffect { startTurn = true, endTurn = false, heal = heal });
+        if (endTurn)
+            cardTempEffects.Add(new CardTempEffect { startTurn = false, endTurn = true, heal = heal });
+        Heal(heal);
+    }
     public void Heal(int heal)
     {
         for (int i = 0; i < heal; i++)
             if (ActualLife < card.life)
                 ActualLife = 1;
-        Debug.Log("Heal me " + heal);
+    }
+    public void BuffEffect(int attack, int life, bool startTurn, bool endTurn)
+    {
+        if (startTurn)
+            cardTempEffects.Add(new CardTempEffect { startTurn = true, endTurn = false, attack = attack, life = life });
+        if (endTurn)
+            cardTempEffects.Add(new CardTempEffect { startTurn = false, endTurn = true, attack = attack, life = life });
+        Buff(attack, life);
     }
     public void Buff(int attack, int life)
     {
-        Debug.LogWarning(attack);
-        Debug.LogWarning(life);
         int posOrNegLife = 1;
         int posOrNegAttack = 1;
         if (life > 0 || attack > 0)
@@ -205,6 +231,52 @@ public class Card : CardCore, IPointerDownHandler
             if (ActualAttack <= 0)
                 break;
             ActualAttack = posOrNegAttack;
+        }
+    }
+    public void ImmuneEffect(bool startTurn, bool endTurn)
+    {
+        if (startTurn)
+            cardTempEffects.Add(new CardTempEffect { startTurn = true, endTurn = false, immune = true });
+        if (endTurn)
+            cardTempEffects.Add(new CardTempEffect { startTurn = false, endTurn = true, immune = true });
+        Immune();
+    }
+    public void Immune()
+    {
+        immune = true;
+    }
+    public void StartTurn()
+    {
+        foreach (CardTempEffect effect in cardTempEffects)
+        {
+            if (effect.endTurn)
+                continue;
+            if (effect.destroy)
+                StartCoroutine(Defeated(null));
+            if (effect.damage > 0)
+                Heal(effect.damage);
+            if (effect.heal > 0)
+                ReceiveDamagePublic(effect.heal, null);
+            if (effect.attack != 0 || effect.life != 0)
+                Buff(effect.attack * -1, effect.life * -1);
+        }
+    }
+    public void EndTurn()
+    {
+        foreach (CardTempEffect effect in cardTempEffects)
+        {
+            if (effect.startTurn)
+                continue;
+            if (effect.immune)
+                immune = false;
+            if (effect.destroy)
+                StartCoroutine(Defeated(null));
+            if (effect.damage > 0)
+                Heal(effect.damage);
+            if (effect.heal > 0)
+                ReceiveDamagePublic(effect.heal, null);
+            if (effect.attack != 0 || effect.life != 0)
+                Buff(effect.attack * -1, effect.life * -1);
         }
     }
     public void OnPointerDown(PointerEventData eventData)
@@ -240,4 +312,16 @@ public class Card : CardCore, IPointerDownHandler
             canvas.overrideSorting = false;
         }
     }
+}
+[System.Serializable]
+public class CardTempEffect
+{
+    public bool startTurn;
+    public bool endTurn;
+    public bool destroy;
+    public int attack;
+    public int life;
+    public int heal;
+    public int damage;
+    public bool immune;
 }

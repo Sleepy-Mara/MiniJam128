@@ -26,6 +26,12 @@ public class EffectManager : MonoBehaviour
         get { return conditions; }
     }
     [SerializeField]
+    private List<string> extraConditions = new List<string>()
+    {
+        "until_next_turn", //0
+        "until_end_turn" //1
+    };
+    [SerializeField]
     private List<string> effects = new List<string>()
     {
         "draw", //0
@@ -191,27 +197,36 @@ public class EffectManager : MonoBehaviour
     }
     private void CheckEffect(CardCore card, List<string> newEffect)
     {
+        bool startTurn = false;
+        bool endTurn = false;
+        foreach(string extraCondition in newEffect)
+        {
+            if (extraCondition.Contains(extraConditions[0]))
+                startTurn = true;
+            if (extraCondition.Contains(extraConditions[1]))
+                endTurn = true;
+        }
         Debug.LogError("Im going to do something");
         foreach (string effect in newEffect)
         {
             if (effect.Contains(effects[0]))
-                DrawEffect(card, newEffect);
+                DrawEffect(card, newEffect, startTurn, endTurn);
             if (effect.Contains(effects[1]))
-                DealDamageEffect(card, newEffect);
+                DealDamageEffect(card, newEffect, startTurn, endTurn);
             if (effect.Contains(effects[2]))
-                HealEffect(card, newEffect);
+                HealEffect(card, newEffect, startTurn, endTurn);
             if (effect.Contains(effects[3]))
-                AddEffect(card, newEffect);
+                AddEffect(card, newEffect, startTurn, endTurn);
             if (effect.Contains(effects[4]))
-                GiveEffect(card, newEffect);
+                GiveEffect(card, newEffect, startTurn, endTurn);
             if (effect.Contains(effects[5]))
-                ImmuneEffect(card, newEffect);
+                ImmuneEffect(card, newEffect, startTurn, endTurn);
             if (effect.Contains(effects[6]))
-                SumonEffect(card, newEffect);
+                SumonEffect(card, newEffect, startTurn, endTurn);
         }
     }
     #endregion
-    private void DrawEffect(CardCore card, List<string> newEffect)
+    private void DrawEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
         Debug.LogError("Im going to draw maybe");
         #region Draw
@@ -245,7 +260,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void DealDamageEffect(CardCore card, List<string> newEffect)
+    private void DealDamageEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
         Debug.LogError("Im going to do damage maybe");
         #region DealDamage
@@ -276,13 +291,13 @@ public class EffectManager : MonoBehaviour
                         if (effectNew == target + "_" + i.ToString())
                         {
                             if (target == targets[13])
-                                card.actualPosition.positionFacing.card.ReceiveDamagePublic(i, null);
+                                card.actualPosition.positionFacing.card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             else if (target == targets[12])
                                 allyHealth.ReceiveDamage(i);
                             else if (target == targets[11])
                                 enemyHealth.ReceiveDamage(i);
                             else if (target == targets[10] || card.GetComponent<Card>())
-                                card.GetComponent<Card>().ReceiveDamagePublic(i, null);
+                                card.GetComponent<Card>().ReceiveDamageEffect(i, null, startTurn, endTurn);
                             else if (target == targets[7])
                             {
                                 for (int j = 0; j < 3; j++)
@@ -297,7 +312,7 @@ public class EffectManager : MonoBehaviour
                                                             enemysAlive.Add(enemy);
                                                 var selected = Random.Range(0, enemysAlive.Count);
                                                 if (allyPositions[selected].card != null)
-                                                    allyPositions[selected].card.ReceiveDamagePublic(i, null);
+                                                    allyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[6])
@@ -314,20 +329,20 @@ public class EffectManager : MonoBehaviour
                                                             enemysAlive.Add(enemy);
                                                 var selected = Random.Range(0, enemysAlive.Count);
                                                 if (enemyPositions[selected].card != null)
-                                                    enemyPositions[selected].card.ReceiveDamagePublic(i, null);
+                                                    enemyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[9])
                             {
                                 foreach (MapPosition selected in allyPositions)
                                     if (selected.card != null)
-                                        selected.card.ReceiveDamagePublic(i, null);
+                                        selected.card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[8])
                             {
                                 foreach (MapPosition selected in enemyPositions)
                                     if (selected.card)
-                                        selected.card.ReceiveDamagePublic(i, null);
+                                        selected.card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[5])
                             {
@@ -338,7 +353,7 @@ public class EffectManager : MonoBehaviour
                                             enemysAlive.Add(enemy);
                                 var selected = Random.Range(0, enemysAlive.Count);
                                 if (allyPositions[selected].card != null)
-                                    allyPositions[selected].card.ReceiveDamagePublic(i, null);
+                                    allyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[4])
                             {
@@ -349,7 +364,7 @@ public class EffectManager : MonoBehaviour
                                             enemysAlive.Add(enemy);
                                 var selected = Random.Range(0, enemysAlive.Count);
                                 if (enemyPositions[selected].card != null)
-                                    enemyPositions[selected].card.ReceiveDamagePublic(i, null);
+                                    enemyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[3])
                             {
@@ -362,7 +377,7 @@ public class EffectManager : MonoBehaviour
                                 if (selected == allyPositions.Length)
                                     allyHealth.ReceiveDamage(i);
                                 else if (allyPositions[selected].card != null)
-                                    allyPositions[selected].card.ReceiveDamagePublic(i, null);
+                                    allyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[2])
                             {
@@ -375,7 +390,7 @@ public class EffectManager : MonoBehaviour
                                 if (selected == enemyPositions.Length)
                                     enemyHealth.ReceiveDamage(i);
                                 else if (enemyPositions[selected].card != null)
-                                    enemyPositions[selected].card.ReceiveDamagePublic(i, null);
+                                    enemyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[0])
                             {
@@ -391,7 +406,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void HealEffect(CardCore card, List<string> newEffect)
+    private void HealEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
         Debug.LogError("Im going to heal maybe");
         #region Heal
@@ -421,13 +436,13 @@ public class EffectManager : MonoBehaviour
                             }
                             Debug.Log("Im going to heal");
                             if (target == targets[13])
-                                card.actualPosition.positionFacing.card.Heal(i);
+                                card.actualPosition.positionFacing.card.HealEffect(i, startTurn, endTurn);
                             else if (target == targets[12])
                                 allyHealth.RestoreHealth(i);
                             else if (target == targets[11])
                                 enemyHealth.RestoreHealth(i);
                             else if (target == targets[10] || card.GetComponent<Card>())
-                                card.GetComponent<Card>().Heal(i);
+                                card.GetComponent<Card>().HealEffect(i, startTurn, endTurn);
                             else if (target == targets[7])
                             {
                                 for (int j = 0; j < 3; j++)
@@ -442,7 +457,7 @@ public class EffectManager : MonoBehaviour
                                                             allysToHeal.Add(ally);
                                                 var selected = Random.Range(0, allysToHeal.Count);
                                                 if (allysToHeal[selected].card != null)
-                                                    allysToHeal[selected].card.Heal(i);
+                                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[6])
@@ -459,20 +474,20 @@ public class EffectManager : MonoBehaviour
                                                             allysToHeal.Add(ally);
                                                 var selected = Random.Range(0, allysToHeal.Count);
                                                 if (allysToHeal[selected].card != null)
-                                                    allysToHeal[selected].card.Heal(i);
+                                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[9])
                             {
                                 foreach (MapPosition selected in allyPositions)
                                     if (selected.card != null)
-                                        selected.card.Heal(i);
+                                        selected.card.HealEffect(i, startTurn, endTurn);
                             }
                             else if (target == targets[8])
                             {
                                 foreach (MapPosition selected in enemyPositions)
                                     if (selected.card)
-                                        selected.card.Heal(i);
+                                        selected.card.HealEffect(i, startTurn, endTurn);
                             }
                             else if (target == targets[5])
                             {
@@ -484,7 +499,7 @@ public class EffectManager : MonoBehaviour
                                 var selected = Random.Range(0, allysToHeal.Count);
                                 Debug.Log("Im going to heal you " + allysToHeal[selected].card.card.name);
                                 if (allysToHeal[selected].card != null)
-                                    allysToHeal[selected].card.Heal(i);
+                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
                             else if (target == targets[4])
                             {
@@ -496,7 +511,7 @@ public class EffectManager : MonoBehaviour
                                 var selected = Random.Range(0, allysToHeal.Count);
                                 Debug.Log("Im going to heal you " + allysToHeal[selected].card.card.name);
                                 if (allysToHeal[selected].card != null)
-                                    allysToHeal[selected].card.Heal(i);
+                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
                             else if (target == targets[3])
                             {
@@ -509,7 +524,7 @@ public class EffectManager : MonoBehaviour
                                 if (selected == allyPositions.Length)
                                     allyHealth.RestoreHealth(i);
                                 else if (allysToHeal[selected].card != null)
-                                    allysToHeal[selected].card.Heal(i);
+                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
                             else if (target == targets[2])
                             {
@@ -522,7 +537,7 @@ public class EffectManager : MonoBehaviour
                                 if (selected == enemyPositions.Length)
                                     enemyHealth.RestoreHealth(i);
                                 else if (allysToHeal[selected].card != null)
-                                    allysToHeal[selected].card.Heal(i);
+                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
                             else if (target == targets[0])
                             {
@@ -536,7 +551,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void AddEffect(CardCore card, List<string> newEffect)
+    private void AddEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
         Debug.LogError("Im going to add a card maybe");
         #region Add
@@ -694,7 +709,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void GiveEffect(CardCore card, List<string> newEffect)
+    private void GiveEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
         Debug.LogError("Im going to buff maybe");
         #region Give
@@ -751,10 +766,10 @@ public class EffectManager : MonoBehaviour
                             if (target == targets[13])
                             {
                                 if (card.actualPosition.positionFacing.card != null)
-                                    card.actualPosition.positionFacing.card.Buff(attack, life);
+                                    card.actualPosition.positionFacing.card.BuffEffect(attack, life, startTurn, endTurn);
                             }
                             else if (target == targets[10] && card.GetComponent<Card>())
-                                card.GetComponent<Card>().Buff(attack, life);
+                                card.GetComponent<Card>().BuffEffect(attack, life, startTurn, endTurn);
                             else if (target == targets[7])
                             {
                                 for (int l = 0; l < 3; l++)
@@ -769,7 +784,7 @@ public class EffectManager : MonoBehaviour
                                                             creatureToBuff.Add(creature);
                                                 var selected = Random.Range(0, creatureToBuff.Count);
                                                 if (creatureToBuff[selected].card != null)
-                                                    creatureToBuff[selected].card.Buff(attack, life);
+                                                    creatureToBuff[selected].card.BuffEffect(attack, life, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[6])
@@ -786,20 +801,20 @@ public class EffectManager : MonoBehaviour
                                                             creatureToBuff.Add(creature);
                                                 var selected = Random.Range(0, creatureToBuff.Count);
                                                 if (creatureToBuff[selected].card != null)
-                                                    creatureToBuff[selected].card.Buff(attack, life);
+                                                    creatureToBuff[selected].card.BuffEffect(attack, life, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[9])
                             {
                                 foreach (MapPosition selected in allyPositions)
                                     if (selected.card != null)
-                                        selected.card.Buff(attack, life);
+                                        selected.card.BuffEffect(attack, life, startTurn, endTurn);
                             }
                             else if (target == targets[8])
                             {
                                 foreach (MapPosition selected in enemyPositions)
                                     if (selected.card != null)
-                                        selected.card.Buff(attack, life);
+                                        selected.card.BuffEffect(attack, life, startTurn, endTurn);
                             }
                             else if (target == targets[5])
                             {
@@ -810,7 +825,7 @@ public class EffectManager : MonoBehaviour
                                             creatureToBuff.Add(creature);
                                 var selected = Random.Range(0, creatureToBuff.Count);
                                 if (creatureToBuff[selected].card != null)
-                                    creatureToBuff[selected].card.Buff(attack, life);
+                                    creatureToBuff[selected].card.BuffEffect(attack, life, startTurn, endTurn);
                             }
                             else if (target == targets[4])
                             {
@@ -821,7 +836,7 @@ public class EffectManager : MonoBehaviour
                                             creatureToBuff.Add(creature);
                                 var selected = Random.Range(0, creatureToBuff.Count);
                                 if (creatureToBuff[selected].card != null)
-                                    creatureToBuff[selected].card.Buff(attack, life);
+                                    creatureToBuff[selected].card.BuffEffect(attack, life, startTurn, endTurn);
                             }
                             else if (target == targets[0])
                             {
@@ -835,7 +850,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void ImmuneEffect(CardCore card, List<string> newEffect)
+    private void ImmuneEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
         Debug.LogError("Im immune maybe");
         #region Inmune
@@ -919,7 +934,7 @@ public class EffectManager : MonoBehaviour
         card.checkingEffect = false;
         #endregion
     }
-    private void SumonEffect(CardCore card, List<string> newEffect)
+    private void SumonEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
         Debug.LogError("Im going to sumon maybe");
         #region Sumon

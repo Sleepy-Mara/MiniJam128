@@ -37,7 +37,10 @@ public class TurnManager : MonoBehaviour
     {
         foreach (MapPosition card in table.playerPositions)
             if (card.card != null)
+            {
                 effectManager.CheckConditionStartOfTurn(card.card);
+                card.card.StartTurn();
+            }
         FindObjectOfType<CameraManager>().HandCamera();
         canEndTurn = false;
         turn++;
@@ -104,6 +107,7 @@ public class TurnManager : MonoBehaviour
         foreach (MapPosition card in table.playerPositions)
             if (card.card != null)
             {
+                card.card.EndTurn();
                 card.card.checkingEffect = true;
                 effectManager.CheckConditionEndOfTurn(card.card);
                 yield return new WaitUntil(() => !card.card.checkingEffect);

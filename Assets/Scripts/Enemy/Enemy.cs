@@ -9,7 +9,7 @@ public class Enemy : Health
     protected Table _table;
     private TurnManager _turnManager;
     protected EffectManager _effectManager;
-    
+
     private void Start()
     {
         _turnManager = FindObjectOfType<TurnManager>();
@@ -89,6 +89,7 @@ public class Enemy : Health
                 _effectManager.CheckConditionEndOfTurn(card.card);
                 yield return new WaitUntil(() => !card.card.checkingEffect);
             }
+        yield return new WaitForSeconds(1);
         _turnManager.StartTurn();
     }
     public override void Defeat()

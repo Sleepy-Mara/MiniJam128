@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
         RefreshHealth();
         //audio / algo
     }
-    public void ReceiveDamage(int damage)
+    virtual public void ReceiveDamage(int damage)
     {
         //sonido / animacion
         if ((actualHealth - damage) <= 0)
