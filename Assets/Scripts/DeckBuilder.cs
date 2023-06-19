@@ -26,29 +26,32 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private GridLayoutGroup buildDeck;
     [SerializeField] private GridLayoutGroup actualDeck;
     [SerializeField] private GameObject cardInDeck;
+    [SerializeField] private GameObject deckBuilderLayout;
+    [SerializeField] private Animator minCardsInNormalDeckWarning;
+    [SerializeField] private Animator maxCardsInNormalDeckWarning;
+    [SerializeField] private Animator minCardsInBloodDeckWarning;
+    [SerializeField] private Animator maxCardsInBloodDeckWarning;
     private void Awake()
     {
         if (instance == null)
         {
+            savedCardsInDeck = new List<CardsInDeckBuilder>();
+            savedCardsInBloodDeck = new List<CardsInDeckBuilder>();
             instance = this;
-            savedCardsInDeck = cardsInDeck;
-            savedCardsInBloodDeck = cardsInBloodDeck;
+            foreach (CardsInDeckBuilder card in cardsInDeck)
+                savedCardsInDeck.Add(card);
+            foreach (CardsInDeckBuilder card in cardsInBloodDeck)
+                savedCardsInBloodDeck.Add(card);
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
-        cardsInDeck = savedCardsInDeck;
-        cardsInBloodDeck = savedCardsInBloodDeck;
-        List<Cards> cardsInDeckTemp = new List<Cards>();
-        List<Cards> cardsInBloodDeckTemp = new List<Cards>();
-        foreach (var card in cardsInDeck)
-            cardsInDeckTemp.Add(card.card.card);
-        foreach (var card in cardsInBloodDeck)
-            cardsInBloodDeckTemp.Add(card.card.card);
-        if (deck != null)
-        {
-            deck.deck = cardsInDeckTemp;
-            deck.bloodDeck = cardsInBloodDeckTemp;
-        }
+        cardsInDeck = new List<CardsInDeckBuilder>();
+        cardsInBloodDeck = new List<CardsInDeckBuilder>();
+        foreach (CardsInDeckBuilder card in savedCardsInDeck)
+            cardsInDeck.Add(card);
+        foreach (CardsInDeckBuilder card in savedCardsInBloodDeck)
+            cardsInBloodDeck.Add(card);
+        ReloadDeck();
         mainCamera = FindObjectOfType<Camera>();
         Debug.Log(mainCamera.pixelWidth);
         Debug.Log(mainCamera.pixelHeight);
@@ -80,10 +83,10 @@ public class DeckBuilder : MonoBehaviour
     }
     public void SelectCard(CardsInDeckBuilder selectedCard)
     {
-        Debug.Log("aaaa");
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
             if (card.card.card.cardName == selectedCard.card.card.cardName)
             {
+                Debug.Log("aaaa");
                 bool inDeck = false;
                 CardsInDeckBuilder newCardInDeck = null;
                 if(cardsInDeck.Count > 0)
@@ -108,10 +111,12 @@ public class DeckBuilder : MonoBehaviour
                 savedCardsInDeck.Add(newCardInDeck);
                 if (deck != null)
                     deck.deck.Add(newCardInDeck.card.card);
+                break;
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
             if (card.card.card.cardName == selectedCard.card.card.cardName)
             {
+                Debug.Log("eeee");
                 bool inDeck = false;
                 CardsInDeckBuilder newCardInDeck = null;
                 if (cardsInBloodDeck.Count > 0)
@@ -130,10 +135,11 @@ public class DeckBuilder : MonoBehaviour
                     newCard.NumberOfCards = 1;
                     newCardInDeck = newCard;
                 }
-                cardsInDeck.Add(newCardInDeck);
-                savedCardsInDeck.Add(newCardInDeck);
+                cardsInBloodDeck.Add(newCardInDeck);
+                savedCardsInBloodDeck.Add(newCardInDeck);
                 if (deck != null)
                     deck.bloodDeck.Add(newCardInDeck.card.card);
+                break;
             }
     }
     public void UnselectedCard(CardsInDeckBuilder selectedCard)
@@ -166,6 +172,59 @@ public class DeckBuilder : MonoBehaviour
                     Destroy(selectedCard.gameObject);
                 return;
             }
+    }
+    private void ReloadDeck()
+    {
+        List<Cards> cardsInDeckTemp = new List<Cards>();
+        List<Cards> cardsInBloodDeckTemp = new List<Cards>();
+        foreach (var card in cardsInDeck)
+            cardsInDeckTemp.Add(card.card.card);
+        foreach (var card in cardsInBloodDeck)
+            cardsInBloodDeckTemp.Add(card.card.card);
+        if (cardsInDeck.Count <= 0)
+            deck?.manaDeckObject.SetActive(false);
+        else deck?.manaDeckObject.SetActive(true);
+        if (cardsInBloodDeck.Count <= 0)
+            deck?.bloodDeckObject.SetActive(false);
+        else deck?.bloodDeckObject.SetActive(true);
+        if (deck != null)
+        {
+            deck.deck = new List<Cards>();
+            deck.bloodDeck = new List<Cards>();
+            deck.deck = cardsInDeckTemp;
+            deck.bloodDeck = cardsInBloodDeckTemp;
+            deck.ReloadActualDecks();
+        }
+    }
+    public void OpenDeckBuilder()
+    {
+        deckBuilderLayout.SetActive(true);
+        ReloadDeck();
+    }
+    public void CloseDeckBuilder()
+    {
+        if (cardsInDeck.Count > maxCardsInNormalDeck)
+        {
+            maxCardsInNormalDeckWarning.SetTrigger("Activate");
+            return;
+        }
+        if (cardsInDeck.Count < minCardsInNormalDeck)
+        {
+            minCardsInNormalDeckWarning.SetTrigger("Activate");
+            return;
+        }
+        if (cardsInBloodDeck.Count > maxCardsInBloodDeck)
+        {
+            maxCardsInBloodDeckWarning.SetTrigger("Activate");
+            return;
+        }
+        if (cardsInBloodDeck.Count < minCardsInBloodDeck)
+        {
+            minCardsInBloodDeckWarning.SetTrigger("Activate");
+            return;
+        }
+        ReloadDeck();
+        deckBuilderLayout.SetActive(false);
     }
     private void Update()
     {

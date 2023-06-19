@@ -38,18 +38,23 @@ public class Draw : MonoBehaviour
         else Destroy(gameObject);
         deck = savedDeck;
         bloodDeck = savedBloodDeck;
+        ReloadActualDecks();
+        manaDeckObject = GameObject.Find("ManaDeck");
+        bloodDeckObject = GameObject.Find("BloodDeck");
+    }
+    public void Start()
+    {
+        _turnManager = FindObjectOfType<TurnManager>();
+    }
+    public void ReloadActualDecks()
+    {
+        _actualDeck = new List<Cards>();
+        _actualBloodDeck = new List<Cards>();
         for (int i = 0; i < deck.Count; i++)
             _actualDeck.Add(deck[i]);
         for (int j = 0; j < bloodDeck.Count; j++)
             _actualBloodDeck.Add(bloodDeck[j]);
     }
-    public void Start()
-    {
-        manaDeckObject = GameObject.Find("ManaDeck");
-        bloodDeckObject = GameObject.Find("BloodDeck");
-        _turnManager = FindObjectOfType<TurnManager>();
-    }
-
     public void AddACard(Cards card)
     {
         if(card.healthCost == 0)

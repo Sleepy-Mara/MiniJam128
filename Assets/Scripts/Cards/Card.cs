@@ -72,11 +72,21 @@ public class Card : CardCore, IPointerDownHandler
             else if (ActualAttack >= 5)
                 attackToPlayer = 2;
             else attackToPlayer = 1;
-            actualPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
-            checkingEffect = true;
-            _effectManager.CheckConditionAttack(this);
-            attacking = false;
+            StartCoroutine(AttackCharacter());
         }
+    }
+    IEnumerator AttackCharacter()
+    {
+        string myAttackAnim = "";
+        if (actualPosition.oponent.GetComponent<Enemy>())
+            myAttackAnim = "AttackPlayer";
+        else
+            myAttackAnim = "AttackEnemy";
+        yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(myAttackAnim));
+        actualPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
+        checkingEffect = true;
+        _effectManager.CheckConditionAttack(this);
+        attacking = false;
     }
     public void ReceiveDamagePublic(int damage, Card attacker)
     {
