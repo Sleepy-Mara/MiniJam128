@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Bisnesman
-  - onbrednegosios
+  - Onbrednegosios
   life: 1
   attack: 2
   attackToPlayer: 1
