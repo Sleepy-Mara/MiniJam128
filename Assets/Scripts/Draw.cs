@@ -39,8 +39,6 @@ public class Draw : MonoBehaviour
         deck = savedDeck;
         bloodDeck = savedBloodDeck;
         ReloadActualDecks();
-        manaDeckObject = GameObject.Find("ManaDeck");
-        bloodDeckObject = GameObject.Find("BloodDeck");
     }
     public void Start()
     {
