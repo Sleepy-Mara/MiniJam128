@@ -230,7 +230,7 @@ public class EffectManager : MonoBehaviour
     {
         Debug.LogError("Im going to draw maybe");
         #region Draw
-        if (card.GetType() == typeof(Card) && card.actualPosition.oponent == FindObjectOfType<Player>())
+        if (card.GetType() == typeof(Card) && card.currentPosition.oponent == FindObjectOfType<Player>())
             return;
         foreach (string target in targets)
             for (int i = 0; i < 5; i++)
@@ -272,7 +272,7 @@ public class EffectManager : MonoBehaviour
                     MapPosition[] allyPositions;
                     Health enemyHealth;
                     Health allyHealth;
-                    if (card.actualPosition.oponent == FindObjectOfType<Player>())
+                    if (card.currentPosition.oponent == FindObjectOfType<Player>())
                     {
                         enemyPositions = _table.playerPositions;
                         allyPositions = _table.enemyFront;
@@ -291,7 +291,7 @@ public class EffectManager : MonoBehaviour
                         if (effectNew == target + "_" + i.ToString())
                         {
                             if (target == targets[13])
-                                card.actualPosition.positionFacing.card.ReceiveDamageEffect(i, null, startTurn, endTurn);
+                                card.currentPosition.positionFacing.card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             else if (target == targets[12])
                                 allyHealth.ReceiveDamage(i);
                             else if (target == targets[11])
@@ -420,7 +420,7 @@ public class EffectManager : MonoBehaviour
                             MapPosition[] allyPositions;
                             Health enemyHealth;
                             Health allyHealth;
-                            if (card.actualPosition.oponent == FindObjectOfType<Player>())
+                            if (card.currentPosition.oponent == FindObjectOfType<Player>())
                             {
                                 enemyPositions = _table.playerPositions;
                                 allyPositions = _table.enemyFront;
@@ -436,7 +436,7 @@ public class EffectManager : MonoBehaviour
                             }
                             Debug.Log("Im going to heal");
                             if (target == targets[13])
-                                card.actualPosition.positionFacing.card.HealEffect(i, startTurn, endTurn);
+                                card.currentPosition.positionFacing.card.HealEffect(i, startTurn, endTurn);
                             else if (target == targets[12])
                                 allyHealth.RestoreHealth(i);
                             else if (target == targets[11])
@@ -555,7 +555,7 @@ public class EffectManager : MonoBehaviour
     {
         Debug.LogError("Im going to add a card maybe");
         #region Add
-        if (card.actualPosition.oponent == FindObjectOfType<Player>())
+        if (card.currentPosition.oponent == FindObjectOfType<Player>())
         {
             card.checkingEffect = false;
             return;
@@ -753,7 +753,7 @@ public class EffectManager : MonoBehaviour
                                 continue;
                             MapPosition[] enemyPositions;
                             MapPosition[] allyPositions;
-                            if (card.actualPosition.oponent == FindObjectOfType<Player>())
+                            if (card.currentPosition.oponent == FindObjectOfType<Player>())
                             {
                                 enemyPositions = _table.playerPositions;
                                 allyPositions = _table.enemyFront;
@@ -765,8 +765,8 @@ public class EffectManager : MonoBehaviour
                             }
                             if (target == targets[13])
                             {
-                                if (card.actualPosition.positionFacing.card != null)
-                                    card.actualPosition.positionFacing.card.BuffEffect(attack, life, startTurn, endTurn);
+                                if (card.currentPosition.positionFacing.card != null)
+                                    card.currentPosition.positionFacing.card.BuffEffect(attack, life, startTurn, endTurn);
                             }
                             else if (target == targets[10] && card.GetComponent<Card>())
                                 card.GetComponent<Card>().BuffEffect(attack, life, startTurn, endTurn);
@@ -860,7 +860,7 @@ public class EffectManager : MonoBehaviour
                 {
                     MapPosition[] enemyPositions;
                     MapPosition[] allyPositions;
-                    if (card.actualPosition.oponent == FindObjectOfType<Player>())
+                    if (card.currentPosition.oponent == FindObjectOfType<Player>())
                     {
                         enemyPositions = _table.playerPositions;
                         allyPositions = _table.enemyFront;
@@ -871,7 +871,7 @@ public class EffectManager : MonoBehaviour
                         allyPositions = _table.playerPositions;
                     }
                     if (target == targets[13])
-                        card.actualPosition.positionFacing.card.immune = true;
+                        card.currentPosition.positionFacing.card.immune = true;
                     else if (target == targets[10] || card.GetComponent<Card>())
                         card.GetComponent<Card>().immune = true;
                     else if (target == targets[7])
@@ -946,7 +946,7 @@ public class EffectManager : MonoBehaviour
                     selectedCards.Add(cards);
         if (selectedCards != null)
         {
-            if (card.actualPosition.oponent.GetComponent<Enemy>())
+            if (card.currentPosition.oponent.GetComponent<Enemy>())
             {
                 for (int i = 0; i < _table.enemyFront.Length; i++)
                     foreach (string effect in newEffect)
@@ -962,7 +962,7 @@ public class EffectManager : MonoBehaviour
                             }
                         }
             }
-            else if (card.actualPosition.oponent.GetComponent<Player>())
+            else if (card.currentPosition.oponent.GetComponent<Player>())
             {
                 for (int i = 0; i < _table.enemyFront.Length; i++)
                     foreach (string effect in newEffect)

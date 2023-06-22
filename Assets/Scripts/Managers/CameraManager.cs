@@ -6,7 +6,7 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField]
     private Transform[] cameraPositions;
-    private int _actualPosition;
+    private int _currentPosition;
     private Camera _camera;
     public int cameraPlaceCard;
     public int cameraHand;
@@ -27,26 +27,26 @@ public class CameraManager : MonoBehaviour
     }
     private void ChangeCamera(int x)
     {
-        _actualPosition += x;
-        if (_actualPosition < 0)
-            _actualPosition = 0;
-        if (_actualPosition >= cameraPositions.Length)
-            _actualPosition = cameraPositions.Length - 1;
-        _camera.transform.position = cameraPositions[_actualPosition].position;
-        _camera.transform.rotation = cameraPositions[_actualPosition].rotation;
+        _currentPosition += x;
+        if (_currentPosition < 0)
+            _currentPosition = 0;
+        if (_currentPosition >= cameraPositions.Length)
+            _currentPosition = cameraPositions.Length - 1;
+        _camera.transform.position = cameraPositions[_currentPosition].position;
+        _camera.transform.rotation = cameraPositions[_currentPosition].rotation;
     }
     public void PlaceCardCamera()
     {
-        _actualPosition = cameraPlaceCard;
+        _currentPosition = cameraPlaceCard;
         ChangeCamera(0);
     }
     public void HandCamera()
     {
-        _actualPosition = cameraHand;
+        _currentPosition = cameraHand;
         ChangeCamera(0);
     }
     public int CameraPosition()
     {
-        return _actualPosition;
+        return _currentPosition;
     }
 }

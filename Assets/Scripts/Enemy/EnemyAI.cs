@@ -5,16 +5,16 @@ using UnityEngine;
 public class EnemyAI : Enemy
 {
     [SerializeField] private List<Cards> deck;
-    private List<Cards> _actualDeck;
+    private List<Cards> _currentDeck;
     [SerializeField] private List<Cards> bloodDeck;
-    private List<Cards> _actualBloodDeck;
+    private List<Cards> _currentBloodDeck;
     private List<Cards> _hand;
     private int _mana;
     private new void Awake()
     {
         base.Awake();
-        _actualDeck = deck;
-        _actualBloodDeck = bloodDeck;
+        _currentDeck = deck;
+        _currentBloodDeck = bloodDeck;
     }
     public override void MoveBackCards(int turn)
     {
@@ -113,11 +113,11 @@ public class EnemyAI : Enemy
             {
                 if (effect.Contains(_effectManager.Effects[0]))
                 {
-                    if (effect.Contains(_effectManager.Target[15]) && _actualDeck.Count > 0)
+                    if (effect.Contains(_effectManager.Target[15]) && _currentDeck.Count > 0)
                         value++;
-                    if (effect.Contains(_effectManager.Target[16]) && _actualBloodDeck.Count > 0)
+                    if (effect.Contains(_effectManager.Target[16]) && _currentBloodDeck.Count > 0)
                         value++;
-                    if (effect.Contains(_effectManager.Target[17]) && (_actualBloodDeck.Count > 0 || _actualDeck.Count > 0))
+                    if (effect.Contains(_effectManager.Target[17]) && (_currentBloodDeck.Count > 0 || _currentDeck.Count > 0))
                         value++;
                 }
                 if (effect.Contains(_effectManager.Conditions[1]))
@@ -155,12 +155,12 @@ public class EnemyAI : Enemy
                     if (effect.Contains(_effectManager.Target[11]))
                         for (int i = 0; i < 50; i++)
                             if (effect.Contains(_effectManager.Target[11] + "_" + i))
-                                if (FindObjectOfType<Player>().actualHealth - i <= 0)
+                                if (FindObjectOfType<Player>().currentHealth - i <= 0)
                                     value += 1000;
                     if (effect.Contains(_effectManager.Target[12]))
                         for (int i = 0; i < 50; i++)
                             if (effect.Contains(_effectManager.Target[12] + "_" + i))
-                                if (actualHealth - i <= 0)
+                                if (currentHealth - i <= 0)
                                     value -= 1000;
                     if (effect.Contains(_effectManager.Target[13]) && !kill)
                     {
@@ -232,13 +232,13 @@ public class EnemyAI : Enemy
                     if (effect.Contains(_effectManager.Target[11]))
                         for (int i = 0; i < 50; i++)
                             if (effect.Contains(_effectManager.Target[11] + "_" + i))
-                                if (FindObjectOfType<Player>().actualHealth + i > FindObjectOfType<Player>().maxHealth)
+                                if (FindObjectOfType<Player>().currentHealth + i > FindObjectOfType<Player>().maxHealth)
                                     usefulEffect = true;
                                 else usefulEffect = false;
                     if (effect.Contains(_effectManager.Target[12]))
                         for (int i = 0; i < 50; i++)
                             if (effect.Contains(_effectManager.Target[12] + "_" + i))
-                                if (actualHealth + i > maxHealth)
+                                if (currentHealth + i > maxHealth)
                                     usefulEffect = false;
                     if (effect.Contains(_effectManager.Target[13]) && !kill)
                     {
@@ -338,10 +338,10 @@ public class EnemyAI : Enemy
             }
             else
             {
-                if (_mana - card.card.manaCost < 0 || actualHealth - card.card.healthCost <= 0)
+                if (_mana - card.card.manaCost < 0 || currentHealth - card.card.healthCost <= 0)
                     continue;
                 newBestPlay.leftoverMana = _mana;
-                newBestPlay.leftoverHealth = actualHealth;
+                newBestPlay.leftoverHealth = currentHealth;
             }
             if (card.mapPosition != null)
             {
@@ -367,22 +367,22 @@ public class EnemyAI : Enemy
     public void AddCard(Cards card)
     {
         if (card.healthCost == 0)
-            _actualDeck.Add(card);
+            _currentDeck.Add(card);
         else
-            _actualBloodDeck.Add(card);
+            _currentBloodDeck.Add(card);
     }
     public void DrawACard(Cards card, int turn)
     {
-        if (card != null && _actualDeck.Contains(card))
+        if (card != null && _currentDeck.Contains(card))
         {
             _hand.Add(card);
-            _actualDeck.Remove(card);
+            _currentDeck.Remove(card);
             PlaceBackCards(turn);
             return;
         }
-        int randomCard = Random.Range(0, _actualDeck.Count);
-        _hand.Add(_actualDeck[randomCard]);
-        _actualDeck.Remove(_actualDeck[randomCard]);
+        int randomCard = Random.Range(0, _currentDeck.Count);
+        _hand.Add(_currentDeck[randomCard]);
+        _currentDeck.Remove(_currentDeck[randomCard]);
         PlaceBackCards(turn);
     }
 }

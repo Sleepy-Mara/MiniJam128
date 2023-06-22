@@ -8,7 +8,7 @@ public class Player : Health
 {
     public int manaLimit;
     public int maxMana;
-    public int actualMana;
+    public int currentMana;
     [SerializeField] private ManaFiller manaFiller;
     public Animator notEnoughManaWindow;
     [SerializeField] private float shakeDuration;
@@ -17,25 +17,25 @@ public class Player : Health
 
     public bool EnoughMana(int cost)
     {
-        if (actualMana < cost)
+        if (currentMana < cost)
         {
             notEnoughManaWindow.SetTrigger("Activate");
         }
-        return actualMana >= cost;
+        return currentMana >= cost;
     }
     public void SpendMana(int cost)
     {
-        actualMana -= cost;
+        currentMana -= cost;
         RefreshMana();
         //sonido / animacion
     }
     public bool EnoughHealth(int cost)
     {
-        return actualHealth > cost;
+        return currentHealth > cost;
     }
     public void SpendHealth(int cost)
     {
-        actualHealth -= cost;
+        currentHealth -= cost;
         RefreshHealth();
         //algun sonido animacion especial
     }
@@ -43,15 +43,15 @@ public class Player : Health
     {
         if (maxMana != manaLimit)
             maxMana++;
-        actualMana = maxMana;
+        currentMana = maxMana;
         RefreshMana();
         //sonido / animacion
     }
     public void RestartPlayer()
     {
-        actualMana = 0;
+        currentMana = 0;
         maxMana = 0;
-        actualHealth = maxHealth;
+        currentHealth = maxHealth;
         RefreshHealth();
         RefreshMana();
     }
@@ -63,7 +63,7 @@ public class Player : Health
     }
     private void RefreshMana()
     {
-        manaFiller.RefreshManas(actualMana, manaLimit);
+        manaFiller.RefreshManas(currentMana, manaLimit);
     }
     public override void ReceiveDamage(int damage)
     {

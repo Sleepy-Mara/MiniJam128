@@ -78,15 +78,15 @@ public class NextCombat : MonoBehaviour
     {
         float distance = Mathf.Abs(rewardsRange[0].localPosition.x) + Mathf.Abs(rewardsRange[1].localPosition.x);
         distance /= (enemies[enemyNum].rewards.Length + 1);
-        for (int i = 0; i < enemies[enemyNum].rewards.Length; i++)
-        {
-            _draw.AddACard(enemies[enemyNum].rewards[i]);
-            CardCore card = Instantiate(cardPrefab, cardsPlacing).GetComponent<CardCore>();
-            card.card = enemies[enemyNum].rewards[i];
-            card.SetData();
-            card.transform.localPosition = new Vector3(rewardsRange[0].localPosition.x + distance * (1 + i), rewardsRange[0].localPosition.y);
-            cardsToDelete.Add(card.gameObject);
-        }
+        //for (int i = 0; i < enemies[enemyNum].rewards.Length; i++)
+        //{
+            //_draw.AddACard(enemies[enemyNum].rewards[i]);
+            //CardCore card = Instantiate(cardPrefab, cardsPlacing).GetComponent<CardCore>();
+            //card.card = enemies[enemyNum].rewards[i];
+            //card.SetData();
+            //card.transform.localPosition = new Vector3(rewardsRange[0].localPosition.x + distance * (1 + i), rewardsRange[0].localPosition.y);
+            //cardsToDelete.Add(card.gameObject);
+        //}
         wonCombatText.text = enemies[enemyNum].wonCombatMessage;
         _audioPlayer.StopPlaying("Music" + enemyNum);
         enemyNum++;

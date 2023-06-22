@@ -112,7 +112,7 @@ public class TurnManager : MonoBehaviour
                 effectManager.CheckConditionEndOfTurn(card.card);
                 yield return new WaitUntil(() => !card.card.checkingEffect);
             }
-        if (enemy.actualHealth > 0)
+        if (enemy.currentHealth > 0)
             enemy.MoveBackCards(turn);
     }
 }

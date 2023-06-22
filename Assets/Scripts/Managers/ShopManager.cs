@@ -9,38 +9,8 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private List<CardPacks> myCardPacks;
     [SerializeField] private GameObject shop;
     [SerializeField] private GameObject openPacks;
-    [SerializeField] private int originalCameraHeight;
-    [SerializeField] private int originalCameraWidth;
-    private int actualCameraHeight;
-    private int actualCameraWidth;
-    private Camera mainCamera;
     [SerializeField] private GridLayoutGroup shopPacks;
     [SerializeField] private GridLayoutGroup myPacks;
-    private void Awake()
-    {
-        mainCamera = FindObjectOfType<Camera>();
-        ChangeCameraSize();
-    }
-    private void Update()
-    {
-        if (actualCameraHeight != mainCamera.pixelHeight || actualCameraWidth != mainCamera.pixelWidth)
-        {
-            ChangeCameraSize();
-        }
-    }
-    private void ChangeCameraSize()
-    {
-        shopPacks.spacing = new Vector2(shopPacks.spacing.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
-            shopPacks.spacing.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
-        shopPacks.cellSize = new Vector2(shopPacks.cellSize.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
-            shopPacks.cellSize.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
-        myPacks.spacing = new Vector2(myPacks.spacing.x * ((float)mainCamera.pixelWidth / (float)actualCameraWidth),
-            myPacks.spacing.y * ((float)mainCamera.pixelHeight / (float)actualCameraHeight));
-        myPacks.cellSize = new Vector2(myPacks.cellSize.x * ((float)mainCamera.pixelWidth / (float)actualCameraWidth),
-            myPacks.cellSize.y * ((float)mainCamera.pixelHeight / (float)actualCameraHeight));
-        actualCameraHeight = mainCamera.pixelHeight;
-        actualCameraWidth = mainCamera.pixelWidth;
-    }
     public void Buy(CardPacks pack)
     {
         foreach (PackInShop shop in packInShops)

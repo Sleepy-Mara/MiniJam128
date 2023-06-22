@@ -25,26 +25,26 @@ public class Card : CardCore, IPointerDownHandler
     }
     public int ActualLife
     {
-        get { return actualLife; }
-        set { actualLife += value;
-            if (actualLife < card.life)
+        get { return currentLife; }
+        set { currentLife += value;
+            if (currentLife < card.life)
                 lifeText.color = Color.red;
-            else if (actualLife > card.life)
+            else if (currentLife > card.life)
                 lifeText.color = Color.green;
             else lifeText.color = Color.black;
-            lifeText.text = actualLife.ToString();
+            lifeText.text = currentLife.ToString();
         }
     }
     public int ActualAttack
     {
-        get { return actualAttack; }
-        set { actualAttack += value;
-            if (actualAttack < card.attack)
+        get { return currentAttack; }
+        set { currentAttack += value;
+            if (currentAttack < card.attack)
                 attackText.color = Color.red;
-            else if (actualAttack > card.attack)
+            else if (currentAttack > card.attack)
                 attackText.color = Color.green;
             else attackText.color = Color.black;
-            attackText.text = actualAttack.ToString();
+            attackText.text = currentAttack.ToString();
         }
     }
     public void Attack()
@@ -54,12 +54,12 @@ public class Card : CardCore, IPointerDownHandler
             attacking = false;
             return;
         }
-        if (actualPosition.oponent.GetComponent<Enemy>())
+        if (currentPosition.oponent.GetComponent<Enemy>())
             GetComponent<Animator>().SetTrigger("AttackPlayer");
         else GetComponent<Animator>().SetTrigger("AttackEnemy");
-        if (actualPosition.positionFacing.card != null)
+        if (currentPosition.positionFacing.card != null)
         {
-            actualPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, this);
+            currentPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, this);
             //ejecutar audio y/o animacion
             checkingEffect = true;
             _effectManager.CheckConditionAttack(this);
@@ -78,12 +78,12 @@ public class Card : CardCore, IPointerDownHandler
     IEnumerator AttackCharacter()
     {
         string myAttackAnim = "";
-        if (actualPosition.oponent.GetComponent<Enemy>())
+        if (currentPosition.oponent.GetComponent<Enemy>())
             myAttackAnim = "AttackPlayer";
         else
             myAttackAnim = "AttackEnemy";
         yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(myAttackAnim));
-        actualPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
+        currentPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
         checkingEffect = true;
         _effectManager.CheckConditionAttack(this);
         attacking = false;
@@ -97,7 +97,7 @@ public class Card : CardCore, IPointerDownHandler
         yield return new WaitUntil(() => checkingEffect == false);
         string myAttackAnim = "";
         string attackerAttackAnim = "";
-        if (actualPosition.oponent.GetComponent<Enemy>())
+        if (currentPosition.oponent.GetComponent<Enemy>())
         {
             attackerAttackAnim = "AttackEnemy";
             myAttackAnim = "AttackPlayer";
@@ -138,7 +138,7 @@ public class Card : CardCore, IPointerDownHandler
             checkingEffect = true;
             _effectManager.CheckConditionDefeatsAnEnemy(attacker);
         }
-        if (actualPosition.oponent == FindObjectOfType<Enemy>())
+        if (currentPosition.oponent == FindObjectOfType<Enemy>())
         {
             foreach (MapPosition mapPosition in _table.playerPositions)
                 if (mapPosition.card != null)
@@ -158,8 +158,8 @@ public class Card : CardCore, IPointerDownHandler
         _effectManager.CheckConditionDefeated(this);
         yield return new WaitUntil(() => checkingEffect == false);
         //animacion / audio
-        actualPosition.card = null;
-        if (actualPosition.oponent.GetComponent<Player>())
+        currentPosition.card = null;
+        if (currentPosition.oponent.GetComponent<Player>())
         {
             for (int j = 0; j < _table.enemyFront.Length; j++)
                 if (_table.enemyFront[j].card != null)
@@ -178,10 +178,10 @@ public class Card : CardCore, IPointerDownHandler
         //    if (!cemetery.player && actualPosition.oponent.GetComponent<Player>())
         //        cemetery.AddCard(card);
         //}
-        if (actualPosition.oponent.GetComponent<Enemy>())
-            FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, actualPosition, true);
-        if (actualPosition.oponent.GetComponent<Player>())
-            FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, actualPosition, false);
+        if (currentPosition.oponent.GetComponent<Enemy>())
+            FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, currentPosition, true);
+        if (currentPosition.oponent.GetComponent<Player>())
+            FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, currentPosition, false);
         Destroy(gameObject);
     }
     public void ReceiveDamageEffect(int damage, Card attacker, bool startTurn, bool endTurn)
@@ -291,7 +291,7 @@ public class Card : CardCore, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left && (actualPosition.cardPos == null || playerCard))
+        if (eventData.button == PointerEventData.InputButton.Left && (currentPosition.cardPos == null || playerCard))
         {
             if (_turnManager.CanPlayCards())
             {

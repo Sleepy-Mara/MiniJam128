@@ -58,7 +58,7 @@ public class Table : MonoBehaviour
         card.transform.SetParent(playerPositions[place].cardPos.transform);
         card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
         playerPositions[place].card = card.GetComponent<Card>();
-        card.GetComponent<Card>().actualPosition = playerPositions[place];
+        card.GetComponent<Card>().currentPosition = playerPositions[place];
         card.GetComponent<Card>().playerCard = true;
         //foreach (MapPosition positions in mapPositions)
         //    if (positions.cardPos == pos)
@@ -77,7 +77,7 @@ public class Table : MonoBehaviour
             newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
-            newCard.actualPosition = enemyBack[place];
+            newCard.currentPosition = enemyBack[place];
             newCard.SetData();
             newCard.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation);
             newCard.playerCard = false;
@@ -95,7 +95,7 @@ public class Table : MonoBehaviour
             card.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
             card.transform.SetParent(enemyFront[place].cardPos.transform);
             card.transform.SetPositionAndRotation(enemyFront[place].cardPos.transform.position, enemyFront[place].cardPos.transform.rotation);
-            newCard.actualPosition = enemyFront[place];
+            newCard.currentPosition = enemyFront[place];
             newCard.SetData();
             enemyFront[place].card = newCard;
         }
@@ -114,7 +114,7 @@ public class Table : MonoBehaviour
                 enemyBack[i].card = null;
                 card.transform.SetParent(enemyFront[i].cardPos.transform);
                 card.transform.SetPositionAndRotation(enemyFront[i].cardPos.transform.position, enemyFront[i].cardPos.transform.rotation);
-                card.actualPosition = enemyFront[i];
+                card.currentPosition = enemyFront[i];
                 enemyFront[i].card = card;
             }
     }

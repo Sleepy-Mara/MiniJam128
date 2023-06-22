@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Cards card;
-    public MapPosition actualPosition;
-    protected int actualLife;
-    protected int actualAttack;
+    public MapPosition currentPosition;
+    protected int currentLife;
+    protected int currentAttack;
     [SerializeField] protected TextMeshProUGUI nameText;
     [SerializeField] protected TextMeshProUGUI attackText;
     [SerializeField] protected TextMeshProUGUI lifeText;
@@ -43,11 +43,11 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public virtual void SetData()
     {
-        actualLife = card.life;
-        actualAttack = card.attack;
+        currentLife = card.life;
+        currentAttack = card.attack;
         image.sprite = card.sprite;
         attackText.text = card.attack.ToString();
-        lifeText.text = actualLife.ToString();
+        lifeText.text = currentLife.ToString();
         manaCostText.text = card.manaCost.ToString();
         healthCostText.text = card.healthCost.ToString();
         UpdateLanguage(FindObjectOfType<LanguageManager>().languageNumber);
