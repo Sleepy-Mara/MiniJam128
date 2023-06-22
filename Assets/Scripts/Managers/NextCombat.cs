@@ -78,6 +78,7 @@ public class NextCombat : MonoBehaviour
     {
         float distance = Mathf.Abs(rewardsRange[0].localPosition.x) + Mathf.Abs(rewardsRange[1].localPosition.x);
         distance /= (enemies[enemyNum].rewards.Length + 1);
+        FindObjectOfType<CurrencyManager>().Currency = enemies[enemyNum].reward;
         //for (int i = 0; i < enemies[enemyNum].rewards.Length; i++)
         //{
             //_draw.AddACard(enemies[enemyNum].rewards[i]);

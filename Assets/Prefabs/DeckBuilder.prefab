@@ -1709,7 +1709,7 @@ MonoBehaviour:
   originalCameraHeight: 522
   originalCameraWidth: 956
   buildDeck: {fileID: 6885375461931048673}
-  actualDeck: {fileID: 6885375461656746860}
+  currentDeck: {fileID: 6885375461656746860}
   cardInDeck: {fileID: 6951729190385097540, guid: bfc791d3c78045647b4ac3a9d42ec6ea, type: 3}
   deckBuilderLayout: {fileID: 3393523162782317461}
   minCardsInNormalDeckWarning: {fileID: 1119187263349453307}
