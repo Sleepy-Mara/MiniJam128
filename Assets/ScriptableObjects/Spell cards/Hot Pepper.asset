@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Hot Pepper
   m_EditorClassIdentifier: 
   cardName:
-  - Honey
-  - Miel
+  - Hot Pepper
+  - Pimiento
   life: 0
   attack: 0
   attackToPlayer: 0
   manaCost: 0
   healthCost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 89606d6aab5ec4d4f864546327290077, type: 3}
   hasEffect: 1
-  effect: <played><give><random_ally_creature_+0/+2>
-  effectSprite: {fileID: 21300000, guid: c35c915bc2d7d734bb573199ec37f933, type: 3}
+  effect: <played><give><random_ally_creature_+2/+0>
+  effectSprite: {fileID: 0}
   effectDesc:
-  - give +0/+2 to a random ally creature
-  - da +0/+2 a una criatura aliada al azar
+  - give +2/+0 to a random ally creature
+  - da +2/+0 a una criatura aliada al azar
   spell: 1
