@@ -10,6 +10,10 @@ public class Deck : MonoBehaviour
     private void Start()
     {
         draw = FindObjectOfType<Draw>();
+        if (type == Draw.DeckType.Mana)
+            draw.manaDeckObject = gameObject;
+        else
+            draw.bloodDeckObject = gameObject;
         animator = GetComponentInParent<Animator>();
     }
     private void OnMouseDown()

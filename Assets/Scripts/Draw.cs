@@ -95,6 +95,8 @@ public class Draw : MonoBehaviour
     {
         if (_currentDeck.Count <= 0 && _currentBloodDeck.Count <= 0)
         {
+            if (noCardsWindow == null)
+                noCardsWindow = GameObject.Find("NoMoreCards").GetComponent<Animator>();
             noCardsWindow.SetTrigger("Activate");
             return;
         }
