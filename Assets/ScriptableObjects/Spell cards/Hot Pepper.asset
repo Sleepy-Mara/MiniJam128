@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
+  m_Name: Hot Pepper
+  m_EditorClassIdentifier: 
+  cardName:
+  - Honey
+  - Miel
+  life: 0
+  attack: 0
+  attackToPlayer: 0
+  manaCost: 0
+  healthCost: 0
+  sprite: {fileID: 0}
+  hasEffect: 1
+  effect: <played><give><random_ally_creature_+0/+2>
+  effectSprite: {fileID: 21300000, guid: c35c915bc2d7d734bb573199ec37f933, type: 3}
+  effectDesc:
+  - give +0/+2 to a random ally creature
+  - da +0/+2 a una criatura aliada al azar
+  spell: 1
