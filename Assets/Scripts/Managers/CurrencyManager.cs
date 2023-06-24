@@ -12,6 +12,7 @@ public class CurrencyManager : MonoBehaviour
     private bool disabled;
     private static CurrencyManager instance;
     private static int savedCurrency;
+    private SaveWithJson json;
     private int currency;
     public int Currency
     {
@@ -21,12 +22,16 @@ public class CurrencyManager : MonoBehaviour
             if(value < 0)
                 posOrNeg = "-";
             moneyEarned.text = posOrNeg + value.ToString();
+            SaveData saveData = json.SaveData;
+            saveData.currentCurrency = currency;
+            json.SaveData = saveData;
             animator.SetTrigger("EarnMoney");
             StartCoroutine(EarnMoney(value));
         }
     }
     private void Awake()
     {
+        json = FindObjectOfType<SaveWithJson>();
         if (instance == null)
         {
             instance = this;
@@ -47,9 +52,9 @@ public class CurrencyManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("EarnMoney"));
         currency += value;
-        textCurrency.text = currency.ToString();
-        if (currency < 0) 
+        if (currency < 0)
             currency = 0;
+        textCurrency.text = currency.ToString();
     }
     public void ChangeDisabledAndEnabled()
     {
