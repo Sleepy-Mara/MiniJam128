@@ -11,7 +11,7 @@ public class SaveWithJson : MonoBehaviour
         get { return saveData; }
         set { 
             saveData = value;
-            string json = JsonUtility.ToJson(saveData);
+            string json = JsonUtility.ToJson(saveData, true);
             File.WriteAllText(path, json);
         }
     }
@@ -20,14 +20,14 @@ public class SaveWithJson : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        path = Application.persistentDataPath + "/data.jsan";
-        if(File.ReadAllText(path)!= null)
+        path = Application.persistentDataPath + "/data.json";
+        if(File.Exists(path))
         {
             string data = File.ReadAllText(path);
             JsonUtility.FromJsonOverwrite(data, saveData);
             return;
         }
-        string json = JsonUtility.ToJson(defaultSaveData);
+        string json = JsonUtility.ToJson(defaultSaveData, true);
         File.WriteAllText(path, json);
     }
 }
