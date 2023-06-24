@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName:
   - Hearthfelt horror
-  - Horror sincero
+  - "Horror de coraz\xF3n"
   life: 1
   attack: 1
   attackToPlayer: 1
