@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Stamina : MonoBehaviour
 {
@@ -12,31 +13,28 @@ public class Stamina : MonoBehaviour
         set
         {
             int posOrNeg = 1;
-            int fillAmount = 100;
             if (value < 0 )
-            {
                 posOrNeg = -1;
-                fillAmount = 0;
-            }
             for(int i = 0; i < value * posOrNeg; i++)
             {
                 currentStamina += i * posOrNeg;
-                if (currentStamina >= stamina.Count || currentStamina <= 0)
+                if (currentStamina >= maxStamina || currentStamina <= 0)
                     continue;
-                stamina[currentStamina].fillAmount = fillAmount;
+                textStamina.text = currentStamina.ToString();
             }
-            if (currentStamina > stamina.Count)
-                currentStamina = stamina.Count;
+            if (currentStamina > maxStamina)
+                currentStamina = maxStamina;
             if (currentStamina < 0)
                 currentStamina = 0;
         }
     }
-    [SerializeField] private List<Image> stamina;
+    [SerializeField] private int maxStamina;
     [SerializeField] private float timeToRecharge;
+    [SerializeField] private TextMeshProUGUI textStamina;
     private float currentTimeToRecharge;
     void Update()
     {
-        if (currentStamina >= stamina.Count)
+        if (currentStamina >= maxStamina)
             return;
         if (currentTimeToRecharge >= timeToRecharge)
         {
@@ -45,6 +43,5 @@ public class Stamina : MonoBehaviour
             return;
         }
         currentTimeToRecharge += Time.deltaTime;
-        stamina[currentStamina].fillAmount = currentTimeToRecharge;
     }
 }

@@ -9,7 +9,7 @@ public class SaveWithJson : MonoBehaviour
     [HideInInspector] public SaveData SaveData
     {
         get { return saveData; }
-        set { 
+        set {
             saveData = value;
             string json = JsonUtility.ToJson(saveData, true);
             File.WriteAllText(path, json);
@@ -29,5 +29,9 @@ public class SaveWithJson : MonoBehaviour
         }
         string json = JsonUtility.ToJson(defaultSaveData, true);
         File.WriteAllText(path, json);
+    }
+    public void ResetSave()
+    {
+        SaveData = defaultSaveData;
     }
 }

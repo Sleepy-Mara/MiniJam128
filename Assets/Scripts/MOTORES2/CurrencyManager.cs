@@ -20,10 +20,10 @@ public class CurrencyManager : MonoBehaviour
         set {
             string posOrNeg = "+";
             if(value < 0)
-                posOrNeg = "-";
+                posOrNeg = "";
             moneyEarned.text = posOrNeg + value.ToString();
             SaveData saveData = json.SaveData;
-            saveData.currentCurrency = currency;
+            saveData.currentCurrency = currency + value;
             json.SaveData = saveData;
             animator.SetTrigger("EarnMoney");
             StartCoroutine(EarnMoney(value));
@@ -32,15 +32,7 @@ public class CurrencyManager : MonoBehaviour
     private void Awake()
     {
         json = FindObjectOfType<SaveWithJson>();
-        if (instance == null)
-        {
-            instance = this;
-            savedCurrency = currency;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
-        currency = savedCurrency;
-        moneyEarned.text = currency.ToString();
+        currency = json.SaveData.currentCurrency;
         if (enabled)
             disabled = false;
         else disabled = true;
