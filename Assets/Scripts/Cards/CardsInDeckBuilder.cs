@@ -23,7 +23,7 @@ public class CardsInDeckBuilder : MonoBehaviour
     public bool inDeck;
     public int inDeckFromStart;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (inDeckFromStart > 0)
             return;

@@ -36,6 +36,8 @@ public class DeckBuilder : MonoBehaviour
     {
         json = FindObjectOfType<SaveWithJson>();
         foreach(CardsInDeckBuilder cards in cardsInDeckBuilder)
+            cards.mysteryCard.SetActive(true);
+        foreach(CardsInDeckBuilder cards in cardsInDeckBuilder)
             for(int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
                 if (json.SaveData.currentUnlockedCards[i].cardName == cards.card.name)
                 {
@@ -177,14 +179,14 @@ public class DeckBuilder : MonoBehaviour
             cardsInDeckTemp.Add(card.card.card);
         foreach (var card in cardsInBloodDeck)
             cardsInBloodDeckTemp.Add(card.card.card);
-        if (cardsInDeck.Count <= 0)
-            deck?.manaDeckObject.SetActive(false);
-        else deck?.manaDeckObject.SetActive(true);
-        if (cardsInBloodDeck.Count <= 0)
-            deck?.bloodDeckObject.SetActive(false);
-        else deck?.bloodDeckObject.SetActive(true);
         if (deck != null)
         {
+            if (cardsInDeck.Count <= 0)
+                deck.manaDeckObject.SetActive(false);
+            else deck.manaDeckObject.SetActive(true);
+            if (cardsInBloodDeck.Count <= 0)
+                deck.bloodDeckObject.SetActive(false);
+            else deck.bloodDeckObject.SetActive(true);
             deck.deck = new List<Cards>();
             deck.bloodDeck = new List<Cards>();
             deck.deck = cardsInDeckTemp;

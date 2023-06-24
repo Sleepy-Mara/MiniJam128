@@ -33,6 +33,7 @@ public class CurrencyManager : MonoBehaviour
     {
         json = FindObjectOfType<SaveWithJson>();
         currency = json.SaveData.currentCurrency;
+        textCurrency.text = currency.ToString();
         if (enabled)
             disabled = false;
         else disabled = true;
