@@ -5,7 +5,7 @@ using UnityEngine;
 public class CardPacks : MonoBehaviour
 {
     [SerializeField] private int numberOfCardsInPack;
-    [SerializeField] private List<Card> cardsInPack;
+    [SerializeField] private List<Cards> cardsInPack;
     public void OpenPack()
     {
         for (int i = 0; i < numberOfCardsInPack; i++)

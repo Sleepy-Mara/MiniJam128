@@ -11,7 +11,7 @@ public class SaveData
     public List<SavedCards> currentUnlockedCards;
     public List<SavedCards> currentCardsInDeck;
 }
-[System.Serializable]
+[Serializable]
 public class SavedCards
 {
     public string cardName;

@@ -21,12 +21,14 @@ public class CardsInDeckBuilder : MonoBehaviour
     public CardCore card;
     [HideInInspector]
     public bool inDeck;
-    public bool inDeckFromStart;
+    public int inDeckFromStart;
     // Start is called before the first frame update
     void Start()
     {
-        if (inDeckFromStart)
-            FindObjectOfType<DeckBuilder>().SelectCard(this);
+        if (inDeckFromStart > 0)
+            return;
+        for (int i = 0; i < inDeckFromStart; i++)
+            SelectThis();
         numberText.text = NumberOfCards.ToString();
     }
 

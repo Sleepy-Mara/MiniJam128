@@ -26,12 +26,22 @@ public class Stamina : MonoBehaviour
                 currentStamina = maxStamina;
             if (currentStamina < 0)
                 currentStamina = 0;
+            SaveData saveData = json.SaveData;
+            saveData.currentStamina = currentStamina;
+            json.SaveData = saveData;
         }
     }
     [SerializeField] private int maxStamina;
     [SerializeField] private float timeToRecharge;
     [SerializeField] private TextMeshProUGUI textStamina;
     private float currentTimeToRecharge;
+    private SaveWithJson json;
+    private void Awake()
+    {
+        json = FindObjectOfType<SaveWithJson>();
+        currentStamina = json.SaveData.currentStamina;
+        textStamina.text = currentStamina.ToString();
+    }
     void Update()
     {
         if (currentStamina >= maxStamina)

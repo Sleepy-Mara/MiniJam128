@@ -31,26 +31,26 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private Animator maxCardsInNormalDeckWarning;
     [SerializeField] private Animator minCardsInBloodDeckWarning;
     [SerializeField] private Animator maxCardsInBloodDeckWarning;
+    private SaveWithJson json;
     private void Awake()
     {
-        if (instance == null)
-        {
-            savedCardsInDeck = new List<CardsInDeckBuilder>();
-            savedCardsInBloodDeck = new List<CardsInDeckBuilder>();
-            instance = this;
-            foreach (CardsInDeckBuilder card in cardsInDeck)
-                savedCardsInDeck.Add(card);
-            foreach (CardsInDeckBuilder card in cardsInBloodDeck)
-                savedCardsInBloodDeck.Add(card);
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
-        cardsInDeck = new List<CardsInDeckBuilder>();
-        cardsInBloodDeck = new List<CardsInDeckBuilder>();
-        foreach (CardsInDeckBuilder card in savedCardsInDeck)
-            cardsInDeck.Add(card);
-        foreach (CardsInDeckBuilder card in savedCardsInBloodDeck)
-            cardsInBloodDeck.Add(card);
+        json = FindObjectOfType<SaveWithJson>();
+        foreach(CardsInDeckBuilder cards in cardsInDeckBuilder)
+            for(int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
+                if (json.SaveData.currentUnlockedCards[i].cardName == cards.card.name)
+                {
+                    UnlockCard(cards.card.card);
+                    for (int j = 0; j < json.SaveData.currentUnlockedCards[i].cardAmount; j++)
+                        cards.NumberOfCards = 1;
+                }
+        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
+            for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
+                if (json.SaveData.currentCardsInDeck[i].cardName == cards.card.name)
+                {
+                    UnlockCard(cards.card.card);
+                    for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
+                        SelectCard(cards);
+                }
         ReloadDeck();
         mainCamera = FindObjectOfType<Camera>();
         Debug.Log(mainCamera.pixelWidth);
@@ -66,16 +66,16 @@ public class DeckBuilder : MonoBehaviour
         currentCameraHeight = mainCamera.pixelHeight;
         currentCameraWidth = mainCamera.pixelWidth;
     }
-    public void UnlockCard(Card newCard)
+    public void UnlockCard(Cards newCard)
     {
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
-            if (card.card.card.cardName == newCard.card.cardName)
+            if (card.card.card.cardName == newCard.cardName)
             {
                 card.NumberOfCards = 1;
                 card.mysteryCard.SetActive(false);
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
-            if (card.card.card.cardName == newCard.card.cardName)
+            if (card.card.card.cardName == newCard.cardName)
             {
                 card.NumberOfCards = 1;
                 card.mysteryCard.SetActive(false);
@@ -108,7 +108,6 @@ public class DeckBuilder : MonoBehaviour
                 else
                     newCardInDeck.NumberOfCards = 1;
                 cardsInDeck.Add(newCardInDeck);
-                savedCardsInDeck.Add(newCardInDeck);
                 if (deck != null)
                     deck.deck.Add(newCardInDeck.card.card);
                 break;
@@ -136,7 +135,6 @@ public class DeckBuilder : MonoBehaviour
                     newCardInDeck = newCard;
                 }
                 cardsInBloodDeck.Add(newCardInDeck);
-                savedCardsInBloodDeck.Add(newCardInDeck);
                 if (deck != null)
                     deck.bloodDeck.Add(newCardInDeck.card.card);
                 break;
@@ -151,7 +149,6 @@ public class DeckBuilder : MonoBehaviour
                     if (cards.card.card.cardName == selectedCard.card.card.cardName)
                         cards.NumberOfCards = 1;
                 cardsInDeck.Remove(selectedCard);
-                savedCardsInDeck.Remove(selectedCard);
                 if (deck != null)
                     deck.deck.Remove(selectedCard.card.card);
                 if (selectedCard.NumberOfCards < 1)
@@ -165,7 +162,6 @@ public class DeckBuilder : MonoBehaviour
                     if (cards.card.card.cardName == selectedCard.card.card.cardName)
                         cards.NumberOfCards = 1;
                 cardsInBloodDeck.Remove(selectedCard);
-                savedCardsInBloodDeck.Remove(selectedCard);
                 if (deck != null)
                     deck.bloodDeck.Remove(selectedCard.card.card);
                 if (selectedCard.NumberOfCards < 1)
@@ -224,6 +220,17 @@ public class DeckBuilder : MonoBehaviour
             return;
         }
         ReloadDeck();
+        json.SaveData.currentCardsInDeck.Clear();
+        foreach (CardsInDeckBuilder card in cardsInDeck)
+        {
+            SavedCards cards = new SavedCards() { cardName = card.card.name, cardAmount = card.NumberOfCards };
+            json.SaveData.currentCardsInDeck.Add(cards);
+        }
+        foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
+        {
+            SavedCards cards = new SavedCards() { cardName = card.card.name, cardAmount = card.NumberOfCards };
+            json.SaveData.currentUnlockedCards.Add(cards);
+        }
         deckBuilderLayout.SetActive(false);
     }
     private void Update()
