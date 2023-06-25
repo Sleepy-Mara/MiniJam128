@@ -10,21 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: Hot pepper
+  m_Name: Fit dude
   m_EditorClassIdentifier: 
   cardName:
-  - Hot pepper
-  - Pimiento
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
+  - Fit dude
+  - Chabon trabado
+  life: 1
+  attack: 2
+  attackToPlayer: 1
+  manaCost: 1
   healthCost: 0
-  sprite: {fileID: 21300000, guid: 89606d6aab5ec4d4f864546327290077, type: 3}
-  hasEffect: 1
-  effect: <played><give><random_ally_creature_+2/+0>
+  sprite: {fileID: 21300000, guid: d3bd398588eaf79498f809d016297c9d, type: 3}
+  hasEffect: 0
+  effect: 
   effectSprite: {fileID: 0}
-  effectDesc:
-  - give +2/+0 to a random ally creature
-  - da +2/+0 a una criatura aliada al azar
-  spell: 1
+  effectDesc: []
+  spell: 0
