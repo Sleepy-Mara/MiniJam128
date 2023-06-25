@@ -594,7 +594,7 @@ RectTransform:
   - {fileID: 6045482819024770680}
   - {fileID: 7855361939760044049}
   m_Father: {fileID: 6885375461931048678}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -651,12 +651,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 1640667675469862390}
   mysteryCard: {fileID: 419842045166774103}
   card: {fileID: 8725104884972004310}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &1926611153541084927
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,7 +826,7 @@ RectTransform:
   - {fileID: 6481958514595255977}
   - {fileID: 1949372737500610865}
   m_Father: {fileID: 6885375461931048678}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -883,12 +883,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 2714061914353443139}
   mysteryCard: {fileID: 149492149984817249}
   card: {fileID: 5654340893000881374}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &2448323343056001876
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +971,7 @@ RectTransform:
   - {fileID: 1000132680078737567}
   - {fileID: 1567521300843344735}
   m_Father: {fileID: 6885375461931048678}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1028,12 +1028,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 3151014802398538896}
   mysteryCard: {fileID: 6918680630967769552}
   card: {fileID: 7295085814025089994}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &3393523162782317461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1109,7 @@ RectTransform:
   - {fileID: 7574484339215068323}
   - {fileID: 375281902747635437}
   m_Father: {fileID: 6885375461931048678}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1166,12 +1166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 7350122577681580859}
   mysteryCard: {fileID: 3879981941057634255}
   card: {fileID: 6985173108266762506}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &3813779070590715847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,12 +1979,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 7448045188060004551}
   mysteryCard: {fileID: 7584364812288887448}
   card: {fileID: 5770816411542869151}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &6405883964637622260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2788,7 +2788,7 @@ RectTransform:
   - {fileID: 6885375463360731773}
   - {fileID: 6885375461919253488}
   m_Father: {fileID: 6885375461931048678}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2845,12 +2845,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 6885375462051704366}
   mysteryCard: {fileID: 6885375461919253495}
   card: {fileID: 4231134998684067968}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &6885375461885947216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3037,14 +3037,14 @@ RectTransform:
   m_Children:
   - {fileID: 6885375463488874957}
   - {fileID: 6885375462837426062}
-  - {fileID: 6885375463233270113}
   - {fileID: 6885375461755917257}
   - {fileID: 6885375463327623451}
-  - {fileID: 2399506443277673585}
+  - {fileID: 6885375463233270113}
   - {fileID: 1625217520445572980}
+  - {fileID: 2399506443277673585}
   - {fileID: 3467077956579223518}
-  - {fileID: 3689848621990828928}
   - {fileID: 8280425143004290201}
+  - {fileID: 3689848621990828928}
   m_Father: {fileID: 6885375461588814018}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4053,12 +4053,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 6885375463247875438}
   mysteryCard: {fileID: 6885375462483878734}
   card: {fileID: 4231134999608901279}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &6885375462844716934
 GameObject:
   m_ObjectHideFlags: 0
@@ -4654,7 +4654,7 @@ RectTransform:
   - {fileID: 6885375463489462040}
   - {fileID: 6885375463258951387}
   m_Father: {fileID: 6885375461931048678}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4711,12 +4711,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 6885375462918637359}
   mysteryCard: {fileID: 6885375463258951386}
   card: {fileID: 4231135000179429938}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &6885375463247875436
 GameObject:
   m_ObjectHideFlags: 0
@@ -5040,7 +5040,7 @@ RectTransform:
   - {fileID: 6885375462490348943}
   - {fileID: 6885375461680621294}
   m_Father: {fileID: 6885375461931048678}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5097,12 +5097,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 6885375462910400464}
   mysteryCard: {fileID: 6885375461680621293}
   card: {fileID: 4231134999853276848}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &6885375463360731772
 GameObject:
   m_ObjectHideFlags: 0
@@ -5375,12 +5375,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f2089dabc14674cadad700c4b88bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCards: 3
+  numberOfCards: 0
   numberText: {fileID: 6885375463123227878}
   mysteryCard: {fileID: 6885375461885947216}
   card: {fileID: 4231134998732602672}
   inDeck: 0
-  inDeckFromStart: 1
+  inDeckFromStart: 0
 --- !u!1 &6885375463489462047
 GameObject:
   m_ObjectHideFlags: 0
@@ -6978,7 +6978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613063399935, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 19.05
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786368, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

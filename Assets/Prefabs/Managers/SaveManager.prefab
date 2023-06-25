@@ -52,5 +52,45 @@ MonoBehaviour:
   defaultSaveData:
     currentCurrency: 0
     currentStamina: 10
-    currentUnlockedCards: []
-    currentCardsInDeck: []
+    currentUnlockedCards:
+    - card: {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 6edafacc9f62664479e49eeff7c5e51f, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 450c7340692cb6346a992fa4b66cc407, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: e87121a1c8c2cc84b91317aa09af5d86, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 46fd1b5ec94b2ae42b8caad074ae7c6e, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 1002cbd4826fe1f438b96f6738ef713a, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: c9a8bb9b421d4c74dadda7540e8a0bcc, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: ce0770ed86825e84ab094631be19dc65, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: ce0770ed86825e84ab094631be19dc65, type: 2}
+      cardAmount: 1
+    currentCardsInDeck:
+    - card: {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 6edafacc9f62664479e49eeff7c5e51f, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 01db0b992dca0764f93f52627e59c9b0, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 450c7340692cb6346a992fa4b66cc407, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: e87121a1c8c2cc84b91317aa09af5d86, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 46fd1b5ec94b2ae42b8caad074ae7c6e, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: 1002cbd4826fe1f438b96f6738ef713a, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: c9a8bb9b421d4c74dadda7540e8a0bcc, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: e54a9c9418b3cf14cb7fa59b57b25d45, type: 2}
+      cardAmount: 1
+    - card: {fileID: 11400000, guid: ce0770ed86825e84ab094631be19dc65, type: 2}
+      cardAmount: 1
