@@ -39,7 +39,7 @@ public class DeckBuilder : MonoBehaviour
             cards.mysteryCard.SetActive(true);
         foreach(CardsInDeckBuilder cards in cardsInDeckBuilder)
             for(int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
-                if (json.SaveData.currentUnlockedCards[i].cardName == cards.card.name)
+                if (json.SaveData.currentUnlockedCards[i].card == cards.card.card)
                 {
                     UnlockCard(cards.card.card);
                     for (int j = 0; j < json.SaveData.currentUnlockedCards[i].cardAmount; j++)
@@ -47,7 +47,7 @@ public class DeckBuilder : MonoBehaviour
                 }
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
             for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
-                if (json.SaveData.currentCardsInDeck[i].cardName == cards.card.name)
+                if (json.SaveData.currentCardsInDeck[i].card == cards.card.card)
                 {
                     UnlockCard(cards.card.card);
                     for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
@@ -225,12 +225,12 @@ public class DeckBuilder : MonoBehaviour
         json.SaveData.currentCardsInDeck.Clear();
         foreach (CardsInDeckBuilder card in cardsInDeck)
         {
-            SavedCards cards = new SavedCards() { cardName = card.card.name, cardAmount = card.NumberOfCards };
+            SavedCards cards = new SavedCards() { card = card.card.card, cardAmount = card.NumberOfCards };
             json.SaveData.currentCardsInDeck.Add(cards);
         }
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
         {
-            SavedCards cards = new SavedCards() { cardName = card.card.name, cardAmount = card.NumberOfCards };
+            SavedCards cards = new SavedCards() { card = card.card.card, cardAmount = card.NumberOfCards };
             json.SaveData.currentUnlockedCards.Add(cards);
         }
         deckBuilderLayout.SetActive(false);

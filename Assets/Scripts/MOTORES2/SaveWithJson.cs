@@ -25,7 +25,6 @@ public class SaveWithJson : MonoBehaviour
         {
             string data = File.ReadAllText(path);
             JsonUtility.FromJsonOverwrite(data, saveData);
-            Debug.LogError(SaveData.currentCurrency);
             return;
         }
         string json = JsonUtility.ToJson(defaultSaveData, true);
