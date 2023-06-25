@@ -8,6 +8,7 @@ public class SaveData
 {
     public int currentCurrency;
     public int currentStamina;
+    public int currentUnlockedLevels;
     public List<SavedCards> currentUnlockedCards;
     public List<SavedCards> currentCardsInDeck;
 }
