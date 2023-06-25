@@ -51,6 +51,8 @@ public class DeckBuilder : MonoBehaviour
                 {
                     for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
                     {
+                        if (cards.NumberOfCards <= 0)
+                            continue;
                         SelectCard(cards);
                         cards.NumberOfCards = -1;
                     }
