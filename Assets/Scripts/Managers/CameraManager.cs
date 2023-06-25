@@ -10,9 +10,11 @@ public class CameraManager : MonoBehaviour
     private Camera _camera;
     public int cameraPlaceCard;
     public int cameraHand;
+    private Animator animator;
     private void Start()
     {
         _camera = FindObjectOfType<Camera>();
+        animator = _camera.transform.GetComponentInParent<Animator>();
     }
     void Update()
     {
@@ -27,13 +29,15 @@ public class CameraManager : MonoBehaviour
     }
     private void ChangeCamera(int x)
     {
+        // por que no usar clamp()?
         _currentPosition += x;
         if (_currentPosition < 0)
             _currentPosition = 0;
         if (_currentPosition >= cameraPositions.Length)
             _currentPosition = cameraPositions.Length - 1;
-        _camera.transform.position = cameraPositions[_currentPosition].position;
-        _camera.transform.rotation = cameraPositions[_currentPosition].rotation;
+        animator.SetInteger("Position", _currentPosition);
+        //_camera.transform.position = cameraPositions[_currentPosition].position;
+        //_camera.transform.rotation = cameraPositions[_currentPosition].rotation;
     }
     public void PlaceCardCamera()
     {
