@@ -49,9 +49,11 @@ public class DeckBuilder : MonoBehaviour
             for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
                 if (json.SaveData.currentCardsInDeck[i].card == cards.card.card)
                 {
-                    UnlockCard(cards.card.card);
                     for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
+                    {
                         SelectCard(cards);
+                        cards.NumberOfCards = -1;
+                    }
                 }
         ReloadDeck();
         mainCamera = FindObjectOfType<Camera>();
