@@ -19,7 +19,7 @@ public class LevelSelector : MonoBehaviour
     }
     public void SelectedLevel(int selectedLevel)
     {
-        FindObjectOfType<LevelSelected>().level = selectedLevel;
+        FindObjectOfType<LevelSelected>().Level = selectedLevel;
         FindObjectOfType<ChangeSceneManager>().ChangeScene(sceneToGo);
     }
 }

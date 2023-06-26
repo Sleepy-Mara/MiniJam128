@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class LevelSelected : MonoBehaviour
 {
-    public static LevelSelected instance;
-    public int level;
+    private static LevelSelected instance;
+    private static int level;
+    public int Level
+    {
+        get { return level; }
+        set { level = value; }
+    }
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            level = 0;
+        }
         else Destroy(gameObject);
         DontDestroyOnLoad(this);
     }

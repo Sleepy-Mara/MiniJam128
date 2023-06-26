@@ -29,8 +29,8 @@ public class NextCombat : MonoBehaviour
 
     private void Awake()
     {
-        if (!FindObjectOfType<LevelSelected>())
-            enemyNum = FindObjectOfType<LevelSelected>().level;
+        if (FindObjectOfType<LevelSelected>())
+            SetEnemyNum(FindObjectOfType<LevelSelected>().Level);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
