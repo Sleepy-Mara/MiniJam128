@@ -18,7 +18,7 @@ MonoBehaviour:
   life: 0
   attack: 0
   attackToPlayer: 0
-  manaCost: 0
+  manaCost: 1
   healthCost: 0
   sprite: {fileID: 21300000, guid: c35c915bc2d7d734bb573199ec37f933, type: 3}
   hasEffect: 1
