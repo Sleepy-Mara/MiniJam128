@@ -62628,7 +62628,7 @@ PrefabInstance:
       objectReference: {fileID: 845860779}
     - target: {fileID: 984996553449241544, guid: 817b1c73404fb9c4ba1e6624774724f2, type: 3}
       propertyPath: deck.Array.size
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 984996553449241544, guid: 817b1c73404fb9c4ba1e6624774724f2, type: 3}
       propertyPath: deck.Array.data[0]
