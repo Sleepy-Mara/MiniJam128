@@ -25,7 +25,7 @@ public class CardMagic : CardCore, IPointerDownHandler
     IEnumerator PlayEffect()
     {
         foreach (MapPosition card in FindObjectOfType<Table>().playerPositions)
-            _effectManager.CheckConditionSpellPlayed(card.card);
+            _effectManager.CheckConditionSpellPlayed(this);
         _table.player.SpendMana(card.manaCost);
         _table.player.SpendHealth(card.healthCost);
         List<GameObject> newCardsInHand = new List<GameObject>();

@@ -6,11 +6,8 @@ public class Draw : MonoBehaviour
 {
     public List<GameObject> drawThings;
     [HideInInspector] public List<GameObject> _cardsInHand = new List<GameObject>();
-    public static List<Cards> savedDeck;
-    public static List<Cards> savedBloodDeck;
     public List<Cards> deck;
     public List<Cards> bloodDeck;
-    private static Draw instance;
     [SerializeField]private List<Cards> _currentDeck = new List<Cards>();
     [SerializeField] private List<Cards> _currentBloodDeck = new();
     public Transform handPos;
@@ -28,16 +25,6 @@ public class Draw : MonoBehaviour
     public enum DeckType { Mana, Blood}
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            savedDeck = deck;
-            savedBloodDeck = bloodDeck;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
-        deck = savedDeck;
-        bloodDeck = savedBloodDeck;
         ReloadActualDecks();
     }
     public void Start()
