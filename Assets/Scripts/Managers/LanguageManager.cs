@@ -44,6 +44,7 @@ public class LanguageManager : MonoBehaviour
 [System.Serializable]
 public class TextLanguage
 {
+    [SerializeField] private string name;
     [TextArea(1, 4)]
     public List<string> languageText;
     public TextMeshProUGUI text;
