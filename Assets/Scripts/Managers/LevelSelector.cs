@@ -19,7 +19,14 @@ public class LevelSelector : MonoBehaviour
     }
     public void SelectedLevel(int selectedLevel)
     {
+        if (!FindObjectOfType<Stamina>().UseStamina(1))
+            return;
         FindObjectOfType<LevelSelected>().Level = selectedLevel;
         FindObjectOfType<ChangeSceneManager>().ChangeScene(sceneToGo);
+    }
+    public void TestStamina()
+    {
+        if (!FindObjectOfType<Stamina>().UseStamina(1))
+            return;
     }
 }
