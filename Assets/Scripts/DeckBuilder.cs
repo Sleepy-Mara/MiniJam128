@@ -58,19 +58,6 @@ public class DeckBuilder : MonoBehaviour
                     }
                 }
         ReloadDeck();
-        mainCamera = FindObjectOfType<Camera>();
-        Debug.Log(mainCamera.pixelWidth);
-        Debug.Log(mainCamera.pixelHeight);
-        buildDeck.spacing = new Vector2(buildDeck.spacing.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
-            buildDeck.spacing.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
-        buildDeck.cellSize = new Vector2(buildDeck.cellSize.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
-            buildDeck.cellSize.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
-        currentDeck.spacing = new Vector2(currentDeck.spacing.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
-            currentDeck.spacing.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
-        currentDeck.cellSize = new Vector2(currentDeck.cellSize.x * ((float)mainCamera.pixelWidth / (float)originalCameraWidth),
-            currentDeck.cellSize.y * ((float)mainCamera.pixelHeight / (float)originalCameraHeight));
-        currentCameraHeight = mainCamera.pixelHeight;
-        currentCameraWidth = mainCamera.pixelWidth;
     }
     public void UnlockCard(Cards newCard)
     {
@@ -238,21 +225,5 @@ public class DeckBuilder : MonoBehaviour
             json.SaveData.currentUnlockedCards.Add(cards);
         }
         deckBuilderLayout.SetActive(false);
-    }
-    private void Update()
-    {
-        if (currentCameraHeight != mainCamera.pixelHeight || currentCameraWidth != mainCamera.pixelWidth)
-        {
-            buildDeck.spacing = new Vector2(buildDeck.spacing.x * ((float)mainCamera.pixelWidth / (float)currentCameraWidth),
-                buildDeck.spacing.y * ((float)mainCamera.pixelHeight / (float)currentCameraHeight));
-            buildDeck.cellSize = new Vector2(buildDeck.cellSize.x * ((float)mainCamera.pixelWidth / (float)currentCameraWidth),
-                buildDeck.cellSize.y * ((float)mainCamera.pixelHeight / (float)currentCameraHeight));
-            currentDeck.spacing = new Vector2(currentDeck.spacing.x * ((float)mainCamera.pixelWidth / (float)currentCameraWidth),
-                currentDeck.spacing.y * ((float)mainCamera.pixelHeight / (float)currentCameraHeight));
-            currentDeck.cellSize = new Vector2(currentDeck.cellSize.x * ((float)mainCamera.pixelWidth / (float)currentCameraWidth),
-                currentDeck.cellSize.y * ((float)mainCamera.pixelHeight / (float)currentCameraHeight));
-            currentCameraHeight = mainCamera.pixelHeight;
-            currentCameraWidth = mainCamera.pixelWidth;
-        }
     }
 }
