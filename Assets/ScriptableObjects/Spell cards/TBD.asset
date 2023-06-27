@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: Promotion
+  m_Name: TBD
   m_EditorClassIdentifier: 
   cardName:
-  - Promotion
-  - Promocion
+  - WolfSpell
+  - WolfSpell
   life: 0
   attack: 0
   attackToPlayer: 0
-  manaCost: 1
+  manaCost: 0
   healthCost: 0
   sprite: {fileID: 0}
   hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - give +1/+0 to a all ally creatures until the end of your turn
-  - da +1/+0 a todas las criaturas aliadas hasta el final de tu turno
+  - Heal 2 HP to all ally creatures
+  - Heal 2 HP to all ally creatures
   spell: 1
