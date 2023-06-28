@@ -26,6 +26,11 @@ public class NextCombat : MonoBehaviour
     private Draw _draw;
     private Table _table;
     private AudioPlayer _audioPlayer;
+    [HideInInspector] public int EnemyReward
+    {
+        get => enemies[enemyNum].reward;
+        set { }
+    }
 
     private void Awake()
     {
