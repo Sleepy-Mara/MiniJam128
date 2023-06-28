@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 933860156666165425}
   - component: {fileID: 933860156666165430}
   m_Layer: 0
-  m_Name: Punching
+  m_Name: Kangaroo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
