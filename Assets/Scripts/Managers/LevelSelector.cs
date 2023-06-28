@@ -6,16 +6,14 @@ public class LevelSelector : MonoBehaviour
 {
     private SaveWithJson json;
     private int unlockedLevels;
-    [SerializeField] private List<GameObject> unlockedLevel;
+    [SerializeField] private List<GameObject> lockLevel;
     [SerializeField] private string sceneToGo;
     private void Awake()
     {
         json = FindObjectOfType<SaveWithJson>();
         unlockedLevels = json.SaveData.currentUnlockedLevels;
-        if (unlockedLevels >= unlockedLevel.Count)
-            return;
-        for(int i = 0; i < unlockedLevels; i++)
-            unlockedLevel[i].SetActive(false);
+        for(int i = 0; i <= unlockedLevels; i++)
+            lockLevel[i].SetActive(true);
     }
     public void SelectedLevel(int selectedLevel)
     {
