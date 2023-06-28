@@ -41,7 +41,7 @@ public class DeckBuilder : MonoBehaviour
             for(int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
                 if (json.SaveData.currentUnlockedCards[i].card == cards.card.card)
                 {
-                    UnlockCard(cards.card.card);
+                    UnlockCard(cards.card.card, 0);
                     for (int j = 0; j < json.SaveData.currentUnlockedCards[i].cardAmount; j++)
                         cards.NumberOfCards = 1;
                 }
@@ -59,18 +59,18 @@ public class DeckBuilder : MonoBehaviour
                 }
         ReloadDeck();
     }
-    public void UnlockCard(Cards newCard)
+    public void UnlockCard(Cards newCard, int number)
     {
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
             if (card.card.card.cardName == newCard.cardName)
             {
-                card.NumberOfCards = 1;
+                card.NumberOfCards = number;
                 card.mysteryCard.SetActive(false);
             }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
             if (card.card.card.cardName == newCard.cardName)
             {
-                card.NumberOfCards = 1;
+                card.NumberOfCards = number;
                 card.mysteryCard.SetActive(false);
             }
     }

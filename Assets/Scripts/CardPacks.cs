@@ -9,6 +9,6 @@ public class CardPacks : MonoBehaviour
     public void OpenPack()
     {
         for (int i = 0; i < numberOfCardsInPack; i++)
-            FindObjectOfType<DeckBuilder>().UnlockCard(cardsInPack[Random.Range(0, cardsInPack.Count)]);
+            FindObjectOfType<DeckBuilder>().UnlockCard(cardsInPack[Random.Range(0, cardsInPack.Count)], 1);
     }
 }
