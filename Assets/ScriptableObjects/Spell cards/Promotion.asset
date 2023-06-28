@@ -25,6 +25,6 @@ MonoBehaviour:
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - give +1/+0 to a all ally creatures until the end of your turn
-  - da +1/+0 a todas las criaturas aliadas hasta el final de tu turno
+  - Give +1/+0 to a all ally creatures until the end of your turn
+  - Da +1/+0 a todas las criaturas aliadas hasta el final de tu turno
   spell: 1

@@ -18,11 +18,13 @@ MonoBehaviour:
   life: 0
   attack: 0
   attackToPlayer: 0
-  manaCost: 0
-  healthCost: 0
+  manaCost: 1
+  healthCost: 1
   sprite: {fileID: 0}
   hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
-  effectDesc: []
+  effectDesc:
+  - Give +2/+0 to a all ally creatures until the end of your turn
+  - Da +2/+0 a todas las criaturas aliadas hasta el final de tu turno
   spell: 1

@@ -18,11 +18,13 @@ MonoBehaviour:
   life: 0
   attack: 0
   attackToPlayer: 0
-  manaCost: 0
+  manaCost: 1
   healthCost: 0
   sprite: {fileID: 21300000, guid: e19b309be78aea047864435999849aa6, type: 3}
   hasEffect: 1
-  effect: 
+  effect: <played><heal><player_1>
   effectSprite: {fileID: 0}
-  effectDesc: []
+  effectDesc:
+  - Heal 1 HP to the player
+  - Cura 1 PV al jugador
   spell: 1
