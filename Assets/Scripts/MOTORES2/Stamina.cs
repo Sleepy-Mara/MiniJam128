@@ -7,11 +7,11 @@ using System;
 
 public class Stamina : MonoBehaviour
 {
-    [SerializeField] int maxStamina = 10;
-    [SerializeField] float timeToRecharge = 5f;
+    [SerializeField] int maxStamina;
+    [SerializeField] float timeToRecharge;
     int currentStamina;
-    [SerializeField] TextMeshProUGUI staminaText = null;
-    [SerializeField] TextMeshProUGUI timertText = null;
+    [SerializeField] TextMeshProUGUI staminaText;
+    [SerializeField] TextMeshProUGUI timerText;
     bool recharging;
     DateTime nextStaminaTime;
     DateTime lastStaminaTime;
@@ -27,15 +27,13 @@ public class Stamina : MonoBehaviour
 
     void Start()
     {
-        if (!PlayerPrefs.HasKey("currentStamina"))
-            PlayerPrefs.SetInt("currentStamina", maxStamina);
         Load();
         StartCoroutine(RechargeStamina());
         if (currentStamina < maxStamina)
         {
             timer = nextStaminaTime - DateTime.Now;
             id = NotificationManager.Instance.DisplayNotification(notifTitle, notifText,
-                AddDuration(DateTime.Now, ((maxStamina - (currentStamina) + 1) * timeToRecharge) + 1 + (float)timer.TotalSeconds));
+                AddDuration(DateTime.Now, ((maxStamina - (currentStamina) + 1) * timeToRecharge) + 1 + (float)timer.TotalMinutes));
         }
     }
     public bool HasEnoughStamina(int stamina) => currentStamina - stamina >= 0;
@@ -76,8 +74,7 @@ public class Stamina : MonoBehaviour
     }
     DateTime AddDuration(DateTime date, float durationMinutes)
     {
-        date.AddSeconds(durationMinutes);
-        return date;
+        return date.AddMinutes(durationMinutes);
     }
     public bool UseStamina(int staminaToUse)
     {
@@ -87,7 +84,7 @@ public class Stamina : MonoBehaviour
             UpdateStamina();
             NotificationManager.Instance.CancelNotification(id);
             id = NotificationManager.Instance.DisplayNotification(notifTitle, notifText,
-                AddDuration(DateTime.Now, ((maxStamina - (currentStamina) + 1) * timeToRecharge) + 1 + (float)timer.TotalSeconds));
+                AddDuration(DateTime.Now, ((maxStamina - (currentStamina) + 1) * timeToRecharge) + 1 + (float)timer.TotalMinutes));
             if (!recharging)
             {
                 nextStaminaTime = AddDuration(DateTime.Now, timeToRecharge);
@@ -102,11 +99,11 @@ public class Stamina : MonoBehaviour
     {
         if (currentStamina >= maxStamina)
         {
-            timertText.text = "Stamina completa";
+            timerText.text = "Stamina completa";
             return;
         }
         timer = nextStaminaTime - DateTime.Now;
-        timertText.text = timer.Minutes.ToString("00") + ":" + timer.Seconds.ToString("00");
+        timerText.text = timer.Minutes.ToString("00") + ":" + timer.Seconds.ToString("00");
     }
     void UpdateStamina()
     {
