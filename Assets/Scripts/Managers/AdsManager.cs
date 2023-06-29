@@ -5,8 +5,8 @@ using UnityEngine.Advertisements;
 
 public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
-    [SerializeField] string gameId = "5303268";
-    [SerializeField] string adId = "Rewarded_Android";
+    [SerializeField] string gameId;
+    [SerializeField] string adId;
     [SerializeField] GameObject errorMessage;
     [SerializeField] GameObject skippedMessage;
     private GameObject adsButton;

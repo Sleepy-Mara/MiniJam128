@@ -17,8 +17,6 @@ public class EffectManager : MonoBehaviour
         "end_turn", //7
         "buffed", //8
         "spell_played", //9
-        "until_next_turn", //10
-        "until_end_turn" //11
     };
     [HideInInspector]
     public List<string> Conditions
@@ -127,14 +125,6 @@ public class EffectManager : MonoBehaviour
     public void CheckConditionGetBuffed(CardCore card)
     {
         SelectEffects(card, conditions[9]);
-    }
-    public void CheckConditionUntilYourNextTurn(CardCore card)
-    {
-        SelectEffects(card, conditions[10]);
-    }
-    public void CheckConditionUntilTheEndOfTheTurn(CardCore card)
-    {
-        SelectEffects(card, conditions[11]);
     }
     void SelectEffects(CardCore card, string condition)
     {
