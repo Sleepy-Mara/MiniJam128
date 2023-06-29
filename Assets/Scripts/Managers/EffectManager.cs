@@ -196,7 +196,6 @@ public class EffectManager : MonoBehaviour
             if (extraCondition.Contains(extraConditions[1]))
                 endTurn = true;
         }
-        Debug.LogError("Im going to do something");
         foreach (string effect in newEffect)
         {
             if (effect.Contains(effects[0]))
@@ -861,9 +860,9 @@ public class EffectManager : MonoBehaviour
                         allyPositions = _table.playerPositions;
                     }
                     if (target == targets[13])
-                        card.currentPosition.positionFacing.card.immune = true;
+                        card.currentPosition.positionFacing.card.ImmuneEffect(startTurn, endTurn);
                     else if (target == targets[10] || card.GetComponent<Card>())
-                        card.GetComponent<Card>().immune = true;
+                        card.GetComponent<Card>().ImmuneEffect(startTurn, endTurn);
                     else if (target == targets[7])
                     {
                         for (int j = 0; j < 3; j++)
@@ -873,7 +872,7 @@ public class EffectManager : MonoBehaviour
                                     {
                                         var selected = Random.Range(0, allyPositions.Length - 1);
                                         if (_table.playerPositions[selected].card != null)
-                                            _table.playerPositions[selected].card.immune = true;
+                                            _table.playerPositions[selected].card.ImmuneEffect(startTurn, endTurn);
                                     }
                     }
                     else if (target == targets[6])
@@ -885,32 +884,32 @@ public class EffectManager : MonoBehaviour
                                     {
                                         var selected = Random.Range(0, enemyPositions.Length - 1);
                                         if (_table.enemyFront[selected].card != null)
-                                            _table.enemyFront[selected].card.immune = true;
+                                            _table.enemyFront[selected].card.ImmuneEffect(startTurn, endTurn);
                                     }
                     }
                     else if (target == targets[9])
                     {
                         foreach (MapPosition selected in allyPositions)
                             if (selected.card != null)
-                                selected.card.immune = true;
+                                selected.card.ImmuneEffect(startTurn, endTurn);
                     }
                     else if (target == targets[8])
                     {
                         foreach (MapPosition selected in enemyPositions)
                             if (selected.card != null)
-                                selected.card.immune = true;
+                                selected.card.ImmuneEffect(startTurn, endTurn);
                     }
                     else if (target == targets[5])
                     {
                         var selected = Random.Range(0, allyPositions.Length - 1);
                         if (_table.playerPositions[selected].card != null)
-                            _table.playerPositions[selected].card.immune = true;
+                            _table.playerPositions[selected].card.ImmuneEffect(startTurn, endTurn);
                     }
                     else if (target == targets[4])
                     {
                         var selected = Random.Range(0, enemyPositions.Length - 1);
                         if (_table.enemyFront[selected].card != null)
-                            _table.enemyFront[selected].card.immune = true;
+                            _table.enemyFront[selected].card.ImmuneEffect(startTurn, endTurn);
                     }
                     else if (target == targets[0])
                     {

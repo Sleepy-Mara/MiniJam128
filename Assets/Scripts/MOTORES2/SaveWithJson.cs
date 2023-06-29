@@ -24,6 +24,7 @@ public class SaveWithJson : MonoBehaviour
         if(File.Exists(path))
         {
             string data = File.ReadAllText(path);
+            Debug.Log(data);
             JsonUtility.FromJsonOverwrite(data, saveData);
             return;
         }

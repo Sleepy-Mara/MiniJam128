@@ -7,7 +7,6 @@ public class Card : CardCore, IPointerDownHandler
 {
     public bool inAttackAnim;
     public bool inDamageAnim;
-    [HideInInspector]
     public bool immune;
     public RuntimeAnimatorController handAnimator;
     public RuntimeAnimatorController tableAnimator;
@@ -21,7 +20,6 @@ public class Card : CardCore, IPointerDownHandler
         _effectManager = FindObjectOfType<EffectManager>();
         _cardManager = FindObjectOfType<CardManager>();
         _turnManager = FindObjectOfType<TurnManager>();
-        immune = false;
     }
     public int ActualLife
     {
@@ -259,8 +257,10 @@ public class Card : CardCore, IPointerDownHandler
     {
         foreach (CardTempEffect effect in cardTempEffects)
         {
-            if (effect.endTurn)
+            if (effect.endTurn || !effect.startTurn)
                 continue;
+            if (effect.immune)
+                immune = false;
             if (effect.destroy)
                 StartCoroutine(Defeated(null));
             if (effect.damage > 0)
@@ -275,7 +275,7 @@ public class Card : CardCore, IPointerDownHandler
     {
         foreach (CardTempEffect effect in cardTempEffects)
         {
-            if (effect.startTurn)
+            if (effect.startTurn || !effect.endTurn)
                 continue;
             if (effect.immune)
                 immune = false;

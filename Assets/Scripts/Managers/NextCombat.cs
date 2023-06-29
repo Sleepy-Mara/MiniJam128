@@ -127,7 +127,8 @@ public class NextCombat : MonoBehaviour
         cardsToDelete.Clear();
         if (enemyNum == enemies.Length - 1)
         {
-            FindObjectOfType<ChangeSceneManager>().ChangeScene("PruebaNoche");
+            FindObjectOfType<ChangeSceneManager>().ChangeScene("Credits");
+            //FindObjectOfType<ChangeSceneManager>().ChangeScene("PruebaNoche");
             return;
         }
         enemies[enemyNum].enemyCharacter.SetActive(true);

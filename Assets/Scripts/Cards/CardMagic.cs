@@ -9,17 +9,14 @@ public class CardMagic : CardCore, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("a");
-            if (_turnManager.CanPlayCards())
+        if (_turnManager.CanPlayCards())
+        {
+            if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
             {
-                Debug.Log("c");
-                if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
-                {
-                    Debug.Log("d");
-                    //_cardManager.PlaceCards(gameObject);
-                    StartCoroutine(PlayEffect());
-                }
+                //_cardManager.PlaceCards(gameObject);
+                StartCoroutine(PlayEffect());
             }
+        }
     }
 
     IEnumerator PlayEffect()
