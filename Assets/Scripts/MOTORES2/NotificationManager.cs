@@ -8,6 +8,9 @@ public class NotificationManager : MonoBehaviour
 {
     public static NotificationManager Instance { get; private set; }
     AndroidNotificationChannel notifChannel;
+    [SerializeField] private List<String> notifMessages;
+    [SerializeField] private List<String> notifTitle;
+    [SerializeField] private int notifTime;
     private void Awake()
     {
         Instance = this;
@@ -27,7 +30,8 @@ public class NotificationManager : MonoBehaviour
 
         AndroidNotificationCenter.RegisterNotificationChannel(notifChannel);
 
-        DisplayNotification("Extraño tu pitito", "Hace tiempo que no te veo, necesito que juegues conmigo", DateTime.Now.AddSeconds(30));
+        string nextNotifTitle = notifTitle[UnityEngine.Random.Range(0,notifTitle.Count)], nextNotifMessage = notifMessages[UnityEngine.Random.Range(0, notifMessages.Count)];
+        DisplayNotification(nextNotifTitle, nextNotifMessage, DateTime.Now.AddSeconds(notifTime));
     }
     public int DisplayNotification(string title, string text, DateTime fireTime)
     {
