@@ -26,6 +26,7 @@ public class NextCombat : MonoBehaviour
     private Draw _draw;
     private Table _table;
     private AudioPlayer _audioPlayer;
+    private SaveWithJson json;
     [HideInInspector] public int EnemyReward
     {
         get => enemies[enemyNum].reward;
@@ -34,6 +35,7 @@ public class NextCombat : MonoBehaviour
 
     private void Awake()
     {
+        json=FindObjectOfType<SaveWithJson>();
         if (FindObjectOfType<LevelSelected>())
             SetEnemyNum(FindObjectOfType<LevelSelected>().Level);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -98,6 +100,9 @@ public class NextCombat : MonoBehaviour
         wonCombatText.text = enemies[enemyNum].wonCombatMessage;
         _audioPlayer.StopPlaying("Music" + enemyNum);
         enemyNum++;
+        SaveData saveData = json.SaveData;
+        saveData.currentUnlockedLevels = enemyNum;
+        json.SaveData = saveData;
         ResetCombat();
         endTurnButton.SetActive(false);
         wonCombat.SetActive(true);
