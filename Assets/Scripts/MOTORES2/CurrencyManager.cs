@@ -18,14 +18,15 @@ public class CurrencyManager : MonoBehaviour
     public int Currency
     {
         get { return currency; }
-        set {
+        set
+        {
+            SaveData saveData = json.SaveData;
+            saveData.currentCurrency = currency + value;
+            json.SaveData = saveData;
             string posOrNeg = "+";
             if(value < 0)
                 posOrNeg = "";
             moneyEarned.text = posOrNeg + value.ToString();
-            SaveData saveData = json.SaveData;
-            saveData.currentCurrency = currency + value;
-            json.SaveData = saveData;
             animator.SetTrigger("EarnMoney");
             StartCoroutine(EarnMoney(value));
         }
