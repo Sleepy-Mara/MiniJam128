@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CurrencyManager : MonoBehaviour
 {
@@ -32,8 +33,11 @@ public class CurrencyManager : MonoBehaviour
     private void Awake()
     {
         json = FindObjectOfType<SaveWithJson>();
+    }
+    private void Start()
+    {
         currency = json.SaveData.currentCurrency;
-        textCurrency.text = currency.ToString();
+        textCurrency.text = json.SaveData.currentCurrency.ToString();
         if (enabled)
             disabled = false;
         else disabled = true;

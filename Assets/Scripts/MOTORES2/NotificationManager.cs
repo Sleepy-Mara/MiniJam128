@@ -29,9 +29,6 @@ public class NotificationManager : MonoBehaviour
         };
 
         AndroidNotificationCenter.RegisterNotificationChannel(notifChannel);
-
-        string nextNotifTitle = notifTitle[UnityEngine.Random.Range(0,notifTitle.Count)], nextNotifMessage = notifMessages[UnityEngine.Random.Range(0, notifMessages.Count)];
-        DisplayNotification(nextNotifTitle, nextNotifMessage, DateTime.Now.AddSeconds(notifTime));
     }
     public int DisplayNotification(string title, string text, DateTime fireTime)
     {
@@ -47,5 +44,16 @@ public class NotificationManager : MonoBehaviour
     public void CancelNotification(int id)
     {
         AndroidNotificationCenter.CancelScheduledNotification(id);
+    }
+    private void OnApplicationQuit()
+    {
+        string nextNotifTitle = notifTitle[UnityEngine.Random.Range(0, notifTitle.Count)], nextNotifMessage = notifMessages[UnityEngine.Random.Range(0, notifMessages.Count)];
+        DisplayNotification(nextNotifMessage, nextNotifTitle, DateTime.Now.AddSeconds(notifTime));
+    }
+    private void OnApplicationPause(bool pause)
+    {
+        if (!pause) return;
+        string nextNotifTitle = notifTitle[UnityEngine.Random.Range(0, notifTitle.Count)], nextNotifMessage = notifMessages[UnityEngine.Random.Range(0, notifMessages.Count)];
+        DisplayNotification(nextNotifMessage, nextNotifTitle, DateTime.Now.AddSeconds(notifTime));
     }
 }

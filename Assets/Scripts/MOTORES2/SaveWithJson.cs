@@ -29,6 +29,7 @@ public class SaveWithJson : MonoBehaviour
             JsonUtility.FromJsonOverwrite(data, saveData);
             return;
         }
+        saveData = defaultSaveData;
         string json = JsonUtility.ToJson(defaultSaveData, true);
         File.WriteAllText(path, json);
     }
