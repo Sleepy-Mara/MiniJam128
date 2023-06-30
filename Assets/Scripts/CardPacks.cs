@@ -16,7 +16,7 @@ public class CardPacks : MonoBehaviour
     {
         if (currencyManager.Currency < cost)
             return;
-        currencyManager.Currency = cost;
+        currencyManager.Currency = -cost;
         for (int i = 0; i < numberOfCardsInPack; i++)
             FindObjectOfType<DeckBuilder>().UnlockCard(cardsInPack[Random.Range(0, cardsInPack.Count)], 1);
     }

@@ -17,6 +17,6 @@ public class SaveData
 [Serializable]
 public class SavedCards
 {
-    public Cards card;
+    public string card;
     public int cardAmount;
 }

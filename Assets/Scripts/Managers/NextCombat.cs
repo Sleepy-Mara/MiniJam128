@@ -29,7 +29,7 @@ public class NextCombat : MonoBehaviour
     private SaveWithJson json;
     [HideInInspector] public int EnemyReward
     {
-        get => enemies[enemyNum].reward;
+        get => enemies[enemyNum-1].reward;
         set { }
     }
 

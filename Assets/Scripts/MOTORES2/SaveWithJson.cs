@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveWithJson : MonoBehaviour
 {
@@ -34,5 +35,7 @@ public class SaveWithJson : MonoBehaviour
     public void ResetSave()
     {
         SaveData = defaultSaveData;
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
