@@ -71,7 +71,6 @@ public class NextCombat : MonoBehaviour
             return;
         }
         initialMenu.SetActive(true);
-        DontDestroyOnLoad(this);
     }
     public void StartGame()
     {
