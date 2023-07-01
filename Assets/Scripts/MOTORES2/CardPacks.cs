@@ -16,6 +16,10 @@ public class CardPacks : MonoBehaviour
     {
         if (currencyManager.Currency < cost)
             return;
+        SaveWithJson json = FindObjectOfType<SaveWithJson>();
+        SaveData saveData = json.SaveData;
+        saveData.currentCurrency = currencyManager.Currency - cost;
+        json.SaveData = saveData;
         currencyManager.Currency = -cost;
         for (int i = 0; i < numberOfCardsInPack; i++)
             FindObjectOfType<DeckBuilder>().UnlockCard(cardsInPack[Random.Range(0, cardsInPack.Count)], 1);
