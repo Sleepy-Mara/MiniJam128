@@ -50,7 +50,7 @@ public class Stamina : MonoBehaviour
             {
                 if (currentStamina >= maxStamina) 
                     break;
-                currentStamina++;
+                ChargeStamina(1);
                 staminaAdd = true;
                 UpdateStamina();
                 DateTime timeToAdd = nextTime;
@@ -71,6 +71,10 @@ public class Stamina : MonoBehaviour
         }
         NotificationManager.Instance.CancelNotification(id);
         recharging = false;
+    }
+    public void ChargeStamina(int stamina)
+    {
+        currentStamina += stamina;
     }
     DateTime AddDuration(DateTime date, float durationMinutes)
     {
