@@ -36,35 +36,19 @@ public class DeckBuilder : MonoBehaviour
     {
         json = FindObjectOfType<SaveWithJson>();
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
-            cards.mysteryCard.SetActive(true);
+            cards.cover.SetActive(true);
     }
     private void Start()
     {
-
-        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
-            for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
-                if (json.SaveData.currentUnlockedCards[i].card == cards.card.card.name)
-                {
-                    UnlockCard(cards.card.card, json.SaveData.currentUnlockedCards[i].cardAmount);
-                }
-        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
-            for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
-                if (json.SaveData.currentCardsInDeck[i].card == cards.card.card.name)
-                {
-                    for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
-                    {
-                        SelectCard(cards);
-                    }
-                }
-        ReloadDeck();
     }
     public void UnlockCard(Cards newCard, int number)
     {
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
             if (card.card.card.name == newCard.name)
             {
+                card.numberText.gameObject.SetActive(true);
                 card.NumberOfCards = number;
-                card.mysteryCard.SetActive(false);
+                card.cover.SetActive(false);
                 bool alreadyUnlocked = false;
                 SaveData saveData = json.SaveData;
                 for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
@@ -83,8 +67,9 @@ public class DeckBuilder : MonoBehaviour
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
             if (card.card.card.name == newCard.name)
             {
+                card.numberText.gameObject.SetActive(true);
                 card.NumberOfCards = number;
-                card.mysteryCard.SetActive(false);
+                card.cover.SetActive(false);
                 bool alreadyUnlocked = false;
                 SaveData saveData = json.SaveData;
                 for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
@@ -119,6 +104,7 @@ public class DeckBuilder : MonoBehaviour
                 if (!inDeck)
                 {
                     CardsInDeckBuilder newCard = Instantiate(cardInDeck, currentDeck.transform).GetComponent<CardsInDeckBuilder>();
+                    newCard.numberText.gameObject.SetActive(true);
                     newCard.card.card = selectedCard.card.card;
                     newCard.card.SetData();
                     newCard.inDeck = true;
@@ -149,6 +135,7 @@ public class DeckBuilder : MonoBehaviour
                 if (!inDeck)
                 {
                     CardsInDeckBuilder newCard = Instantiate(cardInDeck, currentDeck.transform).GetComponent<CardsInDeckBuilder>();
+                    newCard.numberText.gameObject.SetActive(true);
                     newCard.card.card = selectedCard.card.card;
                     newCard.inDeck = true;
                     newCard.NumberOfCards = 1;
@@ -215,9 +202,57 @@ public class DeckBuilder : MonoBehaviour
     public void OpenDeckBuilder()
     {
         deckBuilderLayout.SetActive(true);
+        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
+            for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
+                if (json.SaveData.currentUnlockedCards[i].card == cards.card.card.name)
+                {
+                    UnlockCard(cards.card.card, json.SaveData.currentUnlockedCards[i].cardAmount);
+                }
+        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
+            for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
+                if (json.SaveData.currentCardsInDeck[i].card == cards.card.card.name)
+                {
+                    for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
+                    {
+                        SelectCard(cards);
+                    }
+                }
         ReloadDeck();
     }
     public void CloseDeckBuilder()
+    {
+        deckBuilderLayout.SetActive(false);
+        ResetDeckBuilder();
+    }
+    void ResetDeckBuilder()
+    {
+        foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
+        {
+            card.NumberOfCards = - card.NumberOfCards;
+            card.numberText.gameObject.SetActive(false);
+            card.cover.SetActive(true);
+        }
+        foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
+        {
+            card.NumberOfCards = -card.NumberOfCards;
+            card.numberText.gameObject.SetActive(false);
+            card.cover.SetActive(true);
+        }
+        int x = cardsInDeck.Count, y = cardsInBloodDeck.Count;
+        for (int i = 0; i < x; i++)
+        {
+            var card = cardsInDeck[0];
+            cardsInDeck.Remove(card);
+            Destroy(card.gameObject);
+        }
+        for (int i = 0; i < y; i++)
+        {
+            var card = cardsInBloodDeck[0];
+            cardsInBloodDeck.Remove(card);
+            Destroy(card.gameObject);
+        }
+    }
+    public void SaveData()
     {
         if (cardsInDeck.Count > maxCardsInNormalDeck)
         {
@@ -242,7 +277,7 @@ public class DeckBuilder : MonoBehaviour
         ReloadDeck();
         foreach (CardsInDeckBuilder card in cardsInDeck)
         {
-            if (card.mysteryCard.activeSelf)
+            if (card.cover.activeSelf)
                 continue;
             bool alreadyUnlocked = false;
             SaveData saveData = json.SaveData;
@@ -261,7 +296,7 @@ public class DeckBuilder : MonoBehaviour
         }
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
         {
-            if (card.mysteryCard.activeSelf)
+            if (card.cover.activeSelf)
                 continue;
             bool alreadyUnlocked = false;
             SaveData saveData = json.SaveData;
@@ -278,6 +313,5 @@ public class DeckBuilder : MonoBehaviour
             }
             json.SaveData = saveData;
         }
-        deckBuilderLayout.SetActive(false);
     }
 }

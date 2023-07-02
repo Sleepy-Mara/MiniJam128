@@ -72,7 +72,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             canvas.overrideSorting = false;
         }
     }
-    public void UpdateLanguage(int languageNumber)
+    public virtual void UpdateLanguage(int languageNumber)
     {
         nameText.text = card.cardName[languageNumber];
         if (card.hasEffect)

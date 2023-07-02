@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
-  actualPosition:
+  currentPosition:
     card: {fileID: 0}
     cardPos: {fileID: 0}
     positionNum: 0
@@ -1285,7 +1285,7 @@ Animator:
   m_GameObject: {fileID: 8954024019598615160}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3e4435713f283874ea212417c743c142, type: 2}
+  m_Controller: {fileID: 9100000, guid: 29035033448e2ca468e4e77c07d48bce, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
