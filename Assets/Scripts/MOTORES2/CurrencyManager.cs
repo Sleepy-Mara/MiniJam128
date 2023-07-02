@@ -48,7 +48,7 @@ public class CurrencyManager : MonoBehaviour
     IEnumerator EarnMoney(int value)
     {
         yield return new WaitForSeconds(1f);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("EarnMoney"));
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("EarnMoney") || animator.GetCurrentAnimatorStateInfo(0).IsName("EarnMoney 0"));
         currency += value;
         if (currency < 0)
             currency = 0;

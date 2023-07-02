@@ -59,8 +59,8 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
                 if (adsButton != null)
                     adsButton.SetActive(false);
                 FindObjectOfType<CurrencyManager>().Currency = currencyReward;
-                FindObjectOfType<Stamina>().ChargeStamina(staminaReward);
-                FindObjectOfType<RewardsScreen>()?.AdReward(FindObjectOfType<NextCombat>().EnemyReward);
+                FindObjectOfType<Stamina>()?.ChargeStamina(staminaReward);
+                FindObjectOfType<RewardsScreen>().AdReward(FindObjectOfType<NextCombat>().EnemyReward);
             }
             else if (showResult == ShowResult.Skipped)
             {

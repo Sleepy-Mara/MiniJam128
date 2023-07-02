@@ -99,9 +99,12 @@ public class NextCombat : MonoBehaviour
         wonCombatText.text = enemies[enemyNum].wonCombatMessage;
         _audioPlayer.StopPlaying("Music" + enemyNum);
         enemyNum++;
-        SaveData saveData = json.SaveData;
-        saveData.currentUnlockedLevels = enemyNum;
-        json.SaveData = saveData;
+        if (json.SaveData.currentUnlockedLevels < enemyNum && enemyNum != enemies.Length -1)
+        {
+            SaveData saveData = json.SaveData;
+            saveData.currentUnlockedLevels = enemyNum;
+            json.SaveData = saveData;
+        }
         ResetCombat();
         endTurnButton.SetActive(false);
         wonCombat.SetActive(true);
