@@ -11,6 +11,8 @@ public class SaveData
     public string nextStaminaTime;
     public string lastStaminaTime;
     public int currentUnlockedLevels;
+    public float musicVolume;
+    public float sfxVolume;
     public List<SavedCards> currentUnlockedCards;
     public List<SavedCards> currentCardsInDeck;
 }

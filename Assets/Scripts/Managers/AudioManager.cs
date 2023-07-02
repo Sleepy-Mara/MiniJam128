@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    private SaveWithJson json;
     public static AudioManager instance;
     public static float musicVolume;
     public static float sfxVolume;
@@ -20,11 +21,12 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            musicVolume = 1;
-            sfxVolume = 1;
+            musicVolume = json.SaveData.musicVolume;
+            sfxVolume = json.SaveData.sfxVolume;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+        json = FindObjectOfType<SaveWithJson>();
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
         if (musicSlider.value != musicVolume)
@@ -37,10 +39,16 @@ public class AudioManager : MonoBehaviour
     {
         mixer.SetFloat(MIXER_MUSIC, Mathf.Log10(volume) * 20); 
         musicVolume = volume;
+        SaveData saveData = json.SaveData;
+        saveData.musicVolume = musicVolume;
+        json.SaveData = saveData;
     }
     private void SetSFXVolume(float volume)
     {
         mixer.SetFloat(MIXER_SFX, Mathf.Log10(volume) * 20);
         sfxVolume = volume;
+        SaveData saveData = json.SaveData;
+        saveData.sfxVolume = sfxVolume;
+        json.SaveData = saveData;
     }
 }

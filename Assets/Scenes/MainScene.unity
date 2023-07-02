@@ -16079,7 +16079,7 @@ RectTransform:
   m_Children:
   - {fileID: 303935058}
   m_Father: {fileID: 727877550}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -21489,9 +21489,9 @@ RectTransform:
   - {fileID: 523132047}
   - {fileID: 1811211163}
   - {fileID: 1372977159}
+  - {fileID: 534018469}
   - {fileID: 59724053}
   - {fileID: 1085953917}
-  - {fileID: 534018469}
   m_Father: {fileID: 924548465}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49604,8 +49604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameId: 5330542
   adId: Rewarded_Android
-  errorMessage: {fileID: 0}
-  skippedMessage: {fileID: 0}
+  errorMessage: {fileID: 2039008416}
+  skippedMessage: {fileID: 2113003919}
 --- !u!1001 &1701500420
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -50,6 +50,8 @@ MonoBehaviour:
     nextStaminaTime: 
     lastStaminaTime: 
     currentUnlockedLevels: 0
+    musicVolume: 0
+    sfxVolume: 0
     currentUnlockedCards: []
     currentCardsInDeck: []
   defaultSaveData:
@@ -58,6 +60,8 @@ MonoBehaviour:
     nextStaminaTime: 
     lastStaminaTime: 
     currentUnlockedLevels: 0
+    musicVolume: 1
+    sfxVolume: 1
     currentUnlockedCards:
     - card: Jors
       cardAmount: 1
