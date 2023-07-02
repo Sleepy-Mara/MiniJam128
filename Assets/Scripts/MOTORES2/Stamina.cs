@@ -10,8 +10,8 @@ public class Stamina : MonoBehaviour
     [SerializeField] int maxStamina;
     [SerializeField] float timeToRecharge;
     int currentStamina;
-    [SerializeField] TextMeshProUGUI staminaText;
-    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] List<TextMeshProUGUI> staminaText;
+    [SerializeField] List<TextMeshProUGUI> timerText;
     bool recharging;
     DateTime nextStaminaTime;
     DateTime lastStaminaTime;
@@ -75,6 +75,8 @@ public class Stamina : MonoBehaviour
     public void ChargeStamina(int stamina)
     {
         currentStamina += stamina;
+        UpdateTimer();
+        UpdateStamina();
     }
     DateTime AddDuration(DateTime date, float durationMinutes)
     {
@@ -103,15 +105,18 @@ public class Stamina : MonoBehaviour
     {
         if (currentStamina >= maxStamina)
         {
-            timerText.text = "Stamina completa";
+            foreach (TextMeshProUGUI timerText in timerText)
+                timerText.text = "00:00";
             return;
         }
         timer = nextStaminaTime - DateTime.Now;
-        timerText.text = timer.Minutes.ToString("00") + ":" + timer.Seconds.ToString("00");
+        foreach (TextMeshProUGUI timerText in timerText)
+            timerText.text = timer.Minutes.ToString("00") + ":" + timer.Seconds.ToString("00");
     }
     void UpdateStamina()
     {
-        staminaText.text = currentStamina.ToString() + " / " + maxStamina.ToString();
+        foreach (TextMeshProUGUI staminaText in staminaText)
+            staminaText.text = currentStamina.ToString() + " / " + maxStamina.ToString();
     }
     void Save()
     {
