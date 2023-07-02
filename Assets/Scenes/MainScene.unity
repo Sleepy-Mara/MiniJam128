@@ -57279,7 +57279,7 @@ PrefabInstance:
       objectReference: {fileID: 1695916704}
     - target: {fileID: 9106297613132786368, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowAd
+      value: ShowAdAfterWin
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786368, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

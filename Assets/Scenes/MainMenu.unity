@@ -6894,22 +6894,22 @@ PrefabInstance:
     - target: {fileID: 4487203612341416652, guid: bacfd1033367a404ab67d86e1f2c1670, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1287865508}
+      objectReference: {fileID: 1287865510}
     - target: {fileID: 4487203612341416652, guid: bacfd1033367a404ab67d86e1f2c1670, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4487203612341416652, guid: bacfd1033367a404ab67d86e1f2c1670, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: ShowAdCurrency
       objectReference: {fileID: 0}
     - target: {fileID: 4487203612341416652, guid: bacfd1033367a404ab67d86e1f2c1670, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CurrencyManager, Assembly-CSharp
+      value: AdsManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4487203612341416652, guid: bacfd1033367a404ab67d86e1f2c1670, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4487203612341416652, guid: bacfd1033367a404ab67d86e1f2c1670, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -7015,7 +7015,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1780987356158501337, guid: bacfd1033367a404ab67d86e1f2c1670, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bacfd1033367a404ab67d86e1f2c1670, type: 3}
 --- !u!1 &635938075
 GameObject:
