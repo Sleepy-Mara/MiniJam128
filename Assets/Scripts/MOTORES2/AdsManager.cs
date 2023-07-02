@@ -10,20 +10,33 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     [SerializeField] GameObject errorMessage;
     [SerializeField] GameObject skippedMessage;
     private GameObject adsButton;
+    private int currencyReward;
+    private int staminaReward;
 
     void Start()
     {
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameId);
     }
-    public void ShowAd(GameObject button)
+    public void ShowAdAfterWin(GameObject button)
     {
         if (!Advertisement.IsReady()) return;
-
+        currencyReward = FindObjectOfType<NextCombat>().EnemyReward;
         Advertisement.Show(adId);
         adsButton = button;
     }
-
+    public void ShowAdCurrency(int currency)
+    {
+        if (!Advertisement.IsReady()) return;
+        currencyReward = currency;
+        Advertisement.Show(adId);
+    }
+    public void ShowAdStamina(int stamina)
+    {
+        if (!Advertisement.IsReady()) return;
+        staminaReward = stamina;
+        Advertisement.Show(adId);
+    }
     public void OnUnityAdsReady(string placementId)
     {
         if (placementId == adId) Debug.Log("Is ready!");
@@ -41,11 +54,13 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     {
         if (placementId == adId)
         {
-            if (showResult == ShowResult.Finished)
+            if (showResult == ShowResult.Finished) 
             {
-                adsButton.SetActive(false);
-                FindObjectOfType<CurrencyManager>().Currency = FindObjectOfType<NextCombat>().EnemyReward;
-                FindObjectOfType<RewardsScreen>().AdReward(FindObjectOfType<NextCombat>().EnemyReward);
+                if (adsButton != null)
+                    adsButton.SetActive(false);
+                FindObjectOfType<CurrencyManager>().Currency = currencyReward;
+                FindObjectOfType<Stamina>().ChargeStamina(staminaReward);
+                FindObjectOfType<RewardsScreen>()?.AdReward(FindObjectOfType<NextCombat>().EnemyReward);
             }
             else if (showResult == ShowResult.Skipped)
             {
@@ -55,6 +70,9 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             {
                 errorMessage.SetActive(true);
             }
+            currencyReward = 0;
+            staminaReward = 0;
+            adsButton = null;
         }
     }
 }
