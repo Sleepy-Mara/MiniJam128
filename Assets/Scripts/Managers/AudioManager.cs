@@ -21,8 +21,6 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            musicVolume = json.SaveData.musicVolume;
-            sfxVolume = json.SaveData.sfxVolume;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
@@ -33,6 +31,8 @@ public class AudioManager : MonoBehaviour
             musicSlider.value = musicVolume;
         if (sfxSlider.value != sfxVolume)
             sfxSlider.value = sfxVolume;
+        musicVolume = json.SaveData.musicVolume;
+        sfxVolume = json.SaveData.sfxVolume;
     }
 
     private void SetMusicVolume(float volume)
