@@ -64,11 +64,13 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             }
             else if (showResult == ShowResult.Skipped)
             {
-                skippedMessage.SetActive(true);
+                if (skippedMessage != null)
+                    skippedMessage.SetActive(true);
             }
             else
             {
-                errorMessage.SetActive(true);
+                if (errorMessage != null)
+                    errorMessage.SetActive(true);
             }
             currencyReward = 0;
             staminaReward = 0;

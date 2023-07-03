@@ -27,12 +27,15 @@ public class AudioManager : MonoBehaviour
         json = FindObjectOfType<SaveWithJson>();
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
-        if (musicSlider.value != musicVolume)
-            musicSlider.value = musicVolume;
-        if (sfxSlider.value != sfxVolume)
-            sfxSlider.value = sfxVolume;
+    }
+    private void Start()
+    {
         musicVolume = json.SaveData.musicVolume;
         sfxVolume = json.SaveData.sfxVolume;
+        musicSlider.value = musicVolume;
+        sfxSlider.value = sfxVolume;
+        mixer.SetFloat(MIXER_MUSIC, Mathf.Log10(musicVolume) * 20);
+        mixer.SetFloat(MIXER_SFX, Mathf.Log10(sfxVolume) * 20);
     }
 
     private void SetMusicVolume(float volume)

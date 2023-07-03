@@ -15162,7 +15162,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -26692,7 +26692,7 @@ MonoBehaviour:
     enemyCharacter: {fileID: 446360352}
     rewards:
     - {fileID: 11400000, guid: 26d16ce04e87aa947a969aefb11c5c8a, type: 2}
-    reward: 30
+    reward: 1
     introCombatMessage: "\u201CPay attention, this is how it\u2019s done\u2026\u201D"
     wonCombatMessage: "\u201CWoaaah, you caught the gist of the game so fast! Here,
       take these cards to add to your deck, it\u2019s going to help you in the upcoming
@@ -26705,7 +26705,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b732fe27de5b4564e923f10b5db800a4, type: 2}
     - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
     - {fileID: 11400000, guid: 21d1a8a8e3400cd4095b1ac6af3226f3, type: 2}
-    reward: 0
+    reward: 3
     introCombatMessage: "\u201CHI! I\u2019m Dog, I am very excited to play with you!\u201D"
     wonCombatMessage: "\u201CYou won! I\u2019m SO HAPPY for you, do you wanna be
       my friend? I think I love you, can we go for a walk? Oh, have these cards,
@@ -26716,7 +26716,7 @@ MonoBehaviour:
     enemyCharacter: {fileID: 1286374551}
     rewards:
     - {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
-    reward: 0
+    reward: 5
     introCombatMessage: "\u201CMoooo, let's see what you are made of.\u201D"
     wonCombatMessage: "\u201CMmh, you may have what it\u2019s needed to be on top
       of the food chain\u2026\u201D"
@@ -26726,7 +26726,7 @@ MonoBehaviour:
     rewards:
     - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
     - {fileID: 11400000, guid: c65aebf507439b040a868efb09167974, type: 2}
-    reward: 0
+    reward: 7
     introCombatMessage: "\u201CHuh, a new rival? I\u2019m always up for a new challenge.\u201D"
     wonCombatMessage: "\u201CYou defeated me? You are good, you might get to fight
       Bear, in fact, if you get to that point, can you tell her that it wasn\u2019t
@@ -26737,7 +26737,7 @@ MonoBehaviour:
     enemyCharacter: {fileID: 1097329473}
     rewards:
     - {fileID: 11400000, guid: b5a2c4cc536e51745b542ccc885995e7, type: 2}
-    reward: 0
+    reward: 10
     introCombatMessage: "\u201CHey pal, wanna practice some sparring with me?\u201D"
     wonCombatMessage: "\u201CAagh, you really knocked me out! Hey, I like your moves,
       I see you are going right to the top! It was a pleasure sparring with you,
@@ -26748,7 +26748,7 @@ MonoBehaviour:
     enemyCharacter: {fileID: 2067991128}
     rewards:
     - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
-    reward: 0
+    reward: 12
     introCombatMessage: "\u201CHello, I\u2019m under the table, but don\u2019t worry
       I will play against you.\u201D"
     wonCombatMessage: "\u201COh, I didn\u2019t see that coming. I will tell the monkeys
@@ -26759,7 +26759,7 @@ MonoBehaviour:
     enemyCharacter: {fileID: 1769869984}
     rewards:
     - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
-    reward: 0
+    reward: 15
     introCombatMessage: "\u201CH-hello, I see you have come far, let\u2019s fight.\u201D"
     wonCombatMessage: "\u201CTo forgive Wolf? He was the one ashamed to s-speak with
       me\u2026 Thanks for telling me.\u201D"
@@ -26768,7 +26768,7 @@ MonoBehaviour:
     enemyCharacter: {fileID: 0}
     rewards:
     - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
-    reward: 0
+    reward: 17
     introCombatMessage: "\u201CSo, you defeated everyone else, huh? Let\u2019s play
       and see how far you have come.\u201D"
     wonCombatMessage: "\u201CYou defeated me\u2026 Congratulations!\u201D"
@@ -58876,7 +58876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
