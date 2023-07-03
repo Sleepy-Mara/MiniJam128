@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class SaveData
 {
+    public bool firstPlay;
     public int currentCurrency;
     public int currentStamina;
     public string nextStaminaTime;

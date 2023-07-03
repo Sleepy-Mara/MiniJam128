@@ -70,7 +70,12 @@ public class NextCombat : MonoBehaviour
             StartGame();
             return;
         }
-        initialMenu.SetActive(true);
+        if (json.SaveData.firstPlay)
+            initialMenu.SetActive(true);
+        else StartGame();
+        SaveData saveData = json.SaveData;
+        saveData.firstPlay = false;
+        json.SaveData = saveData;
     }
     public void StartGame()
     {

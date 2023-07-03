@@ -10589,18 +10589,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1419118173}
     m_Modifications:
-    - target: {fileID: 4016169431621772933, guid: dd80f42c5beb5e846878e2c27c34780b, type: 3}
-      propertyPath: defaultSaveData.currentCardsInDeck.Array.data[8].card
-      value: Honey
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016169431621772933, guid: dd80f42c5beb5e846878e2c27c34780b, type: 3}
-      propertyPath: defaultSaveData.currentUnlockedCards.Array.data[8].card
-      value: Honey
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016169431621772933, guid: dd80f42c5beb5e846878e2c27c34780b, type: 3}
-      propertyPath: defaultSaveData.currentUnlockedCards.Array.data[9].card
-      value: Hot pepper
-      objectReference: {fileID: 0}
     - target: {fileID: 4016169431621772934, guid: dd80f42c5beb5e846878e2c27c34780b, type: 3}
       propertyPath: m_RootOrder
       value: 0

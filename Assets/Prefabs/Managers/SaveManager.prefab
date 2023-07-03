@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveData:
+    firstPlay: 0
     currentCurrency: 0
     currentStamina: 0
     nextStaminaTime: 
@@ -55,6 +56,7 @@ MonoBehaviour:
     currentUnlockedCards: []
     currentCardsInDeck: []
   defaultSaveData:
+    firstPlay: 1
     currentCurrency: 0
     currentStamina: 10
     nextStaminaTime: 
@@ -79,9 +81,9 @@ MonoBehaviour:
       cardAmount: 1
     - card: Plumsy
       cardAmount: 1
-    - card: Hot pepper
-      cardAmount: 1
     - card: Honey
+      cardAmount: 1
+    - card: Hot pepper
       cardAmount: 1
     currentCardsInDeck:
     - card: Jors
@@ -100,7 +102,7 @@ MonoBehaviour:
       cardAmount: 1
     - card: Plumsy
       cardAmount: 1
-    - card: Hot Pepper
+    - card: Honey
       cardAmount: 1
     - card: Hot pepper
       cardAmount: 1
