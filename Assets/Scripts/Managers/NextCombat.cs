@@ -117,9 +117,10 @@ public class NextCombat : MonoBehaviour
     // este es para el boton de introduccion
     public void StartCombat()
     {
-        _enemy.strategy = enemies[enemyNum].strategy;
         if (FindObjectOfType<EnemyAI>())
             _enemy.GetComponent<EnemyAI>().deck = enemies[enemyNum].enemyDeck.deck;
+        else
+            _enemy.strategy = enemies[enemyNum].strategy;
         _audioPlayer.Play("Music" + enemyNum);
         _turnManager.StartBattle();
         introCombat.SetActive(false);
