@@ -24642,10 +24642,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Cemetery, Assembly-CSharp
-        m_MethodName: CloseMenu
-        m_Mode: 1
+      - m_Target: {fileID: 188383129}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -43177,8 +43177,7 @@ MonoBehaviour:
     Get +1 max mana each turn (up to 5)
     and regain your max mana each turn
 
-    Buttons 1, 2 and 3 to adjust camera
-    angle'
+    Buttons 1, 2 and 3 to adjust camera angle'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
