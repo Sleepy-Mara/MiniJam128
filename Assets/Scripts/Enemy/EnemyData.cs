@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyData 
 {
     public Strategy strategy;
+    public EnemyDeck enemyDeck;
     public GameObject enemyCharacter;
     public Cards[] rewards;
     public int reward;

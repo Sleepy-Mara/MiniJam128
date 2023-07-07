@@ -545,7 +545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 18335426}
-  - component: {fileID: 18335427}
+  - component: {fileID: 18335428}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -568,7 +568,7 @@ Transform:
   m_Father: {fileID: 1711294742}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &18335427
+--- !u!114 &18335428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -577,15 +577,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 18335425}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba0140787c1d9f4a83614a1033c1e10, type: 3}
+  m_Script: {fileID: 11500000, guid: fad7c516b3067ce4aa161f16a6b925e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
   healthFill: {fileID: 661740562}
   healthText: {fileID: 214645304}
-  strategy: {fileID: 11400000, guid: db11cc9d7c479724f981a30f62b83297, type: 2}
+  strategy: {fileID: 0}
   card: {fileID: 8954024018774041426, guid: 918ce3453ac3589469482dbb7da7ac37, type: 3}
+  deck:
+  - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
+  - {fileID: 11400000, guid: 131afa24c579ad0449c3b2ec6deb9a8d, type: 2}
+  - {fileID: 11400000, guid: 4e434da33d9878540be6e38f21404f00, type: 2}
+  - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
+  - {fileID: 11400000, guid: a42e9a3fb4ed3304989965004e6f58ce, type: 2}
+  - {fileID: 11400000, guid: 4f5652c53ccb69747b79b468b76b199a, type: 2}
+  - {fileID: 11400000, guid: 68c3ff43c12955d47a86fe6abc38d9f0, type: 2}
+  - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+  - {fileID: 11400000, guid: 42344a2ae4643d846bab0813380a6ec6, type: 2}
+  - {fileID: 11400000, guid: bcccdbab809a4c94baf1b54019b4acda, type: 2}
+  - {fileID: 11400000, guid: e02b65b2334dd5549b197fd81a6ac127, type: 2}
+  bloodDeck: []
+  cardsInHand: 5
+  maxMana: 5
+  startMana: 0
 --- !u!1001 &26672597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5524,7 +5540,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 18335427}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: ReceiveDamage
         m_Mode: 3
@@ -19938,7 +19954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turn: 0
   player: {fileID: 1108437376}
-  enemy: {fileID: 18335427}
+  enemy: {fileID: 0}
   table: {fileID: 0}
   canPlayCards: 0
   canEndTurn: 0

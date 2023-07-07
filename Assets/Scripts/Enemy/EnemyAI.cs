@@ -1,24 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyAI : Enemy
 {
-    [SerializeField] private List<Cards> deck;
+    [HideInInspector] public List<Cards> deck;
     private List<Cards> _currentDeck;
     [SerializeField] private List<Cards> bloodDeck;
     private List<Cards> _currentBloodDeck;
     private List<Cards> _hand;
+    [SerializeField] private int cardsInHand;
+    [SerializeField] private int maxMana;
+    [SerializeField] private int startMana;
     private int _mana;
+    private int _currentMana;
     private new void Awake()
     {
         base.Awake();
-        _currentDeck = deck;
+        _table = FindObjectOfType<Table>();
+        _hand = new List<Cards>();
+        _currentDeck = new List<Cards>();
+        _mana = startMana;
+        foreach (Cards card in deck)
+            _currentDeck.Add(card);
         _currentBloodDeck = bloodDeck;
+        for (int i = 0; i < cardsInHand; i++)
+            DrawACard(null, 0);
     }
     public override void MoveBackCards(int turn)
     {
-        base.MoveBackCards(turn);
+        if (_mana < maxMana)
+            _mana++;
+        _currentMana = _mana;
+        foreach (MapPosition card in _table.enemyFront)
+            if (card.card != null)
+            {
+                card.card.StartTurn();
+                _effectManager.CheckConditionStartOfTurn(card.card);
+            }
+        _table.MoveEnemyCard();
+        foreach (MapPosition card in _table.enemyFront)
+            if (card.card != null)
+                if (!card.card.played)
+                {
+                    _effectManager.CheckConditionIsPlayed(card.card);
+                    card.card.played = true;
+                }
         DrawACard(null, turn);
         PlaceBackCards(turn);
     }
@@ -28,7 +56,9 @@ public class EnemyAI : Enemy
         foreach (Cards card in bestPlay.cards)
         {
             _table.EnemySetCard(System.Array.IndexOf(_table.enemyFront, bestPlay.positions[bestPlay.cards.IndexOf(card)]), card);
+            _hand.Remove(card);
         }
+        AttackFrontCards();
     }
     private BestPlay CheckValueCards()
     {
@@ -42,8 +72,12 @@ public class EnemyAI : Enemy
             if (!card.spell)
                 foreach (var position in _table.enemyFront)
                 {
+                    cardInfo = new CardInfo();
+                    actualValue = 0;
                     if (_table.enemyBack[System.Array.IndexOf(_table.enemyFront, position)].card != null)
                         continue;
+                    if (position.card != null)
+                        actualValue -= 3;
                     bool kill = false;
                     bool survive = false;
                     bool hasEffect = false;
@@ -82,13 +116,19 @@ public class EnemyAI : Enemy
                         actualValue += CheckEffectValue(card, position, kill, survive);
                     }
                     cardInfo.mapPosition = position;
+                    cardInfo.card = card;
+                    cardInfo.value = actualValue;
+                    cardInfo.id = actualId;
+                    cards.Add(cardInfo);
                 }
             else
+            {
                 actualValue += CheckEffectValue(card, null, false, true);
-            cardInfo.card = card;
-            cardInfo.value = actualValue;
-            cardInfo.id = actualId;
-            cards.Add(cardInfo);
+                cardInfo.card = card;
+                cardInfo.value = actualValue;
+                cardInfo.id = actualId;
+                cards.Add(cardInfo);
+            }
         }
         List<BestPlay> bestPlays = ForeachCard(cards, 0, null);
         BestPlay trueBestPlay = null;
@@ -319,12 +359,12 @@ public class EnemyAI : Enemy
         List<BestPlay> bestPlays = new List<BestPlay>();
         foreach (CardInfo card in cards)
         {
+            bool iContinue = false;
             BestPlay newBestPlay = new BestPlay();
             if (lastBestPlays != null)
             {
                 if (lastBestPlays.leftoverMana - card.card.manaCost < 0 || lastBestPlays.leftoverHealth - card.card.healthCost <= 0)
                     continue;
-                bool iContinue = false;
                 foreach (int ids in lastBestPlays.ids)
                     if(ids == card.id)
                         iContinue = true;
@@ -332,17 +372,17 @@ public class EnemyAI : Enemy
                     foreach (MapPosition position in lastBestPlays.positions)
                         if (position == card.mapPosition)
                             iContinue = true;
-                if (iContinue)
-                    continue;
                 newBestPlay = lastBestPlays;
             }
             else
             {
-                if (_mana - card.card.manaCost < 0 || currentHealth - card.card.healthCost <= 0)
+                if (_currentMana - card.card.manaCost < 0 || currentHealth - card.card.healthCost <= 0)
                     continue;
-                newBestPlay.leftoverMana = _mana;
+                newBestPlay.leftoverMana = _currentMana;
                 newBestPlay.leftoverHealth = currentHealth;
             }
+            if (iContinue)
+                continue;
             if (card.mapPosition != null)
             {
                 newBestPlay.positions.Add(card.mapPosition);
@@ -373,17 +413,17 @@ public class EnemyAI : Enemy
     }
     public void DrawACard(Cards card, int turn)
     {
+        if (_currentDeck.Count <= 0)
+            return;
         if (card != null && _currentDeck.Contains(card))
         {
             _hand.Add(card);
             _currentDeck.Remove(card);
-            PlaceBackCards(turn);
             return;
         }
         int randomCard = Random.Range(0, _currentDeck.Count);
         _hand.Add(_currentDeck[randomCard]);
         _currentDeck.Remove(_currentDeck[randomCard]);
-        PlaceBackCards(turn);
     }
 }
 [System.Serializable]

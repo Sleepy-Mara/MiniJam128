@@ -118,6 +118,8 @@ public class NextCombat : MonoBehaviour
     public void StartCombat()
     {
         _enemy.strategy = enemies[enemyNum].strategy;
+        if (FindObjectOfType<EnemyAI>())
+            _enemy.GetComponent<EnemyAI>().deck = enemies[enemyNum].enemyDeck.deck;
         _audioPlayer.Play("Music" + enemyNum);
         _turnManager.StartBattle();
         introCombat.SetActive(false);
