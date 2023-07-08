@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardPos : MonoBehaviour, IPointerDownHandler
+public class CardPos : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private CardManager _cardManager;
     private Table _table;
@@ -11,6 +11,8 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
     public Transform positionFacing;
     public int positionNum;
     public bool isPlayable;
+
+    [SerializeField] private GameObject selectViewer;
 
     private void Start()
     {
@@ -51,5 +53,15 @@ public class CardPos : MonoBehaviour, IPointerDownHandler
         }
         else
             _cardManager.CancelPlacing();
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(selectViewer != null)
+            selectViewer.SetActive(_cardManager.placeCards);
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(selectViewer != null)
+            selectViewer.SetActive(false);
     }
 }
