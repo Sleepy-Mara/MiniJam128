@@ -51,4 +51,8 @@ public class CameraManager : MonoBehaviour
     {
         return _currentPosition;
     }
+    public void Shake()
+    {
+        animator.SetTrigger("Shake");
+    }
 }

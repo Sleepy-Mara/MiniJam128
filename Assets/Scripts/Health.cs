@@ -25,6 +25,7 @@ public class Health : MonoBehaviour
     virtual public void ReceiveDamage(int damage)
     {
         //sonido / animacion
+        FindObjectOfType<CameraManager>().Shake();
         if ((currentHealth - damage) <= 0)
         {
             currentHealth = 0;

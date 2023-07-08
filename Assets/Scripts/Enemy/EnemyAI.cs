@@ -52,6 +52,15 @@ public class EnemyAI : Enemy
     }
     public override void PlaceBackCards(int turn)
     {
+        bool canPlay = false;
+        foreach (var pos in _table.enemyBack)
+            if (pos.card == null)
+                canPlay = true;
+        if (!canPlay)
+        {
+            AttackFrontCards();
+            return;
+        }
         BestPlay bestPlay = CheckValueCards();
         foreach (Cards card in bestPlay.cards)
         {
