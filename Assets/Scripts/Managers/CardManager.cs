@@ -34,12 +34,16 @@ public class CardManager : MonoBehaviour
         //foreach (GameObject things in draw.drawThings)
         //    things.SetActive(false);
         CardCore core = card.GetComponent<CardCore>();
-        if (core.Equals(typeof(Card)))
+        if (core.GetType() == typeof(Card))
         {
             previewCard.card = core.card;
-        } else if (core.Equals(typeof(CardMagic)))
+            previewCard.gameObject.SetActive(true);
+            previewCard.SetData();
+        } else if (core.GetType() == typeof(CardMagic))
         {
             previewMagic.card = core.card;
+            previewMagic.gameObject.SetActive(true);
+            previewMagic.SetData();
         }
         _camera.PlaceCardCamera();
         cardToPlace = card;
@@ -51,5 +55,14 @@ public class CardManager : MonoBehaviour
         placeCards = false;
         cardToPlace = null;
         _camera.HandCamera();
+        previewMagic.gameObject.SetActive(false);
+        previewCard.gameObject.SetActive(false);
+    }
+    public void EndPlacing()
+    {
+        placeCards = false;
+        cardToPlace = null;
+        previewMagic.gameObject.SetActive(false);
+        previewCard.gameObject.SetActive(false);
     }
 }

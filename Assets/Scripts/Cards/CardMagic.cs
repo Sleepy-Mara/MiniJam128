@@ -9,6 +9,7 @@ public class CardMagic : CardCore, IPointerDownHandler
     protected override void SelectCard()
     {
         StartCoroutine(PlayEffect());
+        _cardManager.EndPlacing();
     }
 
     IEnumerator PlayEffect()
