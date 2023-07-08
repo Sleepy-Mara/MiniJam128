@@ -60,6 +60,7 @@ public class CardManager : MonoBehaviour
     }
     public void EndPlacing()
     {
+        canZoom = true;
         placeCards = false;
         cardToPlace = null;
         previewMagic.gameObject.SetActive(false);

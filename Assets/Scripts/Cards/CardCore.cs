@@ -69,12 +69,12 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             return;
         if (eventData.button == PointerEventData.InputButton.Left && (currentPosition.cardPos == null || playerCard))
         {
-            _cardManager.canZoom = false;
-            ZoomOut();
             if (_turnManager.CanPlayCards())
             {
                 if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
                 {
+                    ZoomOut();
+                    _cardManager.canZoom = false;
                     SelectCard();
                     //_cardManager.PlaceCards(gameObject);
                 }
