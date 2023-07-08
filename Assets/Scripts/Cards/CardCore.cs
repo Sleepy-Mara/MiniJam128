@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     public Cards card;
     public MapPosition currentPosition;
@@ -54,24 +54,64 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-            GetComponent<Animator>().SetBool("Zoomed", true);
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 5;
-        //if (!_draw.zoomingCard)
-        //{
-        //    //_draw.zoomingCard = true;
-        //}
+        ZoomIn();
     }
     public virtual void OnPointerExit(PointerEventData eventData)
     {
         if (eventData.fullyExited)
         {
-            GetComponent<Animator>().SetBool("Zoomed", false);
-            //_draw.zoomingCard = false;
-            canvas.sortingOrder = 0;
-            canvas.overrideSorting = false;
+            ZoomOut();
         }
     }
+    public virtual void OnPointerDown(PointerEventData eventData)
+    {
+        if (_draw == null)
+            return;
+        if (eventData.button == PointerEventData.InputButton.Left && (currentPosition.cardPos == null || playerCard))
+        {
+            _cardManager.canZoom = false;
+            ZoomOut();
+            if (_turnManager.CanPlayCards())
+            {
+                if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
+                {
+                    SelectCard();
+                    //_cardManager.PlaceCards(gameObject);
+                }
+            }
+        }
+    }
+
+    protected virtual void SelectCard()
+    {
+        Debug.LogError("Cuidado, por algun motivo estas intentando invocar una carta que solo contiene CardCore!");
+    }
+    #region Zoom
+    private void ZoomIn()
+    {
+        if (_draw == null)
+        {
+            GetComponent<Animator>().SetBool("Zoomed", true);
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = 5;
+        }
+        else if (!_draw.zoomingCard && _cardManager.canZoom)
+        {
+            GetComponent<Animator>().SetBool("Zoomed", true);
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = 5;
+            _draw.zoomingCard = true;
+        }
+    }
+    private void ZoomOut()
+    {
+        GetComponent<Animator>().SetBool("Zoomed", false);
+        if (_draw != null)
+            _draw.zoomingCard = false;
+        canvas.sortingOrder = 0;
+        canvas.overrideSorting = false;
+    }
+    #endregion
     public virtual void UpdateLanguage(int languageNumber)
     {
         nameText.text = card.cardName[languageNumber];

@@ -5,18 +5,10 @@ using UnityEngine.EventSystems;
 
 public class CardMagic : CardCore, IPointerDownHandler
 {
-    //aca habia un codigo 
-
-    public void OnPointerDown(PointerEventData eventData)
+    // modificar esto para que haya que moverlo a cualquier parte del escenario
+    protected override void SelectCard()
     {
-        if (_turnManager.CanPlayCards())
-        {
-            if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
-            {
-                //_cardManager.PlaceCards(gameObject);
-                StartCoroutine(PlayEffect());
-            }
-        }
+        StartCoroutine(PlayEffect());
     }
 
     IEnumerator PlayEffect()
@@ -28,7 +20,6 @@ public class CardMagic : CardCore, IPointerDownHandler
         List<GameObject> newCardsInHand = new List<GameObject>();
         foreach (GameObject card in _cardManager.draw._cardsInHand)
         {
-            // preguntar para que sirve este codigo
             if (card != gameObject)
             {
                 newCardsInHand.Add(card);

@@ -289,38 +289,9 @@ public class Card : CardCore, IPointerDownHandler
                 Buff(effect.attack * -1, effect.life * -1);
         }
     }
-    public void OnPointerDown(PointerEventData eventData)
+    protected override void SelectCard()
     {
-        if (eventData.button == PointerEventData.InputButton.Left && (currentPosition.cardPos == null || playerCard))
-        {
-            if (_turnManager.CanPlayCards())
-            {
-                if (_table.player.EnoughMana(card.manaCost) && _table.player.EnoughHealth(card.healthCost))
-                {
-                    _cardManager.PlaceCards(gameObject);
-                }
-            }
-        }
-    }
-    public override void OnPointerEnter(PointerEventData eventData)
-    {
-        if (!_draw.zoomingCard)
-        {
-            GetComponent<Animator>().SetBool("Zoomed", true);
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 5;
-            _draw.zoomingCard = true;
-        }
-    }
-    public override void OnPointerExit(PointerEventData eventData)
-    {
-        if (eventData.fullyExited)
-        {
-            GetComponent<Animator>().SetBool("Zoomed", false);
-            _draw.zoomingCard = false;
-            canvas.sortingOrder = 0;
-            canvas.overrideSorting = false;
-        }
+        _cardManager.PlaceCards(gameObject);
     }
 }
 [System.Serializable]

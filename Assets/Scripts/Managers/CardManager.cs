@@ -9,6 +9,9 @@ public class CardManager : MonoBehaviour
     [HideInInspector] public GameObject cardToPlace;
     [HideInInspector] public Draw draw;
     public CameraManager _camera;
+    public bool canZoom = true;
+    public CardMagic previewMagic;
+    public Card previewCard;
     void Start()
     {
         draw = FindObjectOfType<Draw>();
@@ -25,30 +28,26 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void ShowCard(GameObject card)
-    {
-        card.GetComponentInChildren<Card>().enabled = false;
-        card.transform.position = showCard.position;
-        card.transform.rotation = showCard.rotation;
-        card.transform.localScale = card.transform.localScale * 1.5f;
-    }
-
-    public void HideCard(GameObject card)
-    {
-        Destroy(card);
-    }
-
     public void PlaceCards(GameObject card)
     {
         cardToPlace = null;
-        foreach (GameObject things in draw.drawThings)
-            things.SetActive(false);
+        //foreach (GameObject things in draw.drawThings)
+        //    things.SetActive(false);
+        CardCore core = card.GetComponent<CardCore>();
+        if (core.Equals(typeof(Card)))
+        {
+            previewCard.card = core.card;
+        } else if (core.Equals(typeof(CardMagic)))
+        {
+            previewMagic.card = core.card;
+        }
         _camera.PlaceCardCamera();
         cardToPlace = card;
         placeCards = true;
     }
     public void CancelPlacing()
     {
+        canZoom = true;
         placeCards = false;
         cardToPlace = null;
         _camera.HandCamera();

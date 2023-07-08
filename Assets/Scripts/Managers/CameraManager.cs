@@ -36,8 +36,6 @@ public class CameraManager : MonoBehaviour
         if (_currentPosition >= cameraPositions.Length)
             _currentPosition = cameraPositions.Length - 1;
         animator.SetInteger("Position", _currentPosition);
-        //_camera.transform.position = cameraPositions[_currentPosition].position;
-        //_camera.transform.rotation = cameraPositions[_currentPosition].rotation;
     }
     public void PlaceCardCamera()
     {

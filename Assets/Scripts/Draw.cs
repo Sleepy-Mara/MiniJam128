@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Draw : MonoBehaviour
 {
-    public List<GameObject> drawThings;
+    //public List<GameObject> drawThings;
     [HideInInspector] public List<GameObject> _cardsInHand = new List<GameObject>();
     public List<Cards> deck;
     public List<Cards> bloodDeck;
