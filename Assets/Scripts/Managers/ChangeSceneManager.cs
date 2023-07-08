@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ChangeSceneManager : MonoBehaviour
 {
@@ -15,7 +15,11 @@ public class ChangeSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject loadingScreen;
     [SerializeField]
-    private Image loadingBarFill;
+    private TextMeshProUGUI text;
+    [SerializeField]
+    private float timeBetweenDots;
+    [SerializeField]
+    private Animator fade;
     private void Awake()
     {
         if (instance == null)
@@ -36,12 +40,20 @@ public class ChangeSceneManager : MonoBehaviour
     }
     IEnumerator LoadSceneAsync(string scene)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
+        fade.SetTrigger("Fade");
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitUntil(() => fade.GetCurrentAnimatorStateInfo(0).IsName("Fade"));
         loadingScreen.SetActive(true);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         while (!operation.isDone)
         {
-            float progressValue = Mathf.Clamp01(operation.progress/ 0.9f);
-            loadingBarFill.fillAmount = progressValue;
+            string currentText = text.text;
+            for (int i = 0; i < 3; i++)
+            {
+                text.text += ".";
+                yield return new WaitForSeconds(timeBetweenDots);
+            }
+            text.text = currentText;
             yield return null;
         }
     }
