@@ -18,13 +18,13 @@ MonoBehaviour:
   life: 1
   attack: 1
   attackToPlayer: 1
-  manaCost: 3
-  healthCost: 0
+  manaCost: 1
+  healthCost: 1
   sprite: {fileID: 21300000, guid: 45267dc04125952428e374c741eccc71, type: 3}
   hasEffect: 1
-  effect: <played><deal><enemy_player_1>
+  effect: <played><deal><enemy_player_2>
   effectSprite: {fileID: 0}
   effectDesc:
-  - When it's played, deal 1 damage to the enemy player
-  - "Cuando es jugado, hace 1 de da\xF1o al jugador enemigo"
+  - When it's played, deal 2 damage to the enemy player
+  - "Cuando es jugado, hace 2 de da\xF1o al jugador enemigo"
   spell: 0
