@@ -32,6 +32,8 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private Animator minCardsInBloodDeckWarning;
     [SerializeField] private Animator maxCardsInBloodDeckWarning;
     private SaveWithJson json;
+    [SerializeField] private Filter filter;
+    private List<CardsInDeckBuilder> currentCardOrder;
     private void Awake()
     {
         json = FindObjectOfType<SaveWithJson>();
@@ -59,6 +61,7 @@ public class DeckBuilder : MonoBehaviour
                     }
                 }
         ReloadDeck();
+        ChangeOrderOfCards();
     }
     public void UnlockCard(Cards newCard, int number)
     {
@@ -272,6 +275,141 @@ public class DeckBuilder : MonoBehaviour
             Destroy(card.gameObject);
         }
     }
+    private void ChangeOrderOfCards()
+    {
+        switch (filter)
+        {
+            case Filter.Original:
+                foreach (var card in cardsInDeckBuilder)
+                {
+                    card.transform.SetSiblingIndex(cardsInDeckBuilder.IndexOf(card));
+                    currentCardOrder.Add(card);
+                }
+                break;
+            case Filter.Name:
+                List<CardsInDeckBuilder> cardsName = new List<CardsInDeckBuilder>();
+                foreach (var card in cardsInDeckBuilder)
+                    cardsName.Add(card);
+                cardsName.Sort();
+                foreach (var card in cardsName)
+                    card.transform.SetSiblingIndex(cardsName.IndexOf(card));
+                break;
+            case Filter.ManaCost:
+                List<CardsInDeckBuilder> cardsManaCost = new List<CardsInDeckBuilder>();
+                while (cardsManaCost.Count < cardsInDeckBuilder.Count)
+                {
+                    CardsInDeckBuilder lastFirstCard = null;
+                    foreach (var card in cardsInDeckBuilder)
+                    {
+                        if (cardsManaCost.Contains(card) || card.card.card.healthCost > 0)
+                            continue;
+                        if(lastFirstCard == null)
+                        {
+                            lastFirstCard = card;
+                            continue;
+                        }
+                        if (card.card.card.manaCost < lastFirstCard.card.card.manaCost)
+                            lastFirstCard = card;
+                    }
+                    cardsManaCost.Add(lastFirstCard);
+                    foreach (var card in cardsInDeckBuilder)
+                    {
+                        if (cardsManaCost.Contains(card) || card.card.card.manaCost > 0)
+                            continue;
+                        if (lastFirstCard == null)
+                        {
+                            lastFirstCard = card;
+                            continue;
+                        }
+                        if (card.card.card.healthCost < lastFirstCard.card.card.healthCost)
+                            lastFirstCard = card;
+                    }
+                    cardsManaCost.Add(lastFirstCard);
+                }
+                foreach (var card in cardsManaCost)
+                    card.transform.SetSiblingIndex(cardsManaCost.IndexOf(card));
+                break;
+            case Filter.LifeCost:
+                List<CardsInDeckBuilder> cardsLifeCost = new List<CardsInDeckBuilder>();
+                while (cardsLifeCost.Count < cardsInDeckBuilder.Count)
+                {
+                    CardsInDeckBuilder lastFirstCard = null;
+                    foreach (var card in cardsInDeckBuilder)
+                    {
+                        if (cardsLifeCost.Contains(card) || card.card.card.manaCost > 0)
+                            continue;
+                        if (lastFirstCard == null)
+                        {
+                            lastFirstCard = card;
+                            continue;
+                        }
+                        if (card.card.card.healthCost < lastFirstCard.card.card.healthCost)
+                            lastFirstCard = card;
+                    }
+                    cardsLifeCost.Add(lastFirstCard);
+                    foreach (var card in cardsInDeckBuilder)
+                    {
+                        if (cardsLifeCost.Contains(card) || card.card.card.healthCost > 0)
+                            continue;
+                        if (lastFirstCard == null)
+                        {
+                            lastFirstCard = card;
+                            continue;
+                        }
+                        if (card.card.card.manaCost < lastFirstCard.card.card.manaCost)
+                            lastFirstCard = card;
+                    }
+                    cardsLifeCost.Add(lastFirstCard);
+                }
+                foreach (var card in cardsLifeCost)
+                    card.transform.SetSiblingIndex(cardsLifeCost.IndexOf(card));
+                break;
+            case Filter.Damage:
+                List<CardsInDeckBuilder> cardsDamage = new List<CardsInDeckBuilder>();
+                while (cardsDamage.Count < cardsInDeckBuilder.Count)
+                {
+                    CardsInDeckBuilder lastFirstCard = null;
+                    foreach (var card in cardsInDeckBuilder)
+                    {
+                        if (cardsDamage.Contains(card))
+                            continue;
+                        if (lastFirstCard == null)
+                        {
+                            lastFirstCard = card;
+                            continue;
+                        }
+                        if (card.card.card.attack > lastFirstCard.card.card.attack)
+                            lastFirstCard = card;
+                    }
+                    cardsDamage.Add(lastFirstCard);
+                }
+                foreach (var card in cardsDamage)
+                    card.transform.SetSiblingIndex(cardsDamage.IndexOf(card));
+                break;
+            case Filter.Health:
+                List<CardsInDeckBuilder> cardsHealth = new List<CardsInDeckBuilder>();
+                while (cardsHealth.Count < cardsInDeckBuilder.Count)
+                {
+                    CardsInDeckBuilder lastFirstCard = null;
+                    foreach (var card in cardsInDeckBuilder)
+                    {
+                        if (cardsHealth.Contains(card))
+                            continue;
+                        if (lastFirstCard == null)
+                        {
+                            lastFirstCard = card;
+                            continue;
+                        }
+                        if (card.card.card.life > lastFirstCard.card.card.life)
+                            lastFirstCard = card;
+                    }
+                    cardsHealth.Add(lastFirstCard);
+                }
+                foreach (var card in cardsHealth)
+                    card.transform.SetSiblingIndex(cardsHealth.IndexOf(card));
+                break;
+        }
+    }
     public void SaveData()
     {
         if (cardsInDeck.Count > maxCardsInNormalDeck)
@@ -332,4 +470,13 @@ public class DeckBuilder : MonoBehaviour
             json.SaveData = saveData;
         }
     }
+}
+public enum Filter
+{
+    Original,
+    Name,
+    ManaCost,
+    LifeCost,
+    Damage,
+    Health,
 }
