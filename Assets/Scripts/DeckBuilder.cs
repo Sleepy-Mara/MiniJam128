@@ -288,9 +288,14 @@ public class DeckBuilder : MonoBehaviour
                 break;
             case Filter.Name:
                 List<CardsInDeckBuilder> cardsName = new List<CardsInDeckBuilder>();
-                foreach (var card in cardsInDeckBuilder)
-                    cardsName.Add(card);
-                cardsName.Sort();
+                List<string> cardsNames = new List<string>();
+                foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
+                    cardsNames.Add(card.card.card.name);
+                cardsNames.Sort();
+                foreach (string cardName in cardsNames)
+                    foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
+                        if (cardName == card.card.card.name)
+                            cardsName.Add(card);
                 foreach (var card in cardsName)
                     card.transform.SetSiblingIndex(cardsName.IndexOf(card));
                 break;
