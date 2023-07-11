@@ -933,13 +933,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Option A
-      m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2259,6 +2253,7 @@ MonoBehaviour:
   maxCardsInNormalDeckWarning: {fileID: 1999825861209436839}
   minCardsInBloodDeckWarning: {fileID: 5556238175333947301}
   maxCardsInBloodDeckWarning: {fileID: 6793287268880366725}
+  filter: 0
 --- !u!1 &6885375462844716934
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,7 @@ public class ChangeSceneManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => fade.GetCurrentAnimatorStateInfo(0).IsName("Fade"));
         loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         while (!operation.isDone)
         {

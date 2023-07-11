@@ -43,22 +43,10 @@ public class DeckBuilder : MonoBehaviour
     private void Start()
     {
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
-            for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
-                if (json.SaveData.currentCardsInDeck[i].card == cards.card.card.name)
+            for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
+                if (json.SaveData.currentUnlockedCards[i].card == cards.card.card.name)
                 {
-                    for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
-                    {
-                        SelectCard(cards);
-                    }
-                }
-        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
-            for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
-                if (json.SaveData.currentCardsInDeck[i].card == cards.card.card.name)
-                {
-                    for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
-                    {
-                        SelectCard(cards);
-                    }
+                    UnlockCard(cards.card.card, json.SaveData.currentUnlockedCards[i].cardAmount);
                 }
         ReloadDeck();
         ChangeOrderOfCards();
