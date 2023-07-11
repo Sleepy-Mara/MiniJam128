@@ -116,7 +116,10 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         nameText.text = card.cardName[languageNumber];
         if (card.hasEffect)
+        {
+            effectText.enabled = true;
             effectText.text = card.effectDesc[languageNumber];
+        }
         else
             effectText.enabled = false;
     }

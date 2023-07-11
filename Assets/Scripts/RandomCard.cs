@@ -5,13 +5,14 @@ using UnityEngine;
 public class RandomCard : MonoBehaviour
 {
     private DeckBuilder deckBuilder;
+    [SerializeField] private float wait;
     void Start()
     {
         StartCoroutine(enumerator());
     }
     IEnumerator enumerator()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(wait);
         deckBuilder = FindObjectOfType<DeckBuilder>();
         List<CardsInDeckBuilder> cards = new List<CardsInDeckBuilder>();
         foreach (CardsInDeckBuilder card in deckBuilder.cardsInDeckBuilder)
