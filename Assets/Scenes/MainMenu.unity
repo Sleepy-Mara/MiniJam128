@@ -2710,6 +2710,66 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.099975586
       objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1940140051}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1940140051}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeFilter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ChangeFilter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DeckBuilder, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: DeckBuilder, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236874004007747471, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2576632079988078768, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.099975586
@@ -2994,6 +3054,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4042609172881838822, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4426523678469900368, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3016,6 +3080,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4426523678469900368, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451632944648497659, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451632944648497659, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4557992257644976141, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
@@ -3322,10 +3394,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.00024414062
       objectReference: {fileID: 0}
-    - target: {fileID: 6885375462373082128, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
-      propertyPath: filter
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6885375462373082134, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_Name
       value: DeckBuilder
@@ -3429,6 +3497,10 @@ PrefabInstance:
     - target: {fileID: 6885375463325236814, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885375463497898786, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_Value
+      value: 0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 6931419628272662851, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchorMax.y
@@ -12975,6 +13047,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310926171}
   m_CullTransparentMesh: 1
+--- !u!1 &1330229435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1330229436}
+  - component: {fileID: 1330229437}
+  m_Layer: 0
+  m_Name: EffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1330229436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330229435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1419118173}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1330229437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330229435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e76bbdabddf28e4fb37b6a0506077d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions:
+  - start_turn
+  - played
+  - attacks
+  - damaged
+  - defeated
+  - defeats_enemy
+  - ally_creature_defeated
+  - end_turn
+  - buffed
+  - spell_played
+  extraConditions:
+  - until_next_turn
+  - until_end_turn
+  effects:
+  - draw
+  - deal
+  - heal
+  - add
+  - give
+  - immune
+  - summon
+  targets:
+  - enemy_creature
+  - ally_creature
+  - random_enemy
+  - random_ally
+  - random_enemy_creature
+  - random_ally_creature
+  - random_enemy_creatures
+  - random_ally_creatures
+  - all_enemy_creatures
+  - all_ally_creatures
+  - itself
+  - enemy_player
+  - player
+  - creature_front
+  - hand
+  - deck
+  - life_deck
+  - either_deck
+  - random_creature
+  - random_spell
+  cards: []
+  newCard: {fileID: 0}
 --- !u!1 &1348709609
 GameObject:
   m_ObjectHideFlags: 0
@@ -13454,6 +13615,7 @@ Transform:
   - {fileID: 952199675}
   - {fileID: 431611531}
   - {fileID: 980947964}
+  - {fileID: 1330229436}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

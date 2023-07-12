@@ -39,6 +39,7 @@ public class DeckBuilder : MonoBehaviour
         json = FindObjectOfType<SaveWithJson>();
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
             cards.cover.SetActive(true);
+        currentCardOrder = new List<CardsInDeckBuilder>();
     }
     private void Start()
     {
@@ -47,6 +48,15 @@ public class DeckBuilder : MonoBehaviour
                 if (json.SaveData.currentUnlockedCards[i].card == cards.card.card.name)
                 {
                     UnlockCard(cards.card.card, json.SaveData.currentUnlockedCards[i].cardAmount);
+                }
+        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
+            for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
+                if (json.SaveData.currentCardsInDeck[i].card == cards.card.card.name)
+                {
+                    for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
+                    {
+                        SelectCard(cards);
+                    }
                 }
         ReloadDeck();
         ChangeOrderOfCards();
@@ -263,6 +273,11 @@ public class DeckBuilder : MonoBehaviour
             Destroy(card.gameObject);
         }
     }
+    public void ChangeFilter(int newFilter)
+    {
+        filter = (Filter)newFilter;
+        ChangeOrderOfCards();
+    }
     private void ChangeOrderOfCards()
     {
         switch (filter)
@@ -401,6 +416,22 @@ public class DeckBuilder : MonoBehaviour
                 foreach (var card in cardsHealth)
                     card.transform.SetSiblingIndex(cardsHealth.IndexOf(card));
                 break;
+            case Filter.Effect:
+                List<string> effects = FindObjectOfType<EffectManager>().Effects;
+                List<CardsInDeckBuilder> cardsEffect = new List<CardsInDeckBuilder>();
+                List<CardsInDeckBuilder> cardsWhitoutEffect = new List<CardsInDeckBuilder>();
+                foreach (string effect in effects)
+                    foreach (var card in cardsInDeckBuilder)
+                        if (card.card.card.hasEffect)
+                        {
+                            if (card.card.card.effect.Contains(effect) && !cardsEffect.Contains(card))
+                                cardsEffect.Add(card);
+                        } else cardsWhitoutEffect.Add(card);
+                foreach (var card in cardsWhitoutEffect)
+                    cardsEffect.Add(card);
+                foreach (var card in cardsEffect)
+                    card.transform.SetSiblingIndex(cardsEffect.IndexOf(card));
+                break;
         }
     }
     public void SaveData()
@@ -472,4 +503,5 @@ public enum Filter
     LifeCost,
     Damage,
     Health,
+    Effect,
 }
