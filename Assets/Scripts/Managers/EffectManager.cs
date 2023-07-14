@@ -178,7 +178,6 @@ public class EffectManager : MonoBehaviour
         foreach (string conditions in effectDescriptions)
             if (condition == conditions)
             {
-                Debug.LogError(conditions);
                 effectDescriptions.Remove(conditions);
                 CheckEffect(card, effectDescriptions);
                 return;
@@ -217,7 +216,6 @@ public class EffectManager : MonoBehaviour
     #endregion
     private void DrawEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
-        Debug.LogError("Im going to draw maybe");
         #region Draw
         if (card.GetType() == typeof(Card) && card.currentPosition.oponent == FindObjectOfType<Player>())
             return;
@@ -251,7 +249,6 @@ public class EffectManager : MonoBehaviour
     }
     private void DealDamageEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
-        Debug.LogError("Im going to do damage maybe");
         #region DealDamage
         foreach (string target in targets)
             foreach (string effectNew in newEffect)
@@ -275,7 +272,6 @@ public class EffectManager : MonoBehaviour
                         enemyHealth = FindObjectOfType<Enemy>();
                         allyHealth = FindObjectOfType<Player>();
                     }
-                    Debug.Log("Im going to do damage");
                     for (int i = 0; i < 5; i++)
                         if (effectNew == target + "_" + i.ToString())
                         {
@@ -397,7 +393,6 @@ public class EffectManager : MonoBehaviour
     }
     private void HealEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
-        Debug.LogError("Im going to heal maybe");
         #region Heal
         foreach (string target in targets)
             foreach (string effectNew in newEffect)
@@ -486,7 +481,6 @@ public class EffectManager : MonoBehaviour
                                         if (ally.card.ActualLife > 0)
                                             allysToHeal.Add(ally);
                                 var selected = Random.Range(0, allysToHeal.Count);
-                                Debug.Log("Im going to heal you " + allysToHeal[selected].card.card.name);
                                 if (allysToHeal[selected].card != null)
                                     allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
@@ -498,7 +492,6 @@ public class EffectManager : MonoBehaviour
                                         if (ally.card.ActualLife > 0)
                                             allysToHeal.Add(ally);
                                 var selected = Random.Range(0, allysToHeal.Count);
-                                Debug.Log("Im going to heal you " + allysToHeal[selected].card.card.name);
                                 if (allysToHeal[selected].card != null)
                                     allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
@@ -542,7 +535,6 @@ public class EffectManager : MonoBehaviour
     }
     private void AddEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
-        Debug.LogError("Im going to add a card maybe");
         #region Add
         if (card.currentPosition.oponent == FindObjectOfType<Player>())
         {
@@ -700,7 +692,6 @@ public class EffectManager : MonoBehaviour
     }
     private void GiveEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
-        Debug.LogError("Im going to buff maybe");
         #region Give
         foreach (string target in targets)
             foreach (string effectNew in newEffect)
@@ -841,7 +832,6 @@ public class EffectManager : MonoBehaviour
     }
     private void ImmuneEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
-        Debug.LogError("Im immune maybe");
         #region Inmune
         foreach (string target in targets)
             foreach (string effectNew in newEffect)
@@ -925,7 +915,6 @@ public class EffectManager : MonoBehaviour
     }
     private void SumonEffect(CardCore card, List<string> newEffect, bool startTurn, bool endTurn)
     {
-        Debug.LogError("Im going to sumon maybe");
         #region Sumon
         bool sumoned = false;
         List<Cards> selectedCards = new List<Cards>();

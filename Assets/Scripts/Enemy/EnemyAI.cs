@@ -19,6 +19,9 @@ public class EnemyAI : Enemy
     {
         base.Awake();
         _table = FindObjectOfType<Table>();
+    }
+    public void StartCombat(List<Cards> deck)
+    {
         _hand = new List<Cards>();
         _currentDeck = new List<Cards>();
         _mana = startMana;

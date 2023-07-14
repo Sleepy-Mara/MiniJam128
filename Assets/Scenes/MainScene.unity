@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -599,7 +599,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bcccdbab809a4c94baf1b54019b4acda, type: 2}
   - {fileID: 11400000, guid: e02b65b2334dd5549b197fd81a6ac127, type: 2}
   bloodDeck: []
-  cardsInHand: 5
+  cardsInHand: 3
   maxMana: 5
   startMana: 0
 --- !u!1001 &26672597
@@ -4166,6 +4166,124 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123108493}
   m_CullTransparentMesh: 1
+--- !u!1001 &123147082
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 924548465}
+    m_Modifications:
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877043413233035339, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+      propertyPath: m_Name
+      value: LoadingScreen
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+--- !u!224 &123147083 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6877043413233035338, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+  m_PrefabInstance: {fileID: 123147082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &123147084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6877043411823418183, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+  m_PrefabInstance: {fileID: 123147082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &123147085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6877043413233035339, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
+  m_PrefabInstance: {fileID: 123147082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &130736064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26653,6 +26771,8 @@ RectTransform:
   - {fileID: 2130096043}
   - {fileID: 173842687}
   - {fileID: 361911990}
+  - {fileID: 1645596676}
+  - {fileID: 123147083}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26773,13 +26893,13 @@ MonoBehaviour:
     lostCombatMessage: "\u201COhh, don\u2019t feel bad for losing, you are learning
       to do it better!\u201D"
   - strategy: {fileID: 11400000, guid: 33c7cc9fd0b485b479df7cf372b0cf68, type: 2}
-    enemyDeck: {fileID: 0}
+    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
     enemyCharacter: {fileID: 1105733882}
     rewards:
     - {fileID: 11400000, guid: b732fe27de5b4564e923f10b5db800a4, type: 2}
     - {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
     - {fileID: 11400000, guid: 21d1a8a8e3400cd4095b1ac6af3226f3, type: 2}
-    reward: 3
+    reward: 2
     introCombatMessage: "\u201CHI! I\u2019m Dog, I am very excited to play with you!\u201D"
     wonCombatMessage: "\u201CYou won! I\u2019m SO HAPPY for you, do you wanna be
       my friend? I think I love you, can we go for a walk? Oh, have these cards,
@@ -26787,22 +26907,22 @@ MonoBehaviour:
     lostCombatMessage: "\u201CI won this time, but the next one you will succeed,
       I know it!\u201D"
   - strategy: {fileID: 11400000, guid: 5fc182c7b6540fe46bea4a428074c314, type: 2}
-    enemyDeck: {fileID: 0}
+    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
     enemyCharacter: {fileID: 1286374551}
     rewards:
     - {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
-    reward: 5
+    reward: 3
     introCombatMessage: "\u201CMoooo, let's see what you are made of.\u201D"
     wonCombatMessage: "\u201CMmh, you may have what it\u2019s needed to be on top
       of the food chain\u2026\u201D"
     lostCombatMessage: "\u201CSurely you can do better, care for another round?\u201D"
   - strategy: {fileID: 11400000, guid: c3543f7750ac73044a2aa2d2f961fe5f, type: 2}
-    enemyDeck: {fileID: 0}
+    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
     enemyCharacter: {fileID: 1123909177}
     rewards:
     - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
     - {fileID: 11400000, guid: c65aebf507439b040a868efb09167974, type: 2}
-    reward: 7
+    reward: 5
     introCombatMessage: "\u201CHuh, a new rival? I\u2019m always up for a new challenge.\u201D"
     wonCombatMessage: "\u201CYou defeated me? You are good, you might get to fight
       Bear, in fact, if you get to that point, can you tell her that it wasn\u2019t
@@ -26810,11 +26930,11 @@ MonoBehaviour:
     lostCombatMessage: "\u201CTake that! That was lots of fun, you have a very distinctive
       playstyle.\u201D"
   - strategy: {fileID: 11400000, guid: 632557a2edb408944af4d94b4bafd17e, type: 2}
-    enemyDeck: {fileID: 0}
+    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
     enemyCharacter: {fileID: 1097329473}
     rewards:
     - {fileID: 11400000, guid: b5a2c4cc536e51745b542ccc885995e7, type: 2}
-    reward: 10
+    reward: 8
     introCombatMessage: "\u201CHey pal, wanna practice some sparring with me?\u201D"
     wonCombatMessage: "\u201CAagh, you really knocked me out! Hey, I like your moves,
       I see you are going right to the top! It was a pleasure sparring with you,
@@ -26822,11 +26942,11 @@ MonoBehaviour:
     lostCombatMessage: "\u201CIt looks like you have to keep training, practice makes
       perfect.\u201D"
   - strategy: {fileID: 11400000, guid: db11cc9d7c479724f981a30f62b83297, type: 2}
-    enemyDeck: {fileID: 0}
+    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
     enemyCharacter: {fileID: 2067991128}
     rewards:
     - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
-    reward: 12
+    reward: 13
     introCombatMessage: "\u201CHello, I\u2019m under the table, but don\u2019t worry
       I will play against you.\u201D"
     wonCombatMessage: "\u201COh, I didn\u2019t see that coming. I will tell the monkeys
@@ -26834,21 +26954,21 @@ MonoBehaviour:
     lostCombatMessage: "\u201CI played better this time, but let\u2019s play again,
       maybe you can get me next.\u201D"
   - strategy: {fileID: 11400000, guid: 6ea1db61e5c28264282b7f14b7e6bd7a, type: 2}
-    enemyDeck: {fileID: 0}
+    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
     enemyCharacter: {fileID: 1769869984}
     rewards:
     - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
-    reward: 15
+    reward: 21
     introCombatMessage: "\u201CH-hello, I see you have come far, let\u2019s fight.\u201D"
     wonCombatMessage: "\u201CTo forgive Wolf? He was the one ashamed to s-speak with
       me\u2026 Thanks for telling me.\u201D"
     lostCombatMessage: "\u201CI won\u2026 n-not like it makes you any less actually.\u201D"
   - strategy: {fileID: 11400000, guid: caba320a35d3d2648b9b332ea8539395, type: 2}
-    enemyDeck: {fileID: 0}
+    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
     enemyCharacter: {fileID: 0}
     rewards:
     - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
-    reward: 17
+    reward: 34
     introCombatMessage: "\u201CSo, you defeated everyone else, huh? Let\u2019s play
       and see how far you have come.\u201D"
     wonCombatMessage: "\u201CYou defeated me\u2026 Congratulations!\u201D"
@@ -49243,6 +49363,113 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
+--- !u!1001 &1645596675
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 924548465}
+    m_Modifications:
+    - target: {fileID: 1714224344573334276, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_Name
+      value: Fade
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+--- !u!224 &1645596676 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1714224344573334277, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+  m_PrefabInstance: {fileID: 1645596675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1645596677 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1714224344573334274, guid: 0bb312455a3116f49b79dbe8293cdb62, type: 3}
+  m_PrefabInstance: {fileID: 1645596675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1646633612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64396,10 +64623,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Win: 0
   buttonMonkey: {fileID: 0}
-  loadingScreen: {fileID: 0}
-  text: {fileID: 0}
-  timeBetweenDots: 0
-  fade: {fileID: 0}
+  loadingScreen: {fileID: 123147085}
+  text: {fileID: 123147084}
+  timeBetweenDots: 0.3
+  fade: {fileID: 1645596677}
 --- !u!1001 &4726956273267648894
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,8 +15,6 @@ MonoBehaviour:
   deck:
   - {fileID: 11400000, guid: 19d6b98e55bac86459f0cf3bba17f6b7, type: 2}
   - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
-  - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
-  - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
   - {fileID: 11400000, guid: 31dabbe96aafed64eaa286f9cbefc72e, type: 2}
   - {fileID: 11400000, guid: 26d16ce04e87aa947a969aefb11c5c8a, type: 2}
   - {fileID: 11400000, guid: 9f3a7fdb11fb9274288b0a089dc4d640, type: 2}

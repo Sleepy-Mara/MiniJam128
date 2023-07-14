@@ -118,7 +118,9 @@ public class NextCombat : MonoBehaviour
     public void StartCombat()
     {
         if (FindObjectOfType<EnemyAI>())
-            _enemy.GetComponent<EnemyAI>().deck = enemies[enemyNum].enemyDeck.deck;
+        {
+            _enemy.GetComponent<EnemyAI>().StartCombat(enemies[enemyNum].enemyDeck.deck);
+        }
         else
             _enemy.strategy = enemies[enemyNum].strategy;
         _audioPlayer.Play("Music" + enemyNum);

@@ -221,22 +221,20 @@ public class Card : CardCore, IPointerDownHandler
         if (life < 0)
         {
             posOrNegLife = -1;
-            life *= -1;
         }
         if (attack < 0)
         {
             posOrNegAttack = -1;
-            attack *= -1;
         }
         for (int i = 0; i < life; i++)
         {
-            if (ActualLife <= 1)
+            if (ActualLife <= 1 && posOrNegLife < 0)
                 break;
             ActualLife = posOrNegLife;
         }
         for (int i = 0; i < attack; i++)
         {
-            if (ActualAttack <= 0)
+            if (ActualAttack <= 0 && posOrNegAttack < 0)
                 break;
             ActualAttack = posOrNegAttack;
         }
