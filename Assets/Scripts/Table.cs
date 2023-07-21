@@ -55,7 +55,7 @@ public class Table : MonoBehaviour
         audioSource.clip = clips[Random.Range(0, clips.Count)];
         audioSource.Play();
         card.GetComponent<Animator>().runtimeAnimatorController = card.GetComponent<Card>().tableAnimator;
-        card.transform.SetParent(playerPositions[place].cardPos.transform);
+        //card.transform.SetParent(playerPositions[place].cardPos.transform);
         card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
         playerPositions[place].card = card.GetComponent<Card>();
         card.GetComponent<Card>().currentPosition = playerPositions[place];
@@ -73,13 +73,13 @@ public class Table : MonoBehaviour
             //var newAudio = Instantiate(audio).GetComponent<AudioSource>();
             audioSource.clip = clips[Random.Range(0, clips.Count)];
             audioSource.Play();
-            Card newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<Card>();
+            Card newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation).GetComponent<Card>();
             newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
             newCard.currentPosition = enemyBack[place];
             newCard.SetData();
-            newCard.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation);
+            //newCard.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation);
             newCard.playerCard = false;
             enemyBack[place].card = newCard;
         }
@@ -93,7 +93,7 @@ public class Table : MonoBehaviour
             Card newCard = card.GetComponent<Card>();
             newCard.playerCard = false;
             card.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
-            card.transform.SetParent(enemyFront[place].cardPos.transform);
+            //card.transform.SetParent(enemyFront[place].cardPos.transform);
             card.transform.SetPositionAndRotation(enemyFront[place].cardPos.transform.position, enemyFront[place].cardPos.transform.rotation);
             newCard.currentPosition = enemyFront[place];
             newCard.SetData();

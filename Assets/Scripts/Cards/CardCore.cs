@@ -2,23 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public Cards card;
     public MapPosition currentPosition;
     protected int currentLife;
     protected int currentAttack;
-    [SerializeField] protected TextMeshProUGUI nameText;
-    [SerializeField] protected TextMeshProUGUI attackText;
-    [SerializeField] protected TextMeshProUGUI lifeText;
-    [SerializeField] protected TextMeshProUGUI manaCostText;
-    [SerializeField] protected TextMeshProUGUI healthCostText;
-    [SerializeField] protected TextMeshProUGUI effectText;
-    [SerializeField] protected Image image;
-    [SerializeField] protected Canvas canvas;
+    [SerializeField] protected TextMeshPro nameText;
+    [SerializeField] protected TextMeshPro attackText;
+    [SerializeField] protected TextMeshPro lifeText;
+    [SerializeField] protected TextMeshPro manaCostText;
+    [SerializeField] protected TextMeshPro healthCostText;
+    [SerializeField] protected TextMeshPro effectText;
+    [SerializeField] protected SpriteRenderer image;
+    //[SerializeField] protected Canvas canvas;
 
     [HideInInspector]
     public bool playerCard;
@@ -52,12 +51,26 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         healthCostText.text = card.healthCost.ToString();
         UpdateLanguage(FindObjectOfType<LanguageManager>().languageNumber);
     }
+    public virtual void OnEndDrag(PointerEventData eventData)
+    {
+        //print("OnEndDrag");
+    }
+    public virtual void OnDrop(PointerEventData eventData)
+    {
+        //print("OnDrop");
+    }
+    public virtual void OnDrag(PointerEventData eventData)
+    {
+        //Debug.Log("OnDrag");
+    }
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+        //Debug.Log("OnPointerEnter");
         ZoomIn();
     }
     public virtual void OnPointerExit(PointerEventData eventData)
     {
+        //Debug.Log("OnPointerExit");
         if (eventData.fullyExited)
         {
             ZoomOut();
@@ -65,6 +78,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        //Debug.Log("OnPointerDown");
         if (_draw == null)
             return;
         if (eventData.button == PointerEventData.InputButton.Left && (currentPosition.cardPos == null || playerCard))
@@ -92,14 +106,14 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (_draw == null)
         {
             GetComponent<Animator>().SetBool("Zoomed", true);
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 5;
+            //canvas.overrideSorting = true;
+            //canvas.sortingOrder = 5;
         }
         else if (!_draw.zoomingCard && _cardManager.canZoom)
         {
             GetComponent<Animator>().SetBool("Zoomed", true);
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 5;
+            //canvas.overrideSorting = true;
+            //canvas.sortingOrder = 5;
             _draw.zoomingCard = true;
         }
     }
@@ -108,8 +122,8 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         GetComponent<Animator>().SetBool("Zoomed", false);
         if (_draw != null)
             _draw.zoomingCard = false;
-        canvas.sortingOrder = 0;
-        canvas.overrideSorting = false;
+        //canvas.sortingOrder = 0;
+        //canvas.overrideSorting = false;
     }
     #endregion
     public virtual void UpdateLanguage(int languageNumber)

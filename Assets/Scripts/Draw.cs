@@ -105,9 +105,9 @@ public class Draw : MonoBehaviour
             drawedCard = Random.Range(0, cardsToDraw.Count);
             //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
             if (cardsToDraw[drawedCard].spell)
-                newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
+                newCard = Instantiate(spellPrefab).GetComponent<CardMagic>();
             else
-                newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
+                newCard = Instantiate(cardPrefab).GetComponent<Card>();
             newCard.card = cardsToDraw[drawedCard];
             _currentDeck.Remove(cardsToDraw[drawedCard]);
             Debug.Log(_currentDeck.Count);
@@ -129,9 +129,9 @@ public class Draw : MonoBehaviour
                         cardsToDraw.Add(card);
             drawedCard = Random.Range(0, cardsToDraw.Count);
             if (_currentBloodDeck[drawedCard].spell)
-                newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
+                newCard = Instantiate(spellPrefab).GetComponent<CardMagic>();
             else
-                newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
+                newCard = Instantiate(cardPrefab).GetComponent<Card>();
             newCard.card = cardsToDraw[drawedCard];
             _currentBloodDeck.Remove(cardsToDraw[drawedCard]);
             Debug.Log(_currentBloodDeck.Count);

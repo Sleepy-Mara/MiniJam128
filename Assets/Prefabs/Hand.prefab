@@ -116,7 +116,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 23.5, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.4}
+  m_AnchoredPosition: {x: 0, y: 1.3999939}
   m_SizeDelta: {x: 1300, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &984996553449241546
@@ -192,7 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33865f9ffd6d16845b2212c957aabdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawThings: []
   _cardsInHand: []
   deck:
   - {fileID: 11400000, guid: 19d6b98e55bac86459f0cf3bba17f6b7, type: 2}
@@ -202,11 +201,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
   - {fileID: 11400000, guid: bb69fe447d248bb42b0e0650830199e8, type: 2}
   bloodDeck: []
+  _currentDeck: []
+  _currentBloodDeck: []
   handPos: {fileID: 0}
   canDraw: 0
   zoomingCard: 0
-  cardPrefab: {fileID: 8954024018774041426, guid: 918ce3453ac3589469482dbb7da7ac37, type: 3}
-  spellPrefab: {fileID: 2568296507009188237, guid: 3451e5447d38fb449afd7f5df4e12e16, type: 3}
+  cardPrefab: {fileID: 6303504307996578254, guid: a3e76bfedbe14f94fb6afb7e9b99eed0, type: 3}
+  spellPrefab: {fileID: 149804028099745777, guid: 238c2e87467947e4db6719dac9ea311c, type: 3}
   handRange:
   - {fileID: 372743193811961242}
   - {fileID: 984996554462492292}
