@@ -44,7 +44,7 @@ public class NextCombat : MonoBehaviour
     {
         _enemy = FindObjectOfType<Enemy>();
         _turnManager = FindObjectOfType<TurnManager>();
-        Debug.Log("Se busco TurnManager, se encontro " + _turnManager.name);
+        //Debug.Log("Se busco TurnManager, se encontro " + _turnManager.name);
         _turnManager.enemy = _enemy;
         _draw = FindObjectOfType<Draw>();
         _draw.Start();

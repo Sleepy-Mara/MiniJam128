@@ -38,6 +38,7 @@ public class Table : MonoBehaviour
     }
     void StartSet()
     {
+        print("AAAAAAAAAA");
         for (int i = 0; i < playerPositions.Length; i++)
         {
             playerPositions[i].positionFacing = enemyFront[i];
@@ -57,6 +58,7 @@ public class Table : MonoBehaviour
         card.GetComponent<Animator>().runtimeAnimatorController = card.GetComponent<Card>().tableAnimator;
         //card.transform.SetParent(playerPositions[place].cardPos.transform);
         card.transform.SetPositionAndRotation(playerPositions[place].cardPos.transform.position, playerPositions[place].cardPos.transform.rotation);
+        card.transform.SetParent(playerPositions[place].cardPos.transform);
         playerPositions[place].card = card.GetComponent<Card>();
         card.GetComponent<Card>().currentPosition = playerPositions[place];
         card.GetComponent<Card>().playerCard = true;
@@ -64,6 +66,7 @@ public class Table : MonoBehaviour
         //    if (positions.cardPos == pos)
         //        positions.card = card.GetComponent<ThisCard>();
         myCards.Add(card.GetComponent<Card>());
+        card.GetComponent<Card>().PlayerCard();
         _effectManager.CheckConditionIsPlayed(card.GetComponent<Card>());
     }
     public void EnemySetCard(int place, Cards cardType)
@@ -73,12 +76,14 @@ public class Table : MonoBehaviour
             //var newAudio = Instantiate(audio).GetComponent<AudioSource>();
             audioSource.clip = clips[Random.Range(0, clips.Count)];
             audioSource.Play();
-            Card newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation).GetComponent<Card>();
+            Card newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<Card>();
+            newCard.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation);
             newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
             Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
             newCard.currentPosition = enemyBack[place];
             newCard.SetData();
+            newCard.EnemyCard();
             //newCard.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation);
             newCard.playerCard = false;
             enemyBack[place].card = newCard;
@@ -95,8 +100,10 @@ public class Table : MonoBehaviour
             card.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
             //card.transform.SetParent(enemyFront[place].cardPos.transform);
             card.transform.SetPositionAndRotation(enemyFront[place].cardPos.transform.position, enemyFront[place].cardPos.transform.rotation);
+            card.transform.SetParent(enemyFront[place].cardPos.transform);
             newCard.currentPosition = enemyFront[place];
             newCard.SetData();
+            newCard.EnemyCard();
             enemyFront[place].card = newCard;
         }
         //que spawnee las cartas en la fila de en frente

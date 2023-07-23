@@ -14,6 +14,13 @@ public class Card : CardCore
     public bool attacking;
     private List<CardTempEffect> cardTempEffects = new List<CardTempEffect>();
     private int attackToPlayer;
+    [SerializeField] private string enemyAttack;
+    [SerializeField] private string enemyDamage;
+    [SerializeField] private string playerAttack;
+    [SerializeField] private string playerDamage;
+    private string attackTrigger;
+    private string damageTrigger;
+    private string oponentTrigger;
     private void Start()
     {
         _effectManager = FindObjectOfType<EffectManager>();
@@ -51,9 +58,11 @@ public class Card : CardCore
             attacking = false;
             return;
         }
-        if (currentPosition.oponent.GetComponent<Enemy>())
-            GetComponent<Animator>().SetTrigger("AttackPlayer");
-        else GetComponent<Animator>().SetTrigger("AttackEnemy");
+        //if (currentPosition.oponent.GetComponent<Enemy>())
+        //    GetComponent<Animator>().SetTrigger("AttackPlayer");
+        //else GetComponent<Animator>().SetTrigger("AttackEnemy");
+        GetComponent<Animator>().SetTrigger(attackTrigger);
+        print(card.name + " se enfrenta a " + currentPosition.positionFacing.card);
         if (currentPosition.positionFacing.card != null)
         {
             currentPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, this);
@@ -74,12 +83,12 @@ public class Card : CardCore
     }
     IEnumerator AttackCharacter()
     {
-        string myAttackAnim = "";
-        if (currentPosition.oponent.GetComponent<Enemy>())
-            myAttackAnim = "AttackPlayer";
-        else
-            myAttackAnim = "AttackEnemy";
-        yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(myAttackAnim));
+        //string myAttackAnim = "";
+        //if (currentPosition.oponent.GetComponent<Enemy>())
+        //    myAttackAnim = "AttackPlayer";
+        //else
+        //    myAttackAnim = "AttackEnemy";
+        yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(attackTrigger));
         currentPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
         checkingEffect = true;
         _effectManager.CheckConditionAttack(this);
@@ -92,36 +101,36 @@ public class Card : CardCore
     IEnumerator ReceiveDamage(int damage, Card attacker)
     {
         yield return new WaitUntil(() => checkingEffect == false);
-        string myAttackAnim = "";
-        string attackerAttackAnim = "";
-        if (currentPosition.oponent.GetComponent<Enemy>())
-        {
-            attackerAttackAnim = "AttackEnemy";
-            myAttackAnim = "AttackPlayer";
-        }
-        else
-        {
-            attackerAttackAnim = "AttackPlayer";
-            myAttackAnim = "AttackEnemy";
-        }
+        //string myAttackAnim = "";
+        //string attackerAttackAnim = "";
+        //if (currentPosition.oponent.GetComponent<Enemy>())
+        //{
+        //    attackerAttackAnim = "AttackEnemy";
+        //    myAttackAnim = "AttackPlayer";
+        //}
+        //else
+        //{
+        //    attackerAttackAnim = "AttackPlayer";
+        //    myAttackAnim = "AttackEnemy";
+        //}
         //if (attacker != null)
         //    yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(myAttackAnim) && attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
         //else yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
         if (attacker != null)
-            yield return new WaitUntil(() => attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(attackerAttackAnim));
+            yield return new WaitUntil(() => attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(oponentTrigger));
         checkingEffect = true;
         _effectManager.CheckConditionGetDamaged(this);
         bool damaged = false;
         if (!immune)
         {
             if (damage > 0)
-                GetComponent<Animator>().SetTrigger("GetDamage");
+                GetComponent<Animator>().SetTrigger(damageTrigger);
             ActualLife = -damage;
             damaged = true;
         }
         yield return new WaitUntil(() => checkingEffect == false);
         if (damaged)
-            yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("GetDamage"));
+            yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(damageTrigger));
         attacker.attacking = false;
         if (ActualLife <= 0)
         {
@@ -289,6 +298,18 @@ public class Card : CardCore
     protected override void SelectCard()
     {
         _cardManager.PlaceCards(gameObject);
+    }
+    public void PlayerCard()
+    {
+        attackTrigger = playerAttack;
+        damageTrigger = playerDamage;
+        oponentTrigger = enemyAttack;
+    }
+    public void EnemyCard()
+    {
+        attackTrigger = enemyAttack;
+        damageTrigger = enemyDamage;
+        oponentTrigger = playerAttack;
     }
 }
 [System.Serializable]
