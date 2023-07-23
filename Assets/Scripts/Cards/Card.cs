@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Card : CardCore, IPointerDownHandler
+public class Card : CardCore
 {
     public bool inAttackAnim;
     public bool inDamageAnim;

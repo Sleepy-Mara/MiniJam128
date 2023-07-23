@@ -65,7 +65,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        //Debug.Log("OnPointerEnter");
+        Debug.Log("OnPointerEnter");
         ZoomIn();
     }
     public virtual void OnPointerExit(PointerEventData eventData)
@@ -95,7 +95,6 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
         }
     }
-
     protected virtual void SelectCard()
     {
         Debug.LogError("Cuidado, por algun motivo estas intentando invocar una carta que solo contiene CardCore!");
@@ -106,14 +105,10 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (_draw == null)
         {
             GetComponent<Animator>().SetBool("Zoomed", true);
-            //canvas.overrideSorting = true;
-            //canvas.sortingOrder = 5;
         }
         else if (!_draw.zoomingCard && _cardManager.canZoom)
         {
             GetComponent<Animator>().SetBool("Zoomed", true);
-            //canvas.overrideSorting = true;
-            //canvas.sortingOrder = 5;
             _draw.zoomingCard = true;
         }
     }
@@ -122,8 +117,6 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         GetComponent<Animator>().SetBool("Zoomed", false);
         if (_draw != null)
             _draw.zoomingCard = false;
-        //canvas.sortingOrder = 0;
-        //canvas.overrideSorting = false;
     }
     #endregion
     public virtual void UpdateLanguage(int languageNumber)

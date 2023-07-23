@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class CardMagic : CardCore, IPointerDownHandler
+public class CardMagic : CardCore
 {
     // modificar esto para que haya que moverlo a cualquier parte del escenario
     protected override void SelectCard()
