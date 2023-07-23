@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b094d67c382ec7343a117bbd97823131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 11400000, guid: 68c3ff43c12955d47a86fe6abc38d9f0, type: 2}
+  card: {fileID: 0}
   currentPosition:
     card: {fileID: 0}
     cardPos: {fileID: 0}

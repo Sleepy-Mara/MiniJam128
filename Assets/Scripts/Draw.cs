@@ -16,7 +16,7 @@ public class Draw : MonoBehaviour
     private TurnManager _turnManager;
     public GameObject cardPrefab;
     public GameObject spellPrefab;
-    public RectTransform[] handRange;
+    public Transform[] handRange;
     public List<AudioClip> clips;
     public GameObject audio;
     public Animator noCardsWindow;
@@ -105,9 +105,9 @@ public class Draw : MonoBehaviour
             drawedCard = Random.Range(0, cardsToDraw.Count);
             //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
             if (cardsToDraw[drawedCard].spell)
-                newCard = Instantiate(spellPrefab).GetComponent<CardMagic>();
+                newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
             else
-                newCard = Instantiate(cardPrefab).GetComponent<Card>();
+                newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
             newCard.card = cardsToDraw[drawedCard];
             _currentDeck.Remove(cardsToDraw[drawedCard]);
             Debug.Log(_currentDeck.Count);
@@ -129,9 +129,9 @@ public class Draw : MonoBehaviour
                         cardsToDraw.Add(card);
             drawedCard = Random.Range(0, cardsToDraw.Count);
             if (_currentBloodDeck[drawedCard].spell)
-                newCard = Instantiate(spellPrefab).GetComponent<CardMagic>();
+                newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
             else
-                newCard = Instantiate(cardPrefab).GetComponent<Card>();
+                newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
             newCard.card = cardsToDraw[drawedCard];
             _currentBloodDeck.Remove(cardsToDraw[drawedCard]);
             Debug.Log(_currentBloodDeck.Count);
@@ -153,11 +153,13 @@ public class Draw : MonoBehaviour
         var newAudio = Instantiate(audio).GetComponent<AudioSource>();
         newAudio.clip = clips[Random.Range(0, clips.Count)];
         newAudio.Play();
-        float distance = Mathf.Abs(handRange[0].position.x) + Mathf.Abs(handRange[1].position.x);
-        distance /= (_cardsInHand.Count + 1);
+        float distanceX = Mathf.Abs(handRange[0].localPosition.x) + Mathf.Abs(handRange[1].localPosition.x);
+        float distanceZ = Mathf.Abs(handRange[0].localPosition.z) + Mathf.Abs(handRange[1].localPosition.z);
+        distanceX /= (_cardsInHand.Count + 1);
+        distanceZ /= (_cardsInHand.Count + 1);
         for (int i = 0; i < _cardsInHand.Count; i++)
         {
-            _cardsInHand[_cardsInHand.Count - i - 1].transform.SetPositionAndRotation(new Vector3(handRange[1].position.x + distance * (1 +i), handRange[0].position.y, handRange[0].position.z), handRange[0].rotation);
+            _cardsInHand[_cardsInHand.Count - i - 1].transform.SetPositionAndRotation(new Vector3(handRange[0].position.x + distanceX * (1 +i), handRange[0].position.y, handRange[0].position.z + distanceZ * (1 + i)), handRange[0].rotation);
         }
     }
 
