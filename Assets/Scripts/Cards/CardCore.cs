@@ -65,7 +65,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("OnPointerEnter");
+        //Debug.Log("OnPointerEnter");
         ZoomIn();
     }
     public virtual void OnPointerExit(PointerEventData eventData)

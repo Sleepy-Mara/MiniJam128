@@ -46,6 +46,7 @@ public class CardPos : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
     }
     public void OnPointerDown(PointerEventData eventData)
     {
+        print("BBBBBBBBBBBBBBBBBBBBBB");
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             if (_cardManager.placeCards == true && _cardManager.cardToPlace != null && isPlayable)
@@ -56,6 +57,7 @@ public class CardPos : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
+        print("AAAAAAAAAAAAAAAAAA");
         if(selectViewer != null)
             selectViewer.SetActive(_cardManager.placeCards);
     }
