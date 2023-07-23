@@ -277,7 +277,7 @@ MonoBehaviour:
   numberOfCards: 0
   numberText: {fileID: 6951729189857725838}
   cover: {fileID: 6951729190486963403}
-  card: {fileID: 381757585708566763}
+  card: {fileID: 6097062638825270655}
   inDeck: 0
   inDeckFromStart: 0
 --- !u!1 &6951729190486963403
@@ -634,19 +634,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7fd93e506b3b634d98e9832de111438, type: 3}
---- !u!114 &381757585708566763 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7292953277782130392, guid: c7fd93e506b3b634d98e9832de111438, type: 3}
-  m_PrefabInstance: {fileID: 6951729189380765235}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b094d67c382ec7343a117bbd97823131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2034102808857711968 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8954024018774041427, guid: c7fd93e506b3b634d98e9832de111438, type: 3}
   m_PrefabInstance: {fileID: 6951729189380765235}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6097062638825270655 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3811345969224440652, guid: c7fd93e506b3b634d98e9832de111438, type: 3}
+  m_PrefabInstance: {fileID: 6951729189380765235}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c6953204e50c542ad0d02c137e4caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

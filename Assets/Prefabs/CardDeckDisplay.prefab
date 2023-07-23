@@ -839,11 +839,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
-  currentPosition:
-    card: {fileID: 0}
-    cardPos: {fileID: 0}
-    positionNum: 0
-    oponent: {fileID: 0}
   nameText: {fileID: 7111708209146154616}
   attackText: {fileID: 0}
   lifeText: {fileID: 0}
@@ -852,8 +847,6 @@ MonoBehaviour:
   effectText: {fileID: 0}
   image: {fileID: 0}
   canvas: {fileID: 0}
-  playerCard: 0
-  checkingEffect: 0
 --- !u!114 &916512380770513979
 MonoBehaviour:
   m_ObjectHideFlags: 0

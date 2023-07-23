@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardDeckDisplay : CardCore
+public class CardDeckDisplay : CardDisplay
 {
     public override void SetData()
     {

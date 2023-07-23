@@ -713,12 +713,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8954024018774041427}
-  - component: {fileID: 7292953277782130392}
   - component: {fileID: 8954024018774041424}
   - component: {fileID: 6693638879797595403}
   - component: {fileID: 4283001564486833826}
+  - component: {fileID: 3811345969224440652}
   m_Layer: 5
-  m_Name: CardCore
+  m_Name: CardDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -746,34 +746,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7292953277782130392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8954024018774041426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b094d67c382ec7343a117bbd97823131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  actualPosition:
-    card: {fileID: 0}
-    cardPos: {fileID: 0}
-    positionNum: 0
-    oponent: {fileID: 0}
-  nameText: {fileID: 8954024018660093455}
-  attackText: {fileID: 8954024020480902346}
-  lifeText: {fileID: 8954024018938698572}
-  manaCostText: {fileID: 8954024018446531297}
-  healthCostText: {fileID: 8954024018486074424}
-  effectText: {fileID: 784638889057809569}
-  image: {fileID: 8954024019986997752}
-  canvas: {fileID: 7246755023112462814}
-  playerCard: 0
-  checkingEffect: 0
 --- !u!95 &8954024018774041424
 Animator:
   serializedVersion: 4
@@ -832,6 +804,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3811345969224440652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954024018774041426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c6953204e50c542ad0d02c137e4caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
+  nameText: {fileID: 8954024018660093455}
+  attackText: {fileID: 8954024020480902346}
+  lifeText: {fileID: 8954024018938698572}
+  manaCostText: {fileID: 8954024018446531297}
+  healthCostText: {fileID: 8954024018486074424}
+  effectText: {fileID: 784638889057809569}
+  image: {fileID: 8954024019986997752}
+  canvas: {fileID: 0}
 --- !u!1 &8954024018856908820
 GameObject:
   m_ObjectHideFlags: 0

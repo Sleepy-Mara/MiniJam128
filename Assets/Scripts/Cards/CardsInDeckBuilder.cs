@@ -18,7 +18,7 @@ public class CardsInDeckBuilder : MonoBehaviour
     }
     public TextMeshProUGUI numberText;
     public GameObject cover;
-    public CardCore card;
+    public CardDisplay card;
     [HideInInspector]
     public bool inDeck;
     public int inDeckFromStart;

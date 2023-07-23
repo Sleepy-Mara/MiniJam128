@@ -18,8 +18,8 @@ public class RandomCard : MonoBehaviour
         foreach (CardsInDeckBuilder card in deckBuilder.cardsInDeckBuilder)
             if (!card.cover.activeSelf)
                 cards.Add(card);
-        GetComponent<CardCore>().card = cards[Random.Range(0, cards.Count)].card.card;
-        GetComponent<CardCore>().SetData();
+        GetComponent<CardDisplay>().card = cards[Random.Range(0, cards.Count)].card.card;
+        GetComponent<CardDisplay>().SetData();
     }
     void Update()
     {
