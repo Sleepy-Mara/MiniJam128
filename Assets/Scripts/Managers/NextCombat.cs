@@ -25,6 +25,7 @@ public class NextCombat : MonoBehaviour
     private TurnManager _turnManager;
     private Draw _draw;
     private Table _table;
+    private CameraManager _cameraManager;
     private AudioPlayer _audioPlayer;
     private SaveWithJson json;
     [HideInInspector] public int EnemyReward
@@ -42,6 +43,7 @@ public class NextCombat : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        _cameraManager = FindObjectOfType<CameraManager>();
         _enemy = FindObjectOfType<Enemy>();
         _turnManager = FindObjectOfType<TurnManager>();
         //Debug.Log("Se busco TurnManager, se encontro " + _turnManager.name);
@@ -102,6 +104,7 @@ public class NextCombat : MonoBehaviour
             //cardsToDelete.Add(card.gameObject);
         //}
         wonCombatText.text = enemies[enemyNum].wonCombatMessage;
+        _cameraManager.HandCamera();
         _audioPlayer.StopPlaying("Music" + enemyNum);
         enemyNum++;
         if (json.SaveData.currentUnlockedLevels < enemyNum && enemyNum != enemies.Length -1)

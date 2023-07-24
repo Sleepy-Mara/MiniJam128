@@ -67,6 +67,7 @@ public class EnemyAI : Enemy
         if (_hand.Count > 0)
         {
             BestPlay bestPlay = CheckValueCards();
+            if (bestPlay != null)
             foreach (Cards card in bestPlay.cards)
             {
                 _table.EnemySetCard(System.Array.IndexOf(_table.enemyFront, bestPlay.positions[bestPlay.cards.IndexOf(card)]), card);

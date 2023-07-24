@@ -69,7 +69,7 @@ public class Card : CardCore
         //    GetComponent<Animator>().SetTrigger("AttackPlayer");
         //else GetComponent<Animator>().SetTrigger("AttackEnemy");
         GetComponent<Animator>().SetTrigger(attackTrigger);
-        print(card.name + " se enfrenta a " + currentPosition.positionFacing.card);
+        //print(card.name + " se enfrenta a " + currentPosition.positionFacing.card);
         if (currentPosition.positionFacing.card != null)
         {
             currentPosition.positionFacing.card.GetComponent<Card>().ReceiveDamagePublic(ActualAttack, this);
