@@ -33,12 +33,12 @@ public class CardMagic : CardCore
         checkingEffect = true;
         _effectManager.CheckConditionIsPlayed(this);
         yield return new WaitUntil(() => checkingEffect == false);
-        foreach (Cemetery cemetery in FindObjectsOfType<Cemetery>())
-        {
-            if (cemetery.player)
-                cemetery.AddCard(card);
-        }
-        FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, null, true);
+        //foreach (Cemetery cemetery in FindObjectsOfType<Cemetery>())
+        //{
+        //    if (cemetery.player)
+        //        cemetery.AddCard(card);
+        //}
+        //FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, null, true);
         Destroy(gameObject);
     }
 }
