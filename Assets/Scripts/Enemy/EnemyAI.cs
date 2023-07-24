@@ -64,11 +64,14 @@ public class EnemyAI : Enemy
             AttackFrontCards();
             return;
         }
-        BestPlay bestPlay = CheckValueCards();
-        foreach (Cards card in bestPlay.cards)
+        if (_hand.Count > 0)
         {
-            _table.EnemySetCard(System.Array.IndexOf(_table.enemyFront, bestPlay.positions[bestPlay.cards.IndexOf(card)]), card);
-            _hand.Remove(card);
+            BestPlay bestPlay = CheckValueCards();
+            foreach (Cards card in bestPlay.cards)
+            {
+                _table.EnemySetCard(System.Array.IndexOf(_table.enemyFront, bestPlay.positions[bestPlay.cards.IndexOf(card)]), card);
+                _hand.Remove(card);
+            }
         }
         AttackFrontCards();
     }
