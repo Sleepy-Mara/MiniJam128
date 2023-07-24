@@ -14,13 +14,20 @@ public class Card : CardCore
     public bool attacking;
     private List<CardTempEffect> cardTempEffects = new List<CardTempEffect>();
     private int attackToPlayer;
-    [SerializeField] private string enemyAttack;
-    [SerializeField] private string enemyDamage;
-    [SerializeField] private string playerAttack;
-    [SerializeField] private string playerDamage;
+    [SerializeField] private string enemyAttackTrigger;
+    [SerializeField] private string enemyDamageTrigger;
+    [SerializeField] private string playerAttackTrigger;
+    [SerializeField] private string playerDamageTrigger;
+    [SerializeField] private string enemyAttackAnim;
+    [SerializeField] private string enemyDamageAnim;
+    [SerializeField] private string playerAttackAnim;
+    [SerializeField] private string playerDamageAnim;
     private string attackTrigger;
     private string damageTrigger;
     private string oponentTrigger;
+    [HideInInspector] public string attackAnim;
+    private string damageAnim;
+    private string oponentAnim;
     private void Start()
     {
         _effectManager = FindObjectOfType<EffectManager>();
@@ -88,7 +95,8 @@ public class Card : CardCore
         //    myAttackAnim = "AttackPlayer";
         //else
         //    myAttackAnim = "AttackEnemy";
-        yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(attackTrigger));
+        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(attackAnim));
         currentPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
         checkingEffect = true;
         _effectManager.CheckConditionAttack(this);
@@ -117,7 +125,7 @@ public class Card : CardCore
         //    yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(myAttackAnim) && attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
         //else yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
         if (attacker != null)
-            yield return new WaitUntil(() => attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(oponentTrigger));
+            yield return new WaitUntil(() => attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(oponentAnim));
         checkingEffect = true;
         _effectManager.CheckConditionGetDamaged(this);
         bool damaged = false;
@@ -130,7 +138,7 @@ public class Card : CardCore
         }
         yield return new WaitUntil(() => checkingEffect == false);
         if (damaged)
-            yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(damageTrigger));
+            yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(damageAnim));
         attacker.attacking = false;
         if (ActualLife <= 0)
         {
@@ -184,10 +192,12 @@ public class Card : CardCore
         //    if (!cemetery.player && actualPosition.oponent.GetComponent<Player>())
         //        cemetery.AddCard(card);
         //}
-        if (currentPosition.oponent.GetComponent<Enemy>())
-            FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, currentPosition, true);
-        if (currentPosition.oponent.GetComponent<Player>())
-            FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, currentPosition, false);
+        //!!!!!!!---REACER---
+        //if (currentPosition.oponent.GetComponent<Enemy>())
+        //    FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, currentPosition, true);
+        //if (currentPosition.oponent.GetComponent<Player>())
+        //    FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, currentPosition, false);
+        //!!!!!!!--- ---
         Destroy(gameObject);
     }
     public void ReceiveDamageEffect(int damage, Card attacker, bool startTurn, bool endTurn)
@@ -301,15 +311,21 @@ public class Card : CardCore
     }
     public void PlayerCard()
     {
-        attackTrigger = playerAttack;
-        damageTrigger = playerDamage;
-        oponentTrigger = enemyAttack;
+        attackTrigger = playerAttackTrigger;
+        damageTrigger = playerDamageTrigger;
+        oponentTrigger = enemyAttackTrigger;
+        attackAnim = playerAttackAnim;
+        damageAnim = playerDamageAnim;
+        oponentAnim = enemyAttackAnim;
     }
     public void EnemyCard()
     {
-        attackTrigger = enemyAttack;
-        damageTrigger = enemyDamage;
-        oponentTrigger = playerAttack;
+        attackTrigger = enemyAttackTrigger;
+        damageTrigger = enemyDamageTrigger;
+        oponentTrigger = playerAttackTrigger;
+        attackAnim = enemyAttackAnim;
+        damageAnim = enemyDamageAnim;
+        oponentAnim = playerAttackAnim;
     }
 }
 [System.Serializable]

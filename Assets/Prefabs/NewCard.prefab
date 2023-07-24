@@ -927,10 +927,14 @@ MonoBehaviour:
   tableAnimator: {fileID: 9100000, guid: 2207dec627267e141ac2296de283e12a, type: 2}
   played: 0
   attacking: 0
-  enemyAttack: AttackEnemy
-  enemyDamage: DamageEnemy
-  playerAttack: AttackPlayer
-  playerDamage: DamagePlayer
+  enemyAttackTrigger: AttackEnemy
+  enemyDamageTrigger: DamageEnemy
+  playerAttackTrigger: AttackPlayer
+  playerDamageTrigger: DamagePlayer
+  enemyAttackAnim: EnemyAttack
+  enemyDamageAnim: EnemyDamage
+  playerAttackAnim: PlayerAttack
+  playerDamageAnim: PlayerDamage
 --- !u!65 &2015704900370553539
 BoxCollider:
   m_ObjectHideFlags: 0

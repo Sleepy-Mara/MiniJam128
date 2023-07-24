@@ -100,7 +100,7 @@ public class TurnManager : MonoBehaviour
                 card.card.Attack();
                 if (card.card.ActualAttack > 0)
                 {
-                    yield return new WaitUntil(() => card.card.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackPlayer"));
+                    yield return new WaitUntil(() => card.card.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(card.card.attackAnim));
                     yield return new WaitUntil(() => !card.card.attacking);
                 }
             }
