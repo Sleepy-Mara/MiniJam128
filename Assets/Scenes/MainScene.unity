@@ -27191,7 +27191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - strategy: {fileID: 11400000, guid: 304e424fe3808d94fb5982e72c457a20, type: 2}
-    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
+    enemyDeck: {fileID: 11400000, guid: a77abfa0676116d4fae5c17967215a64, type: 2}
     enemyCharacter: {fileID: 446360352}
     rewards:
     - {fileID: 11400000, guid: 26d16ce04e87aa947a969aefb11c5c8a, type: 2}
@@ -27203,7 +27203,7 @@ MonoBehaviour:
     lostCombatMessage: "\u201COhh, don\u2019t feel bad for losing, you are learning
       to do it better!\u201D"
   - strategy: {fileID: 11400000, guid: 33c7cc9fd0b485b479df7cf372b0cf68, type: 2}
-    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
+    enemyDeck: {fileID: 11400000, guid: 6c4d2420df2358a4abb40ae3e514e919, type: 2}
     enemyCharacter: {fileID: 1105733882}
     rewards:
     - {fileID: 11400000, guid: b732fe27de5b4564e923f10b5db800a4, type: 2}
@@ -27217,7 +27217,7 @@ MonoBehaviour:
     lostCombatMessage: "\u201CI won this time, but the next one you will succeed,
       I know it!\u201D"
   - strategy: {fileID: 11400000, guid: 5fc182c7b6540fe46bea4a428074c314, type: 2}
-    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
+    enemyDeck: {fileID: 11400000, guid: 90613b4a53bc13944b55a16347373964, type: 2}
     enemyCharacter: {fileID: 1286374551}
     rewards:
     - {fileID: 11400000, guid: fe193f65c18387046834788be6bb0885, type: 2}
@@ -27227,7 +27227,7 @@ MonoBehaviour:
       of the food chain\u2026\u201D"
     lostCombatMessage: "\u201CSurely you can do better, care for another round?\u201D"
   - strategy: {fileID: 11400000, guid: c3543f7750ac73044a2aa2d2f961fe5f, type: 2}
-    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
+    enemyDeck: {fileID: 11400000, guid: 1aaf6981cb7e0644ea0b495a3bd8d2ff, type: 2}
     enemyCharacter: {fileID: 1123909177}
     rewards:
     - {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
@@ -27240,7 +27240,7 @@ MonoBehaviour:
     lostCombatMessage: "\u201CTake that! That was lots of fun, you have a very distinctive
       playstyle.\u201D"
   - strategy: {fileID: 11400000, guid: 632557a2edb408944af4d94b4bafd17e, type: 2}
-    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
+    enemyDeck: {fileID: 11400000, guid: b6271177de47f4a4f881455f05769cc4, type: 2}
     enemyCharacter: {fileID: 1097329473}
     rewards:
     - {fileID: 11400000, guid: b5a2c4cc536e51745b542ccc885995e7, type: 2}
@@ -27252,7 +27252,7 @@ MonoBehaviour:
     lostCombatMessage: "\u201CIt looks like you have to keep training, practice makes
       perfect.\u201D"
   - strategy: {fileID: 11400000, guid: db11cc9d7c479724f981a30f62b83297, type: 2}
-    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
+    enemyDeck: {fileID: 11400000, guid: dc381971a3d49c74ca096664e5583896, type: 2}
     enemyCharacter: {fileID: 2067991128}
     rewards:
     - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
@@ -27264,7 +27264,7 @@ MonoBehaviour:
     lostCombatMessage: "\u201CI played better this time, but let\u2019s play again,
       maybe you can get me next.\u201D"
   - strategy: {fileID: 11400000, guid: 6ea1db61e5c28264282b7f14b7e6bd7a, type: 2}
-    enemyDeck: {fileID: 11400000, guid: f23e3819783dceb42af2805c23cd143e, type: 2}
+    enemyDeck: {fileID: 11400000, guid: 5248b31f59567844d997565b855a3824, type: 2}
     enemyCharacter: {fileID: 1769869984}
     rewards:
     - {fileID: 11400000, guid: 9891185201d3dee4d813c4110ec3c29b, type: 2}
@@ -49720,7 +49720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1647164556
 AudioSource:
   m_ObjectHideFlags: 0

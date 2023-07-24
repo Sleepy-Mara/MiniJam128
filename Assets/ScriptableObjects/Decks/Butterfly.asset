@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a452197c01590de448a7f4c5a3b7a62a, type: 3}
-  m_Name: Prueba
+  m_Name: Butterfly
   m_EditorClassIdentifier: 
   deck:
   - {fileID: 11400000, guid: 19d6b98e55bac86459f0cf3bba17f6b7, type: 2}
   - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
-  - {fileID: 11400000, guid: 31dabbe96aafed64eaa286f9cbefc72e, type: 2}
+  - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
+  - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
+  - {fileID: 11400000, guid: 26d16ce04e87aa947a969aefb11c5c8a, type: 2}
   - {fileID: 11400000, guid: 9f3a7fdb11fb9274288b0a089dc4d640, type: 2}
   - {fileID: 11400000, guid: 9305a9ff9eb80694faf50b3c8d54e45d, type: 2}

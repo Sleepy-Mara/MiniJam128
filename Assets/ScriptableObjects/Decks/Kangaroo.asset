@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a452197c01590de448a7f4c5a3b7a62a, type: 3}
+  m_Name: Kangaroo
+  m_EditorClassIdentifier: 
+  deck:
+  - {fileID: 11400000, guid: b5a2c4cc536e51745b542ccc885995e7, type: 2}
+  - {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
+  - {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
+  - {fileID: 11400000, guid: d764b97ad7a13b24f830be6d44533202, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 952b7f4b8a1726743999a107258ad251, type: 2}
+  - {fileID: 11400000, guid: 450c7340692cb6346a992fa4b66cc407, type: 2}

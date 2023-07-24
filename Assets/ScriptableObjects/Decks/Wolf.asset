@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a452197c01590de448a7f4c5a3b7a62a, type: 3}
+  m_Name: Wolf
+  m_EditorClassIdentifier: 
+  deck:
+  - {fileID: 11400000, guid: 4f5652c53ccb69747b79b468b76b199a, type: 2}
+  - {fileID: 11400000, guid: bcccdbab809a4c94baf1b54019b4acda, type: 2}
+  - {fileID: 11400000, guid: 5313136a2aacc04478301cae95f7429e, type: 2}
+  - {fileID: 11400000, guid: 102ebf4ec5039e54fbe53a20da9d327c, type: 2}
+  - {fileID: 11400000, guid: 9bde8ed2f88cae24ba0737c9fb5bcfde, type: 2}
+  - {fileID: 11400000, guid: 8a2e80dc70e64a74a97bfd72f953c128, type: 2}
+  - {fileID: 11400000, guid: 4f5652c53ccb69747b79b468b76b199a, type: 2}
+  - {fileID: 11400000, guid: bcccdbab809a4c94baf1b54019b4acda, type: 2}
+  - {fileID: 11400000, guid: bcccdbab809a4c94baf1b54019b4acda, type: 2}
