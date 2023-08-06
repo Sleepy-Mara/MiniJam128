@@ -11,7 +11,7 @@ public class Card : CardCore
     public RuntimeAnimatorController tableAnimator;
     [HideInInspector]
     public bool played = false;
-    public bool attacking;
+    public bool inAnimation;
     private List<CardTempEffect> cardTempEffects = new List<CardTempEffect>();
     private int attackToPlayer;
     [SerializeField] private string enemyAttackTrigger;
@@ -62,7 +62,7 @@ public class Card : CardCore
     {
         if (ActualAttack <= 0)
         {
-            attacking = false;
+            inAnimation = false;
             return;
         }
         //if (currentPosition.oponent.GetComponent<Enemy>())
@@ -95,15 +95,14 @@ public class Card : CardCore
         //    myAttackAnim = "AttackPlayer";
         //else
         //    myAttackAnim = "AttackEnemy";
-        yield return new WaitForSeconds(0.5f);
-        yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(attackAnim));
+        yield return new WaitUntil(() => !inAnimation);
         currentPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
         checkingEffect = true;
         _effectManager.CheckConditionAttack(this);
-        attacking = false;
     }
     public void ReceiveDamagePublic(int damage, Card attacker)
     {
+        inAnimation = true;
         StartCoroutine(ReceiveDamage(damage, attacker));
     }
     IEnumerator ReceiveDamage(int damage, Card attacker)
@@ -125,7 +124,7 @@ public class Card : CardCore
         //    yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(myAttackAnim) && attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
         //else yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
         if (attacker != null)
-            yield return new WaitUntil(() => attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(oponentAnim));
+            yield return new WaitUntil(() => !attacker.inAnimation);
         checkingEffect = true;
         _effectManager.CheckConditionGetDamaged(this);
         bool damaged = false;
@@ -138,8 +137,7 @@ public class Card : CardCore
         }
         yield return new WaitUntil(() => checkingEffect == false);
         if (damaged)
-            yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(damageAnim));
-        attacker.attacking = false;
+            yield return new WaitUntil(() => !inAnimation);
         if (ActualLife <= 0)
         {
             StartCoroutine(Defeated(attacker));
@@ -197,7 +195,7 @@ public class Card : CardCore
         //    FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, currentPosition, true);
         //if (currentPosition.oponent.GetComponent<Player>())
         //    FindObjectOfType<CardToCemeteryAnimation>().AddCard(card, currentPosition, false);
-        //!!!!!!!--- ---
+        //!!!!!!!--- ---41
         Destroy(gameObject);
     }
     public void ReceiveDamageEffect(int damage, Card attacker, bool startTurn, bool endTurn)

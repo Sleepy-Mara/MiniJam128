@@ -926,7 +926,7 @@ MonoBehaviour:
   handAnimator: {fileID: 9100000, guid: 6f8d96f5e69123246bdee28ecd61b317, type: 2}
   tableAnimator: {fileID: 9100000, guid: 2207dec627267e141ac2296de283e12a, type: 2}
   played: 0
-  attacking: 0
+  inAnimation: 0
   enemyAttackTrigger: AttackEnemy
   enemyDamageTrigger: DamageEnemy
   playerAttackTrigger: AttackPlayer
@@ -935,6 +935,7 @@ MonoBehaviour:
   enemyDamageAnim: EnemyDamage
   playerAttackAnim: PlayerAttack
   playerDamageAnim: PlayerDamage
+  attackAnim: 
 --- !u!65 &2015704900370553539
 BoxCollider:
   m_ObjectHideFlags: 0

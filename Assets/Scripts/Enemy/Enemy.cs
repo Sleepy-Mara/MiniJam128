@@ -73,18 +73,16 @@ public class Enemy : Health
     }
     IEnumerator AttackPhase()
     {
-
         foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
             {
-                card.card.attacking = true;
+                card.card.inAnimation = true;
                 card.card.Attack();
                 if (card.card.ActualAttack > 0)
-                {
-                    yield return new WaitUntil(() => card.card.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(card.card.attackAnim));
-                    yield return new WaitUntil(() => !card.card.attacking);
-                }
+                    yield return new WaitUntil(() => !card.card.inAnimation);
             }
+        foreach (Card card in FindObjectsOfType<Card>())
+            yield return new WaitUntil(() => !card.inAnimation);
         foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
             {
