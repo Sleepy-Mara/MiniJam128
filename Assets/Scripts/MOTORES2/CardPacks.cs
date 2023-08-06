@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CardPacks : MonoBehaviour
 {
+    [SerializeField] private Transform listOfUnlocked;
+    [SerializeField] private GameObject card;
     [SerializeField] private int numberOfCardsInPack;
     [SerializeField] private List<Cards> cardsInPack;
     [SerializeField] int cost;
@@ -21,7 +23,15 @@ public class CardPacks : MonoBehaviour
         saveData.currentCurrency = currencyManager.Currency - cost;
         json.SaveData = saveData;
         currencyManager.Currency = -cost;
+        foreach(CardDisplay card in listOfUnlocked.GetComponentsInChildren<CardDisplay>())
+            Destroy(card.gameObject);
         for (int i = 0; i < numberOfCardsInPack; i++)
-            FindObjectOfType<DeckBuilder>().UnlockCard(cardsInPack[Random.Range(0, cardsInPack.Count)], 1);
+        {
+            var unlockedCard = cardsInPack[Random.Range(0, cardsInPack.Count)];
+            CardDisplay newCard = Instantiate(card, listOfUnlocked).GetComponent<CardDisplay>();
+            newCard.card = unlockedCard;
+            newCard.SetData();
+            FindObjectOfType<DeckBuilder>().UnlockCard(unlockedCard, 1);
+        }
     }
 }
