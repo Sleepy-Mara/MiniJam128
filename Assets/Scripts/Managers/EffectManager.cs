@@ -804,6 +804,7 @@ public class EffectManager : MonoBehaviour
                                         if (creature.card.ActualLife > 0)
                                             creatureToBuff.Add(creature);
                                 var selected = Random.Range(0, creatureToBuff.Count);
+                                if(creatureToBuff.Count > 0)
                                 if (creatureToBuff[selected].card != null)
                                     creatureToBuff[selected].card.BuffEffect(attack, life, startTurn, endTurn);
                             }

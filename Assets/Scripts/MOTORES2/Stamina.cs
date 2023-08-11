@@ -32,8 +32,8 @@ public class Stamina : MonoBehaviour
         if (currentStamina < maxStamina)
         {
             timer = nextStaminaTime - DateTime.Now;
-            id = NotificationManager.Instance.DisplayNotification(notifTitle, notifText,
-                AddDuration(DateTime.Now, ((maxStamina - (currentStamina) + 1) * timeToRecharge) + 1 + (float)timer.TotalMinutes));
+            //id = NotificationManager.Instance.DisplayNotification(notifTitle, notifText,
+            //    AddDuration(DateTime.Now, ((maxStamina - (currentStamina) + 1) * timeToRecharge) + 1 + (float)timer.TotalMinutes));
         }
     }
     public bool HasEnoughStamina(int stamina) => currentStamina - stamina >= 0;
@@ -69,7 +69,7 @@ public class Stamina : MonoBehaviour
             Save();
             yield return new WaitForEndOfFrame();
         }
-        NotificationManager.Instance.CancelNotification(id);
+        //NotificationManager.Instance.CancelNotification(id);
         recharging = false;
     }
     public void ChargeStamina(int stamina)
@@ -88,9 +88,9 @@ public class Stamina : MonoBehaviour
         {
             currentStamina -= staminaToUse;
             UpdateStamina();
-            NotificationManager.Instance.CancelNotification(id);
-            id = NotificationManager.Instance.DisplayNotification(notifTitle, notifText,
-                AddDuration(DateTime.Now, ((maxStamina - (currentStamina) + 1) * timeToRecharge) + 1 + (float)timer.TotalMinutes));
+            //NotificationManager.Instance.CancelNotification(id);
+            //id = NotificationManager.Instance.DisplayNotification(notifTitle, notifText,
+                //AddDuration(DateTime.Now, ((maxStamina - (currentStamina) + 1) * timeToRecharge) + 1 + (float)timer.TotalMinutes));
             if (!recharging)
             {
                 nextStaminaTime = AddDuration(DateTime.Now, timeToRecharge);

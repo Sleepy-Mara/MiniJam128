@@ -47,8 +47,14 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         image.sprite = card.sprite;
         attackText.text = card.attack.ToString();
         lifeText.text = currentLife.ToString();
-        manaCostText.text = card.manaCost.ToString();
-        healthCostText.text = card.healthCost.ToString();
+        if (card.manaCost > 0)
+            manaCostText.text = card.manaCost.ToString();
+        else
+            manaCostText.transform.parent.gameObject.SetActive(false);
+        if (card.healthCost > 0)
+            healthCostText.text = card.healthCost.ToString();
+        else
+            healthCostText.transform.parent.gameObject.SetActive(false);
         UpdateLanguage(FindObjectOfType<LanguageManager>().languageNumber);
     }
     public virtual void OnEndDrag(PointerEventData eventData)

@@ -28,6 +28,7 @@ public class NextCombat : MonoBehaviour
     private CameraManager _cameraManager;
     private AudioPlayer _audioPlayer;
     private SaveWithJson json;
+    public GameObject demoScreen;
     [HideInInspector] public int EnemyReward
     {
         get => enemies[enemyNum-1].reward;
@@ -104,9 +105,18 @@ public class NextCombat : MonoBehaviour
             //cardsToDelete.Add(card.gameObject);
         //}
         wonCombatText.text = enemies[enemyNum].wonCombatMessage;
-        _cameraManager.HandCamera();
+        if (_cameraManager != null)
+            _cameraManager.HandCamera();
+        else
+            FindObjectOfType<CameraManager>().HandCamera();
         _audioPlayer.StopPlaying("Music" + enemyNum);
         enemyNum++;
+
+        //QUITAR ESTE OTRO IF ACORDATE CATALINA LA PUTA MADRE
+
+        if (enemyNum < 4)
+
+        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         if (json.SaveData.currentUnlockedLevels < enemyNum && enemyNum != enemies.Length -1)
         {
             SaveData saveData = json.SaveData;
@@ -136,6 +146,17 @@ public class NextCombat : MonoBehaviour
     {
         ResetCombat();
         wonCombat.SetActive(false);
+
+        // QUITAR ESTE IF
+
+        if (enemyNum == 4)
+        {
+            demoScreen.SetActive(true);
+            return;
+        }
+
+        // QUITAR ESTE IF
+
         if (enemyNum == enemies.Length)
         {
             FindObjectOfType<ChangeSceneManager>().ChangeScene("Credits");
@@ -158,6 +179,12 @@ public class NextCombat : MonoBehaviour
     // este es para el boton de derrota
     public void RestartCombat()
     {
+        if (FindObjectOfType<EnemyAI>())
+        {
+            _enemy.GetComponent<EnemyAI>().StartCombat(enemies[enemyNum].enemyDeck.deck);
+        }
+        else
+            _enemy.strategy = enemies[enemyNum].strategy;
         _table.player.RestartPlayer();
         _turnManager.StartBattle();
         lostCombat.SetActive(false);
@@ -166,6 +193,7 @@ public class NextCombat : MonoBehaviour
     public void Defeat()
     {
         ResetCombat();
+        _cameraManager.HandCamera();
         endTurnButton.SetActive(false);
         lostCombatText.text = enemies[enemyNum].lostCombatMessage;
         lostCombat.SetActive(true);

@@ -22,6 +22,7 @@ public class Draw : MonoBehaviour
     public Animator noCardsWindow;
     public GameObject manaDeckObject;
     public GameObject bloodDeckObject;
+    public float cardHeight = 0.2f;
     public enum DeckType { Mana, Blood}
     private void Awake()
     {
@@ -150,23 +151,34 @@ public class Draw : MonoBehaviour
 
     public void AdjustHand()
     {
+        // a ver, quiero varias cosas:
+        // 1- que las cartas esten mas arriba, se puede conseguir subiendo el objeto
+        // 2- que se vean mejor los contenidos de las cartas
+        // 3- que las cartas no se vean escalonadas, pero que no esten todas al mismo nivel
         var newAudio = Instantiate(audio).GetComponent<AudioSource>();
         newAudio.clip = clips[Random.Range(0, clips.Count)];
         newAudio.Play();
         float distanceX = Mathf.Abs(handRange[0].localPosition.x) + Mathf.Abs(handRange[1].localPosition.x);
         float distanceZ = Mathf.Abs(handRange[0].localPosition.z) + Mathf.Abs(handRange[1].localPosition.z);
+        float angle = Mathf.Abs(handRange[0].localEulerAngles.z - 360) + Mathf.Abs(handRange[1].localEulerAngles.z);
+        print("local rotation 0 = " + handRange[0].localEulerAngles.z + " local rotation 1 = " + handRange[1].localEulerAngles.z);
+        angle /= (_cardsInHand.Count + 1);
+        print(angle);
         distanceX /= (_cardsInHand.Count + 1);
         distanceZ /= (_cardsInHand.Count + 1);
         for (int i = 0; i < _cardsInHand.Count; i++)
         {
-            _cardsInHand[_cardsInHand.Count - i - 1].transform.SetPositionAndRotation(new Vector3(handRange[0].position.x + distanceX * (1 +i), handRange[0].position.y, handRange[0].position.z + distanceZ * (1 + i)), handRange[0].rotation);
+            //tiene que ser un numero entre 0 y 1
+            float f = Mathf.Sin(Mathf.PI * ((i * 1.0f +1) / (_cardsInHand.Count+1)));
+            _cardsInHand[_cardsInHand.Count - i - 1].transform.SetPositionAndRotation(new Vector3(handRange[0].position.x + distanceX * (1 +i), handRange[0].position.y + (f * cardHeight), handRange[0].position.z + distanceZ * (1 + i)), 
+                Quaternion.Euler(new Vector3(handRange[0].eulerAngles.x, handRange[0].eulerAngles.y, handRange[0].eulerAngles.z + angle * (i+1))));
         }
     }
 
     public void ResetDeckAndHand()
     {
         manaDeckObject.SetActive(true);
-        bloodDeckObject.SetActive(true);
+        //bloodDeckObject.SetActive(true);
         _currentDeck = new List<Cards>();
         for (int i = 0; i < deck.Count; i++)
             _currentDeck.Add(deck[i]);
