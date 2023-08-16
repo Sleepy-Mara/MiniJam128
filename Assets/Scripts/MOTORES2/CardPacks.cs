@@ -33,5 +33,6 @@ public class CardPacks : MonoBehaviour
             newCard.SetData();
             FindObjectOfType<DeckBuilder>().UnlockCard(unlockedCard, 1);
         }
+        listOfUnlocked.parent.gameObject.SetActive(true);
     }
 }
