@@ -123,8 +123,9 @@ public class Card : CardCore
         //if (attacker != null)
         //    yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(myAttackAnim) && attacker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
         //else yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AttackEnemy"));
-        if (attacker != null)
-            yield return new WaitUntil(() => !attacker.inAnimation);
+        
+        //if (attacker != null)
+        //    yield return new WaitUntil(() => !attacker.inAnimation);
         checkingEffect = true;
         _effectManager.CheckConditionGetDamaged(this);
         bool damaged = false;
@@ -325,7 +326,7 @@ public class Card : CardCore
         damageAnim = enemyDamageAnim;
         oponentAnim = playerAttackAnim;
     }
-    public void Termine()
+    public void EndAnim()
     {
         inAnimation = false;
     }
