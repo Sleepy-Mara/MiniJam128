@@ -325,6 +325,10 @@ public class Card : CardCore
         damageAnim = enemyDamageAnim;
         oponentAnim = playerAttackAnim;
     }
+    public void Termine()
+    {
+        inAnimation = false;
+    }
 }
 [System.Serializable]
 public class CardTempEffect
