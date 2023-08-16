@@ -111,7 +111,6 @@ public class Draw : MonoBehaviour
                 newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
             newCard.card = cardsToDraw[drawedCard];
             _currentDeck.Remove(cardsToDraw[drawedCard]);
-            Debug.Log(_currentDeck.Count);
             if (_currentDeck.Count < 1)
                 manaDeckObject.SetActive(false);
         }
@@ -161,9 +160,7 @@ public class Draw : MonoBehaviour
         float distanceX = Mathf.Abs(handRange[0].localPosition.x) + Mathf.Abs(handRange[1].localPosition.x);
         float distanceZ = Mathf.Abs(handRange[0].localPosition.z) + Mathf.Abs(handRange[1].localPosition.z);
         float angle = Mathf.Abs(handRange[0].localEulerAngles.z - 360) + Mathf.Abs(handRange[1].localEulerAngles.z);
-        print("local rotation 0 = " + handRange[0].localEulerAngles.z + " local rotation 1 = " + handRange[1].localEulerAngles.z);
         angle /= (_cardsInHand.Count + 1);
-        print(angle);
         distanceX /= (_cardsInHand.Count + 1);
         distanceZ /= (_cardsInHand.Count + 1);
         for (int i = 0; i < _cardsInHand.Count; i++)

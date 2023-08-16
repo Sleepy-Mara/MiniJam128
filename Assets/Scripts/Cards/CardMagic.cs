@@ -21,11 +21,7 @@ public class CardMagic : CardCore
         foreach (GameObject card in _cardManager.draw._cardsInHand)
         {
             if (card != gameObject)
-            {
                 newCardsInHand.Add(card);
-                Debug.Log("Added" + card.name);
-            }
-            else Debug.Log("Ignored" + card.name);
         }
         _cardManager.draw._cardsInHand.Clear();
         _cardManager.draw._cardsInHand = newCardsInHand;

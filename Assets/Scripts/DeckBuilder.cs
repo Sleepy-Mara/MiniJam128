@@ -111,7 +111,6 @@ public class DeckBuilder : MonoBehaviour
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
             if (card.card.card.name == selectedCard.card.card.name)
             {
-                Debug.Log("aaaa");
                 bool inDeck = false;
                 CardsInDeckBuilder newCardInDeck = null;
                 if(cardsInDeck.Count > 0)

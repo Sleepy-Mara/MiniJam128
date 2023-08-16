@@ -38,7 +38,6 @@ public class Table : MonoBehaviour
     }
     void StartSet()
     {
-        print("AAAAAAAAAA");
         for (int i = 0; i < playerPositions.Length; i++)
         {
             playerPositions[i].positionFacing = enemyFront[i];
@@ -79,7 +78,6 @@ public class Table : MonoBehaviour
             Card newCard = Instantiate(cardPrefab, enemyBack[place].cardPos.transform).GetComponent<Card>();
             newCard.transform.SetPositionAndRotation(enemyBack[place].cardPos.transform.position, enemyBack[place].cardPos.transform.rotation);
             newCard.GetComponent<Animator>().runtimeAnimatorController = newCard.tableAnimator;
-            Debug.Log("Se seteo la carta " + cardType.cardName + " en " + enemyBack[place].cardPos.name);
             newCard.card = cardType;
             newCard.currentPosition = enemyBack[place];
             newCard.SetData();
@@ -110,7 +108,6 @@ public class Table : MonoBehaviour
     }
     public void MoveEnemyCard()
     {
-        Debug.Log("MoveEnemyCard");
         for (int i = 0; i < enemyBack.Length; i++)
             if(enemyBack[i].card != null && enemyFront[i].card == null)
             {

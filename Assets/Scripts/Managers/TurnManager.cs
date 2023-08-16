@@ -27,7 +27,6 @@ public class TurnManager : MonoBehaviour
     public void StartBattle()
     {
         enemy.RestoreHealth(10);
-        Debug.Log("Empieza el combate");
         enemy.MoveBackCards(turn);
         for (int i = 0; i < cardsInHandStart; i++)
             draw.DrawACard(Draw.DeckType.Mana, true, true);
@@ -44,14 +43,12 @@ public class TurnManager : MonoBehaviour
         FindObjectOfType<CameraManager>().HandCamera();
         canEndTurn = false;
         turn++;
-        Debug.Log("Empieza el turno " + turn);
         player.RestoreMana();
         draw.CanDraw();
         //algun efecto de comienzo de turno
     }
     public void PlayableTurn()
     {
-        Debug.Log("deberias poder jugar");
         canPlayCards = true;
         //var cards = FindObjectsOfType<Card>();
         //foreach (Card card in cards)
@@ -61,7 +58,6 @@ public class TurnManager : MonoBehaviour
     {
         if (canEndTurn)
         {
-            Debug.Log("puta");
             FindObjectOfType<CameraManager>().PlaceCardCamera();
             canPlayCards = false;
             StartCoroutine(AttackPhase());

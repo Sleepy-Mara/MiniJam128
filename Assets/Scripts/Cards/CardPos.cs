@@ -28,10 +28,7 @@ public class CardPos : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
             {
                 // preguntar para que sirve este codigo
                 if (card != _cardManager.cardToPlace)
-                {
                     newCardsInHand.Add(card);
-                    Debug.Log("Added" + card.name);
-                }else Debug.Log("Ignored" + card.name);
             }
             _cardManager.draw._cardsInHand.Clear();
             _cardManager.draw._cardsInHand = newCardsInHand;

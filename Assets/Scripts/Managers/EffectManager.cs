@@ -387,7 +387,6 @@ public class EffectManager : MonoBehaviour
                             }
                         }
                 }
-        Debug.Log("I did damage");
         card.checkingEffect = false;
         #endregion
     }
@@ -418,7 +417,6 @@ public class EffectManager : MonoBehaviour
                                 enemyHealth = FindObjectOfType<Enemy>();
                                 allyHealth = FindObjectOfType<Player>();
                             }
-                            Debug.Log("Im going to heal");
                             if (target == targets[13])
                                 card.currentPosition.positionFacing.card.HealEffect(i, startTurn, endTurn);
                             else if (target == targets[12])

@@ -39,7 +39,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     }
     public void OnUnityAdsReady(string placementId)
     {
-        if (placementId == adId) Debug.Log("Is ready!");
+
     }
 
     public void OnUnityAdsDidError(string message)
