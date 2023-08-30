@@ -19,38 +19,38 @@ public class CardPos : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
         _cardManager = FindObjectOfType<CardManager>();
         _table = FindObjectOfType<Table>();
     }
-    public void SelectThisPosition()
+    public void SelectThisPosition(GameObject cardToPlace)
     {
-        if(_cardManager.placeCards == true)
-        {
+        //if(_cardManager.placeCards == true)
+        //{
             List<GameObject> newCardsInHand = new List<GameObject>();
             foreach(GameObject card in _cardManager.draw._cardsInHand)
             {
                 // preguntar para que sirve este codigo
-                if (card != _cardManager.cardToPlace)
+                if (card != cardToPlace)
                     newCardsInHand.Add(card);
             }
             _cardManager.draw._cardsInHand.Clear();
             _cardManager.draw._cardsInHand = newCardsInHand;
             _cardManager.draw.AdjustHand();
             //_cardManager.cardToPlace.GetComponentInChildren<ThisCard>().inTable = true;
-            _table.SetCard(_cardManager.cardToPlace, positionNum);
-            _table.player.SpendMana(_cardManager.cardToPlace.GetComponent<Card>().card.manaCost);
-            _table.player.SpendHealth(_cardManager.cardToPlace.GetComponent<Card>().card.healthCost);
+            _table.SetCard(cardToPlace, positionNum);
+            _table.player.SpendMana(cardToPlace.GetComponent<Card>().card.manaCost);
+            _table.player.SpendHealth(cardToPlace.GetComponent<Card>().card.healthCost);
             _cardManager.EndPlacing();
-        }
+        //}
 
     }
     public void OnPointerDown(PointerEventData eventData)
     {
         //print("BBBBBBBBBBBBBBBBBBBBBB");
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            if (_cardManager.placeCards == true && _cardManager.cardToPlace != null && isPlayable)
-                SelectThisPosition();
-        }
-        else
-            _cardManager.CancelPlacing();
+        //if (eventData.button == PointerEventData.InputButton.Left)
+        //{
+        //    if (_cardManager.placeCards == true && _cardManager.cardToPlace != null && isPlayable)
+        //        SelectThisPosition();
+        //}
+        //else
+        //    _cardManager.CancelPlacing();
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

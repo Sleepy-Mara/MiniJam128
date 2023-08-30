@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CardMagic : CardCore
 {
@@ -9,6 +11,19 @@ public class CardMagic : CardCore
     {
         StartCoroutine(PlayEffect());
         _cardManager.EndPlacing();
+    }
+    public override void OnEndDrag(PointerEventData eventData)
+    {
+        if (FindObjectOfType<CameraManager>().CameraPosition() == 2)
+        {
+            StartCoroutine(PlayEffect());
+            _cardManager.EndPlacing();
+        }
+        else
+        {
+            _draw.AdjustHand();
+            FindObjectOfType<CameraManager>().HandCamera();
+        }
     }
 
     IEnumerator PlayEffect()

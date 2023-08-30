@@ -304,6 +304,16 @@ public class Card : CardCore
                 Buff(effect.attack * -1, effect.life * -1);
         }
     }
+    protected override void Selected(MapPosition pos)
+    {
+        if (pos.card != null)
+        {
+            _draw.AdjustHand();
+            FindObjectOfType<CameraManager>().HandCamera();
+            return;
+        }
+        pos.cardPos.SelectThisPosition(gameObject);
+    }
     protected override void SelectCard()
     {
         _cardManager.PlaceCards(gameObject);
