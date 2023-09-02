@@ -14,6 +14,7 @@ public class CardMagic : CardCore
     }
     public override void OnEndDrag(PointerEventData eventData)
     {
+        _onDrag = false;
         if (FindObjectOfType<CameraManager>().CameraPosition() == 2)
         {
             StartCoroutine(PlayEffect());

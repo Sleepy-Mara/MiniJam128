@@ -43,14 +43,13 @@ public class CardPos : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        //print("BBBBBBBBBBBBBBBBBBBBBB");
-        //if (eventData.button == PointerEventData.InputButton.Left)
-        //{
-        //    if (_cardManager.placeCards == true && _cardManager.cardToPlace != null && isPlayable)
-        //        SelectThisPosition();
-        //}
-        //else
-        //    _cardManager.CancelPlacing();
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (_cardManager.placeCards == true && _cardManager.cardToPlace != null && isPlayable)
+                SelectThisPosition(_cardManager.cardToPlace);
+        }
+        else
+            _cardManager.CancelPlacing();
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

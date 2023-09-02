@@ -4,8 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using static UnityEditor.PlayerSettings;
+using Unity.VisualScripting;
 
-public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler
 {
     public Cards card;
     public MapPosition currentPosition;
@@ -31,10 +32,8 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     protected Draw _draw;
 
     private float _mouseZCoord;
-    private Vector3 _mouseOffset;
-    private bool _firstTime;
-    private float _speed = 5;
-    private bool _onDrag;
+    [SerializeField] private float speed = 5;
+    protected bool _onDrag;
 
     private void Awake()
     {
@@ -53,7 +52,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Vector3 direction = (GetMouseWorldPos()) - transform.position;
             while (direction.magnitude > 0.01f)
             {
-                direction = direction * Time.deltaTime * _speed;
+                direction = direction * Time.deltaTime * speed;
                 transform.position += direction;
             }
         }
@@ -86,7 +85,6 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 if (Vector3.Distance(pos.cardPos.transform.position, transform.position) < 0.15f)
                 {
                     Selected(pos);
-                    Debug.Log("SIIIIIII " + pos.cardPos.name);
                     posSelected = true;
                 }
             if (!posSelected)
@@ -112,13 +110,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public virtual void OnDrag(PointerEventData eventData)
     {
         //Debug.Log("OnDrag");
-        if (_draw == null)
-            return;
-        if (eventData.button != PointerEventData.InputButton.Left && (currentPosition.cardPos != null || playerCard))
-            return;
-        if (!_turnManager.CanPlayCards())
-            return;
-        if (!_table.player.EnoughMana(card.manaCost) || !_table.player.EnoughHealth(card.healthCost))
+        if (!CanPlayCard(eventData))
             return;
         ZoomOut();
         transform.parent = null;
@@ -129,16 +121,14 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             FindObjectOfType<CameraManager>().PlaceCardCamera();
             Quaternion newRot = Quaternion.Euler(90, 180, 0);
             transform.rotation = newRot;
+            _mouseZCoord = 1.5f;
         }
-        if (FindObjectOfType<CameraManager>().CameraPosition() == 2)
+        if (Input.mousePosition.y < Camera.main.pixelHeight / 16 && FindObjectOfType<CameraManager>().CameraPosition() != 1)
         {
-            if (_firstTime)
-            {
-                _mouseZCoord = 1.5f;
-                _firstTime = false;
-            }
-            foreach (MapPosition x in _table.playerPositions)
-                Debug.Log(GetMouseWorldPos() + " " + x.cardPos.transform.position);
+            FindObjectOfType<CameraManager>().HandCamera();
+            Quaternion newRot = Quaternion.Euler(0, 180, 0);
+            transform.rotation = newRot;
+            _mouseZCoord = 0.78f;
         }
     }
     public virtual void OnPointerEnter(PointerEventData eventData)
@@ -159,27 +149,43 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         //Debug.Log("OnPointerDown");
-        if (_draw == null)
+        if (!CanPlayCard(eventData))
             return;
-        if (eventData.button != PointerEventData.InputButton.Left && (currentPosition.cardPos != null || playerCard))
-            return;
-        if (!_turnManager.CanPlayCards())
-            return;
-        if (!_table.player.EnoughMana(card.manaCost) && !_table.player.EnoughHealth(card.healthCost))
-            return;
-        _mouseZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-        _mouseOffset = gameObject.transform.position - GetMouseWorldPos();
-        _firstTime = true;
+        //_mouseZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+        _mouseZCoord = 0.78f;
         //ZoomOut();
         //_cardManager.canZoom = false;
         //SelectCard();
         //_cardManager.PlaceCards(gameObject);
+    }
+    public virtual void OnPointerClick(PointerEventData eventData)
+    {
+        if (!CanPlayCard(eventData))
+            return;
+        if (eventData.dragging)
+            return;
+        ZoomOut();
+        _cardManager.canZoom = false;
+        SelectCard();
+        _cardManager.PlaceCards(gameObject);
     }
     private Vector3 GetMouseWorldPos()
     {
         Vector3 mousePoint = Input.mousePosition;
         mousePoint.z  = _mouseZCoord;
         return Camera.main.ScreenToWorldPoint(mousePoint);
+    }
+    private bool CanPlayCard(PointerEventData eventData)
+    {
+        if (_draw == null)
+            return false;
+        else if (eventData.button != PointerEventData.InputButton.Left && (currentPosition.cardPos != null || playerCard))
+            return false;
+        else if (!_turnManager.CanPlayCards())
+            return false;
+        else if (!_table.player.EnoughMana(card.manaCost) || !_table.player.EnoughHealth(card.healthCost))
+            return false;
+        else return true;
     }
     protected virtual void SelectCard()
     {
