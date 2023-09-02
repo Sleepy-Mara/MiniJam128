@@ -18,11 +18,16 @@ public class Draw : MonoBehaviour
     public GameObject spellPrefab;
     public Transform[] handRange;
     public List<AudioClip> clips;
-    public GameObject audio;
+    //public GameObject audio;
     public Animator noCardsWindow;
     public GameObject manaDeckObject;
     public GameObject bloodDeckObject;
-    public float cardHeight = 0.2f;
+
+    [Header("Card Hand")]
+    public float cardVerticalCurvature = 0.2f;
+    public float cardLongitudeCurvature = 1f;
+    public float cardHorizontalMove = 0f;
+    public float cardVerticalMove = 0f;
     public enum DeckType { Mana, Blood}
     private void Awake()
     {
@@ -154,9 +159,9 @@ public class Draw : MonoBehaviour
         // 1- que las cartas esten mas arriba, se puede conseguir subiendo el objeto
         // 2- que se vean mejor los contenidos de las cartas
         // 3- que las cartas no se vean escalonadas, pero que no esten todas al mismo nivel
-        var newAudio = Instantiate(audio).GetComponent<AudioSource>();
-        newAudio.clip = clips[Random.Range(0, clips.Count)];
-        newAudio.Play();
+        //var newAudio = Instantiate(audio).GetComponent<AudioSource>();
+        //newAudio.clip = clips[Random.Range(0, clips.Count)];
+        //newAudio.Play();
         float distanceX = Mathf.Abs(handRange[0].localPosition.x) + Mathf.Abs(handRange[1].localPosition.x);
         float distanceZ = Mathf.Abs(handRange[0].localPosition.z) + Mathf.Abs(handRange[1].localPosition.z);
         float angle = Mathf.Abs(handRange[0].localEulerAngles.z - 360) + Mathf.Abs(handRange[1].localEulerAngles.z);
@@ -166,8 +171,8 @@ public class Draw : MonoBehaviour
         for (int i = 0; i < _cardsInHand.Count; i++)
         {
             //tiene que ser un numero entre 0 y 1
-            float f = Mathf.Sin(Mathf.PI * ((i * 1.0f +1) / (_cardsInHand.Count+1)));
-            _cardsInHand[_cardsInHand.Count - i - 1].transform.SetPositionAndRotation(new Vector3(handRange[0].position.x + distanceX * (1 +i), handRange[0].position.y + (f * cardHeight), handRange[0].position.z + distanceZ * (1 + i)), 
+            float f = cardVerticalCurvature * Mathf.Sin(Mathf.PI * ((i * 1.0f +1) / (_cardsInHand.Count+1)) * cardLongitudeCurvature + cardHorizontalMove) + cardVerticalMove;
+            _cardsInHand[_cardsInHand.Count - i - 1].transform.SetPositionAndRotation(new Vector3(handRange[0].position.x + distanceX * (1 +i), handRange[0].position.y + (f), handRange[0].position.z + distanceZ * (1 + i)), 
                 Quaternion.Euler(new Vector3(handRange[0].eulerAngles.x, handRange[0].eulerAngles.y, handRange[0].eulerAngles.z + angle * (i+1))));
         }
     }
