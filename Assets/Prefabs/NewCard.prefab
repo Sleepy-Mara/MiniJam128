@@ -272,7 +272,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: When it's defeated, draw 1 card and add Forg2 to the deck
+  m_text: When it's played, if you have the 2 other monkeys in the hand, summon them
+    and add 1 random spell with the effect of either "deal" or "heal" to the hand
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -299,14 +300,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.7
+  m_fontSize: 1.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1.5
   m_fontSizeMax: 3.5
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -920,6 +921,7 @@ MonoBehaviour:
   image: {fileID: 6303504308017805926}
   playerCard: 0
   checkingEffect: 0
+  speed: 5
   inAttackAnim: 0
   inDamageAnim: 0
   immune: 0

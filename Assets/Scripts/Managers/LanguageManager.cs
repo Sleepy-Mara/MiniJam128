@@ -5,7 +5,7 @@ using TMPro;
 
 public class LanguageManager : MonoBehaviour
 {
-    private string language;
+    public string language;
     public int languageNumber;
     static int savedLanguageNumber;
     static LanguageManager instance;

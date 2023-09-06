@@ -3813,7 +3813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Made by: Catalina Velasco, Francisco Roldan, Tomas Fernandez'
+  m_text: 'Hecho por: Catalina Velasco, Francisco Roldan, Tomas Fernandez'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -3840,7 +3840,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.95
+  m_fontSize: 22.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4086,7 +4086,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SFX
+  m_text: Sonido
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -10250,7 +10250,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Music
+  m_text: Musica
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -11945,8 +11945,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1419118173}
     m_Modifications:
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: language
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: languageNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: texts.Array.size
-      value: 11
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: texts.Array.data[0].name
@@ -12037,6 +12045,46 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 432498592}
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[11].name
+      value: Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[11].text
+      value: 
+      objectReference: {fileID: 992071031}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[12].name
+      value: SFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[12].text
+      value: 
+      objectReference: {fileID: 312012418}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[13].name
+      value: DeleteSave
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[13].text
+      value: 
+      objectReference: {fileID: 1907261744}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[14].name
+      value: Boosters
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[14].text
+      value: 
+      objectReference: {fileID: 513324648}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[15].name
+      value: Boosters
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[15].text
+      value: 
+      objectReference: {fileID: 513324648}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: texts.Array.data[0].languageText.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -12078,6 +12126,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: texts.Array.data[10].languageText.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[11].languageText.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[12].languageText.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[13].languageText.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[14].languageText.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[15].languageText.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
@@ -12167,6 +12235,46 @@ PrefabInstance:
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: texts.Array.data[10].languageText.Array.data[1]
       value: Cargando
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[11].languageText.Array.data[0]
+      value: Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[11].languageText.Array.data[1]
+      value: Musica
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[12].languageText.Array.data[0]
+      value: SFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[12].languageText.Array.data[1]
+      value: Sonido
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[13].languageText.Array.data[0]
+      value: Delete save
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[13].languageText.Array.data[1]
+      value: Borrar partida
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[14].languageText.Array.data[0]
+      value: Boosters Packs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[14].languageText.Array.data[1]
+      value: Sobres de refuerzo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[15].languageText.Array.data[0]
+      value: Boosters Packs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+      propertyPath: texts.Array.data[15].languageText.Array.data[1]
+      value: Sobres de refuerzo
       objectReference: {fileID: 0}
     - target: {fileID: 6876110824509259728, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: m_Name
@@ -12286,7 +12394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1287967432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12467,7 +12575,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1780487666}
+      - m_Target: {fileID: 1983588593}
         m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: ChangeLanguage
         m_Mode: 5
@@ -14016,7 +14124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1451466621
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14197,7 +14305,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1780487666}
+      - m_Target: {fileID: 1983588593}
         m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: ChangeLanguage
         m_Mode: 5
@@ -16327,17 +16435,6 @@ RectTransform:
   m_AnchoredPosition: {x: 655, y: 505}
   m_SizeDelta: {x: 228.33948, y: 342.89685}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1780487666 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
-  m_PrefabInstance: {fileID: 1279201615}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56fb4400184ceb84f92dca88c346734a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1780487667 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6876110824509259729, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
@@ -17106,7 +17203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1905964773
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17169,6 +17266,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905964772}
   m_CullTransparentMesh: 1
+--- !u!114 &1907261744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9106297613063399935, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
+  m_PrefabInstance: {fileID: 1518562521}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1921026083
 GameObject:
   m_ObjectHideFlags: 0
@@ -17833,6 +17941,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978100392}
   m_CullTransparentMesh: 1
+--- !u!114 &1983588593 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
+  m_PrefabInstance: {fileID: 1279201615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fb4400184ceb84f92dca88c346734a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1999929949 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
@@ -18026,7 +18145,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 212}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 533.2946, y: 153.8841}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062069263
 MonoBehaviour:
@@ -18048,7 +18167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Select your language
+  m_text: Selecciona tu lenguaje
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -18075,8 +18194,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -18794,7 +18913,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1780487666}
+      - m_Target: {fileID: 1983588593}
         m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: ChangeLanguage
         m_Mode: 5
@@ -19128,7 +19247,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1780487666}
+      - m_Target: {fileID: 1983588593}
         m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: ChangeLanguage
         m_Mode: 5
