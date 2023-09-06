@@ -74,6 +74,8 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public virtual void OnEndDrag(PointerEventData eventData)
     {
+        if (!CanPlayCard(eventData))
+            return;
         //print("OnEndDrag");
         _onDrag = false;
         if (FindObjectOfType<CameraManager>().CameraPosition() == 2)
@@ -183,7 +185,13 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             return false;
         else if (!_table.player.EnoughMana(card.manaCost) || !_table.player.EnoughHealth(card.healthCost))
             return false;
-        else return true;
+        else if (GetComponent<Card>().played)
+            return false;
+        else foreach (MapPosition mapPosition in _table.enemyBack)
+                if (mapPosition.card != null)
+                    if (mapPosition.card.gameObject == gameObject)
+                        return false;
+        return true;
     }
     protected virtual void SelectCard()
     {

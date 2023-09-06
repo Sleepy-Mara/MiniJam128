@@ -23,21 +23,24 @@ public class CardPos : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
     {
         //if(_cardManager.placeCards == true)
         //{
-            List<GameObject> newCardsInHand = new List<GameObject>();
-            foreach(GameObject card in _cardManager.draw._cardsInHand)
-            {
-                // preguntar para que sirve este codigo
-                if (card != cardToPlace)
-                    newCardsInHand.Add(card);
-            }
-            _cardManager.draw._cardsInHand.Clear();
-            _cardManager.draw._cardsInHand = newCardsInHand;
-            _cardManager.draw.AdjustHand();
-            //_cardManager.cardToPlace.GetComponentInChildren<ThisCard>().inTable = true;
-            _table.SetCard(cardToPlace, positionNum);
-            _table.player.SpendMana(cardToPlace.GetComponent<Card>().card.manaCost);
-            _table.player.SpendHealth(cardToPlace.GetComponent<Card>().card.healthCost);
-            _cardManager.EndPlacing();
+        if (_table.playerPositions[positionNum].card != null)
+            return;
+        cardToPlace.GetComponent<Card>().played = true;
+        List<GameObject> newCardsInHand = new List<GameObject>();
+        foreach (GameObject card in _cardManager.draw._cardsInHand)
+        {
+            // preguntar para que sirve este codigo
+            if (card != cardToPlace)
+                newCardsInHand.Add(card);
+        }
+        _cardManager.draw._cardsInHand.Clear();
+        _cardManager.draw._cardsInHand = newCardsInHand;
+        _cardManager.draw.AdjustHand();
+        //_cardManager.cardToPlace.GetComponentInChildren<ThisCard>().inTable = true;
+        _table.SetCard(cardToPlace, positionNum);
+        _table.player.SpendMana(cardToPlace.GetComponent<Card>().card.manaCost);
+        _table.player.SpendHealth(cardToPlace.GetComponent<Card>().card.healthCost);
+        _cardManager.EndPlacing();
         //}
 
     }
