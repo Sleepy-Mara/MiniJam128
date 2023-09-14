@@ -11,9 +11,9 @@ public class EnemyData
     public Cards[] rewards;
     public int reward;
     [TextArea(1, 4)]
-    public string introCombatMessage;
+    public string[] introCombatMessage;
     [TextArea(1, 4)]
-    public string wonCombatMessage;
+    public string[] wonCombatMessage;
     [TextArea(1, 4)]
-    public string lostCombatMessage;
+    public string[] lostCombatMessage;
 }

@@ -185,7 +185,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             return false;
         else if (!_table.player.EnoughMana(card.manaCost) || !_table.player.EnoughHealth(card.healthCost))
             return false;
-        else if (GetComponent<Card>().played)
+        else if (TryGetComponent<Card>(out Card component) && component.played)
             return false;
         else foreach (MapPosition mapPosition in _table.enemyBack)
                 if (mapPosition.card != null)

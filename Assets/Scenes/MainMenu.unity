@@ -3813,7 +3813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hecho por: Catalina Velasco, Francisco Roldan, Tomas Fernandez'
+  m_text: 'Made by: Catalina Velasco, Francisco Roldan, Tomas Fernandez'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -3840,7 +3840,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.45
+  m_fontSize: 22.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4086,7 +4086,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sonido
+  m_text: SFX
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -5077,6 +5077,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e1cbb66a9732146959de3642150d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notifMessages: []
+  notifTitle: []
+  notifTime: 0
 --- !u!114 &432498592 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6877043411823418183, guid: c8d88b9bb01d5654786973379058f5e6, type: 3}
@@ -6740,7 +6743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Booster Packs
+  m_text: Boosters Packs
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -10250,7 +10253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Musica
+  m_text: Music
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
@@ -11946,7 +11949,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: language
-      value: 
+      value: English
       objectReference: {fileID: 0}
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: languageNumber
@@ -18167,7 +18170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Selecciona tu lenguaje
+  m_text: Select your language
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}
   m_sharedMaterial: {fileID: -4376731735440770697, guid: 2d93b2af527a9984f9a33da19352b58e, type: 2}

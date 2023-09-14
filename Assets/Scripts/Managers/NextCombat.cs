@@ -26,6 +26,7 @@ public class NextCombat : MonoBehaviour
     private Draw _draw;
     private Table _table;
     private CameraManager _cameraManager;
+    private LanguageManager _languageManager;
     private AudioPlayer _audioPlayer;
     private SaveWithJson json;
     public GameObject demoScreen;
@@ -52,6 +53,7 @@ public class NextCombat : MonoBehaviour
         _draw = FindObjectOfType<Draw>();
         _draw.Start();
         _table = FindObjectOfType<Table>();
+        _languageManager = FindObjectOfType<LanguageManager>();
         _audioPlayer = GetComponent<AudioPlayer>();
         if (enemyNum == enemies.Length - 1)
         {
@@ -85,7 +87,7 @@ public class NextCombat : MonoBehaviour
         if (enemies[enemyNum].enemyCharacter != null)
             enemies[enemyNum].enemyCharacter.SetActive(true);
         initialMenu.SetActive(false);
-        introCombatText.text = enemies[enemyNum].introCombatMessage;
+        introCombatText.text = enemies[enemyNum].introCombatMessage[_languageManager.languageNumber];
         introCombat.SetActive(true);
         endTurnButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         endTurnButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(_turnManager.EndTurn);
@@ -93,7 +95,7 @@ public class NextCombat : MonoBehaviour
     public void ToNextCombat()
     {
         FindObjectOfType<CurrencyManager>().Currency = enemies[enemyNum].reward;
-        wonCombatText.text = enemies[enemyNum].wonCombatMessage;
+        wonCombatText.text = enemies[enemyNum].wonCombatMessage[_languageManager.languageNumber];
         if (_cameraManager != null)
             _cameraManager.HandCamera();
         else
@@ -163,7 +165,7 @@ public class NextCombat : MonoBehaviour
         }
         enemies[enemyNum].enemyCharacter.SetActive(true);
         introCombat.SetActive(true);
-        introCombatText.text = enemies[enemyNum].introCombatMessage;
+        introCombatText.text = enemies[enemyNum].introCombatMessage[_languageManager.languageNumber];
     }
     // este es para el boton de derrota
     public void RestartCombat()
@@ -184,7 +186,7 @@ public class NextCombat : MonoBehaviour
         ResetCombat();
         _cameraManager.HandCamera();
         endTurnButton.SetActive(false);
-        lostCombatText.text = enemies[enemyNum].lostCombatMessage;
+        lostCombatText.text = enemies[enemyNum].lostCombatMessage[_languageManager.languageNumber];
         lostCombat.SetActive(true);
     }
     private void ResetCombat()
