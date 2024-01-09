@@ -19,15 +19,16 @@ public class NextCombat : MonoBehaviour
     public RectTransform[] rewardsRange;
     public Transform cardsPlacing;
     public GameObject cardPrefab;
-    private int enemyNum;
+    [HideInInspector]
+    public int enemyNum;
     private List<GameObject> cardsToDelete = new();
-    private Enemy _enemy;
-    private TurnManager _turnManager;
+    protected Enemy _enemy;
+    protected TurnManager _turnManager;
     private Draw _draw;
     private Table _table;
     private CameraManager _cameraManager;
     private LanguageManager _languageManager;
-    private AudioPlayer _audioPlayer;
+    protected AudioPlayer _audioPlayer;
     private SaveWithJson json;
     public GameObject demoScreen;
     [HideInInspector] public int EnemyReward
@@ -119,7 +120,7 @@ public class NextCombat : MonoBehaviour
         wonCombat.SetActive(true);
     }
     // este es para el boton de introduccion
-    public void StartCombat()
+    public virtual void StartCombat()
     {
         if (FindObjectOfType<EnemyAI>())
         {
