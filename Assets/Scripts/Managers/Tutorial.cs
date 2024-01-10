@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class Tutorial : MonoBehaviour
 {
     [SerializeField]
     private List<TutotialPhases> phases;
-    private bool tutorial;
+    private bool tutorial = true;
 
-    private void Start()
+    public void StartTutorial()
     {
         if (!tutorial || FindObjectOfType<NextCombat>().enemyNum > 0)
             return;
@@ -28,34 +29,29 @@ public class Tutorial : MonoBehaviour
             case tipePhase.Draw:
                 StartCoroutine(WaitToDraw(actualPhase));
                 break;
-            case tipePhase.PutCard:
+            case tipePhase.PlayCard:
                 StartCoroutine(WaitToPlay(actualPhase));
                 break;
-            case tipePhase.EndTurn:
+            case tipePhase.Button:
                 StartCoroutine(WaitToPress(actualPhase));
                 break;
-        }
-        if (phases[actualPhase].toDo.GetComponent<CardPos>())
-        {
-            StartCoroutine(WaitToPlay(actualPhase));
-            return;
-        }
-        if (phases[actualPhase].toDo.GetComponent<Button>())
-        {
-            StartCoroutine(WaitToPress(actualPhase));
-            return;
         }
     }
     private void EndPhase(int actualPhase)
     {
-        foreach (var things in phases[actualPhase].thingsInPhase)
-            things.SetActive(!things.activeSelf);
-        if (!FindObjectOfType<TurnManager>().canPlayCards)
+        if (!FindObjectOfType<TurnManager>().canPlayCards && !FindObjectOfType<Draw>().canDraw)
         {
             StartCoroutine(WaitToPlayerTurn(actualPhase));
             return;
         }
-        NextPhase(actualPhase++);
+        actualPhase++;
+        StopAllCoroutines();
+        if (actualPhase >= phases.Count)
+        {
+            tutorial = false;
+            return;
+        }
+        NextPhase(actualPhase);
     }
     IEnumerator WaitToPlay(int actualPhase)
     {
@@ -63,13 +59,15 @@ public class Tutorial : MonoBehaviour
         foreach (MapPosition pos in FindObjectOfType<Table>().playerPositions)
             if (pos.cardPos.gameObject == phases[actualPhase].toDo)
                 posToWait = pos;
-            else pos.cardPos.gameObject.SetActive(false);
+            else pos.cardPos.isPlayable = false;
         if (posToWait != null)
         {
             yield return new WaitUntil(() => posToWait.card != null);
         }
         foreach (MapPosition pos in FindObjectOfType<Table>().playerPositions)
-            pos.cardPos.gameObject.SetActive(true);
+            pos.cardPos.isPlayable = true;
+        foreach (var things in phases[actualPhase].thingsInPhase)
+            things.SetActive(!things.activeSelf);
         EndPhase(actualPhase);
     }
     IEnumerator WaitToPress(int actualPhase)
@@ -77,31 +75,35 @@ public class Tutorial : MonoBehaviour
         bool clicked = false;
         phases[actualPhase].toDo.GetComponent<Button>().onClick.AddListener(() => clicked = true);
         yield return new WaitUntil(() => clicked);
+        foreach (var things in phases[actualPhase].thingsInPhase)
+            things.SetActive(!things.activeSelf);
         EndPhase(actualPhase);
     }
     IEnumerator WaitToDraw(int actualPhase)
     {
         int cards = phases[actualPhase].toDo.GetComponent<Draw>()._cardsInHand.Count;
         yield return new WaitUntil(() => cards < phases[actualPhase].toDo.GetComponent<Draw>()._cardsInHand.Count);
+        foreach (var things in phases[actualPhase].thingsInPhase)
+            things.SetActive(!things.activeSelf);
         EndPhase(actualPhase);
     }
     IEnumerator WaitToPlayerTurn(int actualPhase)
     {
-        yield return new WaitUntil(() => FindObjectOfType<TurnManager>().canPlayCards);
+        yield return new WaitUntil(() => FindObjectOfType<Draw>().canDraw);
         EndPhase(actualPhase);
     }
 }
 [System.Serializable]
 public class TutotialPhases
 {
+    [SerializeField] private string name;
     public tipePhase tipePhase;
     public GameObject toDo;
-    public Cards card;
     public List<GameObject> thingsInPhase;
 }
 public enum tipePhase
 {
     Draw,
-    PutCard,
-    EndTurn,
+    PlayCard,
+    Button,
 }

@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,8 +24,12 @@ public class CardPos : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
     {
         //if(_cardManager.placeCards == true)
         //{
-        if (_table.playerPositions[positionNum].card != null)
+        if (_table.playerPositions[positionNum].card != null || !isPlayable)
+        {
+            FindObjectOfType<Draw>().AdjustHand();
+            FindObjectOfType<CameraManager>().HandCamera();
             return;
+        }
         cardToPlace.GetComponent<Card>().played = true;
         List<GameObject> newCardsInHand = new List<GameObject>();
         foreach (GameObject card in _cardManager.draw._cardsInHand)
