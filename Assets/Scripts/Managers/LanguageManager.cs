@@ -13,13 +13,13 @@ public class LanguageManager : MonoBehaviour
     private List<TextLanguage> texts;
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            savedLanguageNumber = languageNumber;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //    savedLanguageNumber = languageNumber;
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else Destroy(gameObject);
         languageNumber = savedLanguageNumber;
         UpdateLanguage();
     }
@@ -30,6 +30,7 @@ public class LanguageManager : MonoBehaviour
             languageNumber = 0;
         if (language == "Spanish" || language == "spanish")
             languageNumber = 1;
+        savedLanguageNumber = languageNumber;
         UpdateLanguage();
     }
     private void UpdateLanguage()
@@ -38,6 +39,12 @@ public class LanguageManager : MonoBehaviour
             textLanguage.text.text = textLanguage.languageText[languageNumber];
         foreach (CardCore cardCore in FindObjectsOfType<CardCore>())
             cardCore.UpdateLanguage(languageNumber);
+    }
+    public void Testing()
+    {
+        Debug.Log("Saved Language Number " + savedLanguageNumber);
+        Debug.Log("Language Number " + languageNumber);
+        Debug.Log("Instance " + instance.name);
     }
 }
 
