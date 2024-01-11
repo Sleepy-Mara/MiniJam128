@@ -11,9 +11,6 @@ public class LanguageManagerEditor : Editor
         base.OnInspectorGUI();
         LanguageManager languageManager = (LanguageManager)target;
         if (GUILayout.Button("Change Language"))
-        {
-            languageManager.Testing();
-            //languageManager.ChangeLanguage(languageManager.language);
-        }
+            languageManager.ChangeLanguage(languageManager.language);
     }
 }

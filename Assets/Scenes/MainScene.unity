@@ -67847,14 +67847,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1711294742}
     m_Modifications:
     - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
-      propertyPath: language
-      value: Spanish
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
-      propertyPath: languageNumber
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876110824509259726, guid: 312c7f6af996da14bb6f7f76ae0f4dad, type: 3}
       propertyPath: texts.Array.size
       value: 33
       objectReference: {fileID: 0}

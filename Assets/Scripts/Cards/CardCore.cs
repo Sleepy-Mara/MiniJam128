@@ -57,6 +57,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public virtual void SetData()
     {
+        Debug.Log(FindObjectOfType<LanguageManager>().languageNumber);
         currentLife = card.life;
         currentAttack = card.attack;
         image.sprite = card.sprite;
