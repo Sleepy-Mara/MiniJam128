@@ -16,7 +16,7 @@ public class LanguageManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            savedLanguageNumber = languageNumber;
+            languageNumber = savedLanguageNumber;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
