@@ -46,6 +46,14 @@ public class NextCombat : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Esto es un arreglo provisional, no recuerdo bien como funciona este script, pero quizás haya que 
+        // cambiarlo porque ya no haga falta que haga las cosas de esta manera.
+        // CREO que estaba hecho así porque el canvas se guardaba entre escenas? Ni idea
+        if(scene.buildIndex == 0)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            return;
+        }
         _cameraManager = FindObjectOfType<CameraManager>();
         _enemy = FindObjectOfType<Enemy>();
         _turnManager = FindObjectOfType<TurnManager>();
