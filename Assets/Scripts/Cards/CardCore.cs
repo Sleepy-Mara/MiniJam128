@@ -142,10 +142,7 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public virtual void OnPointerExit(PointerEventData eventData)
     {
         //Debug.Log("OnPointerExit");
-        if (eventData.fullyExited)
-        {
-            ZoomOut();
-        }
+        ZoomOut();
     }
     public virtual void OnPointerDown(PointerEventData eventData)
     {
