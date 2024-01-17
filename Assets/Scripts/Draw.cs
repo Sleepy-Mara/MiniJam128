@@ -9,7 +9,17 @@ public class Draw : MonoBehaviour
     public List<Cards> deck;
     public List<Cards> bloodDeck;
     [SerializeField]private List<Cards> _currentDeck = new List<Cards>();
+    [HideInInspector] public List<Cards> CurrentDeck
+    {
+        get { return _currentDeck; }
+        set { _currentDeck = value; }
+    }
     [SerializeField] private List<Cards> _currentBloodDeck = new();
+    [HideInInspector] public List<Cards> CurrentBloodDeck
+    {
+        get { return _currentBloodDeck; }
+        set { _currentBloodDeck = value; }
+    }
     public Transform handPos;
     public bool canDraw;
     public bool zoomingCard;
@@ -41,10 +51,32 @@ public class Draw : MonoBehaviour
     {
         _currentDeck = new List<Cards>();
         _currentBloodDeck = new List<Cards>();
+        var tempDeck = new List<Cards>();
+        var tempBloodDeck = new List<Cards>();
         for (int i = 0; i < deck.Count; i++)
-            _currentDeck.Add(deck[i]);
+            tempDeck.Add(deck[i]);
         for (int j = 0; j < bloodDeck.Count; j++)
-            _currentBloodDeck.Add(bloodDeck[j]);
+            tempBloodDeck.Add(bloodDeck[j]);
+        ShuffleDeck(tempDeck);
+        ShuffleBloodDeck(tempBloodDeck);
+    }
+    public void ShuffleDeck(List<Cards> cardsToShuffle)
+    {
+        while (cardsToShuffle.Count > 0)
+        {
+            int deckCardNum = Random.Range(0, cardsToShuffle.Count);
+            _currentDeck.Add(cardsToShuffle[deckCardNum]);
+            cardsToShuffle.RemoveAt(deckCardNum);
+        }
+    }
+    public void ShuffleBloodDeck(List<Cards> cardsToShuffle)
+    {
+        while (cardsToShuffle.Count > 0)
+        {
+            int bloodDeckCardNum = Random.Range(0, cardsToShuffle.Count);
+            _currentBloodDeck.Add(cardsToShuffle[bloodDeckCardNum]);
+            cardsToShuffle.RemoveAt(bloodDeckCardNum);
+        }
     }
     public void AddACard(Cards card)
     {
@@ -52,19 +84,27 @@ public class Draw : MonoBehaviour
         {
             deck.Add(card);
             _currentDeck.Add(card);
+            ShuffleDeck(_currentDeck);
         }
         else
         {
             bloodDeck.Add(card);
             _currentBloodDeck.Add(card);
+            ShuffleBloodDeck(_currentBloodDeck);
         }
     }
     public void AddATempCard(Cards card)
     {
         if (card.healthCost == 0)
+        {
             _currentDeck.Add(card);
+            ShuffleDeck(_currentDeck);
+        }
         else
+        {
             _currentBloodDeck.Add(card);
+            ShuffleBloodDeck(_currentBloodDeck);
+        }
     }
 
     public void CanDraw()
@@ -93,7 +133,6 @@ public class Draw : MonoBehaviour
             noCardsWindow.SetTrigger("Activate");
             return;
         }
-        int drawedCard;
         CardCore newCard;
         if (type == DeckType.Mana)
         {
@@ -108,14 +147,13 @@ public class Draw : MonoBehaviour
                 foreach (Cards card in _currentDeck)
                     if (card.spell)
                         cardsToDraw.Add(card);
-            drawedCard = Random.Range(0, cardsToDraw.Count);
             //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
-            if (cardsToDraw[drawedCard].spell)
+            if (cardsToDraw[0].spell)
                 newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
             else
                 newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
-            newCard.card = cardsToDraw[drawedCard];
-            _currentDeck.Remove(cardsToDraw[drawedCard]);
+            newCard.card = cardsToDraw[0];
+            _currentDeck.Remove(cardsToDraw[0]);
             if (_currentDeck.Count < 1)
                 manaDeckObject.SetActive(false);
         }
@@ -132,13 +170,12 @@ public class Draw : MonoBehaviour
                 foreach (Cards card in _currentBloodDeck)
                     if (card.spell)
                         cardsToDraw.Add(card);
-            drawedCard = Random.Range(0, cardsToDraw.Count);
-            if (_currentBloodDeck[drawedCard].spell)
+            if (_currentBloodDeck[0].spell)
                 newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();
             else
                 newCard = Instantiate(cardPrefab, transform).GetComponent<Card>();
-            newCard.card = cardsToDraw[drawedCard];
-            _currentBloodDeck.Remove(cardsToDraw[drawedCard]);
+            newCard.card = cardsToDraw[0];
+            _currentBloodDeck.Remove(cardsToDraw[0]);
             Debug.Log(_currentBloodDeck.Count);
             if (_currentBloodDeck.Count < 1)
                 bloodDeckObject.SetActive(false);

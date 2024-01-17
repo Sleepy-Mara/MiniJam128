@@ -281,7 +281,7 @@ public class EffectManager : MonoBehaviour
                                 allyHealth.ReceiveDamage(i);
                             else if (target == targets[11])
                                 enemyHealth.ReceiveDamage(i);
-                            else if (target == targets[10] || card.GetComponent<Card>())
+                            else if (target == targets[10])
                                 card.GetComponent<Card>().ReceiveDamageEffect(i, null, startTurn, endTurn);
                             else if (target == targets[7])
                             {
@@ -290,14 +290,14 @@ public class EffectManager : MonoBehaviour
                                         if (effect == target + "_" + j.ToString())
                                             for (int k = 0; k < j; k++)
                                             {
-                                                var enemysAlive = new List<MapPosition>();
+                                                var allysAlive = new List<MapPosition>();
                                                 foreach (MapPosition enemy in allyPositions)
                                                     if (enemy.card != null)
                                                         if (enemy.card.ActualLife > 0)
-                                                            enemysAlive.Add(enemy);
-                                                var selected = Random.Range(0, enemysAlive.Count);
-                                                if (allyPositions[selected].card != null)
-                                                    allyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
+                                                            allysAlive.Add(enemy);
+                                                var selected = Random.Range(0, allysAlive.Count);
+                                                if (allysAlive[selected].card != null)
+                                                    allysAlive[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[6])
@@ -313,8 +313,8 @@ public class EffectManager : MonoBehaviour
                                                         if (enemy.card.ActualLife > 0)
                                                             enemysAlive.Add(enemy);
                                                 var selected = Random.Range(0, enemysAlive.Count);
-                                                if (enemyPositions[selected].card != null)
-                                                    enemyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
+                                                if (enemysAlive[selected].card != null)
+                                                    enemysAlive[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[9])
@@ -331,14 +331,14 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[5])
                             {
-                                var enemysAlive = new List<MapPosition>();
+                                var allysAlive = new List<MapPosition>();
                                 foreach (MapPosition enemy in allyPositions)
                                     if (enemy.card != null)
                                         if (enemy.card.ActualLife > 0)
-                                            enemysAlive.Add(enemy);
-                                var selected = Random.Range(0, enemysAlive.Count);
-                                if (allyPositions[selected].card != null)
-                                    allyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
+                                            allysAlive.Add(enemy);
+                                var selected = Random.Range(0, allysAlive.Count);
+                                if (allysAlive[selected].card != null)
+                                    allysAlive[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[4])
                             {
@@ -348,21 +348,21 @@ public class EffectManager : MonoBehaviour
                                         if (enemy.card.ActualLife > 0)
                                             enemysAlive.Add(enemy);
                                 var selected = Random.Range(0, enemysAlive.Count);
-                                if (enemyPositions[selected].card != null)
-                                    enemyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
+                                if (enemysAlive[selected].card != null)
+                                    enemysAlive[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[3])
                             {
-                                var enemysAlive = new List<MapPosition>();
+                                var allysAlive = new List<MapPosition>();
                                 foreach (MapPosition enemy in allyPositions)
                                     if (enemy.card != null)
                                         if (enemy.card.ActualLife > 0)
-                                            enemysAlive.Add(enemy);
-                                var selected = Random.Range(0, enemysAlive.Count + 1);
+                                            allysAlive.Add(enemy);
+                                var selected = Random.Range(0, allysAlive.Count + 1);
                                 if (selected == allyPositions.Length)
                                     allyHealth.ReceiveDamage(i);
-                                else if (allyPositions[selected].card != null)
-                                    allyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
+                                else if (allysAlive[selected].card != null)
+                                    allysAlive[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[2])
                             {
@@ -374,8 +374,8 @@ public class EffectManager : MonoBehaviour
                                 var selected = Random.Range(0, enemysAlive.Count + 1);
                                 if (selected == enemyPositions.Length)
                                     enemyHealth.ReceiveDamage(i);
-                                else if (enemyPositions[selected].card != null)
-                                    enemyPositions[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
+                                else if (enemysAlive[selected].card != null)
+                                    enemysAlive[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
                             else if (target == targets[0])
                             {
@@ -449,14 +449,14 @@ public class EffectManager : MonoBehaviour
                                         if (effect == target + "_" + j.ToString())
                                             for (int k = 0; k < j; k++)
                                             {
-                                                var allysToHeal = new List<MapPosition>();
+                                                var enemysToHeal = new List<MapPosition>();
                                                 foreach (MapPosition ally in enemyPositions)
                                                     if (ally.card != null)
                                                         if (ally.card.ActualLife > 0)
-                                                            allysToHeal.Add(ally);
-                                                var selected = Random.Range(0, allysToHeal.Count);
-                                                if (allysToHeal[selected].card != null)
-                                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
+                                                            enemysToHeal.Add(ally);
+                                                var selected = Random.Range(0, enemysToHeal.Count);
+                                                if (enemysToHeal[selected].card != null)
+                                                    enemysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                                             }
                             }
                             else if (target == targets[9])
@@ -484,14 +484,14 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[4])
                             {
-                                var allysToHeal = new List<MapPosition>();
+                                var enemysToHeal = new List<MapPosition>();
                                 foreach (MapPosition ally in enemyPositions)
                                     if (ally.card != null)
                                         if (ally.card.ActualLife > 0)
-                                            allysToHeal.Add(ally);
-                                var selected = Random.Range(0, allysToHeal.Count);
-                                if (allysToHeal[selected].card != null)
-                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
+                                            enemysToHeal.Add(ally);
+                                var selected = Random.Range(0, enemysToHeal.Count);
+                                if (enemysToHeal[selected].card != null)
+                                    enemysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
                             else if (target == targets[3])
                             {
@@ -508,16 +508,16 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[2])
                             {
-                                var allysToHeal = new List<MapPosition>();
+                                var enemysToHeal = new List<MapPosition>();
                                 foreach (MapPosition ally in enemyPositions)
                                     if (ally.card != null)
                                         if (ally.card.ActualLife > 0)
-                                            allysToHeal.Add(ally);
-                                var selected = Random.Range(0, allysToHeal.Count + 1);
+                                            enemysToHeal.Add(ally);
+                                var selected = Random.Range(0, enemysToHeal.Count + 1);
                                 if (selected == enemyPositions.Length)
                                     enemyHealth.RestoreHealth(i);
-                                else if (allysToHeal[selected].card != null)
-                                    allysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
+                                else if (enemysToHeal[selected].card != null)
+                                    enemysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
                             else if (target == targets[0])
                             {

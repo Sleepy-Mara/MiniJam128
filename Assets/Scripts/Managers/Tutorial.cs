@@ -8,17 +8,46 @@ using Unity.VisualScripting;
 public class Tutorial : MonoBehaviour
 {
     [SerializeField]
-    private List<TutotialPhases> phases;
-    private bool tutorial = true;
-
+    private List<TutotialPhases> gamePhases;
+    [SerializeField]
+    private List<TutotialPhases> menuPhases;
+    private bool gameTutorial = true;
+    private bool menuTutorial = true;
+    [SerializeField]
+    private List<Cards> deck;
+    [SerializeField]
+    private List<Cards> bloodDeck;
+    private SaveWithJson json;
+    [SerializeField] private Enemy enemy;
+    private void Awake()
+    {
+        if (enemy != null)
+        {
+            enemy.enabled = true;
+            FindObjectOfType<EnemyAI>().enabled = false;
+            FindObjectOfType<NextCombat>().enemy = enemy;
+        }
+    }
+    private void Start()
+    {
+        json = FindObjectOfType<SaveWithJson>();
+        gameTutorial = json.SaveData.gameTutorial;
+        menuTutorial = json.SaveData.menuTutorial;
+        if (menuTutorial && !gameTutorial && !FindObjectOfType<NextCombat>())
+            NextPhase(0, menuPhases);
+    }
     public void StartTutorial()
     {
-        if (!tutorial || FindObjectOfType<NextCombat>().enemyNum > 0)
+        if (!FindObjectOfType<NextCombat>())
             return;
-        NextPhase(0);
+        if (!gameTutorial || FindObjectOfType<NextCombat>().enemyNum > 0)
+            return;
+        FindObjectOfType<Draw>().CurrentDeck = deck;
+        FindObjectOfType<Draw>().CurrentBloodDeck = bloodDeck;
+        NextPhase(0, gamePhases);
     }
 
-    private void NextPhase(int actualPhase)
+    private void NextPhase(int actualPhase, List<TutotialPhases> phases)
     {
         if (phases[actualPhase] == null)
             return;
@@ -27,33 +56,44 @@ public class Tutorial : MonoBehaviour
         switch(phases[actualPhase].tipePhase)
         {
             case tipePhase.Draw:
-                StartCoroutine(WaitToDraw(actualPhase));
+                StartCoroutine(WaitToDraw(actualPhase, phases));
                 break;
             case tipePhase.PlayCard:
-                StartCoroutine(WaitToPlay(actualPhase));
+                StartCoroutine(WaitToPlay(actualPhase, phases));
                 break;
             case tipePhase.Button:
-                StartCoroutine(WaitToPress(actualPhase));
+                StartCoroutine(WaitToPress(actualPhase, phases));
                 break;
         }
     }
-    private void EndPhase(int actualPhase)
+    private void EndPhase(int actualPhase, List<TutotialPhases> phases)
     {
-        if (!FindObjectOfType<TurnManager>().canPlayCards && !FindObjectOfType<Draw>().canDraw)
-        {
-            StartCoroutine(WaitToPlayerTurn(actualPhase));
-            return;
-        }
+        if (FindObjectOfType<TurnManager>())
+            if (!FindObjectOfType<TurnManager>().canPlayCards && !FindObjectOfType<Draw>().canDraw)
+            {
+                StartCoroutine(WaitToPlayerTurn(actualPhase, phases));
+                return;
+            }
         actualPhase++;
         StopAllCoroutines();
         if (actualPhase >= phases.Count)
         {
-            tutorial = false;
+            SaveData saveData = json.SaveData;
+            if (!FindObjectOfType<NextCombat>())
+            {
+                menuTutorial = false;
+                saveData.menuTutorial = menuTutorial;
+            } else
+            {
+                gameTutorial = false;
+                saveData.gameTutorial = gameTutorial;
+            }
+            json.SaveData = saveData;
             return;
         }
-        NextPhase(actualPhase);
+        NextPhase(actualPhase, phases);
     }
-    IEnumerator WaitToPlay(int actualPhase)
+    IEnumerator WaitToPlay(int actualPhase, List<TutotialPhases> phases)
     {
         MapPosition posToWait = null;
         foreach (MapPosition pos in FindObjectOfType<Table>().playerPositions)
@@ -68,29 +108,30 @@ public class Tutorial : MonoBehaviour
             pos.cardPos.isPlayable = true;
         foreach (var things in phases[actualPhase].thingsInPhase)
             things.SetActive(!things.activeSelf);
-        EndPhase(actualPhase);
+        EndPhase(actualPhase, phases);
     }
-    IEnumerator WaitToPress(int actualPhase)
+    IEnumerator WaitToPress(int actualPhase, List<TutotialPhases> phases)
     {
         bool clicked = false;
         phases[actualPhase].toDo.GetComponent<Button>().onClick.AddListener(() => clicked = true);
         yield return new WaitUntil(() => clicked);
         foreach (var things in phases[actualPhase].thingsInPhase)
             things.SetActive(!things.activeSelf);
-        EndPhase(actualPhase);
+        EndPhase(actualPhase, phases);
     }
-    IEnumerator WaitToDraw(int actualPhase)
+    IEnumerator WaitToDraw(int actualPhase, List<TutotialPhases> phases)
     {
+        yield return new WaitForEndOfFrame();
         int cards = phases[actualPhase].toDo.GetComponent<Draw>()._cardsInHand.Count;
         yield return new WaitUntil(() => cards < phases[actualPhase].toDo.GetComponent<Draw>()._cardsInHand.Count);
         foreach (var things in phases[actualPhase].thingsInPhase)
             things.SetActive(!things.activeSelf);
-        EndPhase(actualPhase);
+        EndPhase(actualPhase, phases);
     }
-    IEnumerator WaitToPlayerTurn(int actualPhase)
+    IEnumerator WaitToPlayerTurn(int actualPhase, List<TutotialPhases> phases)
     {
         yield return new WaitUntil(() => FindObjectOfType<Draw>().canDraw);
-        EndPhase(actualPhase);
+        EndPhase(actualPhase, phases);
     }
 }
 [System.Serializable]

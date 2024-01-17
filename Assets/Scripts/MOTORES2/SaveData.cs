@@ -16,6 +16,8 @@ public class SaveData
     public float sfxVolume;
     public List<SavedCards> currentUnlockedCards;
     public List<SavedCards> currentCardsInDeck;
+    public bool gameTutorial;
+    public bool menuTutorial;
 }
 [Serializable]
 public class SavedCards

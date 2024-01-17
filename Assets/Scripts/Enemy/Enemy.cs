@@ -42,7 +42,6 @@ public class Enemy : Health
     {
         if (turn < strategy.turns.Length)
         {
-                Debug.Log("el enemigo pone cartas, turno " + turn);
             if (strategy.turns[turn].cardPlacement0 != null)
             {
                 //var newCard = Instantiate(card).GetComponent<ThisCard>();
@@ -97,5 +96,7 @@ public class Enemy : Health
     public override void Defeat()
     {
         FindObjectOfType<NextCombat>().ToNextCombat();
+        FindObjectOfType<EnemyAI>().enabled = true;
+        enabled = false;
     }
 }

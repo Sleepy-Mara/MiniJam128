@@ -25,10 +25,10 @@ public class NextCombatExtraGame : NextCombat
                 var num = enemyNum;
                 while (num >= enemies.Length)
                     num -= enemies.Length;
-                _enemy.GetComponent<EnemyAI>().StartCombat(enemies[num].enemyDeck.deck);
+                enemy.GetComponent<EnemyAI>().StartCombat(enemies[num].enemyDeck.deck);
             }
             else
-                _enemy.strategy = enemies[enemyNum].strategy;
+                enemy.strategy = enemies[enemyNum].strategy;
             _audioPlayer.Play("Music" + enemyNum);
             _turnManager.StartBattle();
             introCombat.SetActive(false);

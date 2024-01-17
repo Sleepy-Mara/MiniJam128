@@ -22,7 +22,7 @@ public class NextCombat : MonoBehaviour
     [HideInInspector]
     public int enemyNum;
     private List<GameObject> cardsToDelete = new();
-    protected Enemy _enemy;
+    [HideInInspector] public Enemy enemy;
     protected TurnManager _turnManager;
     private Draw _draw;
     private Table _table;
@@ -55,10 +55,11 @@ public class NextCombat : MonoBehaviour
             return;
         }
         _cameraManager = FindObjectOfType<CameraManager>();
-        _enemy = FindObjectOfType<Enemy>();
+        if (enemy == null)
+            enemy = FindObjectOfType<Enemy>();
         _turnManager = FindObjectOfType<TurnManager>();
         //Debug.Log("Se busco TurnManager, se encontro " + _turnManager.name);
-        _turnManager.enemy = _enemy;
+        _turnManager.enemy = enemy;
         _draw = FindObjectOfType<Draw>();
         _draw.Start();
         _table = FindObjectOfType<Table>();
@@ -72,9 +73,8 @@ public class NextCombat : MonoBehaviour
     }
     private void Start()
     {
-        _enemy = FindObjectOfType<Enemy>();
         _turnManager = FindObjectOfType<TurnManager>();
-        _turnManager.enemy = _enemy;
+        _turnManager.enemy = enemy;
         _draw = FindObjectOfType<Draw>();
         _table = FindObjectOfType<Table>();
         _audioPlayer = GetComponent<AudioPlayer>();
@@ -132,10 +132,10 @@ public class NextCombat : MonoBehaviour
     {
         if (FindObjectOfType<EnemyAI>())
         {
-            _enemy.GetComponent<EnemyAI>().StartCombat(enemies[enemyNum].enemyDeck.deck);
+            enemy.GetComponent<EnemyAI>().StartCombat(enemies[enemyNum].enemyDeck.deck);
         }
         else
-            _enemy.strategy = enemies[enemyNum].strategy;
+            enemy.strategy = enemies[enemyNum].strategy;
         _audioPlayer.Play("Music" + enemyNum);
         _turnManager.StartBattle();
         introCombat.SetActive(false);
@@ -181,10 +181,10 @@ public class NextCombat : MonoBehaviour
     {
         if (FindObjectOfType<EnemyAI>())
         {
-            _enemy.GetComponent<EnemyAI>().StartCombat(enemies[enemyNum].enemyDeck.deck);
+            enemy.GetComponent<EnemyAI>().StartCombat(enemies[enemyNum].enemyDeck.deck);
         }
         else
-            _enemy.strategy = enemies[enemyNum].strategy;
+            enemy.strategy = enemies[enemyNum].strategy;
         _table.player.RestartPlayer();
         _turnManager.StartBattle();
         lostCombat.SetActive(false);
@@ -203,7 +203,7 @@ public class NextCombat : MonoBehaviour
         _table.ResetTable();
         _table.player.RestartPlayer();
         _draw.ResetDeckAndHand();
-        _enemy.RestoreHealth(10);
+        enemy.RestoreHealth(10);
         _turnManager.turn = 0;
         endTurnButton.SetActive(false);
     }

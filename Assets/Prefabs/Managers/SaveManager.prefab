@@ -55,6 +55,8 @@ MonoBehaviour:
     sfxVolume: 0
     currentUnlockedCards: []
     currentCardsInDeck: []
+    gameTutorial: 0
+    menuTutorial: 0
   defaultSaveData:
     firstPlay: 1
     currentCurrency: 0
@@ -106,3 +108,5 @@ MonoBehaviour:
       cardAmount: 1
     - card: Hot pepper
       cardAmount: 1
+    gameTutorial: 1
+    menuTutorial: 1
