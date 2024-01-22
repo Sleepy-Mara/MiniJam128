@@ -18,6 +18,7 @@ public class SaveData
     public List<SavedCards> currentCardsInDeck;
     public bool gameTutorial;
     public bool menuTutorial;
+    public string language;
 }
 [Serializable]
 public class SavedCards

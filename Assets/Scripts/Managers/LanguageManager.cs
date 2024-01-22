@@ -11,18 +11,12 @@ public class LanguageManager : MonoBehaviour
     static LanguageManager instance;
     [SerializeField]
     private List<TextLanguage> texts;
-    private void Awake()
+    private SaveWithJson json;
+    private void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-            languageNumber = savedLanguageNumber;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
-        DontDestroyOnLoad(this);
-        languageNumber = savedLanguageNumber;
-        UpdateLanguage();
+        json = FindObjectOfType<SaveWithJson>();
+        language = json.SaveData.language;
+        ChangeLanguage(language);
     }
     public void ChangeLanguage(string selectedLanguage)
     {
@@ -32,6 +26,9 @@ public class LanguageManager : MonoBehaviour
         if (language == "Spanish" || language == "spanish")
             languageNumber = 1;
         savedLanguageNumber = languageNumber;
+        SaveData saveData = json.SaveData;
+        saveData.language = language;
+        json.SaveData = saveData;
         UpdateLanguage();
     }
     private void UpdateLanguage()

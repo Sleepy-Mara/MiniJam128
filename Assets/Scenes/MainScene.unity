@@ -639,8 +639,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 18335426}
-  - component: {fileID: 18335429}
   - component: {fileID: 18335428}
+  - component: {fileID: 18335429}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -27572,6 +27572,7 @@ MonoBehaviour:
   cardsPlacing: {fileID: 542873424}
   cardPrefab: {fileID: 8954024018774041426, guid: c7fd93e506b3b634d98e9832de111438, type: 3}
   enemyNum: 0
+  enemy: {fileID: 0}
   demoScreen: {fileID: 1034108760}
 --- !u!114 &924548468
 MonoBehaviour:
@@ -59846,41 +59847,41 @@ MonoBehaviour:
   - card: {fileID: 0}
     cardPos: {fileID: 1282897697}
     positionNum: 0
-    oponent: {fileID: 0}
+    oponent: {fileID: 18335428}
   - card: {fileID: 0}
     cardPos: {fileID: 470228670}
     positionNum: 1
-    oponent: {fileID: 0}
+    oponent: {fileID: 18335428}
   - card: {fileID: 0}
     cardPos: {fileID: 524338845}
     positionNum: 2
-    oponent: {fileID: 0}
+    oponent: {fileID: 18335428}
   enemyFront:
   - card: {fileID: 0}
     cardPos: {fileID: 58899310}
     positionNum: 0
-    oponent: {fileID: 0}
+    oponent: {fileID: 1108437376}
   - card: {fileID: 0}
     cardPos: {fileID: 1943040255}
     positionNum: 1
-    oponent: {fileID: 0}
+    oponent: {fileID: 1108437376}
   - card: {fileID: 0}
     cardPos: {fileID: 1111597531}
     positionNum: 2
-    oponent: {fileID: 0}
+    oponent: {fileID: 1108437376}
   enemyBack:
   - card: {fileID: 0}
     cardPos: {fileID: 795851441}
     positionNum: 0
-    oponent: {fileID: 0}
+    oponent: {fileID: 1108437376}
   - card: {fileID: 0}
     cardPos: {fileID: 605718286}
     positionNum: 1
-    oponent: {fileID: 0}
+    oponent: {fileID: 1108437376}
   - card: {fileID: 0}
     cardPos: {fileID: 855089750}
     positionNum: 2
-    oponent: {fileID: 0}
+    oponent: {fileID: 1108437376}
   player: {fileID: 0}
   cardPrefab: {fileID: 6303504307996578254, guid: a3e76bfedbe14f94fb6afb7e9b99eed0, type: 3}
   clips:

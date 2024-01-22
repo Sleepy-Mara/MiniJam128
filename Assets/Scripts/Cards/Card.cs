@@ -135,7 +135,7 @@ public class Card : CardCore
                 GetComponent<Animator>().SetTrigger(damageTrigger);
             ActualLife = -damage;
             damaged = true;
-        }
+        } else inAnimation = false;
         yield return new WaitUntil(() => checkingEffect == false);
         if (damaged)
             yield return new WaitUntil(() => !inAnimation);
