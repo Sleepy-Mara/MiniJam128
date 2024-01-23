@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     public int currentHealth;
     [SerializeField] private Image healthFill;
     [SerializeField] private TextMeshProUGUI healthText;
+    public string effect;
 
     protected virtual void Awake()
     {

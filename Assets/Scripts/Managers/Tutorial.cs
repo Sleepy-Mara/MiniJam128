@@ -19,20 +19,17 @@ public class Tutorial : MonoBehaviour
     private List<Cards> bloodDeck;
     private SaveWithJson json;
     [SerializeField] private Enemy enemy;
-    private void Awake()
-    {
-        if (enemy != null)
-        {
-            enemy.enabled = true;
-            FindObjectOfType<EnemyAI>().enabled = false;
-            FindObjectOfType<NextCombat>().enemy = enemy;
-        }
-    }
     private void Start()
     {
         json = FindObjectOfType<SaveWithJson>();
         gameTutorial = json.SaveData.gameTutorial;
         menuTutorial = json.SaveData.menuTutorial;
+        if (enemy != null && gameTutorial)
+        {
+            enemy.enabled = true;
+            FindObjectOfType<EnemyAI>().enabled = false;
+            FindObjectOfType<NextCombat>().enemy = enemy;
+        }
         if (menuTutorial && !gameTutorial && !FindObjectOfType<NextCombat>())
             NextPhase(0, menuPhases);
     }
@@ -87,6 +84,8 @@ public class Tutorial : MonoBehaviour
             {
                 gameTutorial = false;
                 saveData.gameTutorial = gameTutorial;
+                enemy.enabled = false;
+                FindObjectOfType<EnemyAI>().enabled = true;
             }
             json.SaveData = saveData;
             return;
