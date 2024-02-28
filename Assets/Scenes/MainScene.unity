@@ -19735,6 +19735,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6598471769832746018, guid: a80f07124e7e7954f81315b3ea95f0c1, type: 3}
   m_PrefabInstance: {fileID: 659699474}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &660637682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 660637684}
+  - component: {fileID: 660637683}
+  m_Layer: 0
+  m_Name: Arrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &660637683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660637682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a64e1f1e3879bd408389ff9ab24f5a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  arrow: {fileID: 7816773999630685004, guid: 59486e0ca97859646b4e14c52239a670, type: 3}
+  point: {fileID: 5664510087213905200, guid: 5966ddcd62f116a40b35af3bc6ce3199, type: 3}
+  numberOfPoints: 10
+  startPoint: {x: 0, y: 0}
+  distance: 1
+  direction: {x: 0, y: 0}
+  force: 50
+--- !u!4 &660637684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660637682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.537, y: 0.829, z: 0.615}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &660907639
 GameObject:
   m_ObjectHideFlags: 0
@@ -27213,7 +27265,7 @@ GameObject:
   - component: {fileID: 924548466}
   - component: {fileID: 924548468}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27302,8 +27354,8 @@ RectTransform:
   - {fileID: 911816282}
   - {fileID: 1756070383}
   - {fileID: 975968203}
-  - {fileID: 1830619344}
   - {fileID: 1970855347}
+  - {fileID: 1830619344}
   - {fileID: 1747001687}
   - {fileID: 1476462818}
   - {fileID: 554358842}
@@ -27312,9 +27364,9 @@ RectTransform:
   - {fileID: 1895990256}
   - {fileID: 173842687}
   - {fileID: 361911990}
+  - {fileID: 1034108761}
   - {fileID: 761674330}
   - {fileID: 2130096043}
-  - {fileID: 1034108761}
   - {fileID: 1645596676}
   - {fileID: 123147083}
   m_Father: {fileID: 0}
@@ -30031,7 +30083,7 @@ RectTransform:
   - {fileID: 1624520298}
   - {fileID: 1969199012}
   m_Father: {fileID: 924548465}
-  m_RootOrder: 21
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -35831,7 +35883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6885375462373082135, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6885375462373082135, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchorMax.x
@@ -53356,6 +53408,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e7c1a7e9d7b81cc4393e00e0314470c8, type: 2}
   - {fileID: 11400000, guid: 091d7ca638832e74e860d63cf5a25204, type: 2}
   newCard: {fileID: 6303504307996578300, guid: a3e76bfedbe14f94fb6afb7e9b99eed0, type: 3}
+  waitForSelect: 0
+  checkingEffect: 0
+  selectedCard: {fileID: 0}
 --- !u!1 &1725489127
 GameObject:
   m_ObjectHideFlags: 0
@@ -56653,7 +56708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchorMax.x
@@ -62173,7 +62228,7 @@ RectTransform:
   m_Children:
   - {fileID: 188519560}
   m_Father: {fileID: 924548465}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -67562,7 +67617,7 @@ PrefabInstance:
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 725e8e83bd71cd7459b632047e14c25e, type: 2}
+      objectReference: {fileID: 11400000, guid: e54a9c9418b3cf14cb7fa59b57b25d45, type: 2}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.data[1]
       value: 
@@ -67865,7 +67920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4726956274294097621, guid: 7327086e9dc038b4ca996fcd7b66c6c6, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 4726956274294097621, guid: 7327086e9dc038b4ca996fcd7b66c6c6, type: 3}
       propertyPath: m_AnchorMax.x

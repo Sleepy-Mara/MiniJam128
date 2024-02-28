@@ -29,6 +29,12 @@ public class CameraManager : MonoBehaviour
     }
     private void ChangeCamera(int x)
     {
+        StartCoroutine(WaitChangeCamera(x));
+    }
+    IEnumerator WaitChangeCamera(int x)
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitUntil(() => !FindObjectOfType<EffectManager>().checkingEffect);
         // por que no usar clamp()?
         _currentPosition += x;
         if (_currentPosition < 0)

@@ -45,6 +45,7 @@ public class CardMagic : CardCore
         checkingEffect = true;
         _effectManager.CheckConditionIsPlayed(this);
         yield return new WaitUntil(() => checkingEffect == false);
+        FindObjectOfType<CameraManager>().HandCamera();
         //foreach (Cemetery cemetery in FindObjectsOfType<Cemetery>())
         //{
         //    if (cemetery.player)

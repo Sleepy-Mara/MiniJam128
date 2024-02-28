@@ -139,14 +139,20 @@ public class Draw : MonoBehaviour
             if (_currentDeck.Count <= 0)
                 return;
             List<Cards> cardsToDraw = new List<Cards>();
-            if (creature)
+            if (creature && spell)
                 foreach (Cards card in _currentDeck)
-                    if (!card.spell)
-                        cardsToDraw.Add(card);
-            if (spell)
-                foreach (Cards card in _currentDeck)
-                    if (card.spell)
-                        cardsToDraw.Add(card);
+                    cardsToDraw.Add(card);
+            else
+            {
+                if (creature)
+                    foreach (Cards card in _currentDeck)
+                        if (!card.spell)
+                            cardsToDraw.Add(card);
+                if (spell)
+                    foreach (Cards card in _currentDeck)
+                        if (card.spell)
+                            cardsToDraw.Add(card);
+            }
             //var newCard = Instantiate(_actualDeck[drawedCard], handPos);
             if (cardsToDraw[0].spell)
                 newCard = Instantiate(spellPrefab, transform).GetComponent<CardMagic>();

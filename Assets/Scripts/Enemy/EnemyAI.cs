@@ -97,10 +97,6 @@ public class EnemyAI : Enemy
                         actualValue -= 3;
                     bool kill = false;
                     bool survive = false;
-                    bool hasEffect = false;
-                    bool activeEffect = false;
-                    bool effectUtility = false;
-                    bool effectValue = false;
                     foreach (var playerCards in _table.playerPositions)
                     {
                         if (playerCards.positionFacing == position)
@@ -126,7 +122,6 @@ public class EnemyAI : Enemy
                         }
                         if (card.hasEffect)
                         {
-                            hasEffect = true;
                             actualValue++;
                         }
                         else continue;
@@ -148,18 +143,26 @@ public class EnemyAI : Enemy
             }
         }
         List<BestPlay> bestPlays = ForeachCard(cards, 0, null);
-        BestPlay trueBestPlay = null;
+        List<BestPlay> trueBestPlay = new List<BestPlay>();
         foreach (BestPlay bestPlay in bestPlays)
         {
-            if (trueBestPlay == null)
+            for (int i = 0; i < bestPlay.cards.Count; i++)
+                Debug.Log(bestPlay.cards[i].cardName[0] + " - " + bestPlay.positions[i].positionNum + " - " + bestPlay.value);
+            Debug.Log("-------------------------------------------------");
+            if (trueBestPlay.Count <= 0)
             {
-                trueBestPlay = bestPlay;
+                trueBestPlay.Add(bestPlay);
                 continue;
             }
-            if (trueBestPlay.value < bestPlay.value)
-                trueBestPlay = bestPlay;
+            else if (trueBestPlay[0].value < bestPlay.value)
+            {
+                trueBestPlay.Clear();
+                trueBestPlay.Add(bestPlay);
+            }
+            else if (trueBestPlay[0].value == bestPlay.value)
+                trueBestPlay.Add(bestPlay);
         }
-        return trueBestPlay;
+        return trueBestPlay[Random.Range(0, trueBestPlay.Count)];
     }
     private int CheckEffectValue(Cards card, MapPosition position, bool kill, bool survive)
     {

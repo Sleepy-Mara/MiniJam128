@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Card : CardCore
 {
@@ -14,20 +16,31 @@ public class Card : CardCore
     public bool inAnimation;
     private List<CardTempEffect> cardTempEffects = new List<CardTempEffect>();
     private int attackToPlayer;
-    [SerializeField] private string enemyAttackTrigger;
-    [SerializeField] private string enemyDamageTrigger;
-    [SerializeField] private string playerAttackTrigger;
-    [SerializeField] private string playerDamageTrigger;
-    [SerializeField] private string enemyAttackAnim;
-    [SerializeField] private string enemyDamageAnim;
-    [SerializeField] private string playerAttackAnim;
-    [SerializeField] private string playerDamageAnim;
+    [SerializeField]
+    private string enemyAttackTrigger;
+    [SerializeField]
+    private string enemyDamageTrigger;
+    [SerializeField]
+    private string playerAttackTrigger;
+    [SerializeField]
+    private string playerDamageTrigger;
+    [SerializeField]
+    private string enemyAttackAnim;
+    [SerializeField]
+    private string enemyDamageAnim;
+    [SerializeField]
+    private string playerAttackAnim;
+    [SerializeField]
+    private string playerDamageAnim;
     private string attackTrigger;
     private string damageTrigger;
     private string oponentTrigger;
-    [HideInInspector] public string attackAnim;
+    [HideInInspector]
+    public string attackAnim;
     private string damageAnim;
     private string oponentAnim;
+    [HideInInspector]
+    public bool waitForSelect;
     private void Start()
     {
         _effectManager = FindObjectOfType<EffectManager>();
@@ -339,6 +352,21 @@ public class Card : CardCore
     public void EndAnim()
     {
         inAnimation = false;
+    }
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        if (waitForSelect)
+        {
+            _effectManager.waitForSelect = false;
+            _effectManager.selectedCard = this;
+            return;
+        }
+        base.OnPointerClick(eventData);
+    }
+    public IEnumerator CardSelected()
+    {
+        yield return new WaitUntil(() => _effectManager.waitForSelect == false);
+        waitForSelect = false;
     }
 }
 [System.Serializable]

@@ -81,6 +81,12 @@ public class EffectManager : MonoBehaviour
     private Card newCard;
     private Table _table;
     private Draw _draw;
+    [HideInInspector]
+    public bool waitForSelect;
+    [HideInInspector]
+    public bool checkingEffect;
+    [HideInInspector]
+    public Card selectedCard;
     private void Awake()
     {
         _table = FindObjectOfType<Table>();
@@ -138,6 +144,8 @@ public class EffectManager : MonoBehaviour
     }
     void SelectEffects(MonoBehaviour caller, string effect, string condition)
     {
+        if (caller.GetComponent<CardCore>())
+            checkingEffect = true;
         List<List<string>> allEffects = new List<List<string>>();
         List<string> effectDescriptions = new List<string>();
         List<string> tempEffect = new List<string>();
@@ -192,8 +200,7 @@ public class EffectManager : MonoBehaviour
                 CheckEffect(caller, effectDescriptions);
                 return;
             }
-        if (caller.GetComponent<CardCore>())
-            caller.GetComponent<CardCore>().checkingEffect = false;
+        CheckingEffect(caller);
     }
     private void CheckEffect(MonoBehaviour caller, List<string> newEffect)
     {
@@ -271,8 +278,7 @@ public class EffectManager : MonoBehaviour
                                 }
                             }
                         }
-        if (caller.GetComponent<CardCore>())
-            caller.GetComponent<CardCore>().checkingEffect = false;
+        CheckingEffect(caller);
         #endregion
     }
     private void DealDamageEffect(MonoBehaviour caller, List<string> newEffect, bool startTurn, bool endTurn)
@@ -412,16 +418,51 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[0])
                             {
+                                var enemysAlive = new List<Card>();
+                                foreach (MapPosition enemy in enemyPositions)
+                                    if (enemy.card != null)
+                                        if (enemy.card.ActualLife > 0)
+                                            enemysAlive.Add(enemy.card);
+                                if (enemysAlive.Count == 0)
+                                {
+                                    CheckingEffect(caller);
+                                    return;
+                                }
+                                waitForSelect = true;
+                                foreach (Card enemy in enemysAlive)
+                                {
+                                    enemy.waitForSelect = true;
+                                    enemy.StartCoroutine(enemy.CardSelected());
+                                }
+                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, i, 0, 0, 0, false));
                                 Debug.Log("Elige Enemigo");
+                                return;
                             }
                             else if (target == targets[1])
                             {
+                                var allysAlive = new List<Card>();
+                                foreach (MapPosition ally in allyPositions)
+                                    if (ally.card != null)
+                                        if (ally.card.ActualLife > 0)
+                                            allysAlive.Add(ally.card);
+                                if (allysAlive.Count == 0)
+                                {
+                                    CheckingEffect(caller);
+                                    return;
+                                }
+                                waitForSelect = true;
+                                foreach (Card ally in allysAlive)
+                                {
+                                    ally.waitForSelect = true;
+                                    ally.StartCoroutine(ally.CardSelected());
+                                }
+                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, i, 0, 0, 0, false));
                                 Debug.Log("Elige Aliado");
+                                return;
                             }
                         }
                 }
-        if (caller.GetComponent<CardCore>())
-            caller.GetComponent<CardCore>().checkingEffect = false;
+        CheckingEffect(caller);
         #endregion
     }
     private void HealEffect(MonoBehaviour caller, List<string> newEffect, bool startTurn, bool endTurn)
@@ -572,15 +613,50 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[0])
                             {
+                                var enemysAlive = new List<Card>();
+                                foreach (MapPosition enemy in enemyPositions)
+                                    if (enemy.card != null)
+                                        if (enemy.card.ActualLife > 0)
+                                            enemysAlive.Add(enemy.card);
+                                if (enemysAlive.Count == 0)
+                                {
+                                    CheckingEffect(caller);
+                                    return;
+                                }
+                                waitForSelect = true;
+                                foreach (Card enemy in enemysAlive)
+                                {
+                                    enemy.waitForSelect = true;
+                                    enemy.StartCoroutine(enemy.CardSelected());
+                                }
+                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, i, 0, 0, false));
                                 Debug.Log("Elige Enemigo");
+                                return;
                             }
                             else if (target == targets[1])
                             {
+                                var allysAlive = new List<Card>();
+                                foreach (MapPosition ally in allyPositions)
+                                    if (ally.card != null)
+                                        if (ally.card.ActualLife > 0)
+                                            allysAlive.Add(ally.card);
+                                if (allysAlive.Count == 0)
+                                {
+                                    CheckingEffect(caller);
+                                    return;
+                                }
+                                waitForSelect = true;
+                                foreach (Card ally in allysAlive)
+                                {
+                                    ally.waitForSelect = true;
+                                    ally.StartCoroutine(ally.CardSelected());
+                                }
+                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, i, 0, 0, false));
                                 Debug.Log("Elige Aliado");
+                                return;
                             }
                         }
-        if (caller.GetComponent<CardCore>())
-            caller.GetComponent<CardCore>().checkingEffect = false;
+        CheckingEffect(caller);
         #endregion
     }
     private void AddEffect(MonoBehaviour caller, List<string> newEffect, bool startTurn, bool endTurn)
@@ -764,8 +840,7 @@ public class EffectManager : MonoBehaviour
                 }
             }
         }
-        if (caller.GetComponent<CardCore>())
-            caller.GetComponent<CardCore>().checkingEffect = false;
+        CheckingEffect(caller);
         #endregion
     }
     private void GiveEffect(MonoBehaviour caller, List<string> newEffect, bool startTurn, bool endTurn)
@@ -900,15 +975,50 @@ public class EffectManager : MonoBehaviour
                             }
                             else if (target == targets[0])
                             {
+                                var enemysAlive = new List<Card>();
+                                foreach (MapPosition enemy in enemyPositions)
+                                    if (enemy.card != null)
+                                        if (enemy.card.ActualLife > 0)
+                                            enemysAlive.Add(enemy.card);
+                                if (enemysAlive.Count == 0)
+                                {
+                                    CheckingEffect(caller);
+                                    return;
+                                }
+                                waitForSelect = true;
+                                foreach (Card enemy in enemysAlive)
+                                {
+                                    enemy.waitForSelect = true;
+                                    enemy.StartCoroutine(enemy.CardSelected());
+                                }
+                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, 0, attack, life, false));
                                 Debug.Log("Elige Enemigo");
+                                return;
                             }
                             else if (target == targets[1])
                             {
+                                var allysAlive = new List<Card>();
+                                foreach (MapPosition ally in allyPositions)
+                                    if (ally.card != null)
+                                        if (ally.card.ActualLife > 0)
+                                            allysAlive.Add(ally.card);
+                                if (allysAlive.Count == 0)
+                                {
+                                    CheckingEffect(caller);
+                                    return;
+                                }
+                                waitForSelect = true;
+                                foreach (Card ally in allysAlive)
+                                {
+                                    ally.waitForSelect = true;
+                                    ally.StartCoroutine(ally.CardSelected());
+                                }
+                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, 0, attack, life, false));
                                 Debug.Log("Elige Aliado");
+                                return;
                             }
                         }
-        if (caller.GetComponent<CardCore>())
-            caller.GetComponent<CardCore>().checkingEffect = false;
+        CheckingEffect(caller);
         #endregion
     }
     private void ImmuneEffect(MonoBehaviour caller, List<string> newEffect, bool startTurn, bool endTurn)
@@ -984,15 +1094,50 @@ public class EffectManager : MonoBehaviour
                     }
                     else if (target == targets[0])
                     {
+                        var enemysAlive = new List<Card>();
+                        foreach (MapPosition enemy in enemyPositions)
+                            if (enemy.card != null)
+                                if (enemy.card.ActualLife > 0)
+                                    enemysAlive.Add(enemy.card);
+                        if (enemysAlive.Count == 0)
+                        {
+                            CheckingEffect(caller);
+                            return;
+                        }
+                        waitForSelect = true;
+                        foreach (Card enemy in enemysAlive)
+                        {
+                            enemy.waitForSelect = true;
+                            enemy.StartCoroutine(enemy.CardSelected());
+                        }
+                        StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, 0, 0, 0, true));
                         Debug.Log("Elige Enemigo");
+                        return;
                     }
                     else if (target == targets[1])
                     {
+                        var allysAlive = new List<Card>();
+                        foreach (MapPosition ally in allyPositions)
+                            if (ally.card != null)
+                                if (ally.card.ActualLife > 0)
+                                    allysAlive.Add(ally.card);
+                        if (allysAlive.Count == 0)
+                        {
+                            CheckingEffect(caller);
+                            return;
+                        }
+                        waitForSelect = true;
+                        foreach (Card ally in allysAlive)
+                        {
+                            ally.waitForSelect = true;
+                            ally.StartCoroutine(ally.CardSelected());
+                        }
+                        StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, 0, 0, 0, true));
                         Debug.Log("Elige Aliado");
+                        return;
                     }
                 }
-        if (caller.GetComponent<CardCore>())
-            caller.GetComponent<CardCore>().checkingEffect = false;
+        CheckingEffect(caller);
         #endregion
     }
     private void SumonEffect(MonoBehaviour caller, List<string> newEffect, bool startTurn, bool endTurn)
@@ -1039,8 +1184,39 @@ public class EffectManager : MonoBehaviour
                         }
             }
         }
-        if (caller.GetComponent<CardCore>())
-            caller.GetComponent<CardCore>().checkingEffect = false;
+        CheckingEffect(caller);
         #endregion
+    }
+    IEnumerator WaitCardSelect(MonoBehaviour caller, bool startTurn, bool endTurn, int damage, int heal, int attack, int life, bool inmune)
+    {
+        ArrowToSelect arrow = FindAnyObjectByType<ArrowToSelect>();
+        arrow.Show();
+        arrow.startPoint = caller.transform.position;
+        while (waitForSelect)
+        {
+            arrow.Arrow();
+            yield return new WaitForSeconds(0.01f);
+        }
+        arrow.Hide();
+        yield return new WaitUntil(() => (!waitForSelect && selectedCard != null));
+        if (damage > 0)
+            selectedCard.ReceiveDamageEffect(damage, null, startTurn, endTurn);
+        if (heal > 0)
+            selectedCard.HealEffect(heal, startTurn, endTurn);
+        if (attack > 0 || life > 0)
+            selectedCard.BuffEffect(attack, life, startTurn, endTurn);
+        if (inmune)
+            selectedCard.ImmuneEffect(startTurn, endTurn);
+        waitForSelect = false;
+        selectedCard = null;
+        CheckingEffect(caller);
+    }
+    private void CheckingEffect(MonoBehaviour caller)
+    {
+        if (caller.GetComponent<CardCore>())
+        {
+            caller.GetComponent<CardCore>().checkingEffect = false;
+            checkingEffect = false;
+        }
     }
 }
