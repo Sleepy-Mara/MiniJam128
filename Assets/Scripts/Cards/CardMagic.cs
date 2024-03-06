@@ -9,6 +9,7 @@ public class CardMagic : CardCore
     // modificar esto para que haya que moverlo a cualquier parte del escenario
     protected override void SelectCard()
     {
+        FindObjectOfType<CameraManager>().PlaceCardCamera();
         StartCoroutine(PlayEffect());
         _cardManager.EndPlacing();
     }
