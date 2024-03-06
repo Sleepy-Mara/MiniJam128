@@ -53398,6 +53398,8 @@ MonoBehaviour:
   - either_deck
   - random_creature
   - random_spell
+  - enemy_creatures
+  - ally_creatures
   cards:
   - {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
   - {fileID: 11400000, guid: 9675af31f38a4df4892c4f4750409598, type: 2}

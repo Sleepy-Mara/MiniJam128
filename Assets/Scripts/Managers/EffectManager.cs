@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EffectManager : MonoBehaviour
 {
@@ -68,7 +69,9 @@ public class EffectManager : MonoBehaviour
         "life_deck", //16
         "either_deck", //17
         "random_creature", //18
-        "random_spell" //19
+        "random_spell", //19
+        "enemy_creatures", //20
+        "ally_creatures", //21
     };
     [HideInInspector]
     public List<string> Target
@@ -307,7 +310,7 @@ public class EffectManager : MonoBehaviour
                         allyHealth = FindObjectOfType<Player>();
                     }
                     for (int i = 0; i < 5; i++)
-                        if (effectNew == target + "_" + i.ToString())
+                        if (effectNew.Contains(target + "_" + i.ToString()))
                         {
                             if (target == targets[13])
                                 caller.GetComponent<CardCore>()?.currentPosition.positionFacing.card.ReceiveDamageEffect(i, null, startTurn, endTurn);
@@ -326,7 +329,7 @@ public class EffectManager : MonoBehaviour
                             {
                                 for (int j = 0; j < 3; j++)
                                     foreach (string effect in newEffect)
-                                        if (effect == target + "_" + j.ToString())
+                                        if (effect.Contains(j.ToString() + "_" + target))
                                             for (int k = 0; k < j; k++)
                                             {
                                                 var allysAlive = new List<MapPosition>();
@@ -343,7 +346,7 @@ public class EffectManager : MonoBehaviour
                             {
                                 for (int j = 0; j < 3; j++)
                                     foreach (string effect in newEffect)
-                                        if (effect == target + "_" + j.ToString())
+                                        if (effect.Contains(j.ToString() + "_" + target))
                                             for (int k = 0; k < j; k++)
                                             {
                                                 var enemysAlive = new List<MapPosition>();
@@ -416,6 +419,65 @@ public class EffectManager : MonoBehaviour
                                 else if (enemysAlive[selected].card != null)
                                     enemysAlive[selected].card.ReceiveDamageEffect(i, null, startTurn, endTurn);
                             }
+                            else if (target == targets[20])
+                            {
+                                for (int l = 0; l < 3; l++)
+                                    foreach (string effect in newEffect)
+                                        if (effect.Contains(l.ToString() + "_" + target))
+                                        {
+                                            var enemysAlive = new List<Card>();
+                                            foreach (MapPosition enemy in enemyPositions)
+                                                if (enemy.card != null)
+                                                    if (enemy.card.ActualLife > 0)
+                                                        enemysAlive.Add(enemy.card);
+                                            if (enemysAlive.Count == 0)
+                                            {
+                                                CheckingEffect(caller);
+                                                return;
+                                            }
+                                            int numberOfObjectives = l;
+                                            if (enemysAlive.Count < l)
+                                                numberOfObjectives = enemysAlive.Count;
+                                            waitForSelect = true;
+                                            foreach (Card enemy in enemysAlive)
+                                            {
+                                                enemy.waitForSelect = true;
+                                                enemy.StartCoroutine(enemy.CardSelected());
+                                            }
+                                            StartCoroutine(WaitCardSelect(caller, numberOfObjectives, startTurn, endTurn, i, 0, 0, 0, false));
+                                            Debug.Log("Elige Enemigo");
+                                            return;
+                                        }
+                            }
+                            else if (target == targets[21])
+                            {
+                                for (int l = 0; l < 3; l++)
+                                    foreach (string effect in newEffect)
+                                        if (effect.Contains(l.ToString() + "_" + target))
+                                        {
+                                            var allysAlive = new List<Card>();
+                                            foreach (MapPosition ally in allyPositions)
+                                                if (ally.card != null)
+                                                    if (ally.card.ActualLife > 0)
+                                                        allysAlive.Add(ally.card);
+                                            if (allysAlive.Count == 0)
+                                            {
+                                                CheckingEffect(caller);
+                                                return;
+                                            }
+                                            int numberOfObjectives = l;
+                                            if (allysAlive.Count < l)
+                                                numberOfObjectives = allysAlive.Count;
+                                            foreach (Card ally in allysAlive)
+                                            {
+                                                ally.waitForSelect = true;
+                                                ally.StartCoroutine(ally.CardSelected());
+                                            }
+                                            StartCoroutine(WaitCardSelect(caller, numberOfObjectives, startTurn, endTurn, i, 0, 0, 0, false));
+                                            Debug.Log("Elige Aliado");
+                                            return;
+                                        }
+                            }
                             else if (target == targets[0])
                             {
                                 var enemysAlive = new List<Card>();
@@ -434,7 +496,7 @@ public class EffectManager : MonoBehaviour
                                     enemy.waitForSelect = true;
                                     enemy.StartCoroutine(enemy.CardSelected());
                                 }
-                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, i, 0, 0, 0, false));
+                                StartCoroutine(WaitCardSelect(caller, 1, startTurn, endTurn, i, 0, 0, 0, false));
                                 Debug.Log("Elige Enemigo");
                                 return;
                             }
@@ -456,7 +518,7 @@ public class EffectManager : MonoBehaviour
                                     ally.waitForSelect = true;
                                     ally.StartCoroutine(ally.CardSelected());
                                 }
-                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, i, 0, 0, 0, false));
+                                StartCoroutine(WaitCardSelect(caller, 1, startTurn, endTurn, i, 0, 0, 0, false));
                                 Debug.Log("Elige Aliado");
                                 return;
                             }
@@ -472,7 +534,7 @@ public class EffectManager : MonoBehaviour
             foreach (string effectNew in newEffect)
                 if (effectNew.Contains(target))
                     for (int i = 0; i < 5; i++)
-                        if (effectNew == target + "_" + i.ToString())
+                        if (effectNew.Contains(target + "_" + i.ToString()))
                         {
                             MapPosition[] enemyPositions;
                             MapPosition[] allyPositions;
@@ -509,7 +571,7 @@ public class EffectManager : MonoBehaviour
                             {
                                 for (int j = 0; j < 3; j++)
                                     foreach (string effect in newEffect)
-                                        if (effect == target + "_" + j.ToString())
+                                        if (effect.Contains(j.ToString() + "_" + target))
                                             for (int k = 0; k < j; k++)
                                             {
                                                 var allysToHeal = new List<MapPosition>();
@@ -528,7 +590,7 @@ public class EffectManager : MonoBehaviour
                             {
                                 for (int j = 0; j < 3; j++)
                                     foreach (string effect in newEffect)
-                                        if (effect == target + "_" + j.ToString())
+                                        if (effect.Contains(j.ToString() + "_" + target))
                                             for (int k = 0; k < j; k++)
                                             {
                                                 var enemysToHeal = new List<MapPosition>();
@@ -611,6 +673,66 @@ public class EffectManager : MonoBehaviour
                                 else if (enemysToHeal[selected].card != null)
                                     enemysToHeal[selected].card.HealEffect(i, startTurn, endTurn);
                             }
+                            else if (target == targets[20])
+                            {
+                                for (int l = 0; l < 3; l++)
+                                    foreach (string effect in newEffect)
+                                        if (effect.Contains(l.ToString() + "_" + target))
+                                        {
+                                            var enemysAlive = new List<Card>();
+                                            foreach (MapPosition enemy in enemyPositions)
+                                                if (enemy.card != null)
+                                                    if (enemy.card.ActualLife > 0)
+                                                        enemysAlive.Add(enemy.card);
+                                            if (enemysAlive.Count == 0)
+                                            {
+                                                CheckingEffect(caller);
+                                                return;
+                                            }
+                                            int numberOfObjectives = l;
+                                            if (enemysAlive.Count < l)
+                                                numberOfObjectives = enemysAlive.Count;
+                                            waitForSelect = true;
+                                            foreach (Card enemy in enemysAlive)
+                                            {
+                                                enemy.waitForSelect = true;
+                                                enemy.StartCoroutine(enemy.CardSelected());
+                                            }
+                                            StartCoroutine(WaitCardSelect(caller, numberOfObjectives, startTurn, endTurn, 0, i, 0, 0, false));
+                                            Debug.Log("Elige Enemigo");
+                                            return;
+                                        }
+                            }
+                            else if (target == targets[21])
+                            {
+                                for (int l = 0; l < 3; l++)
+                                    foreach (string effect in newEffect)
+                                        if (effect.Contains(l.ToString() + "_" + target))
+                                        {
+                                            var allysAlive = new List<Card>();
+                                            foreach (MapPosition ally in allyPositions)
+                                                if (ally.card != null)
+                                                    if (ally.card.ActualLife > 0)
+                                                        allysAlive.Add(ally.card);
+                                            if (allysAlive.Count == 0)
+                                            {
+                                                CheckingEffect(caller);
+                                                return;
+                                            }
+                                            int numberOfObjectives = l;
+                                            if (allysAlive.Count < l)
+                                                numberOfObjectives = allysAlive.Count;
+                                            waitForSelect = true;
+                                            foreach (Card ally in allysAlive)
+                                            {
+                                                ally.waitForSelect = true;
+                                                ally.StartCoroutine(ally.CardSelected());
+                                            }
+                                            StartCoroutine(WaitCardSelect(caller, numberOfObjectives, startTurn, endTurn, 0, i, 0, 0, false));
+                                            Debug.Log("Elige Aliado");
+                                            return;
+                                        }
+                            }
                             else if (target == targets[0])
                             {
                                 var enemysAlive = new List<Card>();
@@ -629,7 +751,7 @@ public class EffectManager : MonoBehaviour
                                     enemy.waitForSelect = true;
                                     enemy.StartCoroutine(enemy.CardSelected());
                                 }
-                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, i, 0, 0, false));
+                                StartCoroutine(WaitCardSelect(caller, 1, startTurn, endTurn, 0, i, 0, 0, false));
                                 Debug.Log("Elige Enemigo");
                                 return;
                             }
@@ -651,7 +773,7 @@ public class EffectManager : MonoBehaviour
                                     ally.waitForSelect = true;
                                     ally.StartCoroutine(ally.CardSelected());
                                 }
-                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, i, 0, 0, false));
+                                StartCoroutine(WaitCardSelect(caller, 1, startTurn, endTurn, 0, i, 0, 0, false));
                                 Debug.Log("Elige Aliado");
                                 return;
                             }
@@ -857,25 +979,25 @@ public class EffectManager : MonoBehaviour
                             bool mustContinue = true;
                             foreach (string effect in newEffect)
                             {
-                                if (effect == target + "_+" + i.ToString() + "/+" + j.ToString())
+                                if (effect.Contains(target + "_+" + i.ToString() + "/+" + j.ToString()))
                                 {
                                     attack *= 1;
                                     life *= 1;
                                     mustContinue = false;
                                 }
-                                else if (effect == target + "_-" + i.ToString() + "/-" + j.ToString())
+                                else if (effect.Contains(target + "_-" + i.ToString() + "/-" + j.ToString()))
                                 {
                                     attack *= -1;
                                     life *= -1;
                                     mustContinue = false;
                                 }
-                                else if (effect == target + "_+" + i.ToString() + "/-" + j.ToString())
+                                else if (effect.Contains(target + "_+" + i.ToString() + "/-" + j.ToString()))
                                 {
                                     attack *= 1;
                                     life *= -1;
                                     mustContinue = false;
                                 }
-                                else if (effect == target + "_-" + i.ToString() + "/+" + j.ToString())
+                                else if (effect.Contains(target + "_-" + i.ToString() + "/+" + j.ToString()))
                                 {
                                     attack *= -1;
                                     life *= 1;
@@ -908,7 +1030,7 @@ public class EffectManager : MonoBehaviour
                             {
                                 for (int l = 0; l < 3; l++)
                                     foreach (string effect in newEffect)
-                                        if (effect == target + "_" + l.ToString())
+                                        if (effect.Contains(l.ToString() + "_" + target))
                                             for (int k = 0; k < l; k++)
                                             {
                                                 var creatureToBuff = new List<MapPosition>();
@@ -925,7 +1047,7 @@ public class EffectManager : MonoBehaviour
                             {
                                 for (int l = 0; l < 3; l++)
                                     foreach (string effect in newEffect)
-                                        if (effect == target + "_" + l.ToString())
+                                        if (effect.Contains(l.ToString() + "_" + target))
                                             for (int k = 0; k < l; k++)
                                             {
                                                 var creatureToBuff = new List<MapPosition>();
@@ -973,6 +1095,66 @@ public class EffectManager : MonoBehaviour
                                 if (creatureToBuff[selected].card != null)
                                     creatureToBuff[selected].card.BuffEffect(attack, life, startTurn, endTurn);
                             }
+                            else if (target == targets[20])
+                            {
+                                for (int l = 0; l < 3; l++)
+                                    foreach (string effect in newEffect)
+                                        if (effect.Contains(l.ToString() + "_" + target))
+                                        {
+                                            var enemysAlive = new List<Card>();
+                                            foreach (MapPosition enemy in enemyPositions)
+                                                if (enemy.card != null)
+                                                    if (enemy.card.ActualLife > 0)
+                                                        enemysAlive.Add(enemy.card);
+                                            if (enemysAlive.Count == 0)
+                                            {
+                                                CheckingEffect(caller);
+                                                return;
+                                            }
+                                            int numberOfObjectives = l;
+                                            if (enemysAlive.Count < l)
+                                                numberOfObjectives = enemysAlive.Count;
+                                            waitForSelect = true;
+                                            foreach (Card enemy in enemysAlive)
+                                            {
+                                                enemy.waitForSelect = true;
+                                                enemy.StartCoroutine(enemy.CardSelected());
+                                            }
+                                            StartCoroutine(WaitCardSelect(caller, numberOfObjectives, startTurn, endTurn, 0, 0, attack, life, false));
+                                            Debug.Log("Elige Enemigo");
+                                            return;
+                                        }
+                            }
+                            else if (target == targets[21])
+                            {
+                                for (int l = 0; l < 3; l++)
+                                    foreach (string effect in newEffect)
+                                        if (effect.Contains(l.ToString() + "_" + target))
+                                        {
+                                            var allysAlive = new List<Card>();
+                                            foreach (MapPosition ally in allyPositions)
+                                                if (ally.card != null)
+                                                    if (ally.card.ActualLife > 0)
+                                                        allysAlive.Add(ally.card);
+                                            if (allysAlive.Count == 0)
+                                            {
+                                                CheckingEffect(caller);
+                                                return;
+                                            }
+                                            int numberOfObjectives = l;
+                                            if (allysAlive.Count < l)
+                                                numberOfObjectives = allysAlive.Count;
+                                            waitForSelect = true;
+                                            foreach (Card ally in allysAlive)
+                                            {
+                                                ally.waitForSelect = true;
+                                                ally.StartCoroutine(ally.CardSelected());
+                                            }
+                                            StartCoroutine(WaitCardSelect(caller, numberOfObjectives, startTurn, endTurn, 0, 0, attack, life, false));
+                                            Debug.Log("Elige Aliado");
+                                            return;
+                                        }
+                            }
                             else if (target == targets[0])
                             {
                                 var enemysAlive = new List<Card>();
@@ -991,7 +1173,7 @@ public class EffectManager : MonoBehaviour
                                     enemy.waitForSelect = true;
                                     enemy.StartCoroutine(enemy.CardSelected());
                                 }
-                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, 0, attack, life, false));
+                                StartCoroutine(WaitCardSelect(caller, 1, startTurn, endTurn, 0, 0, attack, life, false));
                                 Debug.Log("Elige Enemigo");
                                 return;
                             }
@@ -1013,7 +1195,7 @@ public class EffectManager : MonoBehaviour
                                     ally.waitForSelect = true;
                                     ally.StartCoroutine(ally.CardSelected());
                                 }
-                                StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, 0, attack, life, false));
+                                StartCoroutine(WaitCardSelect(caller, 1, startTurn, endTurn, 0, 0, attack, life, false));
                                 Debug.Log("Elige Aliado");
                                 return;
                             }
@@ -1048,7 +1230,7 @@ public class EffectManager : MonoBehaviour
                     {
                         for (int j = 0; j < 3; j++)
                             foreach (string effect in newEffect)
-                                if (effect == target + "_" + j.ToString())
+                                if (effect.Contains(j.ToString() + "_" + target))
                                     for (int k = 0; k < j; k++)
                                     {
                                         var selected = Random.Range(0, allyPositions.Length - 1);
@@ -1060,7 +1242,7 @@ public class EffectManager : MonoBehaviour
                     {
                         for (int j = 0; j < 3; j++)
                             foreach (string effect in newEffect)
-                                if (effect == target + "_" + j.ToString())
+                                if (effect.Contains(j.ToString() + "_" + target))
                                     for (int k = 0; k < j; k++)
                                     {
                                         var selected = Random.Range(0, enemyPositions.Length - 1);
@@ -1092,6 +1274,66 @@ public class EffectManager : MonoBehaviour
                         if (_table.enemyFront[selected].card != null)
                             _table.enemyFront[selected].card.ImmuneEffect(startTurn, endTurn);
                     }
+                    else if (target == targets[20])
+                    {
+                        for (int l = 0; l < 3; l++)
+                            foreach (string effect in newEffect)
+                                if (effect.Contains(l.ToString() + "_" + target))
+                                {
+                                    var enemysAlive = new List<Card>();
+                                    foreach (MapPosition enemy in enemyPositions)
+                                        if (enemy.card != null)
+                                            if (enemy.card.ActualLife > 0)
+                                                enemysAlive.Add(enemy.card);
+                                    if (enemysAlive.Count == 0)
+                                    {
+                                        CheckingEffect(caller);
+                                        return;
+                                    }
+                                    int numberOfObjectives = l;
+                                    if (enemysAlive.Count < l)
+                                        numberOfObjectives = enemysAlive.Count;
+                                    waitForSelect = true;
+                                    foreach (Card enemy in enemysAlive)
+                                    {
+                                        enemy.waitForSelect = true;
+                                        enemy.StartCoroutine(enemy.CardSelected());
+                                    }
+                                    StartCoroutine(WaitCardSelect(caller, numberOfObjectives, startTurn, endTurn, 0, 0, 0, 0, true));
+                                    Debug.Log("Elige Enemigo");
+                                    return;
+                                }
+                    }
+                    else if (target == targets[21])
+                    {
+                        for (int l = 0; l < 3; l++)
+                            foreach (string effect in newEffect)
+                                if (effect.Contains(l.ToString() + "_" + target))
+                                {
+                                    var allysAlive = new List<Card>();
+                                    foreach (MapPosition ally in allyPositions)
+                                        if (ally.card != null)
+                                            if (ally.card.ActualLife > 0)
+                                                allysAlive.Add(ally.card);
+                                    if (allysAlive.Count == 0)
+                                    {
+                                        CheckingEffect(caller);
+                                        return;
+                                    }
+                                    int numberOfObjectives = l;
+                                    if (allysAlive.Count < l)
+                                        numberOfObjectives = allysAlive.Count;
+                                    waitForSelect = true;
+                                    foreach (Card ally in allysAlive)
+                                    {
+                                        ally.waitForSelect = true;
+                                        ally.StartCoroutine(ally.CardSelected());
+                                    }
+                                    StartCoroutine(WaitCardSelect(caller, numberOfObjectives, startTurn, endTurn, 0, 0, 0, 0, true));
+                                    Debug.Log("Elige Aliado");
+                                    return;
+                                }
+                    }
                     else if (target == targets[0])
                     {
                         var enemysAlive = new List<Card>();
@@ -1110,7 +1352,7 @@ public class EffectManager : MonoBehaviour
                             enemy.waitForSelect = true;
                             enemy.StartCoroutine(enemy.CardSelected());
                         }
-                        StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, 0, 0, 0, true));
+                        StartCoroutine(WaitCardSelect(caller, 1, startTurn, endTurn, 0, 0, 0, 0, true));
                         Debug.Log("Elige Enemigo");
                         return;
                     }
@@ -1132,7 +1374,7 @@ public class EffectManager : MonoBehaviour
                             ally.waitForSelect = true;
                             ally.StartCoroutine(ally.CardSelected());
                         }
-                        StartCoroutine(WaitCardSelect(caller, startTurn, endTurn, 0, 0, 0, 0, true));
+                        StartCoroutine(WaitCardSelect(caller, 1, startTurn, endTurn, 0, 0, 0, 0, true));
                         Debug.Log("Elige Aliado");
                         return;
                     }
@@ -1187,25 +1429,29 @@ public class EffectManager : MonoBehaviour
         CheckingEffect(caller);
         #endregion
     }
-    IEnumerator WaitCardSelect(MonoBehaviour caller, bool startTurn, bool endTurn, int damage, int heal, int attack, int life, bool inmune)
+    IEnumerator WaitCardSelect(MonoBehaviour caller, int numberOfObjectives, bool startTurn, bool endTurn, int damage, int heal, int attack, int life, bool inmune)
     {
         ArrowToSelect arrow = FindAnyObjectByType<ArrowToSelect>();
         arrow.origin = Camera.main.WorldToScreenPoint(caller.transform.position);
-        while (waitForSelect)
+        for (int i = 0; i < numberOfObjectives; i++)
         {
-            arrow.Arrow();
-            yield return new WaitForSeconds(0.01f);
+            while (selectedCard == null)
+            {
+                arrow.Arrow();
+                yield return new WaitForSeconds(0.01f);
+            }
+            arrow.Hide();
+            yield return new WaitUntil(() => (selectedCard != null));
+            if (damage > 0)
+                selectedCard.ReceiveDamageEffect(damage, null, startTurn, endTurn);
+            if (heal > 0)
+                selectedCard.HealEffect(heal, startTurn, endTurn);
+            if (attack > 0 || life > 0)
+                selectedCard.BuffEffect(attack, life, startTurn, endTurn);
+            if (inmune)
+                selectedCard.ImmuneEffect(startTurn, endTurn);
+            selectedCard = null;
         }
-        arrow.Hide();
-        yield return new WaitUntil(() => (!waitForSelect && selectedCard != null));
-        if (damage > 0)
-            selectedCard.ReceiveDamageEffect(damage, null, startTurn, endTurn);
-        if (heal > 0)
-            selectedCard.HealEffect(heal, startTurn, endTurn);
-        if (attack > 0 || life > 0)
-            selectedCard.BuffEffect(attack, life, startTurn, endTurn);
-        if (inmune)
-            selectedCard.ImmuneEffect(startTurn, endTurn);
         waitForSelect = false;
         selectedCard = null;
         CheckingEffect(caller);

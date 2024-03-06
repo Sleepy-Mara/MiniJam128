@@ -357,8 +357,8 @@ public class Card : CardCore
     {
         if (waitForSelect)
         {
-            _effectManager.waitForSelect = false;
             _effectManager.selectedCard = this;
+            waitForSelect = false;
             return;
         }
         base.OnPointerClick(eventData);
