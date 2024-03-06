@@ -1190,8 +1190,7 @@ public class EffectManager : MonoBehaviour
     IEnumerator WaitCardSelect(MonoBehaviour caller, bool startTurn, bool endTurn, int damage, int heal, int attack, int life, bool inmune)
     {
         ArrowToSelect arrow = FindAnyObjectByType<ArrowToSelect>();
-        arrow.Show();
-        arrow.startPoint = caller.transform.position;
+        arrow.origin = Camera.main.WorldToScreenPoint(caller.transform.position);
         while (waitForSelect)
         {
             arrow.Arrow();
