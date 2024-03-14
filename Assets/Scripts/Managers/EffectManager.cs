@@ -1497,7 +1497,7 @@ public class Effects
         "add", //4
         "give", //5
         "immune", //6
-        "summon" //7
+        "summon", //7
     };
     public List<string> targets = new List<string>()
     {
@@ -1525,4 +1525,8 @@ public class Effects
         "enemy_creatures", //21
         "ally_creatures", //22
     };
+    public List<int> x = new List<int>();
+    public List<int> y = new List<int>();
+    public List<int> numberOfTargets = new List<int>();
+    public List<List<string>> cards = new List<List<string>>();
 }

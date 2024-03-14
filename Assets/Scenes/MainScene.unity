@@ -3822,7 +3822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.099868774
+      value: -0.099853516
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4082,7 +4082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.09992981
+      value: -0.09991455
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -26400,16 +26400,26 @@ MonoBehaviour:
   - Spanish name
   attack: 0
   life: 0
-  manaCost: 0
+  manaCost: 2
   healthCost: 0
   sprite: {fileID: 0}
-  hasEffect: 1
-  hasEffectInt: 0
+  hasEffect: 0
+  hasEffectInt: 1
   effect: 
   effectDescription:
   - English effect text
   - Spanish effect text
-  texture: {fileID: 0}
+  effects:
+    conditions: []
+    extraConditions: []
+    effects: []
+    targets: []
+    x: 
+    y: 
+    numberOfTargets: 
+  clearEffexts: 0
+  spell: 0
+  spellInt: 0
 --- !u!1001 &880482490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32760,7 +32770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.09992981
+      value: -0.09991455
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -65777,7 +65787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.099868774
+      value: -0.099853516
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

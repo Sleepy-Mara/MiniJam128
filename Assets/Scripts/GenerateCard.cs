@@ -53,9 +53,9 @@ public class GenerateCard : MonoBehaviour
             card.effectDesc = effectDescription;
         }
     }
-    public void UpdateCard()
+    public void UpdateCard(string name)
     {
-        foreach (var asset in AssetDatabase.FindAssets(cardName[0]))
+        foreach (var asset in AssetDatabase.FindAssets(name))
         {
             var path = AssetDatabase.GUIDToAssetPath(asset);
             AssetDatabase.DeleteAsset(path);
@@ -89,6 +89,12 @@ public class GenerateCardEditor : Editor
     int indexExtraCondition = 0;
     int indexEffect = 0;
     int indexTarget = 0;
+    int effextX = 0;
+    int effextY = 0;
+    int creaturesToAffect = 0;
+    List<string> cards = new List<string>();
+    bool updateCard = false;
+    string cardName = "";
     public override void OnInspectorGUI()
     {
         GenerateCard card = (GenerateCard)target;
@@ -202,11 +208,79 @@ public class GenerateCardEditor : Editor
                         EditorGUILayout.LabelField("Effects:", myStyle);
                         indexEffect = EditorGUILayout.Popup(indexEffect, new Effects().effects.ToArray());
                         var effect = new Effects().effects[indexEffect];
+                        switch (indexEffect)
+                        {
+                            case 1:
+                                EditorGUILayout.LabelField("Draw cards");
+                                effextX = EditorGUILayout.IntField(effextX, GUILayout.MaxWidth(50));
+                                break;
+                            case 2:
+                                EditorGUILayout.LabelField("Damage");
+                                effextX = EditorGUILayout.IntField(effextX, GUILayout.MaxWidth(50));
+                                break;
+                            case 3:
+                                EditorGUILayout.LabelField("Health");
+                                effextX = EditorGUILayout.IntField(effextX, GUILayout.MaxWidth(50));
+                                break;
+                            case 4:
+                                EditorGUILayout.LabelField("Add cards");
+                                effextX = EditorGUILayout.IntField(effextX, GUILayout.MaxWidth(50));
+                                for (int i = 0; i < effextX; i++)
+                                {
+                                    if (cards.Count <= i)
+                                        cards.Add("");
+                                    cards[i] = EditorGUILayout.TextField(cards[i]);
+                                }
+                                break;
+                            case 5:
+                                EditorGUILayout.LabelField("Attack");
+                                effextX = EditorGUILayout.IntField(effextX, GUILayout.MaxWidth(50));
+                                EditorGUILayout.LabelField("Health");
+                                effextY = EditorGUILayout.IntField(effextY, GUILayout.MaxWidth(50));
+                                break;
+                            case 7:
+                                EditorGUILayout.LabelField("Summon cards");
+                                effextX = EditorGUILayout.IntField(effextX, GUILayout.MaxWidth(50));
+                                for (int i = 0; i < effextX; i++)
+                                {
+                                    if (cards.Count <= i)
+                                        cards.Add("");
+                                    cards[i] = EditorGUILayout.TextField(cards[i]);
+                                }
+                                break;
+                        }
                     GUILayout.EndVertical();
                     GUILayout.BeginVertical();
                         EditorGUILayout.LabelField("Target:", myStyle);
                         indexTarget = EditorGUILayout.Popup(indexTarget, new Effects().targets.ToArray());
                         var target = new Effects().targets[indexTarget];
+                        switch (indexTarget)
+                        {
+                            case 7:
+                                EditorGUILayout.LabelField("Creatures");
+                                creaturesToAffect = EditorGUILayout.IntField(creaturesToAffect, GUILayout.MaxWidth(50));
+                                break;
+                            case 8:
+                                EditorGUILayout.LabelField("Creatures");
+                                creaturesToAffect = EditorGUILayout.IntField(creaturesToAffect, GUILayout.MaxWidth(50));
+                                break;
+                            case 9:
+                                EditorGUILayout.LabelField("Creatures");
+                                creaturesToAffect = EditorGUILayout.IntField(creaturesToAffect, GUILayout.MaxWidth(50));
+                                break;
+                            case 10:
+                                EditorGUILayout.LabelField("Creatures");
+                                creaturesToAffect = EditorGUILayout.IntField(creaturesToAffect, GUILayout.MaxWidth(50));
+                                break;
+                            case 21:
+                                EditorGUILayout.LabelField("Creatures");
+                                creaturesToAffect = EditorGUILayout.IntField(creaturesToAffect, GUILayout.MaxWidth(50));
+                                break;
+                            case 22:
+                                EditorGUILayout.LabelField("Creatures");
+                                creaturesToAffect = EditorGUILayout.IntField(creaturesToAffect, GUILayout.MaxWidth(50));
+                                break;
+                        }
                     GUILayout.EndVertical();
                 GUILayout.EndHorizontal();
                 GUILayout.Space(10);
@@ -216,6 +290,36 @@ public class GenerateCardEditor : Editor
                     card.effects.extraConditions.Add(extraCondition);
                     card.effects.effects.Add(effect);
                     card.effects.targets.Add(target);
+                    card.effects.x.Add(effextX);
+                    card.effects.y.Add(effextY);
+                    card.effects.numberOfTargets.Add(creaturesToAffect);
+                    card.effects.cards.Add(cards);
+                    indexCondition = 0;
+                    indexExtraCondition = 0;
+                    indexEffect = 0;
+                    indexTarget = 0;
+                    effextX = 0;
+                    effextY = 0;
+                    creaturesToAffect = 0;
+                    cards = new List<string>();
+                }
+                for (int i = 0; i < card.effects.conditions.Count; i++)
+                {
+                    GUILayout.Space(10);
+                    GUILayout.TextArea("Condition: " + card.effects.conditions[i] + " ExtraConditions: " + card.effects.extraConditions[i] 
+                        + " Effect: " + card.effects.effects[i] + " " + card.effects.x[i] + " " + card.effects.y[i]
+                        + " Targets: " + card.effects.targets[i] + " " + card.effects.numberOfTargets[i]);
+                    if (GUILayout.Button("Remove effect"))
+                    {
+                        card.effects.conditions.RemoveAt(i);
+                        card.effects.extraConditions.RemoveAt(i);
+                        card.effects.effects.RemoveAt(i);
+                        card.effects.targets.RemoveAt(i);
+                        card.effects.x.RemoveAt(i);
+                        card.effects.y.RemoveAt(i);
+                        card.effects.numberOfTargets.RemoveAt(i);
+                        card.effects.cards.RemoveAt(i);
+                    }
                 }
                 break;
             case false:
@@ -226,16 +330,44 @@ public class GenerateCardEditor : Editor
             if (GUILayout.Button("Create card"))
             {
                 card.CreateCard();
+                ClearInfo();
             }
             if (GUILayout.Button("Update card"))
             {
-                card.UpdateCard();
+                updateCard = true;
             }
             if (GUILayout.Button("Clear info"))
             {
                 card.ClearInfo();
+                ClearInfo();
             }
         GUILayout.EndHorizontal();
+        if (updateCard)
+        {
+            GUILayout.Space(5);
+            GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Original english card name", myStyle);
+                cardName = EditorGUILayout.TextField(cardName);
+            GUILayout.EndHorizontal();
+            GUILayout.Space(5);
+            if (GUILayout.Button("Update card"))
+            {
+                updateCard = true;
+                card.UpdateCard(cardName);
+                ClearInfo();
+            }
+        }
+    }
+    private void ClearInfo()
+    {
+        indexCondition = 0;
+        indexExtraCondition = 0;
+        indexEffect = 0;
+        indexTarget = 0;
+        effextX = 0;
+        effextY = 0;
+        creaturesToAffect = 0;
+        updateCard = false;
     }
     void OnEnable()
     {
