@@ -1465,3 +1465,64 @@ public class EffectManager : MonoBehaviour
         }
     }
 }
+[System.Serializable]
+public class Effects
+{
+    public List<string> conditions = new List<string>()
+    {
+        "none", //0
+        "start_turn", //1
+        "played", //2
+        "attacks", //3
+        "damaged", //4
+        "defeated", //5
+        "defeats_enemy", //6
+        "ally_creature_defeated", //7
+        "end_turn", //8
+        "buffed", //9
+        "spell_played", //10
+    };
+    public List<string> extraConditions = new List<string>()
+    {
+        "none", //0
+        "until_next_turn", //1
+        "until_end_turn" //2
+    };
+    public List<string> effects = new List<string>()
+    {
+        "none", //0
+        "draw", //1
+        "deal", //2
+        "heal", //3
+        "add", //4
+        "give", //5
+        "immune", //6
+        "summon" //7
+    };
+    public List<string> targets = new List<string>()
+    {
+        "none", //0
+        "enemy_creature", //1
+        "ally_creature", //2
+        "random_enemy", //3
+        "random_ally", //4
+        "random_enemy_creature", //5
+        "random_ally_creature", //6
+        "random_enemy_creatures", //7
+        "random_ally_creatures", //8
+        "all_enemy_creatures", //9
+        "all_ally_creatures", //10
+        "itself", //11
+        "enemy_player", //12
+        "player", //13
+        "creature_front", //14
+        "hand", //15
+        "deck", //16
+        "life_deck", //17
+        "either_deck", //18
+        "random_creature", //19
+        "random_spell", //20
+        "enemy_creatures", //21
+        "ally_creatures", //22
+    };
+}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Cards/Normal")]
+[CreateAssetMenu(menuName = "Card")]
 public class Cards : ScriptableObject
 {
     public List<string> cardName;
@@ -19,4 +19,5 @@ public class Cards : ScriptableObject
     [TextArea(1, 4)]
     public List<string> effectDesc;
     public bool spell;
+    public Effects effects;
 }

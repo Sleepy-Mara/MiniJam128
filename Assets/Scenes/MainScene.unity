@@ -3822,7 +3822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.099975586
+      value: -0.099868774
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4082,7 +4082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.10003662
+      value: -0.09992981
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6764,7 +6764,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0004272461}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &193500858
@@ -21743,7 +21743,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0004272461}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &712040996
@@ -26351,6 +26351,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &876575961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876575963}
+  - component: {fileID: 876575964}
+  m_Layer: 0
+  m_Name: GenerateCard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &876575963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876575961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 424.35638, y: 109.56247, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &876575964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876575961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a7554814ba7ed43be66685f6f9649a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardName:
+  - English name
+  - Spanish name
+  attack: 0
+  life: 0
+  manaCost: 0
+  healthCost: 0
+  sprite: {fileID: 0}
+  hasEffect: 1
+  hasEffectInt: 0
+  effect: 
+  effectDescription:
+  - English effect text
+  - Spanish effect text
+  texture: {fileID: 0}
 --- !u!1001 &880482490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32701,7 +32760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.10003662
+      value: -0.09992981
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -35311,7 +35370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1886842407820040361, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 15.200073
+      value: 15.200195
       objectReference: {fileID: 0}
     - target: {fileID: 1886842407820040361, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -65718,7 +65777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.099975586
+      value: -0.099868774
       objectReference: {fileID: 0}
     - target: {fileID: 9106297613132786371, guid: b281218a26e1d6a47ad8b97a20470b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
