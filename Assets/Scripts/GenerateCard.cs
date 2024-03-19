@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class GenerateCard : MonoBehaviour
 {
+    public string scriptableName = "Scriptable name";
     public List<string> cardName = new List<string> {"English name", "Spanish name"};
     public int attack;
     public int life;
@@ -43,7 +44,7 @@ public class GenerateCard : MonoBehaviour
             direction = "NormalCards";
             suffix = "_N";
         }
-        AssetDatabase.CreateAsset(card, "Assets/ScriptableObjects/" + direction + "/SO_" + id + "_" + cardName[0] + suffix + ".asset");
+        AssetDatabase.CreateAsset(card, "Assets/ScriptableObjects/" + direction + "/SO_" + id + "_" + scriptableName + suffix + ".asset");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         EditorUtility.FocusProjectWindow();
@@ -65,6 +66,7 @@ public class GenerateCard : MonoBehaviour
             card.effect = effect;
             card.effectDesc = effectDescription;
         }
+        ClearInfo();
         return card;
     }
     public void UpdateCard(string name)
@@ -161,9 +163,11 @@ public class GenerateCardEditor : Editor
                 card.id = card.GetID(generatedCards.Count);
                 firstTimeId = false;
             }
-            card.id = EditorGUILayout.TextField(card.id);
+            EditorGUILayout.LabelField(card.id);
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
+        EditorGUILayout.LabelField("Name", myStyle);
+        card.scriptableName = EditorGUILayout.TextField(card.scriptableName);
         GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
                 EditorGUILayout.LabelField("English name", myStyle);
