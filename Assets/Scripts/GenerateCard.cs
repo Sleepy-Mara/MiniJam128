@@ -128,6 +128,7 @@ public class GenerateCardEditor : Editor
     string cardName = "";
     List<Cards> generatedCards = new List<Cards>();
     bool firstTimeId = true;
+    string loadId = "0000";
     public override void OnInspectorGUI()
     {
         GenerateCard card = (GenerateCard)target;
@@ -161,6 +162,7 @@ public class GenerateCardEditor : Editor
             if (generatedCards.Count != 0 && firstTimeId)
             {
                 card.id = card.GetID(generatedCards.Count);
+                loadId = card.id;
                 firstTimeId = false;
             }
             EditorGUILayout.LabelField(card.id);
@@ -473,11 +475,11 @@ public class GenerateCardEditor : Editor
             GUILayout.Space(5);
             GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Original ID", myStyle);
-                card.id = EditorGUILayout.TextField(card.id);
+                loadId = EditorGUILayout.TextField(loadId);
                 if (GUILayout.Button("Load card"))
                 {
                     foreach (Cards cards in generatedCards)
-                        if (cards.id == card.id)
+                        if (cards.id == loadId)
                         {
                             cardName = cards.name;
                             card.cardName = cards.cardName;
