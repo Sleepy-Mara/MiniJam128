@@ -416,7 +416,7 @@ public class DeckBuilder : MonoBehaviour
                     card.transform.SetSiblingIndex(cardsHealth.IndexOf(card));
                 break;
             case Filter.Effect:
-                List<string> effects = FindObjectOfType<EffectManager>().Effects;
+                List<string> effects = new Effects().effects;
                 List<CardsInDeckBuilder> cardsEffect = new List<CardsInDeckBuilder>();
                 List<CardsInDeckBuilder> cardsWhitoutEffect = new List<CardsInDeckBuilder>();
                 foreach (string effect in effects)

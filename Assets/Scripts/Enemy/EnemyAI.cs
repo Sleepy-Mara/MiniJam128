@@ -167,211 +167,409 @@ public class EnemyAI : Enemy
     private int CheckEffectValue(Cards card, MapPosition position, bool kill, bool survive)
     {
         int value = 0;
-        var effect = card.effect;
-        foreach(string effects in _effectManager.Conditions)
-            if (!survive && effect.Contains(effects))
-            {
-                if (effect.Contains(_effectManager.Effects[0]))
+        Effects effect = card.effects;
+        foreach (string effects in new Effects().conditions)
+            for (int j = 0; j < effect.conditions.Count; j++)
+                if (!survive && effect.conditions[j] == effects)
                 {
-                    if (effect.Contains(_effectManager.Target[15]) && _currentDeck.Count > 0)
-                        value++;
-                    if (effect.Contains(_effectManager.Target[16]) && _currentBloodDeck.Count > 0)
-                        value++;
-                    if (effect.Contains(_effectManager.Target[17]) && (_currentBloodDeck.Count > 0 || _currentDeck.Count > 0))
-                        value++;
-                }
-                if (effect.Contains(_effectManager.Conditions[1]))
-                {
-                    bool usefulEffect = false;
-                    if (effect.Contains(_effectManager.Target[2]) || effect.Contains(_effectManager.Target[4]) || effect.Contains(_effectManager.Target[6]) || effect.Contains(_effectManager.Target[8]))
+                    if (effect.effects[j] == new Effects().effects[1])
                     {
-                        if (!kill && position.positionFacing.card != null)
-                            usefulEffect = true;
-                        else
-                        {
-                            foreach (MapPosition playerCards in _table.playerPositions)
-                            {
-                                if (playerCards.card == null)
-                                    continue;
-                                if (position != null)
-                                    if (playerCards != position.positionFacing)
-                                        continue;
-                                usefulEffect = true;
-                            }
-                        }
-                    }
-                    if (effect.Contains(_effectManager.Target[3]) || effect.Contains(_effectManager.Target[5]) || effect.Contains(_effectManager.Target[7]) || effect.Contains(_effectManager.Target[9]))
-                    {
-                        bool allyInBattle = false;
-                        foreach (MapPosition allyCards in _table.enemyFront)
-                        {
-                            if (allyCards.card == null)
-                                continue;
-                            allyInBattle = true;
-                        }
-                        if (!allyInBattle)
-                            usefulEffect = true;
-                    }
-                    if (effect.Contains(_effectManager.Target[11]))
-                        for (int i = 0; i < 50; i++)
-                            if (effect.Contains(_effectManager.Target[11] + "_" + i))
-                                if (FindObjectOfType<Player>().currentHealth - i <= 0)
-                                    value += 1000;
-                    if (effect.Contains(_effectManager.Target[12]))
-                        for (int i = 0; i < 50; i++)
-                            if (effect.Contains(_effectManager.Target[12] + "_" + i))
-                                if (currentHealth - i <= 0)
-                                    value -= 1000;
-                    if (effect.Contains(_effectManager.Target[13]) && !kill)
-                    {
-                        for (int i = 0; i < 50; i++)
-                            if (effect.Contains(_effectManager.Target[13] + "_" + i))
-                                if (position.positionFacing.card.ActualLife - card.attack - i <= 0)
-                                {
-                                    kill = true;
-                                    value++;
-                                    if (effect.Contains(_effectManager.Conditions[1]) || effect.Contains(_effectManager.Conditions[2]) || effect.Contains(_effectManager.Conditions[3]) || effect.Contains(_effectManager.Conditions[7]))
-                                        survive = true;
-                                }
-                        usefulEffect = true;
-                    }
-                    if (effect.Contains(_effectManager.Target[10]))
-                    {
-                        for (int i = 0; i < 50; i++)
-                            if (effect.Contains(_effectManager.Target[10] + "_" + i))
-                                if (card.life - position.positionFacing.card.ActualAttack - i <= 0)
-                                {
-                                    if (effect.Contains(_effectManager.Conditions[1]) || effect.Contains(_effectManager.Conditions[2]) || effect.Contains(_effectManager.Conditions[3]) || effect.Contains(_effectManager.Conditions[7]))
-                                    {
-                                        value--;
-                                        survive = false;
-                                    }
-                                }
-                        usefulEffect = true;
-                    }
-                    if ((!effect.Contains(_effectManager.Conditions[4]) || !survive) && (!effect.Contains(_effectManager.Conditions[4]) || kill))
-                        if (usefulEffect)
+                        if (effect.targetsDecks[j] == new Effects().targetsDecks[2] && _currentDeck.Count > 0)
                             value++;
-                }
-                if (effect.Contains(_effectManager.Conditions[2]))
-                {
-                    bool usefulEffect = true;
-                    if (effect.Contains(_effectManager.Target[2]) || effect.Contains(_effectManager.Target[4]) || effect.Contains(_effectManager.Target[6]) || effect.Contains(_effectManager.Target[8]))
+                        if (effect.targetsDecks[j] == new Effects().targetsDecks[3] && _currentBloodDeck.Count > 0)
+                            value++;
+                        if (effect.targetsDecks[j] == new Effects().targetsDecks[4] && (_currentBloodDeck.Count > 0 || _currentDeck.Count > 0))
+                            value++;
+                    }
+                    if (effect.effects[j] == new Effects().effects[2])
                     {
-                        if (!kill && position.positionFacing.card != null)
-                            usefulEffect = false;
-                        else
+                        bool usefulEffect = false;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[3] || effect.targetsCards[j] == new Effects().targetsCards[5] ||
+                            effect.targetsCards[j] == new Effects().targetsCards[7] || effect.targetsCards[j] == new Effects().targetsCards[9])
                         {
-                            foreach (MapPosition playerCards in _table.playerPositions)
+                            if (!kill && position.positionFacing.card != null)
+                                usefulEffect = true;
+                            else
                             {
-                                if (playerCards.card == null)
-                                    continue;
-                                if (position != null)
-                                    if (playerCards != position.positionFacing)
+                                foreach (MapPosition playerCards in _table.playerPositions)
+                                {
+                                    if (playerCards.card == null)
                                         continue;
-                                if (playerCards.card.ActualLife >= playerCards.card.card.life)
-                                    continue;
-                                usefulEffect = false;
+                                    if (position != null)
+                                        if (playerCards != position.positionFacing)
+                                            continue;
+                                    usefulEffect = true;
+                                }
                             }
                         }
-                    }
-                    if (effect.Contains(_effectManager.Target[3]) || effect.Contains(_effectManager.Target[5]) || effect.Contains(_effectManager.Target[7]) || effect.Contains(_effectManager.Target[9]))
-                    {
-                        bool allyInBattle = false;
-                        foreach (MapPosition allyCards in _table.enemyFront)
+                        if (effect.targetsCards[j] == new Effects().targetsCards[4] || effect.targetsCards[j] == new Effects().targetsCards[6] ||
+                            effect.targetsCards[j] == new Effects().targetsCards[8] || effect.targetsCards[j] == new Effects().targetsCards[10])
                         {
-                            if (allyCards.card == null)
-                                continue;
-                            if (allyCards.card.ActualLife >= allyCards.card.card.life)
-                                continue;
-                            allyInBattle = true;
+                            bool allyInBattle = false;
+                            foreach (MapPosition allyCards in _table.enemyFront)
+                            {
+                                if (allyCards.card == null)
+                                    continue;
+                                allyInBattle = true;
+                            }
+                            if (!allyInBattle)
+                                usefulEffect = true;
                         }
-                        if (!allyInBattle)
-                            usefulEffect = false;
-                    }
-                    if (effect.Contains(_effectManager.Target[11]))
-                        for (int i = 0; i < 50; i++)
-                            if (effect.Contains(_effectManager.Target[11] + "_" + i))
-                                if (FindObjectOfType<Player>().currentHealth + i > FindObjectOfType<Player>().maxHealth)
-                                    usefulEffect = true;
-                                else usefulEffect = false;
-                    if (effect.Contains(_effectManager.Target[12]))
-                        for (int i = 0; i < 50; i++)
-                            if (effect.Contains(_effectManager.Target[12] + "_" + i))
-                                if (currentHealth + i > maxHealth)
-                                    usefulEffect = false;
-                    if (effect.Contains(_effectManager.Target[13]) && !kill)
-                    {
-                        for (int i = 0; i < 50; i++)
-                            if (effect.Contains(_effectManager.Target[13] + "_" + i))
-                                if (position.positionFacing.card.ActualLife - card.attack + i > position.positionFacing.card.card.life)
-                                {
-                                    usefulEffect = true;
-                                    //survive = true;
-                                }
-                                else usefulEffect = false;
-                    }
-                    if (effect.Contains(_effectManager.Target[10]))
-                    {
-                        for (int i = 0; i < 50; i++)
-                            if (effect.Contains(_effectManager.Target[10] + "_" + i))
-                                if (card.life - position.positionFacing.card.ActualAttack + i > card.life)
-                                {
-                                    usefulEffect = false;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[12])
+                            if (FindObjectOfType<Player>().currentHealth - effect.x[j] <= 0)
+                                value += 1000;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[13])
+                            if (currentHealth - effect.x[j] <= 0)
+                                value -= 1000;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[14] && !kill)
+                        {
+                            if (position.positionFacing.card.ActualLife - card.attack - effect.x[j] <= 0)
+                            {
+                                kill = true;
+                                value++;
+                                if (effect.conditions[j] == new Effects().conditions[2] || effect.conditions[j] == new Effects().conditions[3] ||
+                                    effect.conditions[j] == new Effects().conditions[4] || effect.conditions[j] == new Effects().conditions[8])
                                     survive = true;
-                                }
-                    }
-                    if ((!effect.Contains(_effectManager.Conditions[4]) || !survive) && (!effect.Contains(_effectManager.Conditions[4]) || kill))
-                        if (usefulEffect)
-                            value++;
-                }
-                if (effect.Contains(_effectManager.Conditions[4]))
-                {
-                    bool usefulEffect = false;
-                    if (effect.Contains(_effectManager.Target[2]) || effect.Contains(_effectManager.Target[4]) || effect.Contains(_effectManager.Target[6]) || effect.Contains(_effectManager.Target[8]))
-                    {
-                        if (!kill && position.positionFacing.card != null && effect.Contains("-"))
+                            }
                             usefulEffect = true;
-                        else
+                        }
+                        if (effect.targetsCards[j] == new Effects().targetsCards[11])
                         {
-                            foreach (MapPosition playerCards in _table.playerPositions)
+                            if (card.life - position.positionFacing.card.ActualAttack - effect.x[j] <= 0)
                             {
-                                if (playerCards.card == null)
-                                    continue;
-                                if (position != null)
-                                    if (playerCards != position.positionFacing)
+                                if (effect.conditions[j] == new Effects().conditions[2] || effect.conditions[j] == new Effects().conditions[3] ||
+                                    effect.conditions[j] == new Effects().conditions[4] || effect.conditions[j] == new Effects().conditions[8])
+                                {
+                                    value--;
+                                    survive = false;
+                                }
+                            }
+                            usefulEffect = true;
+                        }
+                        if ((effect.conditions[j] != new Effects().conditions[4] || !survive) && (effect.conditions[j] != new Effects().conditions[4] || kill))
+                            if (usefulEffect)
+                                value++;
+                    }
+                    if (effect.effects[j] == new Effects().effects[3])
+                    {
+                        bool usefulEffect = true;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[3] || effect.targetsCards[j] == new Effects().targetsCards[5] ||
+                            effect.targetsCards[j] == new Effects().targetsCards[7] || effect.targetsCards[j] == new Effects().targetsCards[9])
+                        {
+                            if (!kill && position.positionFacing.card != null)
+                                usefulEffect = false;
+                            else
+                            {
+                                foreach (MapPosition playerCards in _table.playerPositions)
+                                {
+                                    if (playerCards.card == null)
                                         continue;
-                                if (!effect.Contains("-"))
-                                    continue;
-                                usefulEffect = true;
+                                    if (position != null)
+                                        if (playerCards != position.positionFacing)
+                                            continue;
+                                    if (playerCards.card.ActualLife >= playerCards.card.card.life)
+                                        continue;
+                                    usefulEffect = false;
+                                }
                             }
                         }
-                    }
-                    if (effect.Contains(_effectManager.Target[3]) || effect.Contains(_effectManager.Target[5]) || effect.Contains(_effectManager.Target[7]) || effect.Contains(_effectManager.Target[9]))
-                    {
-                        bool allyInBattle = false;
-                        foreach (MapPosition allyCards in _table.enemyFront)
+                        if (effect.targetsCards[j] == new Effects().targetsCards[4] || effect.targetsCards[j] == new Effects().targetsCards[6] ||
+                            effect.targetsCards[j] == new Effects().targetsCards[8] || effect.targetsCards[j] == new Effects().targetsCards[10])
                         {
-                            if (allyCards.card == null)
-                                continue;
-                            if (effect.Contains("-"))
-                                continue;
-                            allyInBattle = true;
+                            bool allyInBattle = false;
+                            foreach (MapPosition allyCards in _table.enemyFront)
+                            {
+                                if (allyCards.card == null)
+                                    continue;
+                                if (allyCards.card.ActualLife >= allyCards.card.card.life)
+                                    continue;
+                                allyInBattle = true;
+                            }
+                            if (!allyInBattle)
+                                usefulEffect = false;
                         }
-                        if (!allyInBattle)
-                            usefulEffect = true;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[12])
+                            if (FindObjectOfType<Player>().currentHealth + effect.x[j] > FindObjectOfType<Player>().maxHealth)
+                                usefulEffect = true;
+                            else usefulEffect = false;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[13])
+                            if (currentHealth + effect.x[j] > maxHealth)
+                                usefulEffect = false;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[14])
+                        {
+                            if (position.positionFacing.card.ActualLife - card.attack + effect.x[j] > position.positionFacing.card.card.life)
+                            {
+                                usefulEffect = true;
+                                //survive = true;
+                            }
+                            else usefulEffect = false;
+                        }
+                        if (effect.targetsCards[j] == new Effects().targetsCards[11])
+                        {
+                            if (card.life - position.positionFacing.card.ActualAttack + effect.x[j] > card.life)
+                            {
+                                usefulEffect = false;
+                                survive = true;
+                            }
+                        }
+                        if ((effect.conditions[j] != new Effects().conditions[4] || !survive) && (effect.conditions[j] != new Effects().conditions[4] || kill))
+                            if (usefulEffect)
+                                value++;
                     }
-                    if (effect.Contains(_effectManager.Target[13]) && !kill)
-                        if (effect.Contains("-"))
-                            usefulEffect = true;
-                    if (effect.Contains(_effectManager.Target[10]))
-                        if (survive)
-                            usefulEffect = true;
-                    if ((!effect.Contains(_effectManager.Conditions[4]) || !survive) && (!effect.Contains(_effectManager.Conditions[4]) || kill))
-                        if (usefulEffect)
-                            value++;
+                    if (effect.effects[j] == new Effects().effects[5])
+                    {
+                        bool usefulEffect = false;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[3] || effect.targetsCards[j] == new Effects().targetsCards[5] ||
+                            effect.targetsCards[j] == new Effects().targetsCards[7] || effect.targetsCards[j] == new Effects().targetsCards[9])
+                        {
+                            if (!kill && position.positionFacing.card != null && (effect.x[j] < 0 || effect.y[j] < 0))
+                                usefulEffect = true;
+                            else
+                            {
+                                foreach (MapPosition playerCards in _table.playerPositions)
+                                {
+                                    if (playerCards.card == null)
+                                        continue;
+                                    if (position != null)
+                                        if (playerCards != position.positionFacing)
+                                            continue;
+                                    if (effect.x[j] >= 0 || effect.y[j] >= 0)
+                                        continue;
+                                    usefulEffect = true;
+                                }
+                            }
+                        }
+                        if (effect.targetsCards[j] == new Effects().targetsCards[4] || effect.targetsCards[j] == new Effects().targetsCards[6] ||
+                            effect.targetsCards[j] == new Effects().targetsCards[8] || effect.targetsCards[j] == new Effects().targetsCards[10])
+                        {
+                            bool allyInBattle = false;
+                            foreach (MapPosition allyCards in _table.enemyFront)
+                            {
+                                if (allyCards.card == null)
+                                    continue;
+                                if (effect.x[j] < 0 || effect.y[j] < 0)
+                                    continue;
+                                allyInBattle = true;
+                            }
+                            if (!allyInBattle)
+                                usefulEffect = true;
+                        }
+                        if (effect.targetsCards[j] == new Effects().targetsCards[14] && !kill)
+                            if (effect.x[j] < 0 || effect.y[j] < 0)
+                                usefulEffect = true;
+                        if (effect.targetsCards[j] == new Effects().targetsCards[11])
+                            if (survive)
+                                usefulEffect = true;
+                        if ((effect.conditions[j] != new Effects().conditions[4] || !survive) && (effect.conditions[j] != new Effects().conditions[4] || kill))
+                            if (usefulEffect)
+                                value++;
+                    }
                 }
-            }
+        //foreach (string effects in new Effects().conditions)
+        //    for (int i =0; i< effects.; i++)
+        //    if (!survive && effect.Contains(effects))
+        //    {
+        //        if (effect.Contains(_effectManager.Effects[0]))
+        //        {
+        //            if (effect.Contains(_effectManager.Target[15]) && _currentDeck.Count > 0)
+        //                value++;
+        //            if (effect.Contains(_effectManager.Target[16]) && _currentBloodDeck.Count > 0)
+        //                value++;
+        //            if (effect.Contains(_effectManager.Target[17]) && (_currentBloodDeck.Count > 0 || _currentDeck.Count > 0))
+        //                value++;
+        //        }
+        //        if (effect.Contains(_effectManager.Conditions[1]))
+        //        {
+        //            bool usefulEffect = false;
+        //            if (effect.Contains(_effectManager.Target[2]) || effect.Contains(_effectManager.Target[4]) || effect.Contains(_effectManager.Target[6]) || effect.Contains(_effectManager.Target[8]))
+        //            {
+        //                if (!kill && position.positionFacing.card != null)
+        //                    usefulEffect = true;
+        //                else
+        //                {
+        //                    foreach (MapPosition playerCards in _table.playerPositions)
+        //                    {
+        //                        if (playerCards.card == null)
+        //                            continue;
+        //                        if (position != null)
+        //                            if (playerCards != position.positionFacing)
+        //                                continue;
+        //                        usefulEffect = true;
+        //                    }
+        //                }
+        //            }
+        //            if (effect.Contains(_effectManager.Target[3]) || effect.Contains(_effectManager.Target[5]) || effect.Contains(_effectManager.Target[7]) || effect.Contains(_effectManager.Target[9]))
+        //            {
+        //                bool allyInBattle = false;
+        //                foreach (MapPosition allyCards in _table.enemyFront)
+        //                {
+        //                    if (allyCards.card == null)
+        //                        continue;
+        //                    allyInBattle = true;
+        //                }
+        //                if (!allyInBattle)
+        //                    usefulEffect = true;
+        //            }
+        //            if (effect.Contains(_effectManager.Target[11]))
+        //                for (int i = 0; i < 50; i++)
+        //                    if (effect.Contains(_effectManager.Target[11] + "_" + i))
+        //                        if (FindObjectOfType<Player>().currentHealth - i <= 0)
+        //                            value += 1000;
+        //            if (effect.Contains(_effectManager.Target[12]))
+        //                for (int i = 0; i < 50; i++)
+        //                    if (effect.Contains(_effectManager.Target[12] + "_" + i))
+        //                        if (currentHealth - i <= 0)
+        //                            value -= 1000;
+        //            if (effect.Contains(_effectManager.Target[13]) && !kill)
+        //            {
+        //                for (int i = 0; i < 50; i++)
+        //                    if (effect.Contains(_effectManager.Target[13] + "_" + i))
+        //                        if (position.positionFacing.card.ActualLife - card.attack - i <= 0)
+        //                        {
+        //                            kill = true;
+        //                            value++;
+        //                            if (effect.Contains(_effectManager.Conditions[1]) || effect.Contains(_effectManager.Conditions[2]) || effect.Contains(_effectManager.Conditions[3]) || effect.Contains(_effectManager.Conditions[7]))
+        //                                survive = true;
+        //                        }
+        //                usefulEffect = true;
+        //            }
+        //            if (effect.Contains(_effectManager.Target[10]))
+        //            {
+        //                for (int i = 0; i < 50; i++)
+        //                    if (effect.Contains(_effectManager.Target[10] + "_" + i))
+        //                        if (card.life - position.positionFacing.card.ActualAttack - i <= 0)
+        //                        {
+        //                            if (effect.Contains(_effectManager.Conditions[1]) || effect.Contains(_effectManager.Conditions[2]) || effect.Contains(_effectManager.Conditions[3]) || effect.Contains(_effectManager.Conditions[7]))
+        //                            {
+        //                                value--;
+        //                                survive = false;
+        //                            }
+        //                        }
+        //                usefulEffect = true;
+        //            }
+        //            if ((!effect.Contains(_effectManager.Conditions[4]) || !survive) && (!effect.Contains(_effectManager.Conditions[4]) || kill))
+        //                if (usefulEffect)
+        //                    value++;
+        //        }
+        //        if (effect.Contains(_effectManager.Conditions[2]))
+        //        {
+        //            bool usefulEffect = true;
+        //            if (effect.Contains(_effectManager.Target[2]) || effect.Contains(_effectManager.Target[4]) || effect.Contains(_effectManager.Target[6]) || effect.Contains(_effectManager.Target[8]))
+        //            {
+        //                if (!kill && position.positionFacing.card != null)
+        //                    usefulEffect = false;
+        //                else
+        //                {
+        //                    foreach (MapPosition playerCards in _table.playerPositions)
+        //                    {
+        //                        if (playerCards.card == null)
+        //                            continue;
+        //                        if (position != null)
+        //                            if (playerCards != position.positionFacing)
+        //                                continue;
+        //                        if (playerCards.card.ActualLife >= playerCards.card.card.life)
+        //                            continue;
+        //                        usefulEffect = false;
+        //                    }
+        //                }
+        //            }
+        //            if (effect.Contains(_effectManager.Target[3]) || effect.Contains(_effectManager.Target[5]) || effect.Contains(_effectManager.Target[7]) || effect.Contains(_effectManager.Target[9]))
+        //            {
+        //                bool allyInBattle = false;
+        //                foreach (MapPosition allyCards in _table.enemyFront)
+        //                {
+        //                    if (allyCards.card == null)
+        //                        continue;
+        //                    if (allyCards.card.ActualLife >= allyCards.card.card.life)
+        //                        continue;
+        //                    allyInBattle = true;
+        //                }
+        //                if (!allyInBattle)
+        //                    usefulEffect = false;
+        //            }
+        //            if (effect.Contains(_effectManager.Target[11]))
+        //                for (int i = 0; i < 50; i++)
+        //                    if (effect.Contains(_effectManager.Target[11] + "_" + i))
+        //                        if (FindObjectOfType<Player>().currentHealth + i > FindObjectOfType<Player>().maxHealth)
+        //                            usefulEffect = true;
+        //                        else usefulEffect = false;
+        //            if (effect.Contains(_effectManager.Target[12]))
+        //                for (int i = 0; i < 50; i++)
+        //                    if (effect.Contains(_effectManager.Target[12] + "_" + i))
+        //                        if (currentHealth + i > maxHealth)
+        //                            usefulEffect = false;
+        //            if (effect.Contains(_effectManager.Target[13]) && !kill)
+        //            {
+        //                for (int i = 0; i < 50; i++)
+        //                    if (effect.Contains(_effectManager.Target[13] + "_" + i))
+        //                        if (position.positionFacing.card.ActualLife - card.attack + i > position.positionFacing.card.card.life)
+        //                        {
+        //                            usefulEffect = true;
+        //                            //survive = true;
+        //                        }
+        //                        else usefulEffect = false;
+        //            }
+        //            if (effect.Contains(_effectManager.Target[10]))
+        //            {
+        //                for (int i = 0; i < 50; i++)
+        //                    if (effect.Contains(_effectManager.Target[10] + "_" + i))
+        //                        if (card.life - position.positionFacing.card.ActualAttack + i > card.life)
+        //                        {
+        //                            usefulEffect = false;
+        //                            survive = true;
+        //                        }
+        //            }
+        //            if ((!effect.Contains(_effectManager.Conditions[4]) || !survive) && (!effect.Contains(_effectManager.Conditions[4]) || kill))
+        //                if (usefulEffect)
+        //                    value++;
+        //        }
+        //        if (effect.Contains(_effectManager.Conditions[4]))
+        //        {
+        //            bool usefulEffect = false;
+        //            if (effect.Contains(_effectManager.Target[2]) || effect.Contains(_effectManager.Target[4]) || effect.Contains(_effectManager.Target[6]) || effect.Contains(_effectManager.Target[8]))
+        //            {
+        //                if (!kill && position.positionFacing.card != null && effect.Contains("-"))
+        //                    usefulEffect = true;
+        //                else
+        //                {
+        //                    foreach (MapPosition playerCards in _table.playerPositions)
+        //                    {
+        //                        if (playerCards.card == null)
+        //                            continue;
+        //                        if (position != null)
+        //                            if (playerCards != position.positionFacing)
+        //                                continue;
+        //                        if (!effect.Contains("-"))
+        //                            continue;
+        //                        usefulEffect = true;
+        //                    }
+        //                }
+        //            }
+        //            if (effect.Contains(_effectManager.Target[3]) || effect.Contains(_effectManager.Target[5]) || effect.Contains(_effectManager.Target[7]) || effect.Contains(_effectManager.Target[9]))
+        //            {
+        //                bool allyInBattle = false;
+        //                foreach (MapPosition allyCards in _table.enemyFront)
+        //                {
+        //                    if (allyCards.card == null)
+        //                        continue;
+        //                    if (effect.Contains("-"))
+        //                        continue;
+        //                    allyInBattle = true;
+        //                }
+        //                if (!allyInBattle)
+        //                    usefulEffect = true;
+        //            }
+        //            if (effect.Contains(_effectManager.Target[13]) && !kill)
+        //                if (effect.Contains("-"))
+        //                    usefulEffect = true;
+        //            if (effect.Contains(_effectManager.Target[10]))
+        //                if (survive)
+        //                    usefulEffect = true;
+        //            if ((!effect.Contains(_effectManager.Conditions[4]) || !survive) && (!effect.Contains(_effectManager.Conditions[4]) || kill))
+        //                if (usefulEffect)
+        //                    value++;
+        //        }
+        //    }
         return value;
     }
     private List<BestPlay> ForeachCard(List<CardInfo> cards, int i, BestPlay lastBestPlays)
