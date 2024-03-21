@@ -152,7 +152,7 @@ public class GenerateCardEditor : Editor
         GUILayout.Space(10);
         if (GUILayout.Button("Reload card list"))
         {
-            ReloadList();
+            ReloadList(card);
         }
         GUILayout.Space(20);
         card.spellInt = GUILayout.Toolbar(card.spellInt, new string[] { "Creature card", "Spell card" });
@@ -522,7 +522,7 @@ public class GenerateCardEditor : Editor
                     updateCard = false;
                     card.UpdateCard(loadId);
                     firstTimeId = true;
-                    ReloadList();
+                    ReloadList(card);
                     ClearInfo();
                 }
         }
@@ -539,7 +539,7 @@ public class GenerateCardEditor : Editor
         creaturesToAffect = 0;
         updateCard = false;
     }
-    private void ReloadList()
+    private void ReloadList(GenerateCard card)
     {
         generatedCards.Clear();
         var tempCards = new List<Cards>();
