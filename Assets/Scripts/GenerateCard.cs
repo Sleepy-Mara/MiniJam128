@@ -48,7 +48,6 @@ public class GenerateCard : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         EditorUtility.FocusProjectWindow();
-
         card.cardName = cardName;
         card.attack = attack;
         card.life = life;
@@ -69,12 +68,14 @@ public class GenerateCard : MonoBehaviour
         ClearInfo();
         return card;
     }
-    public void UpdateCard(string name)
+    public void UpdateCard(string cardId)
     {
-        foreach (var asset in AssetDatabase.FindAssets(name))
+        foreach (var asset in AssetDatabase.FindAssets("SO_"))
         {
             var path = AssetDatabase.GUIDToAssetPath(asset);
-            AssetDatabase.DeleteAsset(path);
+            var objects = AssetDatabase.LoadAssetAtPath(path, typeof(Cards));
+            if (objects.ConvertTo<Cards>().id == cardId)
+                AssetDatabase.DeleteAsset(path);
         }
         CreateCard();
     }
@@ -146,6 +147,41 @@ public class GenerateCardEditor : Editor
         var width = EditorGUIUtility.currentViewWidth;
         var height = Screen.height * (width / Screen.width) - 160;
 
+        GUILayout.Space(10);
+        if (GUILayout.Button("Reload card list"))
+        {
+            generatedCards.Clear();
+            var tempCards = new List<Cards>();
+            foreach (var asset in AssetDatabase.FindAssets("SO_"))
+            {
+                var path = AssetDatabase.GUIDToAssetPath(asset);
+                var objects = AssetDatabase.LoadAssetAtPath(path, typeof(Cards));
+                tempCards.Add(objects.ConvertTo<Cards>());
+            }
+            int j = tempCards.Count;
+            int lastId = -1;
+            for (int i = 0; i < j; i++)
+            {
+                int acrualId = tempCards.Count;
+                Cards cardToRemove = null;
+                foreach (Cards cards in tempCards)
+                {
+                    int.TryParse(cards.id, out int x);
+                    if (x <= acrualId && x > lastId)
+                    {
+                        acrualId = x;
+                        cardToRemove = cards;
+                    }
+                }
+                if (cardToRemove == null)
+                    break;
+                generatedCards.Add(cardToRemove);
+                lastId = acrualId;
+            }
+            card.id = card.GetID(generatedCards.Count);
+            loadId = card.id;
+        }
+        GUILayout.Space(20);
         card.spellInt = GUILayout.Toolbar(card.spellInt, new string[] { "Creature card", "Spell card" });
         switch (card.spellInt)
         {
@@ -509,7 +545,7 @@ public class GenerateCardEditor : Editor
                 {
                     showLastUpdate = false;
                     updateCard = false;
-                    card.UpdateCard(cardName);
+                    card.UpdateCard(loadId);
                     firstTimeId = true;
                     ClearInfo();
                 }
