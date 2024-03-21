@@ -515,7 +515,7 @@ public class GenerateCardEditor : Editor
                         if (cards.spell)
                             card.spellInt = 1;
                         else card.spellInt = 0;
-                        card.id = cards.id;
+                        card.id = loadId;
                         showLastUpdate = true;
                     }
                     Debug.Log(cards.id + " " + loadId);
@@ -528,6 +528,7 @@ public class GenerateCardEditor : Editor
                 {
                     showLastUpdate = false;
                     updateCard = false;
+                    card.id = loadId;
                     card.UpdateCard(loadId);
                     firstTimeId = true;
                     ReloadList(card);
