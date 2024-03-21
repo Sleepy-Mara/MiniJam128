@@ -44,7 +44,7 @@ public class GenerateCard : MonoBehaviour
             direction = "NormalCards";
             suffix = "_N";
         }
-        AssetDatabase.CreateAsset(card, "Assets/ScriptableObjects/" + direction + "/SO_" + id + "_" + scriptableName + suffix + ".asset");
+        AssetDatabase.CreateAsset(card, "Assets/ScriptableObjects/" + direction + "/SOC_" + id + "_" + scriptableName + suffix + ".asset");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         EditorUtility.FocusProjectWindow();
@@ -71,7 +71,7 @@ public class GenerateCard : MonoBehaviour
     }
     public void UpdateCard(string cardId)
     {
-        foreach (var asset in AssetDatabase.FindAssets("SO_"))
+        foreach (var asset in AssetDatabase.FindAssets("SOC_"))
         {
             var path = AssetDatabase.GUIDToAssetPath(asset);
             var objects = AssetDatabase.LoadAssetAtPath(path, typeof(Cards));
