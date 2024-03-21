@@ -48,6 +48,7 @@ public class GenerateCard : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         EditorUtility.FocusProjectWindow();
+        card.scriptableName = scriptableName;
         card.cardName = cardName;
         card.attack = attack;
         card.life = life;
@@ -81,6 +82,7 @@ public class GenerateCard : MonoBehaviour
     }
     public void ClearInfo()
     {
+        scriptableName = "Scriptable name";
         cardName = new List<string> { "English name", "Spanish name" };
         attack = 0;
         life = 0;
@@ -518,6 +520,7 @@ public class GenerateCardEditor : Editor
                         if (cards.id == loadId)
                         {
                             cardName = cards.name;
+                            card.scriptableName = cards.scriptableName;
                             card.cardName = cards.cardName;
                             card.attack = cards.attack;
                             card.life = cards.life;
