@@ -152,36 +152,7 @@ public class GenerateCardEditor : Editor
         GUILayout.Space(10);
         if (GUILayout.Button("Reload card list"))
         {
-            generatedCards.Clear();
-            var tempCards = new List<Cards>();
-            foreach (var asset in AssetDatabase.FindAssets("SO_"))
-            {
-                var path = AssetDatabase.GUIDToAssetPath(asset);
-                var objects = AssetDatabase.LoadAssetAtPath(path, typeof(Cards));
-                tempCards.Add(objects.ConvertTo<Cards>());
-            }
-            int j = tempCards.Count;
-            int lastId = -1;
-            for (int i = 0; i < j; i++)
-            {
-                int acrualId = tempCards.Count;
-                Cards cardToRemove = null;
-                foreach (Cards cards in tempCards)
-                {
-                    int.TryParse(cards.id, out int x);
-                    if (x <= acrualId && x > lastId)
-                    {
-                        acrualId = x;
-                        cardToRemove = cards;
-                    }
-                }
-                if (cardToRemove == null)
-                    break;
-                generatedCards.Add(cardToRemove);
-                lastId = acrualId;
-            }
-            card.id = card.GetID(generatedCards.Count);
-            loadId = card.id;
+            ReloadList();
         }
         GUILayout.Space(20);
         card.spellInt = GUILayout.Toolbar(card.spellInt, new string[] { "Creature card", "Spell card" });
@@ -539,8 +510,8 @@ public class GenerateCardEditor : Editor
                                 card.spellInt = 1;
                             else card.spellInt = 0;
                             card.id = cards.id;
-                        }
-                    showLastUpdate = true;
+                            showLastUpdate = true;
+                        }   
                 }
             GUILayout.EndHorizontal();
             GUILayout.Space(5);
@@ -551,6 +522,7 @@ public class GenerateCardEditor : Editor
                     updateCard = false;
                     card.UpdateCard(loadId);
                     firstTimeId = true;
+                    ReloadList();
                     ClearInfo();
                 }
         }
@@ -566,6 +538,39 @@ public class GenerateCardEditor : Editor
         effextY = 0;
         creaturesToAffect = 0;
         updateCard = false;
+    }
+    private void ReloadList()
+    {
+        generatedCards.Clear();
+        var tempCards = new List<Cards>();
+        foreach (var asset in AssetDatabase.FindAssets("SO_"))
+        {
+            var path = AssetDatabase.GUIDToAssetPath(asset);
+            var objects = AssetDatabase.LoadAssetAtPath(path, typeof(Cards));
+            tempCards.Add(objects.ConvertTo<Cards>());
+        }
+        int j = tempCards.Count;
+        int lastId = -1;
+        for (int i = 0; i < j; i++)
+        {
+            int acrualId = tempCards.Count;
+            Cards cardToRemove = null;
+            foreach (Cards cards in tempCards)
+            {
+                int.TryParse(cards.id, out int x);
+                if (x <= acrualId && x > lastId)
+                {
+                    acrualId = x;
+                    cardToRemove = cards;
+                }
+            }
+            if (cardToRemove == null)
+                break;
+            generatedCards.Add(cardToRemove);
+            lastId = acrualId;
+        }
+        card.id = card.GetID(generatedCards.Count);
+        loadId = card.id;
     }
     void OnEnable()
     {
