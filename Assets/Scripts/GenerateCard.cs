@@ -493,30 +493,33 @@ public class GenerateCardEditor : Editor
                 if (GUILayout.Button("Load card"))
                 {
                     foreach (Cards cards in ReloadList(card))
-                        if (cards.id == loadId)
-                        {
-                            cardName = cards.name;
-                            card.scriptableName = cards.scriptableName;
-                            card.cardName = cards.cardName;
-                            card.attack = cards.attack;
-                            card.life = cards.life;
-                            card.manaCost = cards.manaCost;
-                            card.healthCost = cards.healthCost;
-                            card.sprite = cards.sprite;
-                            card.clearEffexts = false;
-                            card.hasEffect = cards.hasEffect;
-                            if (cards.hasEffect)
-                                card.hasEffectInt = 0;
-                            else card.hasEffectInt = 1;
-                            card.effectDescription = cards.effectDesc;
-                            card.effects = cards.effects;
-                            card.spell = cards.spell;
-                            if (cards.spell)
-                                card.spellInt = 1;
-                            else card.spellInt = 0;
-                            card.id = cards.id;
-                            showLastUpdate = true;
-                        }   
+                {
+                    if (cards.id == loadId)
+                    {
+                        cardName = cards.name;
+                        card.scriptableName = cards.scriptableName;
+                        card.cardName = cards.cardName;
+                        card.attack = cards.attack;
+                        card.life = cards.life;
+                        card.manaCost = cards.manaCost;
+                        card.healthCost = cards.healthCost;
+                        card.sprite = cards.sprite;
+                        card.clearEffexts = false;
+                        card.hasEffect = cards.hasEffect;
+                        if (cards.hasEffect)
+                            card.hasEffectInt = 0;
+                        else card.hasEffectInt = 1;
+                        card.effectDescription = cards.effectDesc;
+                        card.effects = cards.effects;
+                        card.spell = cards.spell;
+                        if (cards.spell)
+                            card.spellInt = 1;
+                        else card.spellInt = 0;
+                        card.id = loadId;
+                        showLastUpdate = true;
+                    }
+                    Debug.Log(cards.id + " " + loadId);
+                }
                 }
             GUILayout.EndHorizontal();
             GUILayout.Space(5);
@@ -525,6 +528,7 @@ public class GenerateCardEditor : Editor
                 {
                     showLastUpdate = false;
                     updateCard = false;
+                    card.id = loadId;
                     card.UpdateCard(loadId);
                     firstTimeId = true;
                     ReloadList(card);
@@ -575,7 +579,6 @@ public class GenerateCardEditor : Editor
             lastId = acrualId;
         }
         card.id = card.GetID(retirnGeneratedCards.Count);
-        loadId = card.id;
         return retirnGeneratedCards;
     }
     void OnEnable()
