@@ -535,6 +535,7 @@ public class GenerateCardEditor : Editor
                             if (cards.spell)
                                 card.spellInt = 1;
                             else card.spellInt = 0;
+                            card.id = cards.id;
                         }
                     showLastUpdate = true;
                 }
