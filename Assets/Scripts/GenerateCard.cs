@@ -129,7 +129,6 @@ public class GenerateCardEditor : Editor
     bool updateCard = false;
     bool showLastUpdate = false;
     string cardName = "";
-    List<Cards> generatedCards = new List<Cards>();
     bool firstTimeId = true;
     string loadId = "0000";
     public override void OnInspectorGUI()
@@ -168,9 +167,9 @@ public class GenerateCardEditor : Editor
         GUILayout.Space(20);
         GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("ID:", myStyle);
-            if (generatedCards.Count != 0 && firstTimeId)
+            if (ReloadList(card).Count != 0 && firstTimeId)
             {
-                card.id = card.GetID(generatedCards.Count);
+                card.id = card.GetID(ReloadList(card).Count);
                 loadId = card.id;
                 firstTimeId = false;
             }
@@ -464,7 +463,13 @@ public class GenerateCardEditor : Editor
         GUILayout.BeginHorizontal();
             if (GUILayout.Button("Create card"))
             {
-                generatedCards.Add(card.CreateCard());
+                card.CreateCard();
+                foreach (Cards cards in ReloadList(card))
+                    if (cards.id == card.id)
+                    {
+                        Debug.Log("ID in use");
+                        return;
+                    }
                 firstTimeId = true;
                 ClearInfo();
             }
@@ -487,7 +492,7 @@ public class GenerateCardEditor : Editor
                 loadId = EditorGUILayout.TextField(loadId);
                 if (GUILayout.Button("Load card"))
                 {
-                    foreach (Cards cards in generatedCards)
+                    foreach (Cards cards in ReloadList(card))
                         if (cards.id == loadId)
                         {
                             cardName = cards.name;
@@ -539,9 +544,9 @@ public class GenerateCardEditor : Editor
         creaturesToAffect = 0;
         updateCard = false;
     }
-    private void ReloadList(GenerateCard card)
+    private List<Cards> ReloadList(GenerateCard card)
     {
-        generatedCards.Clear();
+        List<Cards> retirnGeneratedCards = new List<Cards>();
         var tempCards = new List<Cards>();
         foreach (var asset in AssetDatabase.FindAssets("SO_"))
         {
@@ -566,11 +571,12 @@ public class GenerateCardEditor : Editor
             }
             if (cardToRemove == null)
                 break;
-            generatedCards.Add(cardToRemove);
+            retirnGeneratedCards.Add(cardToRemove);
             lastId = acrualId;
         }
-        card.id = card.GetID(generatedCards.Count);
+        card.id = card.GetID(retirnGeneratedCards.Count);
         loadId = card.id;
+        return retirnGeneratedCards;
     }
     void OnEnable()
     {
