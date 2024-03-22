@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
+  m_Name: SOC_0017_Dog_E
+  m_EditorClassIdentifier: 
+  scriptableName: 
+  id: 
+  cardName: []
+  life: 0
+  attack: 0
+  attackToPlayer: 0
+  manaCost: 0
+  healthCost: 0
+  sprite: {fileID: 0}
+  hasEffect: 0
+  effect: 
+  effectSprite: {fileID: 0}
+  effectDesc: []
+  spell: 0
+  effects:
+    conditions:
+    - None
+    - Start_turn
+    - Played
+    - Attacks
+    - Damaged
+    - Defeated
+    - Defeats_enemy
+    - Ally_creature_defeated
+    - End_turn
+    - Buffed
+    - Spell_played
+    extraConditions:
+    - None
+    - Until_next_turn
+    - Until_end_turn
+    effects:
+    - None
+    - Draw
+    - Deal_damage
+    - Heal
+    - Add
+    - Give_stats
+    - Immune
+    - 'Summon '
+    targetsCreatures:
+    - None
+    - Enemy_creature
+    - Ally_creature
+    - Random_enemy
+    - Random_ally
+    - Random_enemy_creature
+    - Random_ally_creature
+    - Random_enemy_creatures
+    - Random_ally_creatures
+    - All_enemy_creatures
+    - All_ally_creatures
+    - Itself
+    - Enemy_player
+    - Player
+    - Creature_front
+    - Enemy_creatures
+    - Ally_creatures
+    targetsDecks:
+    - None
+    - Hand
+    - Deck
+    - Life_deck
+    - Either_deck
+    targetsCards:
+    - None
+    - Random_creature
+    - Random_spell
+    - Random
+    - Specific_card
+    targetsSummon:
+    - None
+    - Player
+    - Enemy
+    x: 
+    y: 
+    numberOfTargets: 
