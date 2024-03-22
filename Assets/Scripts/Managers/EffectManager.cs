@@ -2530,76 +2530,76 @@ public class Effects
 {
     public List<string> conditions = new List<string>()
     {
-        "none", //0
-        "start_turn", //1
-        "played", //2
-        "attacks", //3
-        "damaged", //4
-        "defeated", //5
-        "defeats_enemy", //6
-        "ally_creature_defeated", //7
-        "end_turn", //8
-        "buffed", //9
-        "spell_played", //10
+        "None", //0
+        "Start_turn", //1
+        "Played", //2
+        "Attacks", //3
+        "Damaged", //4
+        "Defeated", //5
+        "Defeats_enemy", //6
+        "Ally_creature_defeated", //7
+        "End_turn", //8
+        "Buffed", //9
+        "Spell_played", //10
     };
     public List<string> extraConditions = new List<string>()
     {
-        "none", //0
-        "until_next_turn", //1
-        "until_end_turn" //2
+        "None", //0
+        "Until_next_turn", //1
+        "Until_end_turn" //2
     };
     public List<string> effects = new List<string>()
     {
-        "none", //0
-        "draw", //1
-        "deal", //2
-        "heal", //3
-        "add", //4
-        "give", //5
-        "immune", //6
-        "summon", //7
+        "None", //0
+        "Draw", //1
+        "Deal_damage", //2
+        "Heal", //3
+        "Add", //4
+        "Give_stats", //5
+        "Immune", //6
+        "Summon ", //7
     };
     public List<string> targetsCreatures = new List<string>()
     {
-        "none", //0
-        "enemy_creature", //1
-        "ally_creature", //2
-        "random_enemy", //3
-        "random_ally", //4
-        "random_enemy_creature", //5
-        "random_ally_creature", //6
-        "random_enemy_creatures", //7
-        "random_ally_creatures", //8
-        "all_enemy_creatures", //9
-        "all_ally_creatures", //10
-        "itself", //11
-        "enemy_player", //12
-        "player", //13
-        "creature_front", //14
-        "enemy_creatures", //15
-        "ally_creatures", //16
+        "None", //0
+        "Enemy_creature", //1
+        "Ally_creature", //2
+        "Random_enemy", //3
+        "Random_ally", //4
+        "Random_enemy_creature", //5
+        "Random_ally_creature", //6
+        "Random_enemy_creatures", //7
+        "Random_ally_creatures", //8
+        "All_enemy_creatures", //9
+        "All_ally_creatures", //10
+        "Itself", //11
+        "Enemy_player", //12
+        "Player", //13
+        "Creature_front", //14
+        "Enemy_creatures", //15
+        "Ally_creatures", //16
     };
     public List<string> targetsDecks = new List<string>()
     {
-        "none", //0
-        "hand", //1
-        "deck", //2
-        "life_deck", //3
-        "either_deck", //4
+        "None", //0
+        "Hand", //1
+        "Deck", //2
+        "Life_deck", //3
+        "Either_deck", //4
     };
     public List<string> targetsCards = new List<string>()
     {
-        "none", //0
-        "random_creature", //1
-        "random_spell", //2
-        "random", //3
-        "specific_card" //4
+        "None", //0
+        "Random_creature", //1
+        "Random_spell", //2
+        "Random", //3
+        "Specific_card" //4
     };
     public List<string> targetsSummon = new List<string>()
     {
-        "none", //0
-        "player", //1
-        "enemy", //2
+        "None", //0
+        "Player", //1
+        "Enemy", //2
     };
     public List<int> x = new List<int>();
     public List<int> y = new List<int>();
