@@ -552,7 +552,7 @@ public class GenerateCardEditor : Editor
     {
         List<Cards> retirnGeneratedCards = new List<Cards>();
         var tempCards = new List<Cards>();
-        foreach (var asset in AssetDatabase.FindAssets("SO_"))
+        foreach (var asset in AssetDatabase.FindAssets("SOC_"))
         {
             var path = AssetDatabase.GUIDToAssetPath(asset);
             var objects = AssetDatabase.LoadAssetAtPath(path, typeof(Cards));
