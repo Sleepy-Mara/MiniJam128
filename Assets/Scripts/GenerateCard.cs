@@ -67,6 +67,7 @@ public class GenerateCard : MonoBehaviour
             card.effectDesc = effectDescription;
         }
         ClearInfo();
+        UnityEditor.EditorUtility.SetDirty(card);
         return card;
     }
     public void UpdateCard(string cardId)
