@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: SOC_0001_oggodyadB_N
+  m_Name: SOC_0024_Crocoroco_N
   m_EditorClassIdentifier: 
-  scriptableName: oggodyadB
-  id: 0001
+  scriptableName: Crocoroco
+  id: 0024
   cardName:
-  - oggod yadB
-  - "ore\xF1alpmc otirreP"
-  life: 2
+  - Crocoroco
+  - Crocoroco
+  life: 3
   attack: 3
   attackToPlayer: 0
-  manaCost: 2
+  manaCost: 3
   healthCost: 0
-  sprite: {fileID: 21300000, guid: dff75fff64d1b4b4796831a06296e44e, type: 3}
+  sprite: {fileID: 21300000, guid: 0e85060f4dbeed34d951167d28ac6531, type: 3}
   hasEffect: 0
   effect: 
   effectSprite: {fileID: 0}

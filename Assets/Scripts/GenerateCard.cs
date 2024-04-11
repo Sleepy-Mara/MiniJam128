@@ -2,48 +2,123 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.TerrainTools;
+using UnityEditor.UIElements;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class GenerateCard : MonoBehaviour
 {
+    #region private variables
+    private List<string> cardName = new List<string> { "English name", "Spanish name" };
+    private int attack;
+    private int life;
+    private int manaCost;
+    private int healthCost;
+    private Sprite sprite;
+    private List<string> effectDescription = new List<string> { "English effect text", "Spanish effect text" };
+    #endregion
     public string scriptableName = "Scriptable name";
-    public List<string> cardName = new List<string> {"English name", "Spanish name"};
-    public int attack;
-    public int life;
-    public int manaCost;
-    public int healthCost;
-    public Sprite sprite;
+    public List<string> CardName
+    {
+        get { return cardName; }
+        set 
+        {
+            cardName = value;
+            VisualCard();
+        }
+    }
+    public int Attack
+    {
+        get { return attack; }
+        set
+        {
+            attack = value;
+            VisualCard();
+        }
+    }
+    public int Life
+    {
+        get { return life; }
+        set
+        {
+            life = value;
+            VisualCard();
+        }
+    }
+    public int ManaCost
+    {
+        get { return manaCost; }
+        set
+        {
+            manaCost = value;
+            VisualCard();
+        }
+    }
+    public int HealthCost
+    {
+        get { return healthCost; }
+        set
+        {
+            healthCost = value;
+            VisualCard();
+        }
+    }
+    public Sprite Sprite
+    {
+        get { return sprite; }
+        set
+        {
+            sprite = value;
+            VisualCard();
+        }
+    }
+    public List<string> EffectDescription
+    {
+        get { return effectDescription; }
+        set
+        {
+            effectDescription = value;
+            VisualCard();
+        }
+    }
     public bool hasEffect = false;
     public int hasEffectInt = 1;
     public string effect;
-    public List<string> effectDescription = new List<string> { "English effect text", "Spanish effect text" };
     public Effects effects;
     public bool clearEffexts = true;
     public bool spell = false;
     public int spellInt = 0;
+    public bool token = false;
     public string id = "0000";
+    public CardCore card;
     public Cards CreateCard()
     {
         Cards card = ScriptableObject.CreateInstance<Cards>();
         string direction = "";
-        string suffix = "";
+        string suffix = "_";
+        if (token)
+            suffix += "T";
+        if (healthCost > 0)
+            suffix += "B";
         if (spell)
         {
             direction = "SpellCards";
-            suffix = "_M";
+            suffix += "M";
         }
         else if (hasEffect)
         {
             direction = "EffectCards";
-            suffix = "_E";
+            suffix += "E";
         }
         else
         {
             direction = "NormalCards";
-            suffix = "_N";
+            suffix += "N";
         }
+        if (token)
+            direction += "/Tokens";
         AssetDatabase.CreateAsset(card, "Assets/ScriptableObjects/" + direction + "/SOC_" + id + "_" + scriptableName + suffix + ".asset");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -98,6 +173,8 @@ public class GenerateCard : MonoBehaviour
         clearEffexts = true;
         spell = false;
         spellInt = 0;
+        token = false;
+        VisualCard();
     }
     public string GetID(int id)
     {
@@ -108,6 +185,29 @@ public class GenerateCard : MonoBehaviour
         else if (id < 1000)
             return "0" + id;
         else return id.ToString();
+    }
+    public void VisualCard()
+    {
+        if (card == null)
+        {
+            if (!FindObjectOfType<CardCore>())
+            {
+                Debug.Log("AAAAAAAAAAA");
+                return;
+            }
+            card = FindObjectOfType<CardCore>();
+        }
+        if (card.card == null)
+            card.card = new Cards();
+        card.card.cardName = cardName;
+        card.card.attack = attack;
+        card.card.life = life;
+        card.card.manaCost = manaCost;
+        card.card.healthCost = healthCost;
+        card.card.sprite = sprite;
+        card.card.hasEffect = hasEffect;
+        card.card.effectDesc = effectDescription;
+        card.SetData();
     }
 }
 
@@ -132,6 +232,7 @@ public class GenerateCardEditor : Editor
     string cardName = "";
     bool firstTimeId = true;
     string loadId = "0000";
+
     public override void OnInspectorGUI()
     {
         GenerateCard card = (GenerateCard)target;
@@ -182,23 +283,23 @@ public class GenerateCardEditor : Editor
         GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
                 EditorGUILayout.LabelField("English name", myStyle);
-                card.cardName[0] = EditorGUILayout.TextField(card.cardName[0]);
+                card.CardName[0] = EditorGUILayout.TextField(card.CardName[0]);
             GUILayout.EndVertical();
             GUILayout.BeginVertical();
                 EditorGUILayout.LabelField("Spanish name", myStyle);
-                card.cardName[1] = EditorGUILayout.TextField(card.cardName[1]);
+                card.CardName[1] = EditorGUILayout.TextField(card.CardName[1]);
             GUILayout.EndVertical();
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
         GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
                 EditorGUILayout.LabelField("Mana cost");
-                card.manaCost = EditorGUILayout.IntField(card.manaCost, GUILayout.MaxWidth(50));
+                card.ManaCost = EditorGUILayout.IntField(card.ManaCost, GUILayout.MaxWidth(50));
             GUILayout.EndVertical();
             GUILayout.Space(50);
             GUILayout.BeginVertical();
                 EditorGUILayout.LabelField("Health cost");
-                card.healthCost = EditorGUILayout.IntField(card.healthCost, GUILayout.MaxWidth(50));
+                card.HealthCost = EditorGUILayout.IntField(card.HealthCost, GUILayout.MaxWidth(50));
             GUILayout.EndVertical();
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
@@ -206,7 +307,7 @@ public class GenerateCardEditor : Editor
             GUILayout.FlexibleSpace();
             GUILayout.BeginVertical();
                 EditorGUILayout.LabelField("Sprite", myStyle);
-                card.sprite = (Sprite)EditorGUILayout.ObjectField(card.sprite, typeof(Sprite), true,
+                card.Sprite = (Sprite)EditorGUILayout.ObjectField(card.Sprite, typeof(Sprite), true,
                     GUILayout.MinWidth(50), GUILayout.MinHeight(75),
                     GUILayout.MaxWidth(200), GUILayout.MaxHeight(300));
             GUILayout.EndVertical();
@@ -218,12 +319,12 @@ public class GenerateCardEditor : Editor
             GUILayout.BeginHorizontal();
                 GUILayout.BeginVertical();
                     EditorGUILayout.LabelField("Attack");
-                    card.attack = EditorGUILayout.IntField(card.attack, GUILayout.MaxWidth(50));
+                    card.Attack = EditorGUILayout.IntField(card.Attack, GUILayout.MaxWidth(50));
                 GUILayout.EndVertical();
                 GUILayout.Space(50);
                 GUILayout.BeginVertical();
                     EditorGUILayout.LabelField("Life");
-                    card.life = EditorGUILayout.IntField(card.life, GUILayout.MaxWidth(50));
+                    card.Life = EditorGUILayout.IntField(card.Life, GUILayout.MaxWidth(50));
                 GUILayout.EndVertical();
             GUILayout.EndHorizontal();
             GUILayout.Space(20);
@@ -245,10 +346,10 @@ public class GenerateCardEditor : Editor
         {
             case true:
                 EditorGUILayout.LabelField("English effect text:", myStyle);
-                card.effectDescription[0] = EditorGUILayout.TextArea(card.effectDescription[0], GUILayout.MaxHeight(50));
+                card.EffectDescription[0] = EditorGUILayout.TextArea(card.EffectDescription[0], GUILayout.MaxHeight(50));
                 GUILayout.Space(10);
                 EditorGUILayout.LabelField("Spanish effect text:", myStyle);
-                card.effectDescription[1] = EditorGUILayout.TextArea(card.effectDescription[1], GUILayout.MaxHeight(50));
+                card.EffectDescription[1] = EditorGUILayout.TextArea(card.EffectDescription[1], GUILayout.MaxHeight(50));
                 GUILayout.Space(10);
                 GUILayout.BeginHorizontal();
                     GUILayout.BeginVertical();
@@ -462,6 +563,11 @@ public class GenerateCardEditor : Editor
         }
         GUILayout.Space(20);
         GUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Is a token:", myStyle);
+            card.token = EditorGUILayout.Toggle(card.token);
+        GUILayout.EndHorizontal();
+        GUILayout.Space(20);
+        GUILayout.BeginHorizontal();
             if (GUILayout.Button("Create card"))
             {
                 card.CreateCard();
@@ -494,33 +600,32 @@ public class GenerateCardEditor : Editor
                 if (GUILayout.Button("Load card"))
                 {
                     foreach (Cards cards in ReloadList(card))
-                {
-                    if (cards.id == loadId)
                     {
-                        cardName = cards.name;
-                        card.scriptableName = cards.scriptableName;
-                        card.cardName = cards.cardName;
-                        card.attack = cards.attack;
-                        card.life = cards.life;
-                        card.manaCost = cards.manaCost;
-                        card.healthCost = cards.healthCost;
-                        card.sprite = cards.sprite;
-                        card.clearEffexts = false;
-                        card.hasEffect = cards.hasEffect;
-                        if (cards.hasEffect)
-                            card.hasEffectInt = 0;
-                        else card.hasEffectInt = 1;
-                        card.effectDescription = cards.effectDesc;
-                        card.effects = cards.effects;
-                        card.spell = cards.spell;
-                        if (cards.spell)
-                            card.spellInt = 1;
-                        else card.spellInt = 0;
-                        card.id = loadId;
-                        showLastUpdate = true;
+                        if (cards.id == loadId)
+                        {
+                            cardName = cards.name;
+                            card.scriptableName = cards.scriptableName;
+                            card.CardName = cards.cardName;
+                            card.Attack = cards.attack;
+                            card.Life = cards.life;
+                            card.ManaCost = cards.manaCost;
+                            card.HealthCost = cards.healthCost;
+                            card.Sprite = cards.sprite;
+                            card.clearEffexts = false;
+                            card.hasEffect = cards.hasEffect;
+                            if (cards.hasEffect)
+                                card.hasEffectInt = 0;
+                            else card.hasEffectInt = 1;
+                            card.EffectDescription = cards.effectDesc;
+                            card.effects = cards.effects;
+                            card.spell = cards.spell;
+                            if (cards.spell)
+                                card.spellInt = 1;
+                            else card.spellInt = 0;
+                            card.id = loadId;
+                            showLastUpdate = true;
+                        }
                     }
-                    Debug.Log(cards.id + " " + loadId);
-                }
                 }
             GUILayout.EndHorizontal();
             GUILayout.Space(5);

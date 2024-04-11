@@ -12,80 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: SOC_0008_Cotton_E
   m_EditorClassIdentifier: 
-  scriptableName: 
-  id: 
-  cardName: []
-  life: 0
-  attack: 0
+  scriptableName: Cotton
+  id: 0008
+  cardName:
+  - Cotton
+  - Algodon
+  life: 1
+  attack: 1
   attackToPlayer: 0
-  manaCost: 0
+  manaCost: 2
   healthCost: 0
-  sprite: {fileID: 0}
-  hasEffect: 0
+  sprite: {fileID: 21300000, guid: 4051d1ea56e71b94ab4ee216244189db, type: 3}
+  hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
-  effectDesc: []
+  effectDesc:
+  - When it's defeated, deal 2 damage to the enemy in front
+  - "Cuando es derrotado, hace 2 de da\xF1o al enemigo de enfrente"
   spell: 0
   effects:
     conditions:
-    - None
-    - Start_turn
-    - Played
-    - Attacks
-    - Damaged
     - Defeated
-    - Defeats_enemy
-    - Ally_creature_defeated
-    - End_turn
-    - Buffed
-    - Spell_played
     extraConditions:
     - None
-    - Until_next_turn
-    - Until_end_turn
     effects:
-    - None
-    - Draw
     - Deal_damage
-    - Heal
-    - Add
-    - Give_stats
-    - Immune
-    - 'Summon '
     targetsCreatures:
-    - None
-    - Enemy_creature
-    - Ally_creature
-    - Random_enemy
-    - Random_ally
-    - Random_enemy_creature
-    - Random_ally_creature
-    - Random_enemy_creatures
-    - Random_ally_creatures
-    - All_enemy_creatures
-    - All_ally_creatures
-    - Itself
-    - Enemy_player
-    - Player
     - Creature_front
-    - Enemy_creatures
-    - Ally_creatures
     targetsDecks:
     - None
-    - Hand
-    - Deck
-    - Life_deck
-    - Either_deck
     targetsCards:
     - None
-    - Random_creature
-    - Random_spell
-    - Random
-    - Specific_card
     targetsSummon:
     - None
-    - Player
-    - Enemy
-    x: 
-    y: 
-    numberOfTargets: 
+    x: 02000000
+    y: 00000000
+    numberOfTargets: 00000000

@@ -10,41 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: SOC_0004_Mauski_E
+  m_Name: SOC_0012_Forg2_TE
   m_EditorClassIdentifier: 
-  scriptableName: Mauski
-  id: 0004
+  scriptableName: Forg2
+  id: 0012
   cardName:
-  - Mauski
-  - Mauski
+  - Forg2
+  - Rna2
   life: 1
-  attack: 1
+  attack: 0
   attackToPlayer: 0
-  manaCost: 3
+  manaCost: 1
   healthCost: 0
-  sprite: {fileID: 21300000, guid: e0c3e370c8860474f9ff40c96a41258e, type: 3}
+  sprite: {fileID: 21300000, guid: c9fef3b2765d7ac4a855c4178da844b7, type: 3}
   hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - At the end of your turn, draw 1 card
-  - Al final de tu turno, roba 1 carta
+  - When it's defeated, add Colonel toad to the deck and draw 1 card
+  - "Cuando es derrotado, a\xF1ade a Coronel sapo al mazo y roba 1 carta"
   spell: 0
   effects:
     conditions:
-    - End_turn
+    - Defeated
+    - Defeated
     extraConditions:
     - None
+    - None
     effects:
+    - Add
     - Draw
     targetsCreatures:
     - None
+    - None
     targetsDecks:
     - Deck
+    - Deck
     targetsCards:
+    - Specific_card
     - Random
     targetsSummon:
     - None
-    x: 01000000
-    y: 00000000
-    numberOfTargets: 00000000
+    - None
+    x: 0100000001000000
+    y: 0000000000000000
+    numberOfTargets: 0000000000000000

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: SOC_0001_oggodyadB_N
+  m_Name: SOC_0013_ColonelToad_TN
   m_EditorClassIdentifier: 
-  scriptableName: oggodyadB
-  id: 0001
+  scriptableName: ColonelToad
+  id: 0013
   cardName:
-  - oggod yadB
-  - "ore\xF1alpmc otirreP"
-  life: 2
-  attack: 3
+  - Colonel toad
+  - Coronel sapo
+  life: 6
+  attack: 6
   attackToPlayer: 0
-  manaCost: 2
+  manaCost: 1
   healthCost: 0
-  sprite: {fileID: 21300000, guid: dff75fff64d1b4b4796831a06296e44e, type: 3}
+  sprite: {fileID: 21300000, guid: a8bcd5c47f66a8544926ab8e9e945d2b, type: 3}
   hasEffect: 0
   effect: 
   effectSprite: {fileID: 0}

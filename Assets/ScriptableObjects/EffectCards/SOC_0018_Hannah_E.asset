@@ -10,39 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: SOC_0004_Mauski_E
+  m_Name: SOC_0018_Hannah_E
   m_EditorClassIdentifier: 
-  scriptableName: Mauski
-  id: 0004
+  scriptableName: Hannah
+  id: 0018
   cardName:
-  - Mauski
-  - Mauski
+  - Hannah
+  - Hannah
   life: 1
   attack: 1
   attackToPlayer: 0
-  manaCost: 3
+  manaCost: 1
   healthCost: 0
-  sprite: {fileID: 21300000, guid: e0c3e370c8860474f9ff40c96a41258e, type: 3}
+  sprite: {fileID: 21300000, guid: 7c320c88269b5684d9e9db94af909737, type: 3}
   hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - At the end of your turn, draw 1 card
-  - Al final de tu turno, roba 1 carta
+  - When it's defeated, add Roger to the deck
+  - "Al ser derrotado, a\xF1ade a Roger al mazo"
   spell: 0
   effects:
     conditions:
-    - End_turn
+    - Defeated
     extraConditions:
     - None
     effects:
-    - Draw
+    - Add
     targetsCreatures:
     - None
     targetsDecks:
     - Deck
     targetsCards:
-    - Random
+    - Specific_card
     targetsSummon:
     - None
     x: 01000000

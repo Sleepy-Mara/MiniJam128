@@ -26395,12 +26395,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a7554814ba7ed43be66685f6f9649a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptableName: Scriptable name
   cardName:
   - English name
   - Spanish name
   attack: 0
   life: 0
-  manaCost: 2
+  manaCost: 0
   healthCost: 0
   sprite: {fileID: 0}
   hasEffect: 0
@@ -26413,13 +26414,17 @@ MonoBehaviour:
     conditions: []
     extraConditions: []
     effects: []
-    targets: []
+    targetsCreatures: []
+    targetsDecks: []
+    targetsCards: []
+    targetsSummon: []
     x: 
     y: 
     numberOfTargets: 
   clearEffexts: 0
   spell: 0
   spellInt: 0
+  id: 0027
 --- !u!1001 &880482490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53422,53 +53427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e76bbdabddf28e4fb37b6a0506077d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditions:
-  - start_turn
-  - played
-  - attacks
-  - damaged
-  - defeated
-  - defeats_enemy
-  - ally_creature_defeated
-  - end_turn
-  - buffed
-  - spell_played
-  - until_next_turn
-  - until_end_turn
-  extraConditions:
-  - until_next_turn
-  - until_end_turn
-  effects:
-  - draw
-  - deal
-  - heal
-  - add
-  - give
-  - immune
-  - summon
-  targets:
-  - enemy_creature
-  - ally_creature
-  - random_enemy
-  - random_ally
-  - random_enemy_creature
-  - random_ally_creature
-  - random_enemy_creatures
-  - random_ally_creatures
-  - all_enemy_creatures
-  - all_ally_creatures
-  - itself
-  - enemy_player
-  - player
-  - creature_front
-  - hand
-  - deck
-  - life_deck
-  - either_deck
-  - random_creature
-  - random_spell
-  - enemy_creatures
-  - ally_creatures
   cards:
   - {fileID: 11400000, guid: 34acbb225459718448d440517b0e1141, type: 2}
   - {fileID: 11400000, guid: 9675af31f38a4df4892c4f4750409598, type: 2}

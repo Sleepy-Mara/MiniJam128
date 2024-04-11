@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: SOC_0001_oggodyadB_N
+  m_Name: SOC_0002_Whole Party_M
   m_EditorClassIdentifier: 
-  scriptableName: oggodyadB
-  id: 0001
+  scriptableName: Whole Party
+  id: 0002
   cardName:
-  - oggod yadB
-  - "ore\xF1alpmc otirreP"
-  life: 2
-  attack: 3
+  - Whole Party
+  - Toda una fiesta
+  life: 0
+  attack: 0
   attackToPlayer: 0
-  manaCost: 2
-  healthCost: 0
-  sprite: {fileID: 21300000, guid: dff75fff64d1b4b4796831a06296e44e, type: 3}
-  hasEffect: 0
+  manaCost: 0
+  healthCost: 3
+  sprite: {fileID: 21300000, guid: 8811cb0e6ec430c458c988cfc8ec4db2, type: 3}
+  hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - English effect text
-  - Spanish effect text
-  spell: 0
+  - Summon Bday doggo & oggod yadB, add "..." to the hand
+  - "Invoca Perro cmple y elpmc prreP, a\xF1ade \"...\" a la mano"
+  spell: 1
   effects:
     conditions: []
     extraConditions: []

@@ -12,80 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
   m_Name: SOC_0017_Dog_E
   m_EditorClassIdentifier: 
-  scriptableName: 
-  id: 
-  cardName: []
-  life: 0
-  attack: 0
+  scriptableName: Dog
+  id: 0017
+  cardName:
+  - Dog
+  - Perro
+  life: 1
+  attack: 1
   attackToPlayer: 0
-  manaCost: 0
+  manaCost: 2
   healthCost: 0
-  sprite: {fileID: 0}
-  hasEffect: 0
+  sprite: {fileID: 21300000, guid: dbe10634b5cfc334bb2e63f6e3020084, type: 3}
+  hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
-  effectDesc: []
+  effectDesc:
+  - When it's played, give +1/+1 to a random ally creature
+  - Cuando es jugado, da +1/+1 a una criatura aliada al azar
   spell: 0
   effects:
     conditions:
-    - None
-    - Start_turn
     - Played
-    - Attacks
-    - Damaged
-    - Defeated
-    - Defeats_enemy
-    - Ally_creature_defeated
-    - End_turn
-    - Buffed
-    - Spell_played
     extraConditions:
     - None
-    - Until_next_turn
-    - Until_end_turn
     effects:
-    - None
-    - Draw
-    - Deal_damage
-    - Heal
-    - Add
     - Give_stats
-    - Immune
-    - 'Summon '
     targetsCreatures:
-    - None
-    - Enemy_creature
-    - Ally_creature
-    - Random_enemy
-    - Random_ally
-    - Random_enemy_creature
     - Random_ally_creature
-    - Random_enemy_creatures
-    - Random_ally_creatures
-    - All_enemy_creatures
-    - All_ally_creatures
-    - Itself
-    - Enemy_player
-    - Player
-    - Creature_front
-    - Enemy_creatures
-    - Ally_creatures
     targetsDecks:
     - None
-    - Hand
-    - Deck
-    - Life_deck
-    - Either_deck
     targetsCards:
     - None
-    - Random_creature
-    - Random_spell
-    - Random
-    - Specific_card
     targetsSummon:
     - None
-    - Player
-    - Enemy
-    x: 
-    y: 
-    numberOfTargets: 
+    x: 01000000
+    y: 01000000
+    numberOfTargets: 00000000

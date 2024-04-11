@@ -70,9 +70,9 @@ MonoBehaviour:
     currentUnlockedCards:
     - card: Jors
       cardAmount: 1
-    - card: Mr. Quack
+    - card: Mr.Quack
       cardAmount: 1
-    - card: Mrs. Quack
+    - card: Mrs.Quack
       cardAmount: 1
     - card: Crowin
       cardAmount: 1
@@ -86,14 +86,14 @@ MonoBehaviour:
       cardAmount: 1
     - card: Honey
       cardAmount: 1
-    - card: Hot pepper
+    - card: HotPepper
       cardAmount: 1
     currentCardsInDeck:
     - card: Jors
       cardAmount: 1
-    - card: Mr. Quack
+    - card: Mr.Quack
       cardAmount: 1
-    - card: Mrs. Quack
+    - card: Mrs.Quack
       cardAmount: 1
     - card: Crowin
       cardAmount: 1
@@ -107,7 +107,7 @@ MonoBehaviour:
       cardAmount: 1
     - card: Honey
       cardAmount: 1
-    - card: Hot pepper
+    - card: HotPepper
       cardAmount: 1
     gameTutorial: 1
     menuTutorial: 1

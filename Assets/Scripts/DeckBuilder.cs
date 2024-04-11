@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor;
+using Unity.VisualScripting;
 
 public class DeckBuilder : MonoBehaviour
 {
-    public List<CardsInDeckBuilder> cardsInDeckBuilder;
-    public List<CardsInDeckBuilder> cardsInBloodDeckBuilder;
-    public List<CardsInDeckBuilder> cardsInDeck;
-    static List<CardsInDeckBuilder> savedCardsInDeck;
-    public List<CardsInDeckBuilder> cardsInBloodDeck;
-    static List<CardsInDeckBuilder> savedCardsInBloodDeck;
-    private static DeckBuilder instance;
+    [SerializeField] private CardsInDeckBuilder cardPrefab;
+    public List<CardsInDeckBuilder> cardsInDeckBuilder = new List<CardsInDeckBuilder>();
+    [HideInInspector] public List<CardsInDeckBuilder> cardsInBloodDeckBuilder = new List<CardsInDeckBuilder>();
+    private List<CardsInDeckBuilder> cardsInDeck = new List<CardsInDeckBuilder>();
+    private List<CardsInDeckBuilder> cardsInBloodDeck = new List<CardsInDeckBuilder>();
     [SerializeField] private int maxCardsInNormalDeck;
     [SerializeField] private int minCardsInNormalDeck;
     [SerializeField] private int maxCardsInBloodDeck;
@@ -37,21 +37,22 @@ public class DeckBuilder : MonoBehaviour
     private void Awake()
     {
         json = FindObjectOfType<SaveWithJson>();
-        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
-            cards.cover.SetActive(true);
+        LoadCards();
         currentCardOrder = new List<CardsInDeckBuilder>();
     }
     private void Start()
     {
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
+                cards.cover.SetActive(true);
+        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
             for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
-                if (json.SaveData.currentUnlockedCards[i].card == cards.card.card.name)
+                if (cards.card.card.name.Contains("_" + json.SaveData.currentUnlockedCards[i].card + "_"))
                 {
                     UnlockCard(cards.card.card, json.SaveData.currentUnlockedCards[i].cardAmount);
                 }
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
             for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
-                if (json.SaveData.currentCardsInDeck[i].card == cards.card.card.name)
+                if (cards.card.card.name.Contains("_" + json.SaveData.currentCardsInDeck[i].card + "_"))
                 {
                     for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
                     {
@@ -60,6 +61,57 @@ public class DeckBuilder : MonoBehaviour
                 }
         ReloadDeck();
         ChangeOrderOfCards();
+    }
+    public void LoadCards()
+    {
+        foreach (Cards card in CardList())
+        {
+            var newCard = Instantiate(cardPrefab, buildDeck.transform);
+            newCard.name = card.name;
+            newCard.card.card = card;
+            newCard.card.SetData();
+            cardsInDeckBuilder.Add(newCard);
+        }
+    }
+    private List<Cards> CardList()
+    {
+        List<Cards> retirnGeneratedCards = new List<Cards>();
+        var tempCards = new List<Cards>();
+        foreach (var asset in AssetDatabase.FindAssets("SOC_"))
+        {
+            var path = AssetDatabase.GUIDToAssetPath(asset);
+            if (path.Contains("/Tokens"))
+                continue;
+            var objects = AssetDatabase.LoadAssetAtPath(path, typeof(Cards));
+            tempCards.Add(objects.ConvertTo<Cards>());
+        }
+        int j = tempCards.Count;
+        int lastId = -1;
+        for (int i = 0; i < j; i++)
+        {
+            int acrualId = 0;
+            foreach (Cards cards in tempCards)
+            {
+                int.TryParse(cards.id, out int x);
+                if (x > acrualId)
+                    acrualId = x;
+            }
+            Cards cardToRemove = null;
+            foreach (Cards cards in tempCards)
+            {
+                int.TryParse(cards.id, out int y);
+                if (y <= acrualId && y > lastId)
+                {
+                    acrualId = y;
+                    cardToRemove = cards;
+                }
+            }
+            if (cardToRemove == null)
+                break;
+            retirnGeneratedCards.Add(cardToRemove);
+            lastId = acrualId;
+        }
+        return retirnGeneratedCards;
     }
     public void UnlockCard(Cards newCard, int number)
     {

@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: SOC_0004_Mauski_E
+  m_Name: SOC_0027_RatPack_E
   m_EditorClassIdentifier: 
-  scriptableName: Mauski
-  id: 0004
+  scriptableName: RatPack
+  id: 0027
   cardName:
-  - Mauski
-  - Mauski
-  life: 1
-  attack: 1
+  - Rat Pack
+  - Manada de ratas
+  life: 4
+  attack: 0
   attackToPlayer: 0
-  manaCost: 3
+  manaCost: 2
   healthCost: 0
-  sprite: {fileID: 21300000, guid: e0c3e370c8860474f9ff40c96a41258e, type: 3}
+  sprite: {fileID: 21300000, guid: e4c6d147ecb4cd64ebd820b0ae3d2d1f, type: 3}
   hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - At the end of your turn, draw 1 card
-  - Al final de tu turno, roba 1 carta
+  - At the end of your turn, add 1 Rat to the hand
+  - "Al final de tu turno, a\xF1ade 1 Rata a la mano"
   spell: 0
   effects:
     conditions:
@@ -36,13 +36,13 @@ MonoBehaviour:
     extraConditions:
     - None
     effects:
-    - Draw
+    - Add
     targetsCreatures:
     - None
     targetsDecks:
-    - Deck
+    - Hand
     targetsCards:
-    - Random
+    - Specific_card
     targetsSummon:
     - None
     x: 01000000
