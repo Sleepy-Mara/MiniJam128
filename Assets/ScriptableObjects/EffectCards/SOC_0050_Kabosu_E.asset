@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
+  m_Name: SOC_0050_Kabosu_E
+  m_EditorClassIdentifier: 
+  scriptableName: Kabosu
+  id: 0050
+  cardName:
+  - Kabosu
+  - Kabosu
+  life: 1
+  attack: 3
+  attackToPlayer: 0
+  manaCost: 3
+  healthCost: 0
+  sprite: {fileID: 21300000, guid: 7ca650fddd37b0444b84e6c53c32718e, type: 3}
+  hasEffect: 1
+  effect: 
+  effectSprite: {fileID: 0}
+  effectDesc:
+  - When it defeats an enemy, gain +2/+0
+  - Cuando derrota a un enemigo, gana +2/+0
+  spell: 0
+  effects:
+    conditions:
+    - Defeats_enemy
+    extraConditions:
+    - None
+    effects:
+    - Give_stats
+    targetsCreatures:
+    - Itself
+    targetsDecks:
+    - None
+    targetsCards:
+    - None
+    targetsSummon:
+    - None
+    x: 02000000
+    y: 00000000
+    numberOfTargets: 00000000

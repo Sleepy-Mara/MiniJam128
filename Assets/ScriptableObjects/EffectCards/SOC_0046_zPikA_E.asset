@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
+  m_Name: SOC_0046_zPikA_E
+  m_EditorClassIdentifier: 
+  scriptableName: zPikA
+  id: 0046
+  cardName:
+  - zPikA
+  - zPikA
+  life: 2
+  attack: 2
+  attackToPlayer: 0
+  manaCost: 2
+  healthCost: 0
+  sprite: {fileID: 21300000, guid: abf457150b156ed4abdcf842c853c6d9, type: 3}
+  hasEffect: 1
+  effect: 
+  effectSprite: {fileID: 0}
+  effectDesc:
+  - When it's played, if you have the 2 other monkeys in the hand, summon them and
+    add 1 random spell with the effect of either "deal" or "heal" to the hand
+  - "Cuando es jugado, si tenes a los otros 2 monos en la mano, invocalos y a\xF1ade
+    1 hechizo al azar a la mano con el efecto de \"da\xF1ar\" o \"curar\""
+  spell: 0
+  effects:
+    conditions: []
+    extraConditions: []
+    effects: []
+    targetsCreatures: []
+    targetsDecks:
+    - None
+    targetsCards:
+    - None
+    targetsSummon:
+    - None
+    x: 
+    y: 
+    numberOfTargets: 
