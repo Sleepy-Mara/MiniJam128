@@ -42,17 +42,20 @@ public class DeckBuilder : MonoBehaviour
     }
     private void Start()
     {
+        deck = FindObjectOfType<Draw>();
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
                 cards.cover.SetActive(true);
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
             for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
-                if (cards.card.card.name.Contains("_" + json.SaveData.currentUnlockedCards[i].card + "_"))
+                if (cards.card.card.name.Contains("_" + json.SaveData.currentUnlockedCards[i].card + "_") ||
+                    cards.card.card.name == json.SaveData.currentUnlockedCards[i].card)
                 {
                     UnlockCard(cards.card.card, json.SaveData.currentUnlockedCards[i].cardAmount);
                 }
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
             for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
-                if (cards.card.card.name.Contains("_" + json.SaveData.currentCardsInDeck[i].card + "_"))
+                if (cards.card.card.name.Contains("_" + json.SaveData.currentCardsInDeck[i].card + "_") ||
+                    cards.card.card.name == json.SaveData.currentCardsInDeck[i].card)
                 {
                     for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
                     {
@@ -249,40 +252,49 @@ public class DeckBuilder : MonoBehaviour
     }
     private void ReloadDeck()
     {
+        if (deck == null)
+            return;
         List<Cards> cardsInDeckTemp = new List<Cards>();
         List<Cards> cardsInBloodDeckTemp = new List<Cards>();
         foreach (var card in cardsInDeck)
             cardsInDeckTemp.Add(card.card.card);
         foreach (var card in cardsInBloodDeck)
             cardsInBloodDeckTemp.Add(card.card.card);
-        if (deck != null)
+        if (deck.manaDeckObject != null)
         {
             if (cardsInDeck.Count <= 0)
                 deck.manaDeckObject.SetActive(false);
             else deck.manaDeckObject.SetActive(true);
+        }
+        if (deck.bloodDeckObject != null)
+        {
             if (cardsInBloodDeck.Count <= 0)
                 deck.bloodDeckObject.SetActive(false);
             else deck.bloodDeckObject.SetActive(true);
-            deck.deck = new List<Cards>();
-            deck.bloodDeck = new List<Cards>();
-            deck.deck = cardsInDeckTemp;
-            deck.bloodDeck = cardsInBloodDeckTemp;
-            deck.ReloadActualDecks();
         }
+        deck.deck = new List<Cards>();
+        deck.bloodDeck = new List<Cards>();
+        deck.deck = cardsInDeckTemp;
+        deck.bloodDeck = cardsInBloodDeckTemp;
+        deck.ReloadActualDecks();
     }
     public void OpenDeckBuilder()
     {
+        foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
+            cards.cover.SetActive(true);
         deckBuilderLayout.SetActive(true);
         ResetDeckBuilder();
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
             for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
-                if (json.SaveData.currentUnlockedCards[i].card == cards.card.card.name)
+                if (cards.card.card.name.Contains("_" + json.SaveData.currentUnlockedCards[i].card + "_") || 
+                    cards.card.card.name == json.SaveData.currentUnlockedCards[i].card)
                 {
                     UnlockCard(cards.card.card, json.SaveData.currentUnlockedCards[i].cardAmount);
                 }
         foreach (CardsInDeckBuilder cards in cardsInDeckBuilder)
             for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
-                if (json.SaveData.currentCardsInDeck[i].card == cards.card.card.name)
+                if (cards.card.card.name.Contains("_" + json.SaveData.currentCardsInDeck[i].card + "_") ||
+                    cards.card.card.name == json.SaveData.currentCardsInDeck[i].card)
                 {
                     for (int j = 0; j < json.SaveData.currentCardsInDeck[i].cardAmount; j++)
                     {
@@ -306,7 +318,7 @@ public class DeckBuilder : MonoBehaviour
         }
         foreach (CardsInDeckBuilder card in cardsInBloodDeckBuilder)
         {
-            card.NumberOfCards = -card.NumberOfCards;
+            card.NumberOfCards = - card.NumberOfCards;
             card.numberText.gameObject.SetActive(false);
             card.cover.SetActive(true);
         }
@@ -508,42 +520,23 @@ public class DeckBuilder : MonoBehaviour
             return;
         }
         ReloadDeck();
+        SaveData saveData = json.SaveData;
+        saveData.currentCardsInDeck.Clear();
         foreach (CardsInDeckBuilder card in cardsInDeck)
         {
-            bool alreadyUnlocked = false;
-            SaveData saveData = json.SaveData;
-            for (int i = 0; i < json.SaveData.currentCardsInDeck.Count; i++)
-                if (card.card.card.name == json.SaveData.currentCardsInDeck[i].card)
-                {
-                    saveData.currentCardsInDeck[i].cardAmount = card.NumberOfCards;
-                    alreadyUnlocked = true;
-                }
-            if (!alreadyUnlocked)
-            {
-                SavedCards savedCards = new SavedCards() { card = card.card.card.name, cardAmount = card.NumberOfCards };
-                saveData.currentCardsInDeck.Add(savedCards);
-            }
-            json.SaveData = saveData;
+            SavedCards savedCards = new SavedCards() { card = card.card.card.name, cardAmount = card.NumberOfCards };
+            saveData.currentCardsInDeck.Add(savedCards);
         }
+        saveData.currentUnlockedCards.Clear();
         foreach (CardsInDeckBuilder card in cardsInDeckBuilder)
         {
-            if (card.cover.activeSelf)
-                continue;
-            bool alreadyUnlocked = false;
-            SaveData saveData = json.SaveData;
-            for (int i = 0; i < json.SaveData.currentUnlockedCards.Count; i++)
-                if (card.card.card.name == json.SaveData.currentUnlockedCards[i].card)
-                {
-                    saveData.currentUnlockedCards[i].cardAmount = card.NumberOfCards;
-                    alreadyUnlocked = true;
-                }
-            if (!alreadyUnlocked)
+            if (!card.cover.activeSelf)
             {
                 SavedCards savedCards = new SavedCards() { card = card.card.card.name, cardAmount = card.NumberOfCards };
                 saveData.currentUnlockedCards.Add(savedCards);
             }
-            json.SaveData = saveData;
         }
+        json.SaveData = saveData;
     }
 }
 public enum Filter

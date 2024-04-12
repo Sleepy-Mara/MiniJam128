@@ -3412,7 +3412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6885375461656746864, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 51.5401
+      value: 51.572144
       objectReference: {fileID: 0}
     - target: {fileID: 6885375461931048678, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3421,6 +3421,10 @@ PrefabInstance:
     - target: {fileID: 6885375461931048678, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.00012207031
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885375462373082128, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: minCardsInNormalDeck
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6885375462373082128, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: cardsInDeckBuilder.Array.size
@@ -3532,10 +3536,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6885375463497898786, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_Size
-      value: 0.36137807
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6885375463497898786, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
       propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885375463497898786, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}
+      propertyPath: m_Interactable
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6931419628272662851, guid: c853791cc40547648a8d719a7fbd1bf8, type: 3}

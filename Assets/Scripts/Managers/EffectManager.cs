@@ -102,12 +102,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[1])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -117,12 +117,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[2])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -132,12 +132,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[3])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -147,12 +147,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[4])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -162,12 +162,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[5])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -177,12 +177,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[6])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -192,12 +192,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[7])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -207,12 +207,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[8])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -222,12 +222,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[9])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
@@ -237,12 +237,12 @@ public class EffectManager : MonoBehaviour
         Effects effects = new Effects();
         if (caller.GetComponent<CardCore>())
             effects = caller.GetComponent<CardCore>().card.effects;
-        bool checkEffect = true;
+        bool checkEffect = false;
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[10])
             {
                 CheckEffect(caller, effects, i);
-                checkEffect = false;
+                checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);

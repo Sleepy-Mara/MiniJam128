@@ -39,10 +39,6 @@ public class Draw : MonoBehaviour
     public float cardHorizontalMove = 0f;
     public float cardVerticalMove = 0f;
     public enum DeckType { Mana, Blood}
-    private void Awake()
-    {
-        ReloadActualDecks();
-    }
     public void Start()
     {
         _turnManager = FindObjectOfType<TurnManager>();

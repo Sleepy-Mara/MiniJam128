@@ -6,6 +6,7 @@ using UnityEditor.TerrainTools;
 using UnityEditor.UIElements;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 
 public class GenerateCard : MonoBehaviour
@@ -191,10 +192,7 @@ public class GenerateCard : MonoBehaviour
         if (card == null)
         {
             if (!FindObjectOfType<CardCore>())
-            {
-                Debug.Log("AAAAAAAAAAA");
                 return;
-            }
             card = FindObjectOfType<CardCore>();
         }
         if (card.card == null)
@@ -568,17 +566,20 @@ public class GenerateCardEditor : Editor
         GUILayout.EndHorizontal();
         GUILayout.Space(20);
         GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Create card"))
+            if (!updateCard)
             {
-                card.CreateCard();
-                foreach (Cards cards in ReloadList(card))
-                    if (cards.id == card.id)
-                    {
-                        Debug.Log("ID in use");
-                        return;
-                    }
-                firstTimeId = true;
-                ClearInfo();
+                if (GUILayout.Button("Create card"))
+                {
+                    card.CreateCard();
+                    foreach (Cards cards in ReloadList(card))
+                        if (cards.id == card.id)
+                        {
+                            Debug.Log("ID in use");
+                            return;
+                        }
+                    firstTimeId = true;
+                    ClearInfo();
+                }
             }
             if (GUILayout.Button("Update card"))
             {
@@ -599,6 +600,10 @@ public class GenerateCardEditor : Editor
                 loadId = EditorGUILayout.TextField(loadId);
                 if (GUILayout.Button("Load card"))
                 {
+                    card.ClearInfo();
+                    firstTimeId = true;
+                    ClearInfo();
+                    updateCard = true;
                     foreach (Cards cards in ReloadList(card))
                     {
                         if (cards.id == loadId)
@@ -622,6 +627,9 @@ public class GenerateCardEditor : Editor
                             if (cards.spell)
                                 card.spellInt = 1;
                             else card.spellInt = 0;
+                            if (AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets(cards.name)[0]).Contains("/Tokens"))
+                                card.token = true;
+                            else card.token = false;
                             card.id = loadId;
                             showLastUpdate = true;
                         }

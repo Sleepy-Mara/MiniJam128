@@ -69,25 +69,25 @@ MonoBehaviour:
     sfxVolume: 1
     currentUnlockedCards:
     - card: Jors
-      cardAmount: 1
+      cardAmount: 0
     - card: Mr.Quack
-      cardAmount: 1
+      cardAmount: 0
     - card: Mrs.Quack
-      cardAmount: 1
+      cardAmount: 0
     - card: Crowin
-      cardAmount: 1
+      cardAmount: 0
     - card: Trashy
-      cardAmount: 1
+      cardAmount: 0
     - card: Mauski
-      cardAmount: 1
+      cardAmount: 0
     - card: Perry
-      cardAmount: 1
+      cardAmount: 0
     - card: Plumsy
-      cardAmount: 1
+      cardAmount: 0
     - card: Honey
-      cardAmount: 1
+      cardAmount: 0
     - card: HotPepper
-      cardAmount: 1
+      cardAmount: 0
     currentCardsInDeck:
     - card: Jors
       cardAmount: 1

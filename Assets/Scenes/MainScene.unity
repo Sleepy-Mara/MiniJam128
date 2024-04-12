@@ -26396,20 +26396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptableName: Scriptable name
-  cardName:
-  - English name
-  - Spanish name
-  attack: 0
-  life: 0
-  manaCost: 0
-  healthCost: 0
-  sprite: {fileID: 0}
   hasEffect: 0
   hasEffectInt: 1
   effect: 
-  effectDescription:
-  - English effect text
-  - Spanish effect text
   effects:
     conditions: []
     extraConditions: []
@@ -26424,7 +26413,9 @@ MonoBehaviour:
   clearEffexts: 0
   spell: 0
   spellInt: 0
+  token: 0
   id: 0027
+  card: {fileID: 0}
 --- !u!1001 &880482490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67693,32 +67684,56 @@ PrefabInstance:
       objectReference: {fileID: 18335429}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.size
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: e54a9c9418b3cf14cb7fa59b57b25d45, type: 2}
+      objectReference: {fileID: 11400000, guid: 41eb310e1bd42e14c9fe12e77186e80c, type: 2}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 131afa24c579ad0449c3b2ec6deb9a8d, type: 2}
+      objectReference: {fileID: 11400000, guid: ca877ddbaca322348aa8fb9aa630e5ed, type: 2}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 450c7340692cb6346a992fa4b66cc407, type: 2}
+      objectReference: {fileID: 11400000, guid: db2e40a40bb5152499e7f6096b7b29cc, type: 2}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 4a90b2db79d4702499968560912e14fd, type: 2}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 19d6b98e55bac86459f0cf3bba17f6b7, type: 2}
+      objectReference: {fileID: 11400000, guid: 28c30e404ed78554283b3322ba7f549f, type: 2}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: deck.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 4bcb97971cdeb0b45af93d20d25444cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 2aacac0674c3b7741b269e25aa30107d, type: 2}
+    - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
+      propertyPath: deck.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2aacac0674c3b7741b269e25aa30107d, type: 2}
+    - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
+      propertyPath: deck.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2aacac0674c3b7741b269e25aa30107d, type: 2}
+    - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
+      propertyPath: deck.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2aacac0674c3b7741b269e25aa30107d, type: 2}
+    - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
+      propertyPath: deck.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2aacac0674c3b7741b269e25aa30107d, type: 2}
+    - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
+      propertyPath: deck.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2aacac0674c3b7741b269e25aa30107d, type: 2}
+    - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
+      propertyPath: deck.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2aacac0674c3b7741b269e25aa30107d, type: 2}
     - target: {fileID: 1098564352661077620, guid: 117f91b4e256f5a43898580b55852af0, type: 3}
       propertyPath: gamePhases.Array.size
       value: 4

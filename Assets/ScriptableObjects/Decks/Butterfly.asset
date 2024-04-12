@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Butterfly
   m_EditorClassIdentifier: 
   deck:
-  - {fileID: 11400000, guid: 19d6b98e55bac86459f0cf3bba17f6b7, type: 2}
-  - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
-  - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
-  - {fileID: 11400000, guid: 4bcda45d99786cb489efe6721f1727a3, type: 2}
-  - {fileID: 11400000, guid: 26d16ce04e87aa947a969aefb11c5c8a, type: 2}
-  - {fileID: 11400000, guid: 9f3a7fdb11fb9274288b0a089dc4d640, type: 2}
-  - {fileID: 11400000, guid: 9305a9ff9eb80694faf50b3c8d54e45d, type: 2}
+  - {fileID: 11400000, guid: 41eb310e1bd42e14c9fe12e77186e80c, type: 2}
+  - {fileID: 11400000, guid: f38cbd33fd5b7ba44ae1c56a706b17b9, type: 2}
+  - {fileID: 11400000, guid: db2e40a40bb5152499e7f6096b7b29cc, type: 2}
+  - {fileID: 11400000, guid: 7e421ea7c52df2a4da3db8873e1e2843, type: 2}
+  - {fileID: 11400000, guid: 434b708124a302c43ae749c60cf09331, type: 2}
+  - {fileID: 11400000, guid: 2aacac0674c3b7741b269e25aa30107d, type: 2}

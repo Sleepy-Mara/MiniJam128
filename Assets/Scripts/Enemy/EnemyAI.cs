@@ -143,26 +143,30 @@ public class EnemyAI : Enemy
             }
         }
         List<BestPlay> bestPlays = ForeachCard(cards, 0, null);
-        List<BestPlay> trueBestPlay = new List<BestPlay>();
-        foreach (BestPlay bestPlay in bestPlays)
+        if (bestPlays.Count > 0)
         {
-            for (int i = 0; i < bestPlay.cards.Count; i++)
-                Debug.Log(bestPlay.cards[i].cardName[0] + " - " + bestPlay.positions[i].positionNum + " - " + bestPlay.value);
-            Debug.Log("-------------------------------------------------");
-            if (trueBestPlay.Count <= 0)
+            List<BestPlay> trueBestPlay = new List<BestPlay>();
+            foreach (BestPlay bestPlay in bestPlays)
             {
-                trueBestPlay.Add(bestPlay);
-                continue;
+                for (int i = 0; i < bestPlay.cards.Count; i++)
+                    Debug.Log(bestPlay.cards[i].cardName[0] + " - " + bestPlay.positions[i].positionNum + " - " + bestPlay.value);
+                Debug.Log("-------------------------------------------------");
+                if (trueBestPlay.Count <= 0)
+                {
+                    trueBestPlay.Add(bestPlay);
+                    continue;
+                }
+                else if (trueBestPlay[0].value < bestPlay.value)
+                {
+                    trueBestPlay.Clear();
+                    trueBestPlay.Add(bestPlay);
+                }
+                else if (trueBestPlay[0].value == bestPlay.value)
+                    trueBestPlay.Add(bestPlay);
             }
-            else if (trueBestPlay[0].value < bestPlay.value)
-            {
-                trueBestPlay.Clear();
-                trueBestPlay.Add(bestPlay);
-            }
-            else if (trueBestPlay[0].value == bestPlay.value)
-                trueBestPlay.Add(bestPlay);
+            return trueBestPlay[Random.Range(0, trueBestPlay.Count)];
         }
-        return trueBestPlay[Random.Range(0, trueBestPlay.Count)];
+        return null;
     }
     private int CheckEffectValue(Cards card, MapPosition position, bool kill, bool survive)
     {
@@ -184,8 +188,8 @@ public class EnemyAI : Enemy
                     if (effect.effects[j] == new Effects().effects[2])
                     {
                         bool usefulEffect = false;
-                        if (effect.targetsCards[j] == new Effects().targetsCards[3] || effect.targetsCards[j] == new Effects().targetsCards[5] ||
-                            effect.targetsCards[j] == new Effects().targetsCards[7] || effect.targetsCards[j] == new Effects().targetsCards[9])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[3] || effect.targetsCreatures[j] == new Effects().targetsCreatures[5] ||
+                            effect.targetsCreatures[j] == new Effects().targetsCreatures[7] || effect.targetsCreatures[j] == new Effects().targetsCreatures[9])
                         {
                             if (!kill && position.positionFacing.card != null)
                                 usefulEffect = true;
@@ -202,8 +206,8 @@ public class EnemyAI : Enemy
                                 }
                             }
                         }
-                        if (effect.targetsCards[j] == new Effects().targetsCards[4] || effect.targetsCards[j] == new Effects().targetsCards[6] ||
-                            effect.targetsCards[j] == new Effects().targetsCards[8] || effect.targetsCards[j] == new Effects().targetsCards[10])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[4] || effect.targetsCreatures[j] == new Effects().targetsCreatures[6] ||
+                            effect.targetsCreatures[j] == new Effects().targetsCreatures[8] || effect.targetsCreatures[j] == new Effects().targetsCreatures[10])
                         {
                             bool allyInBattle = false;
                             foreach (MapPosition allyCards in _table.enemyFront)
@@ -215,13 +219,13 @@ public class EnemyAI : Enemy
                             if (!allyInBattle)
                                 usefulEffect = true;
                         }
-                        if (effect.targetsCards[j] == new Effects().targetsCards[12])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[12])
                             if (FindObjectOfType<Player>().currentHealth - effect.x[j] <= 0)
                                 value += 1000;
-                        if (effect.targetsCards[j] == new Effects().targetsCards[13])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[13])
                             if (currentHealth - effect.x[j] <= 0)
                                 value -= 1000;
-                        if (effect.targetsCards[j] == new Effects().targetsCards[14] && !kill)
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[14] && !kill)
                         {
                             if (position.positionFacing.card.ActualLife - card.attack - effect.x[j] <= 0)
                             {
@@ -233,7 +237,7 @@ public class EnemyAI : Enemy
                             }
                             usefulEffect = true;
                         }
-                        if (effect.targetsCards[j] == new Effects().targetsCards[11])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[11])
                         {
                             if (card.life - position.positionFacing.card.ActualAttack - effect.x[j] <= 0)
                             {
@@ -253,8 +257,8 @@ public class EnemyAI : Enemy
                     if (effect.effects[j] == new Effects().effects[3])
                     {
                         bool usefulEffect = true;
-                        if (effect.targetsCards[j] == new Effects().targetsCards[3] || effect.targetsCards[j] == new Effects().targetsCards[5] ||
-                            effect.targetsCards[j] == new Effects().targetsCards[7] || effect.targetsCards[j] == new Effects().targetsCards[9])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[3] || effect.targetsCreatures[j] == new Effects().targetsCreatures[5] ||
+                            effect.targetsCreatures[j] == new Effects().targetsCreatures[7] || effect.targetsCreatures[j] == new Effects().targetsCreatures[9])
                         {
                             if (!kill && position.positionFacing.card != null)
                                 usefulEffect = false;
@@ -273,8 +277,8 @@ public class EnemyAI : Enemy
                                 }
                             }
                         }
-                        if (effect.targetsCards[j] == new Effects().targetsCards[4] || effect.targetsCards[j] == new Effects().targetsCards[6] ||
-                            effect.targetsCards[j] == new Effects().targetsCards[8] || effect.targetsCards[j] == new Effects().targetsCards[10])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[4] || effect.targetsCreatures[j] == new Effects().targetsCreatures[6] ||
+                            effect.targetsCreatures[j] == new Effects().targetsCreatures[8] || effect.targetsCreatures[j] == new Effects().targetsCreatures[10])
                         {
                             bool allyInBattle = false;
                             foreach (MapPosition allyCards in _table.enemyFront)
@@ -288,14 +292,14 @@ public class EnemyAI : Enemy
                             if (!allyInBattle)
                                 usefulEffect = false;
                         }
-                        if (effect.targetsCards[j] == new Effects().targetsCards[12])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[12])
                             if (FindObjectOfType<Player>().currentHealth + effect.x[j] > FindObjectOfType<Player>().maxHealth)
                                 usefulEffect = true;
                             else usefulEffect = false;
-                        if (effect.targetsCards[j] == new Effects().targetsCards[13])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[13])
                             if (currentHealth + effect.x[j] > maxHealth)
                                 usefulEffect = false;
-                        if (effect.targetsCards[j] == new Effects().targetsCards[14])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[14])
                         {
                             if (position.positionFacing.card.ActualLife - card.attack + effect.x[j] > position.positionFacing.card.card.life)
                             {
@@ -304,7 +308,7 @@ public class EnemyAI : Enemy
                             }
                             else usefulEffect = false;
                         }
-                        if (effect.targetsCards[j] == new Effects().targetsCards[11])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[11])
                         {
                             if (card.life - position.positionFacing.card.ActualAttack + effect.x[j] > card.life)
                             {
@@ -319,8 +323,8 @@ public class EnemyAI : Enemy
                     if (effect.effects[j] == new Effects().effects[5])
                     {
                         bool usefulEffect = false;
-                        if (effect.targetsCards[j] == new Effects().targetsCards[3] || effect.targetsCards[j] == new Effects().targetsCards[5] ||
-                            effect.targetsCards[j] == new Effects().targetsCards[7] || effect.targetsCards[j] == new Effects().targetsCards[9])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[3] || effect.targetsCreatures[j] == new Effects().targetsCreatures[5] ||
+                            effect.targetsCreatures[j] == new Effects().targetsCreatures[7] || effect.targetsCreatures[j] == new Effects().targetsCreatures[9])
                         {
                             if (!kill && position.positionFacing.card != null && (effect.x[j] < 0 || effect.y[j] < 0))
                                 usefulEffect = true;
@@ -339,8 +343,8 @@ public class EnemyAI : Enemy
                                 }
                             }
                         }
-                        if (effect.targetsCards[j] == new Effects().targetsCards[4] || effect.targetsCards[j] == new Effects().targetsCards[6] ||
-                            effect.targetsCards[j] == new Effects().targetsCards[8] || effect.targetsCards[j] == new Effects().targetsCards[10])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[4] || effect.targetsCreatures[j] == new Effects().targetsCreatures[6] ||
+                            effect.targetsCreatures[j] == new Effects().targetsCreatures[8] || effect.targetsCreatures[j] == new Effects().targetsCreatures[10])
                         {
                             bool allyInBattle = false;
                             foreach (MapPosition allyCards in _table.enemyFront)
@@ -354,10 +358,10 @@ public class EnemyAI : Enemy
                             if (!allyInBattle)
                                 usefulEffect = true;
                         }
-                        if (effect.targetsCards[j] == new Effects().targetsCards[14] && !kill)
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[14] && !kill)
                             if (effect.x[j] < 0 || effect.y[j] < 0)
                                 usefulEffect = true;
-                        if (effect.targetsCards[j] == new Effects().targetsCards[11])
+                        if (effect.targetsCreatures[j] == new Effects().targetsCreatures[11])
                             if (survive)
                                 usefulEffect = true;
                         if ((effect.conditions[j] != new Effects().conditions[4] || !survive) && (effect.conditions[j] != new Effects().conditions[4] || kill))
