@@ -10,41 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: SOC_0051_Chester_E
+  m_Name: SOC_0058_HearthfeltHorror_E
   m_EditorClassIdentifier: 
-  scriptableName: Chester
-  id: 0051
+  scriptableName: HearthfeltHorror
+  id: 0058
   cardName:
-  - Chester
-  - Chester
+  - Hearthfelt Horror
+  - "Horror de coraz\xF3n"
   life: 1
   attack: 1
   attackToPlayer: 0
-  manaCost: 2
+  manaCost: 1
   healthCost: 0
-  sprite: {fileID: 21300000, guid: c84fc4af37df0464c9b99ae415f1735b, type: 3}
+  sprite: {fileID: 21300000, guid: 6fa48ae608de0634f996cc2eaa12004d, type: 3}
   hasEffect: 1
   effect: 
   effectSprite: {fileID: 0}
   effectDesc:
-  - At the end of your turn, give +0/+1 to a random ally creature
-  - Al final de tu turno, da +0/+1 a una criatura aliada al azar
+  - When it's played, deal 1 damage to the player and 2 damage to the enemy player
+  - "Cuando es jugado, hace 1 de da\xF1o al jugador y 2 de da\xF1o al jugador enemigo"
   spell: 0
   effects:
     conditions:
-    - End_turn
+    - Played
+    - Played
     extraConditions:
     - None
+    - None
     effects:
-    - Give_stats
+    - Deal_damage
+    - Deal_damage
     targetsCreatures:
-    - Random_ally_creature
+    - Player
+    - Enemy_player
     targetsDecks:
+    - None
     - None
     targetsCards:
     - None
+    - None
     targetsSummon:
     - None
-    x: 00000000
-    y: 01000000
-    numberOfTargets: 00000000
+    - None
+    x: 0100000002000000
+    y: 0000000000000000
+    numberOfTargets: 0000000000000000
