@@ -8,7 +8,6 @@ public class Player : Health
 {
     public int manaLimit;
     public int maxMana;
-    public int currentMana;
     [SerializeField] private ManaFiller manaFiller;
     public Animator notEnoughManaWindow;
     [SerializeField] private float shakeDuration;
@@ -65,10 +64,10 @@ public class Player : Health
     {
         manaFiller.RefreshManas(currentMana, manaLimit);
     }
-    public override void ReceiveDamage(int damage)
+    public override void ReceiveDamage(int damage, bool startTurn, bool endTurn)
     {
         //StartCoroutine(Shake());
-        base.ReceiveDamage(damage);
+        base.ReceiveDamage(damage, startTurn, endTurn);
     }
     IEnumerator Shake()
     {

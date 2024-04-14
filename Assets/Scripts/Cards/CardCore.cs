@@ -8,6 +8,34 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Cards card;
     public MapPosition currentPosition;
+    public int ManaCost
+    {
+        get { return card.manaCost; }
+        set { 
+            card.manaCost = value;
+            if (value > 0 && manaCostText != null)
+            {
+                manaCostText.transform.parent.gameObject.SetActive(true);
+                manaCostText.text = value.ToString();
+            }
+            else
+                manaCostText.transform.parent.gameObject.SetActive(false);
+        }
+    } 
+    public int HealthCost
+    {
+        get { return card.healthCost; }
+        set { 
+            card.healthCost = value;
+            if (value > 0 && healthCostText != null)
+            {
+                healthCostText.transform.parent.gameObject.SetActive(true);
+                healthCostText.text = value.ToString();
+            }
+            else
+                healthCostText.transform.parent.gameObject.SetActive(false);
+        }
+    }
     protected int currentLife;
     protected int currentAttack;
     [SerializeField] protected TextMeshPro nameText;
@@ -62,14 +90,8 @@ public class CardCore : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         image.sprite = card.sprite;
         attackText.text = card.attack.ToString();
         lifeText.text = currentLife.ToString();
-        if (card.manaCost > 0)
-            manaCostText.text = card.manaCost.ToString();
-        else
-            manaCostText.transform.parent.gameObject.SetActive(false);
-        if (card.healthCost > 0)
-            healthCostText.text = card.healthCost.ToString();
-        else
-            healthCostText.transform.parent.gameObject.SetActive(false);
+        ManaCost = card.manaCost;
+        HealthCost = card.healthCost;
         UpdateLanguage(FindObjectOfType<LanguageManager>().languageNumber);
     }
     public virtual void OnEndDrag(PointerEventData eventData)

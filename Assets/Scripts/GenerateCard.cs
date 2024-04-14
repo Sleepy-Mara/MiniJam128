@@ -200,8 +200,8 @@ public class GenerateCard : MonoBehaviour
         card.card.cardName = cardName;
         card.card.attack = attack;
         card.card.life = life;
-        card.card.manaCost = manaCost;
-        card.card.healthCost = healthCost;
+        card.ManaCost = manaCost;
+        card.HealthCost = healthCost;
         card.card.sprite = sprite;
         card.card.hasEffect = hasEffect;
         card.card.effectDesc = effectDescription;
@@ -215,12 +215,15 @@ public class GenerateCardEditor : Editor
     private static GUIStyle myStyle = new GUIStyle();
     Effects effects = new Effects();
     int indexCondition = 0;
-    int indexExtraCondition = 0;
+    int indexTempEffect = 0;
     int indexEffect = 0;
+    List<int> indexExtraCondition = new List<int>();
+    int hasExtraConditions = 1;
+    ExtraConditions extraConditions = new ExtraConditions();
     int indexTargetCreature = 0;
     int indexTargetDeck = 0;
     int indexTargetCard = 0;
-    int indexTargetSummon = 0;
+    int indexTargetPlayers = 0;
     int effextX = 0;
     int effextY = 0;
     int creaturesToAffect = 0;
@@ -237,12 +240,13 @@ public class GenerateCardEditor : Editor
         if (card.clearEffexts)
         {
             card.effects.conditions = new List<string>();
-            card.effects.extraConditions = new List<string>();
+            card.effects.tempEffect = new List<string>();
             card.effects.effects = new List<string>();
+            card.effects.extraConditions = new List<ExtraConditions>();
             card.effects.targetsCreatures = new List<string>();
             card.effects.targetsDecks = new List<string>();
             card.effects.targetsCards = new List<string>();
-            card.effects.targetsSummon = new List<string>();
+            card.effects.targetsPlayers = new List<string>();
             card.clearEffexts = false;
         }
         var width = EditorGUIUtility.currentViewWidth;
@@ -356,9 +360,9 @@ public class GenerateCardEditor : Editor
                         var condition = new Effects().conditions[indexCondition];
                     GUILayout.EndVertical();
                     GUILayout.BeginVertical();
-                        EditorGUILayout.LabelField("Extra conditions:", myStyle);
-                        indexExtraCondition = EditorGUILayout.Popup(indexExtraCondition, new Effects().extraConditions.ToArray());
-                        var extraCondition = new Effects().extraConditions[indexExtraCondition];
+                        EditorGUILayout.LabelField("TempEffects:", myStyle);
+                        indexTempEffect = EditorGUILayout.Popup(indexTempEffect, new Effects().tempEffect.ToArray());
+                        var tempEffect = new Effects().tempEffect[indexTempEffect];
                     GUILayout.EndVertical();
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
@@ -400,6 +404,10 @@ public class GenerateCardEditor : Editor
                                     cards[i] = EditorGUILayout.TextField(cards[i]);
                                 }
                                 break;
+                            case 8:
+                                EditorGUILayout.LabelField("Mana");
+                                effextX = EditorGUILayout.IntField(effextX, GUILayout.MaxWidth(50));
+                                break;
                         }
                     GUILayout.EndVertical();
                     GUILayout.BeginVertical();
@@ -411,7 +419,7 @@ public class GenerateCardEditor : Editor
                             indexTargetCard = EditorGUILayout.Popup(indexTargetCard, new Effects().targetsCards.ToArray());
                             indexTargetDeck = EditorGUILayout.Popup(indexTargetDeck, effects.targetsDecks.ToArray());
                             indexTargetCreature = 0;
-                            indexTargetSummon = 0;
+                            indexTargetPlayers = 0;
                         }
                         else if (effect == new Effects().effects[4])
                         {
@@ -429,9 +437,9 @@ public class GenerateCardEditor : Editor
                                 }
                             }
                             indexTargetCreature = 0;
-                            indexTargetSummon = 0;
+                            indexTargetPlayers = 0;
                         }
-                        else if (effect != new Effects().effects[7])
+                        else if (effect != new Effects().effects[7] && effect != new Effects().effects[8])
                         {
                             if (effect == new Effects().effects[5])
                             {
@@ -472,7 +480,7 @@ public class GenerateCardEditor : Editor
                                 }
                                 indexTargetDeck = 0;
                                 indexTargetCard = 0;
-                                indexTargetSummon = 0;
+                                indexTargetPlayers = 0;
                             }
                             else
                             {
@@ -497,12 +505,12 @@ public class GenerateCardEditor : Editor
                                 }
                                 indexTargetDeck = 0;
                                 indexTargetCard = 0;
-                                indexTargetSummon = 0;
+                                indexTargetPlayers = 0;
                             }
                         }
                         else
                         {
-                            indexTargetSummon = EditorGUILayout.Popup(indexTargetSummon, new Effects().targetsSummon.ToArray());
+                            indexTargetPlayers = EditorGUILayout.Popup(indexTargetPlayers, new Effects().targetsPlayers.ToArray());
                             indexTargetDeck = 0;
                             indexTargetCard = 0;
                             indexTargetCreature = 0;
@@ -511,25 +519,136 @@ public class GenerateCardEditor : Editor
                         var targetCard = new Effects().targetsCards[new Effects().targetsCards.IndexOf(effects.targetsCards[indexTargetCard])];
                         var targetCreature = new Effects().targetsCreatures[new Effects().targetsCreatures.IndexOf
                             (effects.targetsCreatures[indexTargetCreature])];
-                        var targetSummon = new Effects().targetsSummon[indexTargetSummon];
+                        var targetSummon = new Effects().targetsPlayers[indexTargetPlayers];
                     GUILayout.EndVertical();
                 GUILayout.EndHorizontal();
-                GUILayout.Space(10);
+                EditorGUILayout.LabelField("Has extra conditions?", myStyle);
+                hasExtraConditions = GUILayout.Toolbar(hasExtraConditions, new string[] { "Yes", "No" });
+                GUILayout.Space(5);
+                switch (hasExtraConditions)
+                {
+                    case 0:
+                        if (extraConditions == new ExtraConditions())
+                        {
+                            extraConditions.extraConditions.Clear();
+                            extraConditions.extraConditionsInt.Clear();
+                            extraConditions.cards.Clear();
+                        }
+                        if (GUILayout.Button("Add extra effect"))
+                        {
+                            extraConditions.extraConditions.Add("");
+                            extraConditions.extraConditionsInt.Add(0);
+                            extraConditions.cards.Add(new List<string>());
+                            indexExtraCondition.Add(0);
+                        }
+                        for (int i = 0; i < indexExtraCondition.Count; i++)
+                        {
+                            GUILayout.Space(5);
+                            GUILayout.BeginHorizontal();
+                                GUILayout.BeginVertical();
+                                    indexExtraCondition[i] = EditorGUILayout.Popup(indexExtraCondition[i], new ExtraConditions().extraConditions.ToArray());
+                                    if (indexExtraCondition[i] == 5 || indexExtraCondition[i] == 6 || indexExtraCondition[i] == 11 || indexExtraCondition[i] == 12 ||
+                                        indexExtraCondition[i] == 17 || indexExtraCondition[i] == 18 || indexExtraCondition[i] == 21 || indexExtraCondition[i] == 22 || 
+                                        indexExtraCondition[i] == 25 || indexExtraCondition[i] == 26)
+                                    {
+                                        EditorGUILayout.LabelField("!!!! In AT LEAST this: '-' is equal to this: '<=' !!!!");
+                                        EditorGUILayout.LabelField("!!!! If the number is '+' is equal to this: '>=' !!!!");
+                                    }
+                                    extraConditions.extraConditionsInt[i] = EditorGUILayout.IntField(extraConditions.extraConditionsInt[i], GUILayout.MaxWidth(50));
+                                GUILayout.EndVertical();
+                                GUILayout.BeginVertical();
+                                    switch (indexExtraCondition[i])
+                                    {
+                                        case 1:
+                                            for (int j = 0; j < extraConditions.extraConditionsInt[i]; j++)
+                                            {
+                                                if (extraConditions.cards.Count <= i)
+                                                    extraConditions.cards.Add(new List<string>());
+                                                if (extraConditions.cards[i].Count <= j)
+                                                    extraConditions.cards[i].Add("");
+                                                extraConditions.cards[i][j] = EditorGUILayout.TextField(extraConditions.cards[i][j]);
+                                            }
+                                            break;
+                                        case 2:
+                                            for (int j = 0; j < extraConditions.extraConditionsInt[i]; j++)
+                                            {
+                                                if (extraConditions.cards.Count <= i)
+                                                    extraConditions.cards.Add(new List<string>());
+                                                if (extraConditions.cards[i].Count <= j)
+                                                    extraConditions.cards[i].Add("");
+                                                extraConditions.cards[i][j] = EditorGUILayout.TextField(extraConditions.cards[i][j]);
+                                            }
+                                            break;
+                                        case 7:
+                                            for (int j = 0; j < extraConditions.extraConditionsInt[i]; j++)
+                                            {
+                                                if (extraConditions.cards.Count <= i)
+                                                    extraConditions.cards.Add(new List<string>());
+                                                if (extraConditions.cards[i].Count <= j)
+                                                    extraConditions.cards[i].Add("");
+                                                extraConditions.cards[i][j] = EditorGUILayout.TextField(extraConditions.cards[i][j]);
+                                            }
+                                            break;
+                                        case 8:
+                                            for (int j = 0; j < extraConditions.extraConditionsInt[i]; j++)
+                                            {
+                                                if (extraConditions.cards.Count <= i)
+                                                    extraConditions.cards.Add(new List<string>());
+                                                if (extraConditions.cards[i].Count <= j)
+                                                    extraConditions.cards[i].Add("");
+                                                extraConditions.cards[i][j] = EditorGUILayout.TextField(extraConditions.cards[i][j]);
+                                            }
+                                            break;
+                                        case 13:
+                                            for (int j = 0; j < extraConditions.extraConditionsInt[i]; j++)
+                                            {
+                                                if (extraConditions.cards.Count <= i)
+                                                    extraConditions.cards.Add(new List<string>());
+                                                if (extraConditions.cards[i].Count <= j)
+                                                    extraConditions.cards[i].Add("");
+                                                extraConditions.cards[i][j] = EditorGUILayout.TextField(extraConditions.cards[i][j]);
+                                            }
+                                            break;
+                                        case 14:
+                                            for (int j = 0; j < extraConditions.extraConditionsInt[i]; j++)
+                                            {
+                                                if (extraConditions.cards.Count <= i)
+                                                    extraConditions.cards.Add(new List<string>());
+                                                if (extraConditions.cards[i].Count <= j)
+                                                    extraConditions.cards[i].Add("");
+                                                extraConditions.cards[i][j] = EditorGUILayout.TextField(extraConditions.cards[i][j]);
+                                            }
+                                            break;
+                                    }
+                                GUILayout.EndVertical();
+                            GUILayout.EndHorizontal();
+                        }
+                        break;
+                    case 1:
+                        extraConditions = new ExtraConditions();
+                        indexExtraCondition = new List<int>();
+                        break;
+                }
+                GUILayout.Space(20);
                 if (GUILayout.Button("Add effect"))
                 {
                     card.effects.conditions.Add(condition);
-                    card.effects.extraConditions.Add(extraCondition);
+                    card.effects.extraConditions.Add(extraConditions);
+                    card.effects.tempEffect.Add(tempEffect);
                     card.effects.effects.Add(effect);
                     card.effects.targetsDecks.Add(targetDeck);
                     card.effects.targetsCards.Add(targetCard);
                     card.effects.targetsCreatures.Add(targetCreature);
-                    card.effects.targetsSummon.Add(targetSummon);
+                    card.effects.targetsPlayers.Add(targetSummon);
                     card.effects.x.Add(effextX);
                     card.effects.y.Add(effextY);
                     card.effects.numberOfTargets.Add(creaturesToAffect);
                     card.effects.cards.Add(cards);
                     indexCondition = 0;
-                    indexExtraCondition = 0;
+                    extraConditions = new ExtraConditions();
+                    indexExtraCondition = new List<int>();
+                    hasExtraConditions = 1;
+                    indexTempEffect = 0;
                     indexEffect = 0;
                     indexTargetCreature = 0;
                     effextX = 0;
@@ -540,19 +659,20 @@ public class GenerateCardEditor : Editor
                 for (int i = 0; i < card.effects.conditions.Count; i++)
                 {
                     GUILayout.Space(10);
-                    GUILayout.TextArea("Condition: " + card.effects.conditions[i] + " ExtraConditions: " + card.effects.extraConditions[i] 
+                    GUILayout.TextArea("Condition: " + card.effects.conditions[i] + " ExtraConditions: " + card.effects.tempEffect[i] 
                         + " Effect: " + card.effects.effects[i] + " " + card.effects.x[i] + " " + card.effects.y[i]
                         + " Targets: " + card.effects.targetsCreatures[i] + " " + card.effects.numberOfTargets[i]);
                     if (GUILayout.Button("Remove effect"))
                     {
                         card.effects.conditions.RemoveAt(i);
-                        card.effects.extraConditions.RemoveAt(i);
+                        card.effects.tempEffect.RemoveAt(i);
                         card.effects.effects.RemoveAt(i);
                         card.effects.targetsCreatures.RemoveAt(i);
                         card.effects.x.RemoveAt(i);
                         card.effects.y.RemoveAt(i);
                         card.effects.numberOfTargets.RemoveAt(i);
                         card.effects.cards.RemoveAt(i);
+                        card.effects.extraConditions.RemoveAt(i);
                     }
                 }
                 break;
@@ -654,7 +774,10 @@ public class GenerateCardEditor : Editor
     {
         effects = new Effects();
         indexCondition = 0;
-        indexExtraCondition = 0;
+        indexExtraCondition = new List<int>();
+        hasExtraConditions = 1;
+        extraConditions = new ExtraConditions();
+        indexTempEffect = 0;
         indexEffect = 0;
         indexTargetCreature = 0;
         effextX = 0;

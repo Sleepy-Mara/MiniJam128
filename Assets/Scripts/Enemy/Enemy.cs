@@ -28,6 +28,7 @@ public class Enemy : Health
                 card.card.StartTurn();
                 _effectManager.CheckConditionStartOfTurn(card.card);
             }
+        StartTurn();
         _table.MoveEnemyCard();
         foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
@@ -90,6 +91,7 @@ public class Enemy : Health
                 _effectManager.CheckConditionEndOfTurn(card.card);
                 yield return new WaitUntil(() => !card.card.checkingEffect);
             }
+        EndTurn();
         yield return new WaitForSeconds(1);
         _turnManager.StartTurn();
     }

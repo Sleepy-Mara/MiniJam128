@@ -8,6 +8,10 @@ public class EnemyAI : Enemy
 {
     [HideInInspector] public List<Cards> deck;
     private List<Cards> _currentDeck;
+    public List<Cards> CurrentDeck
+    {
+        get { return _currentDeck; }
+    }
     [SerializeField] private List<Cards> bloodDeck;
     private List<Cards> _currentBloodDeck;
     [HideInInspector] public List<Cards> hand;
@@ -15,7 +19,6 @@ public class EnemyAI : Enemy
     [SerializeField] private int maxMana;
     [SerializeField] private int startMana;
     private int _mana;
-    private int _currentMana;
     private new void Awake()
     {
         base.Awake();
@@ -36,13 +39,14 @@ public class EnemyAI : Enemy
     {
         if (_mana < maxMana)
             _mana++;
-        _currentMana = _mana;
+        currentMana = _mana;
         foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
             {
                 card.card.StartTurn();
                 _effectManager.CheckConditionStartOfTurn(card.card);
             }
+        StartTurn();
         _table.MoveEnemyCard();
         foreach (MapPosition card in _table.enemyFront)
             if (card.card != null)
@@ -598,9 +602,9 @@ public class EnemyAI : Enemy
             }
             else
             {
-                if (_currentMana - card.card.manaCost < 0 || currentHealth - card.card.healthCost <= 0)
+                if (currentMana - card.card.manaCost < 0 || currentHealth - card.card.healthCost <= 0)
                     continue;
-                newBestPlay.leftoverMana = _currentMana;
+                newBestPlay.leftoverMana = currentMana;
                 newBestPlay.leftoverHealth = currentHealth;
             }
             if (iContinue)
