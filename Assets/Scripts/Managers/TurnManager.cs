@@ -26,7 +26,7 @@ public class TurnManager : MonoBehaviour
 
     public void StartBattle()
     {
-        enemy.RestoreHealth(10);
+        enemy.RestoreHealth(10, false, false);
         enemy.MoveBackCards(turn);
         for (int i = 0; i < cardsInHandStart; i++)
             draw.DrawACard(Draw.DeckType.Mana, true, true);
@@ -41,6 +41,7 @@ public class TurnManager : MonoBehaviour
                 card.card.StartTurn();
             }
         FindObjectOfType<CameraManager>().HandCamera();
+        player.StartTurn();
         canEndTurn = false;
         turn++;
         player.RestoreMana();
@@ -107,6 +108,7 @@ public class TurnManager : MonoBehaviour
                 effectManager.CheckConditionEndOfTurn(card.card);
                 yield return new WaitUntil(() => !card.card.checkingEffect);
             }
+        player.EndTurn();
         if (enemy.currentHealth > 0)
             enemy.MoveBackCards(turn);
     }

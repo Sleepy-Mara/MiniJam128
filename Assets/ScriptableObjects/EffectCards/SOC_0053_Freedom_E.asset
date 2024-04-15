@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
+  m_Name: SOC_0053_Freedom_E
+  m_EditorClassIdentifier: 
+  scriptableName: Freedom
+  id: 0053
+  cardName:
+  - Freedom
+  - Libertad
+  life: 2
+  attack: 1
+  attackToPlayer: 0
+  manaCost: 2
+  healthCost: 0
+  sprite: {fileID: 21300000, guid: 1663b91935dff084a81ce3507240affd, type: 3}
+  hasEffect: 1
+  effect: 
+  effectSprite: {fileID: 0}
+  effectDesc:
+  - When it defeats an enemy creature, deal 1 damage to the enemy player
+  - "Cuando derrota a una criatura enemiga, hace 1 de da\xF1o al jugador enemigo"
+  spell: 0
+  effects:
+    conditions:
+    - Defeats_enemy
+    extraConditions:
+    - None
+    effects:
+    - Deal_damage
+    targetsCreatures:
+    - Enemy_player
+    targetsDecks:
+    - None
+    targetsCards:
+    - None
+    targetsSummon:
+    - None
+    x: 01000000
+    y: 00000000
+    numberOfTargets: 00000000

@@ -217,6 +217,99 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &396960636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptableName: 
+  id: 
+  cardName:
+  - English name
+  - Spanish name
+  life: 0
+  attack: 0
+  attackToPlayer: 0
+  manaCost: 0
+  healthCost: 0
+  sprite: {fileID: 0}
+  hasEffect: 0
+  effect: 
+  effectSprite: {fileID: 0}
+  effectDesc:
+  - English effect text
+  - Spanish effect text
+  spell: 0
+  effects:
+    conditions:
+    - None
+    - Start_turn
+    - Played
+    - Attacks
+    - Damaged
+    - Defeated
+    - Defeats_enemy
+    - Ally_creature_defeated
+    - End_turn
+    - Buffed
+    - Spell_played
+    extraConditions:
+    - None
+    - Until_next_turn
+    - Until_end_turn
+    effects:
+    - None
+    - Draw
+    - Deal_damage
+    - Heal
+    - Add
+    - Give_stats
+    - Immune
+    - 'Summon '
+    targetsCreatures:
+    - None
+    - Enemy_creature
+    - Ally_creature
+    - Random_enemy
+    - Random_ally
+    - Random_enemy_creature
+    - Random_ally_creature
+    - Random_enemy_creatures
+    - Random_ally_creatures
+    - All_enemy_creatures
+    - All_ally_creatures
+    - Itself
+    - Enemy_player
+    - Player
+    - Creature_front
+    - Enemy_creatures
+    - Ally_creatures
+    targetsDecks:
+    - None
+    - Hand
+    - Deck
+    - Life_deck
+    - Either_deck
+    targetsCards:
+    - None
+    - Random_creature
+    - Random_spell
+    - Random
+    - Specific_card
+    targetsPlayers:
+    - None
+    - Player
+    - Enemy
+    x: 
+    y: 
+    numberOfTargets: 
 --- !u!1 &911704777
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +433,7 @@ MonoBehaviour:
     targetsCreatures: []
     targetsDecks: []
     targetsCards: []
-    targetsSummon: []
+    targetsPlayers: []
     x: 
     y: 
     numberOfTargets: 
@@ -348,7 +441,7 @@ MonoBehaviour:
   spell: 0
   spellInt: 0
   token: 0
-  id: 0029
+  id: 0068
   card: {fileID: 1483077502}
 --- !u!1001 &1083329848
 PrefabInstance:
@@ -560,7 +653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8373737743083832900, guid: 853d860b9284d7f4c8d6db9e04432c89, type: 3}
       propertyPath: m_text
-      value: When it's defeated, add Colonel toad to the deck and draw 1 card
+      value: English effect text
       objectReference: {fileID: 0}
     - target: {fileID: 8373737743083832900, guid: 853d860b9284d7f4c8d6db9e04432c89, type: 3}
       propertyPath: m_Enabled
@@ -568,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8373737743083832900, guid: 853d860b9284d7f4c8d6db9e04432c89, type: 3}
       propertyPath: m_fontSize
-      value: 2.4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8373737743834724895, guid: 853d860b9284d7f4c8d6db9e04432c89, type: 3}
       propertyPath: m_IsActive
@@ -615,96 +708,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b094d67c382ec7343a117bbd97823131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1538973773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 113b72815b9b2fa42ac4284bd68344c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scriptableName: 
-  id: 
-  cardName:
-  - English name
-  - Spanish name
-  life: 0
-  attack: 0
-  attackToPlayer: 0
-  manaCost: 0
-  healthCost: 0
-  sprite: {fileID: 0}
-  hasEffect: 0
-  effect: 
-  effectSprite: {fileID: 0}
-  effectDesc:
-  - English effect text
-  - Spanish effect text
-  spell: 0
-  effects:
-    conditions:
-    - None
-    - Start_turn
-    - Played
-    - Attacks
-    - Damaged
-    - Defeated
-    - Defeats_enemy
-    - Ally_creature_defeated
-    - End_turn
-    - Buffed
-    - Spell_played
-    extraConditions:
-    - None
-    - Until_next_turn
-    - Until_end_turn
-    effects:
-    - None
-    - Draw
-    - Deal_damage
-    - Heal
-    - Add
-    - Give_stats
-    - Immune
-    - 'Summon '
-    targetsCreatures:
-    - None
-    - Enemy_creature
-    - Ally_creature
-    - Random_enemy
-    - Random_ally
-    - Random_enemy_creature
-    - Random_ally_creature
-    - Random_enemy_creatures
-    - Random_ally_creatures
-    - All_enemy_creatures
-    - All_ally_creatures
-    - Itself
-    - Enemy_player
-    - Player
-    - Creature_front
-    - Enemy_creatures
-    - Ally_creatures
-    targetsDecks:
-    - None
-    - Hand
-    - Deck
-    - Life_deck
-    - Either_deck
-    targetsCards:
-    - None
-    - Random_creature
-    - Random_spell
-    - Random
-    - Specific_card
-    targetsSummon:
-    - None
-    - Player
-    - Enemy
-    x: 
-    y: 
-    numberOfTargets: 

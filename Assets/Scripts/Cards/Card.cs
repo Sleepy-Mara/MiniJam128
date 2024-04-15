@@ -109,7 +109,7 @@ public class Card : CardCore
         //else
         //    myAttackAnim = "AttackEnemy";
         yield return new WaitUntil(() => !inAnimation);
-        currentPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer);
+        currentPosition.oponent.GetComponent<Health>().ReceiveDamage(attackToPlayer, false, false);
         checkingEffect = true;
         _effectManager.CheckConditionAttack(this);
     }
@@ -297,6 +297,7 @@ public class Card : CardCore
                 ReceiveDamagePublic(effect.heal, null);
             if (effect.attack != 0 || effect.life != 0)
                 Buff(effect.attack * -1, effect.life * -1);
+            effect.startTurn = false;
         }
     }
     public void EndTurn()
@@ -309,12 +310,13 @@ public class Card : CardCore
                 immune = false;
             if (effect.destroy)
                 StartCoroutine(Defeated(null));
-            if (effect.damage > 0)
+            if (effect.damage != 0)
                 Heal(effect.damage);
-            if (effect.heal > 0)
+            if (effect.heal != 0)
                 ReceiveDamagePublic(effect.heal, null);
             if (effect.attack != 0 || effect.life != 0)
                 Buff(effect.attack * -1, effect.life * -1);
+            effect.endTurn = false;
         }
     }
     protected override void Selected(MapPosition pos)

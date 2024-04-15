@@ -106,6 +106,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[1])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -121,6 +123,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[2])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -136,6 +140,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[3])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -151,6 +157,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[4])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -166,6 +174,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[5])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -181,6 +191,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[6])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -196,6 +208,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[7])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -211,6 +225,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[8])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -226,6 +242,8 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[9])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
@@ -241,11 +259,506 @@ public class EffectManager : MonoBehaviour
         for (int i = 0; i < effects.conditions.Count; i++)
             if (effects.conditions[i] == effect.conditions[10])
             {
+                if (!CheckExtraConditions(caller, effects, i))
+                    continue;
                 CheckEffect(caller, effects, i);
                 checkEffect = true;
             }
         if (!checkEffect)
             CheckingEffect(caller);
+    }
+    private bool CheckExtraConditions(MonoBehaviour caller, Effects newEffect, int numberEffect)
+    {
+        MapPosition[] enemyPositions;
+        MapPosition[] allyPositions;
+        Health enemyHealth;
+        Health allyHealth;
+        if (caller.GetComponent<CardCore>()?.currentPosition.oponent == FindObjectOfType<Player>() || caller.GetComponent<Enemy>())
+        {
+            enemyPositions = _table.playerPositions;
+            allyPositions = _table.enemyFront;
+            enemyHealth = FindObjectOfType<Player>();
+            allyHealth = FindObjectOfType<Enemy>();
+        }
+        else
+        {
+            enemyPositions = _table.enemyFront;
+            allyPositions = _table.playerPositions;
+            enemyHealth = FindObjectOfType<Enemy>();
+            allyHealth = FindObjectOfType<Player>();
+        }
+        bool fulfillsExtraCondition = true;
+        foreach (string extraCondition in newEffect.extraConditions[numberEffect].extraConditions)
+            for (int i = 0; i < effect.extraConditions[0].extraConditions.Count; i++)
+            {
+                if (extraCondition == effect.extraConditions[0].extraConditions[i])
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (GameObject card in FindObjectOfType<Draw>()._cardsInHand)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.GetComponent<CardCore>().card.scriptableName) &&
+                                        !ignore.Contains(card.GetComponent<CardCore>().card.scriptableName))
+                                    {
+                                        ignore.Add(card.GetComponent<CardCore>().card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (Cards card in allyHealth.GetComponent<EnemyAI>().hand)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.scriptableName) &&
+                                        !ignore.Contains(card.scriptableName))
+                                    {
+                                        ignore.Add(card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 2:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (GameObject card in FindObjectOfType<Draw>()._cardsInHand)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.GetComponent<CardCore>().card.scriptableName) &&
+                                        !ignore.Contains(card.GetComponent<CardCore>().card.scriptableName))
+                                    {
+                                        ignore.Add(card.GetComponent<CardCore>().card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (Cards card in enemyHealth.GetComponent<EnemyAI>().hand)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.scriptableName) &&
+                                        !ignore.Contains(card.scriptableName))
+                                    {
+                                        ignore.Add(card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 3:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                if (FindObjectOfType<Draw>()._cardsInHand.Count != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                if (allyHealth.GetComponent<EnemyAI>().hand.Count != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 4:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                if (FindObjectOfType<Draw>()._cardsInHand.Count != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                if (enemyHealth.GetComponent<EnemyAI>().hand.Count != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 5:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (FindObjectOfType<Draw>()._cardsInHand.Count > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                                    else if (FindObjectOfType<Draw>()._cardsInHand.Count < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (allyHealth.GetComponent<EnemyAI>().hand.Count > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                                    else if (allyHealth.GetComponent<EnemyAI>().hand.Count < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 6:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (FindObjectOfType<Draw>()._cardsInHand.Count > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                                    else if (FindObjectOfType<Draw>()._cardsInHand.Count < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (enemyHealth.GetComponent<EnemyAI>().hand.Count > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                                    else if (enemyHealth.GetComponent<EnemyAI>().hand.Count < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 7:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (Cards card in FindObjectOfType<Draw>().CurrentDeck)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.scriptableName) &&
+                                        !ignore.Contains(card.scriptableName))
+                                    {
+                                        ignore.Add(card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (Cards card in allyHealth.GetComponent<EnemyAI>().CurrentDeck)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.scriptableName) &&
+                                        !ignore.Contains(card.scriptableName))
+                                    {
+                                        ignore.Add(card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 8:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (Cards card in FindObjectOfType<Draw>().CurrentDeck)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.scriptableName) &&
+                                        !ignore.Contains(card.scriptableName))
+                                    {
+                                        ignore.Add(card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (Cards card in enemyHealth.GetComponent<EnemyAI>().CurrentDeck)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.scriptableName) &&
+                                        !ignore.Contains(card.scriptableName))
+                                    {
+                                        ignore.Add(card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 9:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                if (FindObjectOfType<Draw>().CurrentDeck.Count != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                if (allyHealth.GetComponent<EnemyAI>().CurrentDeck.Count != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 10:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                if (FindObjectOfType<Draw>().CurrentDeck.Count != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                if (enemyHealth.GetComponent<EnemyAI>().CurrentDeck.Count != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 11:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (FindObjectOfType<Draw>().CurrentDeck.Count > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                                    else if (FindObjectOfType<Draw>().CurrentDeck.Count < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (allyHealth.GetComponent<EnemyAI>().CurrentDeck.Count > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                                    else if (allyHealth.GetComponent<EnemyAI>().CurrentDeck.Count < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 12:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (FindObjectOfType<Draw>().CurrentDeck.Count > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                                    else if (FindObjectOfType<Draw>().CurrentDeck.Count < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (enemyHealth.GetComponent<EnemyAI>().CurrentDeck.Count > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                                    else if (enemyHealth.GetComponent<EnemyAI>().CurrentDeck.Count < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 13:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (MapPosition card in _table.playerPositions)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.card.card.scriptableName) &&
+                                        !ignore.Contains(card.card.card.scriptableName))
+                                    {
+                                        ignore.Add(card.card.card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (MapPosition card in _table.enemyFront)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.card.card.scriptableName) &&
+                                        !ignore.Contains(card.card.card.scriptableName))
+                                    {
+                                        ignore.Add(card.card.card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 14:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (MapPosition card in _table.playerPositions)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.card.card.scriptableName) &&
+                                        !ignore.Contains(card.card.card.scriptableName))
+                                    {
+                                        ignore.Add(card.card.card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                List<string> ignore = new List<string>();
+                                foreach (MapPosition card in _table.enemyFront)
+                                    if (newEffect.extraConditions[numberEffect].cards[i].Contains(card.card.card.scriptableName) &&
+                                        !ignore.Contains(card.card.card.scriptableName))
+                                    {
+                                        ignore.Add(card.card.card.scriptableName);
+                                        j++;
+                                        if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                            break;
+                                    }
+                                if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 15:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                foreach (MapPosition card in _table.playerPositions)
+                                    if (card.card != null)
+                                        j++;
+                                if (j != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                foreach (MapPosition card in _table.enemyFront)
+                                    if (card.card != null)
+                                        j++;
+                                if (j != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 16:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                foreach (MapPosition card in _table.playerPositions)
+                                    if (card.card != null)
+                                        j++;
+                                if (j != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                foreach (MapPosition card in _table.enemyFront)
+                                    if (card.card != null)
+                                        j++;
+                                if (j != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 17:
+                            if (allyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                foreach (MapPosition card in _table.playerPositions)
+                                    if (card.card != null)
+                                        j++;
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i] * -1)
+                                        fulfillsExtraCondition = false;
+                                else if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            if (allyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                foreach (MapPosition card in _table.enemyFront)
+                                    if (card.card != null)
+                                        j++;
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i] * -1)
+                                        fulfillsExtraCondition = false;
+                                    else if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 18:
+                            if (enemyHealth.GetComponent<Player>())
+                            {
+                                int j = 0;
+                                foreach (MapPosition card in _table.playerPositions)
+                                    if (card.card != null)
+                                        j++;
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i] * -1)
+                                        fulfillsExtraCondition = false;
+                                    else if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            if (enemyHealth.GetComponent<EnemyAI>())
+                            {
+                                int j = 0;
+                                foreach (MapPosition card in _table.enemyFront)
+                                    if (card.card != null)
+                                        j++;
+                                if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                    if (j > newEffect.extraConditions[numberEffect].extraConditionsInt[i] * -1)
+                                        fulfillsExtraCondition = false;
+                                    else if (j < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                        fulfillsExtraCondition = false;
+                            }
+                            break;
+                        case 19:
+                            if (allyHealth.currentHealth != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                fulfillsExtraCondition = false;
+                            break;
+                        case 20:
+                            if (enemyHealth.currentHealth != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                fulfillsExtraCondition = false;
+                            break;
+                        case 21:
+                            if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                if (allyHealth.currentHealth > newEffect.extraConditions[numberEffect].extraConditionsInt[i] * -1)
+                                    fulfillsExtraCondition = false;
+                                else if (allyHealth.currentHealth < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            break;
+                        case 22:
+                            if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                if (enemyHealth.currentHealth > newEffect.extraConditions[numberEffect].extraConditionsInt[i] * -1)
+                                    fulfillsExtraCondition = false;
+                                else if (enemyHealth.currentHealth < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            break;
+                        case 23:
+                            if (allyHealth.currentMana != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                fulfillsExtraCondition = false;
+                            break;
+                        case 24:
+                            if (enemyHealth.currentMana != newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                fulfillsExtraCondition = false;
+                            break;
+                        case 25:
+                            if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                if (allyHealth.currentMana > newEffect.extraConditions[numberEffect].extraConditionsInt[i] * -1)
+                                    fulfillsExtraCondition = false;
+                                else if (allyHealth.currentMana < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            break;
+                        case 26:
+                            if (newEffect.extraConditions[numberEffect].extraConditionsInt[i] < 0)
+                                if (enemyHealth.currentMana > newEffect.extraConditions[numberEffect].extraConditionsInt[i] * -1)
+                                    fulfillsExtraCondition = false;
+                                else if (enemyHealth.currentMana < newEffect.extraConditions[numberEffect].extraConditionsInt[i])
+                                    fulfillsExtraCondition = false;
+                            break;
+                    }
+                }
+            }
+        return fulfillsExtraCondition;
     }
     string GetEffect(MonoBehaviour caller)
     {
@@ -320,9 +833,9 @@ public class EffectManager : MonoBehaviour
     {
         bool startTurn = false;
         bool endTurn = false;
-        if (effect.extraConditions[1] == newEffect.extraConditions[numberEffect])
+        if (effect.tempEffect[1] == newEffect.tempEffect[numberEffect])
             startTurn = true;
-        if (effect.extraConditions[2] == newEffect.extraConditions[numberEffect])
+        if (effect.tempEffect[2] == newEffect.tempEffect[numberEffect])
             endTurn = true;
         for (int i = 0; i < effect.effects.Count; i++)
             if (effect.effects[i] == newEffect.effects[numberEffect])
@@ -348,6 +861,9 @@ public class EffectManager : MonoBehaviour
                         break;
                     case 7:
                         SumonEffect(caller, newEffect, numberEffect, startTurn, endTurn);
+                        break;
+                    case 8:
+                        ManaEffect(caller, newEffect, numberEffect, startTurn, endTurn);
                         break;
                 }
     }
@@ -512,7 +1028,7 @@ public class EffectManager : MonoBehaviour
                         if (enemysAlive2.Count > 0)
                             selected1 = Random.Range(0, enemysAlive2.Count + 1);
                         if (selected1 == enemyPositions.Length)
-                            enemyHealth.ReceiveDamage(newEffect.x[numberEffect]);
+                            enemyHealth.ReceiveDamage(newEffect.x[numberEffect], startTurn, endTurn);
                         else if (enemysAlive2[selected1].card != null)
                             enemysAlive2[selected1].card.ReceiveDamageEffect(newEffect.x[numberEffect], null, startTurn, endTurn);
                         break;
@@ -526,7 +1042,7 @@ public class EffectManager : MonoBehaviour
                         if (allysAlive2.Count > 0)
                             selected2 = Random.Range(0, allysAlive2.Count + 1);
                         if (selected2 == allyPositions.Length)
-                            allyHealth.ReceiveDamage(newEffect.x[numberEffect]);
+                            allyHealth.ReceiveDamage(newEffect.x[numberEffect], startTurn, endTurn);
                         else if (allysAlive2[selected2].card != null)
                             allysAlive2[selected2].card.ReceiveDamageEffect(newEffect.x[numberEffect], null, startTurn, endTurn);
                         break;
@@ -598,13 +1114,13 @@ public class EffectManager : MonoBehaviour
                         if (caller.GetComponent<Card>())
                             caller.GetComponent<Card>().ReceiveDamageEffect(newEffect.x[numberEffect], null, startTurn, endTurn);
                         if (caller.GetComponent<Health>())
-                            caller.GetComponent<Health>().ReceiveDamage(newEffect.x[numberEffect]);
+                            caller.GetComponent<Health>().ReceiveDamage(newEffect.x[numberEffect], startTurn, endTurn);
                         break;
                     case 12:
-                        enemyHealth.ReceiveDamage(newEffect.x[numberEffect]);
+                        enemyHealth.ReceiveDamage(newEffect.x[numberEffect], startTurn, endTurn);
                         break;
                     case 13:
-                        allyHealth.ReceiveDamage(newEffect.x[numberEffect]);
+                        allyHealth.ReceiveDamage(newEffect.x[numberEffect], startTurn, endTurn);
                         break;
                     case 14:
                         caller.GetComponent<CardCore>()?.currentPosition.positionFacing.card.ReceiveDamageEffect(newEffect.x[numberEffect], null, startTurn, endTurn);
@@ -970,7 +1486,7 @@ public class EffectManager : MonoBehaviour
                         if (enemysAlive2.Count > 0)
                             selected1 = Random.Range(0, enemysAlive2.Count + 1);
                         if (selected1 == enemyPositions.Length)
-                            enemyHealth.RestoreHealth(newEffect.x[numberEffect]);
+                            enemyHealth.RestoreHealth(newEffect.x[numberEffect], startTurn, endTurn);
                         else if (enemysAlive2[selected1].card != null)
                             enemysAlive2[selected1].card.HealEffect(newEffect.x[numberEffect], startTurn, endTurn);
                         break;
@@ -984,7 +1500,7 @@ public class EffectManager : MonoBehaviour
                         if (allysAlive2.Count > 0)
                             selected2 = Random.Range(0, allysAlive2.Count + 1);
                         if (selected2 == allyPositions.Length)
-                            allyHealth.RestoreHealth(newEffect.x[numberEffect]);
+                            allyHealth.RestoreHealth(newEffect.x[numberEffect], startTurn, endTurn);
                         else if (allysAlive2[selected2].card != null)
                             allysAlive2[selected2].card.HealEffect(newEffect.x[numberEffect], startTurn, endTurn);
                         break;
@@ -1056,13 +1572,13 @@ public class EffectManager : MonoBehaviour
                         if (caller.GetComponent<Card>())
                             caller.GetComponent<Card>().HealEffect(newEffect.x[numberEffect], startTurn, endTurn);
                         if (caller.GetComponent<Health>())
-                            caller.GetComponent<Health>().RestoreHealth(newEffect.x[numberEffect]);
+                            caller.GetComponent<Health>().RestoreHealth(newEffect.x[numberEffect], startTurn, endTurn);
                         break;
                     case 12:
-                        enemyHealth.RestoreHealth(newEffect.x[numberEffect]);
+                        enemyHealth.RestoreHealth(newEffect.x[numberEffect], startTurn, endTurn);
                         break;
                     case 13:
-                        allyHealth.RestoreHealth(newEffect.x[numberEffect]);
+                        allyHealth.RestoreHealth(newEffect.x[numberEffect], startTurn, endTurn);
                         break;
                     case 14:
                         caller.GetComponent<CardCore>()?.currentPosition.positionFacing.card.HealEffect(newEffect.x[numberEffect], startTurn, endTurn);
@@ -2369,7 +2885,7 @@ public class EffectManager : MonoBehaviour
         List<Cards> selectedCards = new List<Cards>();
         foreach (Cards cards in cards)
             foreach (string effectCards in newEffect.cards[numberEffect])
-                if (effectCards == cards.name)
+                if (effectCards == cards.scriptableName)
                     selectedCards.Add(cards);
         if (selectedCards != null)
         {
@@ -2451,6 +2967,35 @@ public class EffectManager : MonoBehaviour
         //                }
         //    }
         //}
+        CheckingEffect(caller);
+        #endregion
+    }
+    private void ManaEffect(MonoBehaviour caller, Effects newEffect, int numberEffect, bool startTurn, bool endTurn)
+    {
+        #region Mana
+        Health enemyMana;
+        Health allyMana;
+        if (caller.GetComponent<CardCore>()?.currentPosition.oponent == FindObjectOfType<Player>() || caller.GetComponent<Enemy>())
+        {
+            enemyMana = FindObjectOfType<Player>();
+            allyMana = FindObjectOfType<Enemy>();
+        }
+        else
+        {
+            enemyMana = FindObjectOfType<Enemy>();
+            allyMana = FindObjectOfType<Player>();
+        }
+        for (int i = 0; i < effect.targetsCreatures.Count; i++)
+            if (effect.targetsPlayers[i] == newEffect.targetsPlayers[numberEffect])
+                switch (i)
+                {
+                    case 1:
+                        allyMana.ManaEffect(newEffect.x[numberEffect], startTurn, endTurn);
+                        return;
+                    case 2:
+                        enemyMana.ManaEffect(newEffect.x[numberEffect], startTurn, endTurn);
+                        return;
+                }
         CheckingEffect(caller);
         #endregion
     }
@@ -2542,7 +3087,11 @@ public class Effects
         "Buffed", //9
         "Spell_played", //10
     };
-    public List<string> extraConditions = new List<string>()
+    public List<ExtraConditions> extraConditions = new List<ExtraConditions>()
+    {
+        new ExtraConditions()
+    };
+    public List<string> tempEffect = new List<string>()
     {
         "None", //0
         "Until_next_turn", //1
@@ -2558,6 +3107,7 @@ public class Effects
         "Give_stats", //5
         "Immune", //6
         "Summon ", //7
+        "Mana", //8
     };
     public List<string> targetsCreatures = new List<string>()
     {
@@ -2595,7 +3145,7 @@ public class Effects
         "Random", //3
         "Specific_card" //4
     };
-    public List<string> targetsSummon = new List<string>()
+    public List<string> targetsPlayers = new List<string>()
     {
         "None", //0
         "Player", //1
@@ -2604,5 +3154,41 @@ public class Effects
     public List<int> x = new List<int>();
     public List<int> y = new List<int>();
     public List<int> numberOfTargets = new List<int>();
+    public List<List<string>> cards = new List<List<string>>();
+}
+[System.Serializable]
+public class ExtraConditions
+{
+    public List<string> extraConditions = new List<string>()
+    {
+        "None", //0
+        "Have_specifics_cards_in_hand", //1
+        "Enemy_have_specifics_cards_in_hand", //2
+        "Have_x_cards_in_hand", //3
+        "Enemy_have_x_cards_in_hand", //4
+        "Have_at_least_x_cards_in_hand", //5
+        "Enemy_have_at_least_x_cards_in_hand", //6
+        "Have_specifics_cards_in_deck", //7
+        "Enemy_have_specifics_cards_in_deck", //8
+        "Have_x_cards_in_deck", //9
+        "Enemy_have_x_cards_in_deck", //10
+        "Have_at_least_x_cards_in_deck", //11
+        "Enemy_have_at_least_x_cards_in_deck", //12
+        "Have_specifics_cards_played", //13
+        "Enemy_have_specifics_cards_played", //14
+        "Have_x_cards_played", //15
+        "Enemy_have_x_cards_played", //16
+        "Have_at_least_x_cards_played", //17
+        "Enemy_have_at_least_x_cards_played", //18
+        "Have_x_life", //19
+        "Enemy_have_x_life", //20
+        "Have_at_least_x_life", //21
+        "Enemy_have_at_least_x_life", //22
+        "Have_x_mana", //23
+        "Enemy_have_x_mana", //24
+        "Have_at_least_x_mana", //25
+        "Enemy_have_at_least_x_mana", //26
+    };
+    public List<int> extraConditionsInt = new List<int>();
     public List<List<string>> cards = new List<List<string>>();
 }

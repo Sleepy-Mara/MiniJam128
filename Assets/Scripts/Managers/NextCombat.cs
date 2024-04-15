@@ -203,7 +203,7 @@ public class NextCombat : MonoBehaviour
         _table.ResetTable();
         _table.player.RestartPlayer();
         _draw.ResetDeckAndHand();
-        enemy.RestoreHealth(10);
+        enemy.RestoreHealth(10, false, false);
         _turnManager.turn = 0;
         endTurnButton.SetActive(false);
     }
