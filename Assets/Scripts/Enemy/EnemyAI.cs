@@ -224,14 +224,14 @@ public class EnemyAI : Enemy
                                 usefulEffect = true;
                         }
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[12])
-                            if (FindObjectOfType<Player>().currentHealth - effect.x[j] <= 0)
+                            if (FindObjectOfType<Player>().currentHealth - effect.values[j][0] <= 0)
                                 value += 1000;
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[13])
-                            if (currentHealth - effect.x[j] <= 0)
+                            if (currentHealth - effect.values[j][0] <= 0)
                                 value -= 1000;
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[14] && !kill)
                         {
-                            if (position.positionFacing.card.ActualLife - card.attack - effect.x[j] <= 0)
+                            if (position.positionFacing.card.ActualLife - card.attack - effect.values[j][0] <= 0)
                             {
                                 kill = true;
                                 value++;
@@ -243,7 +243,7 @@ public class EnemyAI : Enemy
                         }
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[11])
                         {
-                            if (card.life - position.positionFacing.card.ActualAttack - effect.x[j] <= 0)
+                            if (card.life - position.positionFacing.card.ActualAttack - effect.values[j][0] <= 0)
                             {
                                 if (effect.conditions[j] == new Effects().conditions[2] || effect.conditions[j] == new Effects().conditions[3] ||
                                     effect.conditions[j] == new Effects().conditions[4] || effect.conditions[j] == new Effects().conditions[8])
@@ -297,15 +297,15 @@ public class EnemyAI : Enemy
                                 usefulEffect = false;
                         }
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[12])
-                            if (FindObjectOfType<Player>().currentHealth + effect.x[j] > FindObjectOfType<Player>().maxHealth)
+                            if (FindObjectOfType<Player>().currentHealth + effect.values[j][0] > FindObjectOfType<Player>().maxHealth)
                                 usefulEffect = true;
                             else usefulEffect = false;
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[13])
-                            if (currentHealth + effect.x[j] > maxHealth)
+                            if (currentHealth + effect.values[j][0] > maxHealth)
                                 usefulEffect = false;
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[14])
                         {
-                            if (position.positionFacing.card.ActualLife - card.attack + effect.x[j] > position.positionFacing.card.card.life)
+                            if (position.positionFacing.card.ActualLife - card.attack + effect.values[j][0] > position.positionFacing.card.card.life)
                             {
                                 usefulEffect = true;
                                 //survive = true;
@@ -314,7 +314,7 @@ public class EnemyAI : Enemy
                         }
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[11])
                         {
-                            if (card.life - position.positionFacing.card.ActualAttack + effect.x[j] > card.life)
+                            if (card.life - position.positionFacing.card.ActualAttack + effect.values[j][0] > card.life)
                             {
                                 usefulEffect = false;
                                 survive = true;
@@ -330,7 +330,7 @@ public class EnemyAI : Enemy
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[3] || effect.targetsCreatures[j] == new Effects().targetsCreatures[5] ||
                             effect.targetsCreatures[j] == new Effects().targetsCreatures[7] || effect.targetsCreatures[j] == new Effects().targetsCreatures[9])
                         {
-                            if (!kill && position.positionFacing.card != null && (effect.x[j] < 0 || effect.y[j] < 0))
+                            if (!kill && position.positionFacing.card != null && (effect.values[j][0] < 0 || effect.values[j][1] < 0))
                                 usefulEffect = true;
                             else
                             {
@@ -341,7 +341,7 @@ public class EnemyAI : Enemy
                                     if (position != null)
                                         if (playerCards != position.positionFacing)
                                             continue;
-                                    if (effect.x[j] >= 0 || effect.y[j] >= 0)
+                                    if (effect.values[j][0] >= 0 || effect.values[j][1] >= 0)
                                         continue;
                                     usefulEffect = true;
                                 }
@@ -355,7 +355,7 @@ public class EnemyAI : Enemy
                             {
                                 if (allyCards.card == null)
                                     continue;
-                                if (effect.x[j] < 0 || effect.y[j] < 0)
+                                if (effect.values[j][0] < 0 || effect.values[j][1] < 0)
                                     continue;
                                 allyInBattle = true;
                             }
@@ -363,7 +363,7 @@ public class EnemyAI : Enemy
                                 usefulEffect = true;
                         }
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[14] && !kill)
-                            if (effect.x[j] < 0 || effect.y[j] < 0)
+                            if (effect.values[j][0] < 0 || effect.values[j][1] < 0)
                                 usefulEffect = true;
                         if (effect.targetsCreatures[j] == new Effects().targetsCreatures[11])
                             if (survive)
